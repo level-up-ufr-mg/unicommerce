@@ -17,8 +17,7 @@ public class Categoria {
     public Categoria() {
     }
 
-    public Categoria(Long id, String nome, boolean status) {
-        this.id = id;
+    public Categoria(String nome, boolean status) {
         this.nome = nome;
         this.status = status;
     }
@@ -48,8 +47,6 @@ public class Categoria {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-    
-    
     
 
     @Override

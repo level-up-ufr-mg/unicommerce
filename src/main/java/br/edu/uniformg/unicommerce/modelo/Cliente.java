@@ -1,12 +1,12 @@
 package br.edu.uniformg.unicommerce.modelo;
 
+import javax.persistence.Embedded;
 import javax.persistence.OneToOne;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,19 +19,17 @@ public class Cliente {
     private String cpf;
     private String telefone;
     //FK
-    private Long endereco_id;
+    private Endereco endereco_id;
     
     public Cliente() {
     	
     }
-
-    public Cliente(Long id, String nome, String cpf, String telefone, String rua, String numero, String complemento,
-			String bairro, String cidade, String estado) {
-		this.id = id;
+    
+	public Cliente(String nome, String cpf, String telefone, Endereco endereco_id) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
-
+		this.endereco_id = endereco_id;
 	}
 
 	@Id
@@ -52,8 +50,8 @@ public class Cliente {
 		return telefone;
 	}
 	
-	@OneToOne
-	public Long getEndereco_id() {
+	@Embedded
+	public Endereco getEndereco_id() {
 		return endereco_id;
 	}
 

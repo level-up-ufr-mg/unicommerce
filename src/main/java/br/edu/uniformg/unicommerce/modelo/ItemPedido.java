@@ -9,27 +9,48 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "item_pedido")
 public class ItemPedido {
 
     private Long id;
-    private Double precoUnitario;
+    private BigDecimal precoUnitario;
     private Integer quantidade;
-    private Double desconto;   
-    private String tipoDesconto;    
+    private BigDecimal desconto;   
+    private TipoDesconto tipoDesconto;    
     //FKs
-    private Long pedidoId;
-    private Long produtoId;
+    private Pedido pedidoId;
+    private Produto produtoId;
+    
+    
+    public ItemPedido() {
+    	
+    }
 
-    @Id
+    public ItemPedido(Integer quantidade, BigDecimal desconto, TipoDesconto tipoDesconto, Pedido pedidoId,
+			Produto produtoId) {
+		this.precoUnitario = produtoId.getPreco();
+		this.quantidade = quantidade;
+		this.desconto = desconto;
+		this.tipoDesconto = tipoDesconto;
+		this.pedidoId = pedidoId;
+		this.produtoId = produtoId;
+	}
+
+    
+    public BigDecimal getValor() {
+    	 return precoUnitario.multiply(new BigDecimal(quantidade));
+    }
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
 
-	public Double getPrecoUnitario() {
+	public BigDecimal getPrecoUnitario() {
 		return precoUnitario;
 	}
 
@@ -37,24 +58,24 @@ public class ItemPedido {
 		return quantidade;
 	}
 
-	public Double getDesconto() {
+	public BigDecimal getDesconto() {
 		return desconto;
 	}
 	
 	@Enumerated(EnumType.STRING)
-	public String getTipoDesconto() {
+	public TipoDesconto getTipoDesconto() {
 		return tipoDesconto;
 	}
 
 	@ManyToOne
     @JoinColumn(name = "pedido_id")
-	public Long getPedido() {
+	public Pedido getPedido() {
 		return pedidoId;
 	}
 	
 	@ManyToOne
     @JoinColumn(name = "produto_id")
-	public Long getProduto() {
+	public Produto getProduto() {
 		return produtoId;
 	}
 
@@ -62,7 +83,7 @@ public class ItemPedido {
 		this.id = id;
 	}
 
-	public void setPrecoUnitario(Double precoUnitario) {
+	public void setPrecoUnitario(BigDecimal precoUnitario) {
 		this.precoUnitario = precoUnitario;
 	}
 
@@ -70,19 +91,19 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 
-	public void setDesconto(Double desconto) {
+	public void setDesconto(BigDecimal desconto) {
 		this.desconto = desconto;
 	}
 
-	public void setTipoDesconto(String tipoDesconto) {
+	public void setTipoDesconto(TipoDesconto tipoDesconto) {
 		this.tipoDesconto = tipoDesconto;
 	}
 
-	public void setPedidoId(Long pedidoId) {
+	public void setPedidoId(Pedido pedidoId) {
 		this.pedidoId = pedidoId;
 	}
 
-	public void setProdutoId(Long produtoId) {
+	public void setProdutoId(Produto produtoId) {
 		this.produtoId = produtoId;
 	}
 

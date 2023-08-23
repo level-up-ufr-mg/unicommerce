@@ -19,6 +19,10 @@ public class ClienteDao {
 	
 	private EntityManager em;
 	
+	public ClienteDao() {
+		
+	}
+	
 	public ClienteDao(EntityManager em) {
 		this.em = em;
 	}

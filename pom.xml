@@ -43,14 +43,14 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.27.Final</version> <!-- Use a versão mais recentedisponível -->
+			<version>5.5.6.Final</version> <!-- Use a versão mais recentedisponível -->
 		</dependency>
 
 		<!-- Conector do driver do MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.26</version> <!-- Use a versão mais recente disponível -->
+			<version>8.0.27</version> <!-- Use a versão mais recente disponível -->
 		</dependency>
 		
 	</dependencies>

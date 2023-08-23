@@ -15,23 +15,18 @@ public class Endereco {
     private String bairro;
     private String cidade;
     private String estado;
-    //FK
-    private Long cliente_id;
     
     public Endereco() {
     	
     }
 
-	public Endereco(Long id, String rua, String numero, String complemento, String bairro, String cidade, String estado,
-			Long cliente_id) {
-		this.id = id;
+	public Endereco(String rua, String numero, String complemento, String bairro, String cidade, String estado) {
 		this.rua = rua;
 		this.numero = numero;
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.estado = estado;
-		this.cliente_id = cliente_id;
 	}
 
 	@Id
@@ -64,11 +59,6 @@ public class Endereco {
 		return estado;
 	}
 
-	@OneToMany(mappedBy = "endereco_id")
-	public Long getCliente_id() {
-		return cliente_id;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -95,17 +85,6 @@ public class Endereco {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-
-	public void setCliente_id(Long cliente_id) {
-		this.cliente_id = cliente_id;
-	}
-
-	@Override
-	public String toString() {
-		return "Endereco [id=" + id + ", rua=" + rua + ", numero=" + numero + ", complemento=" + complemento
-				+ ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", cliente_id=" + cliente_id
-				+ "]";
 	}
 
 }
