@@ -2,7 +2,7 @@ package br.com.alura.unicommerce.Dao;
 
 import java.util.List;
 
-import br.com.alura.unicommerce.entidades.Categoria;
+import br.com.alura.unicommerce.modelo.Categoria;
 import jakarta.persistence.EntityManager;
 
 public class CategoriaDao {

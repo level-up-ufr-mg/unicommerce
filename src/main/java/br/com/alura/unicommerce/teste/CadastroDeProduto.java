@@ -1,18 +1,16 @@
-package br.com.alura.unicommerce.Controller;
+package br.com.alura.unicommerce.teste;
 
 import java.util.List;
 
-import javax.security.auth.x500.X500Principal;
-
 import br.com.alura.unicommerce.Dao.CategoriaDao;
 import br.com.alura.unicommerce.Dao.ProdutoDao;
-import br.com.alura.unicommerce.Factory.Factory;
-import br.com.alura.unicommerce.entidades.Categoria;
-import br.com.alura.unicommerce.entidades.Produto;
+import br.com.alura.unicommerce.Util.Factory;
+import br.com.alura.unicommerce.modelo.Categoria;
+import br.com.alura.unicommerce.modelo.Produto;
 import jakarta.persistence.EntityManager;
 
 //service
-public class ProdutoController {
+public class CadastroDeProduto {
 
 	public static void main(String[] args) {
 		Categoria categoria = new Categoria(null, "informatica", "ativada");
@@ -22,13 +20,13 @@ public class ProdutoController {
 		ProdutoDao produtodao = new ProdutoDao(em);
 		CategoriaDao categoriadao = new CategoriaDao(em);
 
-//		Cadastrar(categoria, produto, em, produtodao, categoriadao);
-//
-//		Editar(categoria, produto, em);
-//
-//		Delete(categoria, produto, em);
-//
-//		ListaIndisponiveis(produtodao);
+		Cadastrar(categoria, produto, em, produtodao, categoriadao);
+
+		Editar(categoria, produto, em);
+
+		Delete(categoria, produto, em);
+
+		ListaIndisponiveis(produtodao);
 
 		BuscaporId(produtodao);
 		

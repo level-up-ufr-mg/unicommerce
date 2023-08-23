@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.Controller;
+package br.com.alura.unicommerce.teste;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -8,12 +8,12 @@ import br.com.alura.unicommerce.Dao.ClienteDao;
 import br.com.alura.unicommerce.Dao.Item_PedidoDao;
 import br.com.alura.unicommerce.Dao.PedidoDao;
 import br.com.alura.unicommerce.Dao.ProdutoDao;
-import br.com.alura.unicommerce.Factory.Factory;
-import br.com.alura.unicommerce.entidades.Categoria;
-import br.com.alura.unicommerce.entidades.Cliente;
-import br.com.alura.unicommerce.entidades.Item_Pedido;
-import br.com.alura.unicommerce.entidades.Pedido;
-import br.com.alura.unicommerce.entidades.Produto;
+import br.com.alura.unicommerce.Util.Factory;
+import br.com.alura.unicommerce.modelo.Categoria;
+import br.com.alura.unicommerce.modelo.Cliente;
+import br.com.alura.unicommerce.modelo.Item_Pedido;
+import br.com.alura.unicommerce.modelo.Pedido;
+import br.com.alura.unicommerce.modelo.Produto;
 import jakarta.persistence.EntityManager;
 
 //service
@@ -38,16 +38,14 @@ public class Item_PedidoController {
 		ClienteDao clienteDao = new ClienteDao(em);
 		CategoriaDao categoriaDao = new CategoriaDao(em);
 
-//		Cadastro(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao,
-//				clienteDao, categoriaDao);
+		Cadastro(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao,
+				clienteDao, categoriaDao);
 
-		
-	//	Editar(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao, clienteDao,
-	//			categoriaDao);
+		Editar(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao, clienteDao,
+				categoriaDao);
 
-				
-		//Delete(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao, clienteDao,
-		//		categoriaDao);
+		Delete(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao, clienteDao,
+				categoriaDao);
 
 	}
 
@@ -87,7 +85,7 @@ public class Item_PedidoController {
 	private static void Delete(Cliente cliente, Pedido pedido, Categoria categoria, Produto produto,
 			Item_Pedido item_Pedido, EntityManager em, Item_PedidoDao item_PedidoDao, PedidoDao pedidoDao,
 			ProdutoDao produtoDao, ClienteDao clienteDao, CategoriaDao categoriaDao) {
-		// +++ DELETE 
+		// +++ DELETE
 		em.getTransaction().begin();
 
 		clienteDao.cadastra(cliente);
@@ -95,34 +93,29 @@ public class Item_PedidoController {
 		categoriaDao.cadastra(categoria);
 		produtoDao.cadastra(produto);
 		item_PedidoDao.cadastra(item_Pedido);
-		
-				em.remove(pedido);
-				em.remove(cliente);
-				em.remove(categoria); // porque invertendo a odem dos REMOVE ele aparece um update
-				em.remove(produto);
-				em.remove(item_Pedido);
-		//		
-		// se eu altera a ordem do 1 pelo 2 da um update.
-		// SE a ordem for assim
-		//		em.remove(cliente);   <<<<<<
-		//		em.remove(pedido);             <<<<<<
-		//		em.remove(categoria); 
-		//		em.remove(produto);
-		
-		
-		// ou 
-		
-		//		pedidoDao.remover(pedido);
-		//		clienteDao.remover(cliente);
-		//		categoriaDao.remover(categoria);
-		//		produtoDao.remover(produto);
+
+//		em.remove(pedido);
+//		em.remove(cliente);
+//		em.remove(categoria); // porque invertendo a odem dos REMOVE ele aparece um update
+//		em.remove(produto);
+//		em.remove(item_Pedido);
+		//
+		 //se eu altera a ordem do 1 pelo 2 da um update.
+		 //SE a ordem for assim
+		 em.remove(cliente); 
+		 em.remove(pedido); 
+		 em.remove(categoria);
+		 em.remove(produto);
+
+		// ou
+
+		// pedidoDao.remover(pedido);
+		// clienteDao.remover(cliente);
+		// categoriaDao.remover(categoria);
+		// produtoDao.remover(produto);
 //		
 
 		em.flush();
 	}
-	
-	
-	
-	
 
 }

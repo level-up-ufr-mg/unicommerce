@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.Factory;
+package br.com.alura.unicommerce.Util;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

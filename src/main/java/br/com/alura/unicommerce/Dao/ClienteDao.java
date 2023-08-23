@@ -2,7 +2,7 @@ package br.com.alura.unicommerce.Dao;
 
 import java.util.List;
 
-import br.com.alura.unicommerce.entidades.Cliente;
+import br.com.alura.unicommerce.modelo.Cliente;
 import jakarta.persistence.EntityManager;
 
 public class ClienteDao {

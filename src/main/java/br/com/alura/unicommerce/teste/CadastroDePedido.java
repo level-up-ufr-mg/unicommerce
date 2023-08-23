@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.Controller;
+package br.com.alura.unicommerce.teste;
 
 
 
@@ -7,28 +7,30 @@ import java.sql.Timestamp;
 
 import br.com.alura.unicommerce.Dao.ClienteDao;
 import br.com.alura.unicommerce.Dao.PedidoDao;
-import br.com.alura.unicommerce.Factory.Factory;
-import br.com.alura.unicommerce.entidades.Cliente;
-import br.com.alura.unicommerce.entidades.Pedido;
+import br.com.alura.unicommerce.Util.Factory;
+import br.com.alura.unicommerce.modelo.Cliente;
+import br.com.alura.unicommerce.modelo.Pedido;
 import jakarta.persistence.EntityManager;
 
 //service
-public class PedidoController {
+public class CadastroDePedido {
 	
 	public static void main(String[] args) {
 	
-		Cliente cliente = new Cliente( null, "Luiz", 123456789012L , 99000101L, "rua x", 100L, "casa",
+		Cliente cliente = new Cliente( null, "Ana Beatriz ", 1254686588L , 99043201L, "rua x", 100L, "APT",
 				"centro", "São paulo ", "SAO PAULO");
 		Pedido pedido = new Pedido(null, new Timestamp(System.currentTimeMillis()), cliente, new BigDecimal("00"), "nenhum");
 		
 	EntityManager em = Factory.getEntityManager();
 	ClienteDao ClienteDao = new ClienteDao(em );
 	PedidoDao pedidoDao = new PedidoDao(em );
+	
+	
 	Cadastra(cliente, pedido, em, ClienteDao, pedidoDao);
 	
-	  Editar(cliente, pedido, em, ClienteDao, pedidoDao);
+	//Editar(cliente, pedido, em, ClienteDao, pedidoDao);
 	
-	Deletar(cliente, pedido, em, ClienteDao, pedidoDao);
+	//Deletar(cliente, pedido, em, ClienteDao, pedidoDao);
 	 
 	}
 

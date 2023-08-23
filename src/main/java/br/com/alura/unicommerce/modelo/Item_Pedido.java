@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.entidades;
+package br.com.alura.unicommerce.modelo;
 
 import java.math.BigDecimal;
 

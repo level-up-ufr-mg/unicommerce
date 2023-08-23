@@ -1,10 +1,10 @@
-package br.com.alura.unicommerce.Controller;
+package br.com.alura.unicommerce.teste;
 
 import java.util.List;
 
 import br.com.alura.unicommerce.Dao.ClienteDao;
-import br.com.alura.unicommerce.Factory.Factory;
-import br.com.alura.unicommerce.entidades.Cliente;
+import br.com.alura.unicommerce.Util.Factory;
+import br.com.alura.unicommerce.modelo.Cliente;
 import jakarta.persistence.EntityManager;
 
 //service

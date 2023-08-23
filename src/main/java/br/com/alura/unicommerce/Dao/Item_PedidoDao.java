@@ -1,6 +1,6 @@
 package br.com.alura.unicommerce.Dao;
 
-import br.com.alura.unicommerce.entidades.Item_Pedido;
+import br.com.alura.unicommerce.modelo.Item_Pedido;
 import jakarta.persistence.EntityManager;
 
 public class Item_PedidoDao {

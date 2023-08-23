@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.entidades;
+package br.com.alura.unicommerce.modelo;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -25,6 +25,10 @@ public class Pedido {
 	@ManyToOne
 	@JoinColumn(name = "CLIENTE_ID")
 	private Cliente CLIENTE_ID;
+	
+	@ManyToOne
+	@JoinColumn(name = "")
+	private Item_Pedido item_Pedido_ID;
 	// ==================== Variaveis de Relacionamento================
 
 	public Pedido() {

@@ -1,6 +1,4 @@
-package br.com.alura.unicommerce.entidades;
-
-import java.util.Objects;
+package br.com.alura.unicommerce.modelo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

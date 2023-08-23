@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.entidades;
+package br.com.alura.unicommerce.modelo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long CLIENTE_ID;
-	private String NOME;
+	private String NOME; 
 	private Long CPF;
 	private Long TELEFONE;
 	private String RUA;
