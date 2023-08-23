@@ -18,7 +18,9 @@ public class Categoria {
     private String nome;
     private Boolean status ;
 
- 
+   
+    
+    
     public Categoria(String nome, Boolean status) {
         this.nome = nome;
         this.status = status;
