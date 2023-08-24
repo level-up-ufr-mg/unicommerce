@@ -1,31 +1,28 @@
 package br.com.alura.unicommerce.modelo;
 
-import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "clientes")
+@SecondaryTable(name = "enderecos", pkJoinColumns = @javax.persistence.PrimaryKeyJoinColumn(name = "cliente_id"))
 public class Cliente {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	
-	@Column(name = "nome", length = 150)
+
 	private String nome;
-	
-	public Cliente(String nome) {
-		this.nome = nome;
-	}
-	
-	public Cliente () {
-		
-	}
+	private String cpf;
+	private String telefone;
+
+	@Embedded
+	private Endereco endereco;
 
 	public Long getId() {
 		return id;
@@ -41,6 +38,21 @@ public class Cliente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}	
-	
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 }
