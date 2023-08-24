@@ -1,7 +1,6 @@
 package br.com.alura.unicommerce.controller;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -19,6 +18,7 @@ import br.com.alura.unicommerce.modelo.TipoDescontoItemPedido;
 import br.com.alura.unicommerce.modelo.TipoDescontoPedido;
 import br.com.alura.unicommerce.util.JPAUtil;
 
+
 public class CadastraPedido {
 	
 	
@@ -31,6 +31,7 @@ public class CadastraPedido {
 		// recupera dados
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		Produto produto = produtoDao.buscaPorId(1l);
+		Produto produto2 = produtoDao.buscaPorId(2l);
 		
 		ClienteDao clienteDao = new ClienteDao(em);
 		Cliente cliente = clienteDao.buscaPorId(1l);
@@ -39,6 +40,11 @@ public class CadastraPedido {
 		
 		Pedido pedido = new Pedido(cliente, new BigDecimal("30"), TipoDescontoPedido.NENHUM);
 		pedido.adicionarItem(new ItemDePedido(1, pedido, produto, new BigDecimal("30") , TipoDescontoItemPedido.NENHUM));
+		pedido.adicionarItem(new ItemDePedido(1, pedido, produto2, new BigDecimal("10") , TipoDescontoItemPedido.NENHUM));
+		
+		Pedido pedido2 = new Pedido(cliente, new BigDecimal("30"), TipoDescontoPedido.NENHUM);
+		pedido.adicionarItem(new ItemDePedido(1, pedido2, produto, new BigDecimal("10") , TipoDescontoItemPedido.NENHUM));
+		
 		
 		PedidoDao pedidoDao = new PedidoDao(em);
 		pedidoDao.cadastra(pedido);
@@ -48,19 +54,19 @@ public class CadastraPedido {
 		BigDecimal totalVendido = pedidoDao.valorTotalVendido();
 		System.out.println("Valor Total: " + totalVendido);
 		
-		List<Object[]> relatorioVendas = pedidoDao.relatorioDeVendas();
-		for (Object[] obj : relatorioVendas) {
-			System.out.println(obj[0]);
-			System.out.println(obj[1]);
-			System.out.println(obj[2]);
-		}
+		
 		
 	 }
 	
 	private static void popularBancoDeDados() {
 		
 		Categoria categoria = new Categoria("Eletrônicos", true);
+		Categoria categoria1 = new Categoria("Eletrodomésticos", true);
+		Categoria categoria2 = new Categoria("Brinquedos", true);
+		
 		Produto produto = new Produto ("Mouse","Mouse Gamer",3, categoria, new BigDecimal("120"));
+		Produto produto1 = new Produto ("Geladeira","Potente",3, categoria1, new BigDecimal("4000"));
+		Produto produto2 = new Produto ("Barbie","Barbie Sereia",3, categoria2, new BigDecimal("90"));
 		
 		Endereco endereco = new Endereco ( "Avenida Brasil", "168", "Casa", "Ouro Negro", "Formiga", "MG");
 		Cliente  cliente = new Cliente("Dayane Costa", "00000000000", "37998751208", endereco);
@@ -74,9 +80,15 @@ public class CadastraPedido {
 		em.getTransaction().begin();
 		
 		categoriaDao.cadastra(categoria);
-		produtoDao.cadastra(produto);
-		clienteDao.cadastra(cliente);
+		categoriaDao.cadastra(categoria1);
+		categoriaDao.cadastra(categoria2);
 		
+		produtoDao.cadastra(produto);
+		produtoDao.cadastra(produto1);
+		produtoDao.cadastra(produto2);
+		
+		clienteDao.cadastra(cliente);
+				
 		em.getTransaction().commit();
 		em.close();
 	

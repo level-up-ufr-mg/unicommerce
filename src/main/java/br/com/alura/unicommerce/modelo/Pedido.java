@@ -56,8 +56,6 @@ public class Pedido {
 	
 	public Pedido() {
 		
-		
-		
 	}
 
 	public Pedido(Cliente cliente, BigDecimal desconto, TipoDescontoPedido tipo_desconto) {
