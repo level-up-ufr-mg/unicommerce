@@ -55,4 +55,34 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	public void setRua(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setNumero(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEstado(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCidade(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setBairro(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setComplemento(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

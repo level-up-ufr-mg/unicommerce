@@ -22,7 +22,7 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             
             <!-- Cria as tabelas automaticamente (pode ser "update", "create", "create-drop", "none") -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

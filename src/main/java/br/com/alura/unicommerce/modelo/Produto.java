@@ -1,5 +1,7 @@
 package br.com.alura.unicommerce.modelo;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +18,7 @@ public class Produto {
     private Long id;   
     
     private String nome;
-    private Double preco;
+    private BigDecimal preco;
     private String descricao;
     private Integer quantidadeEmEstoque;
     
@@ -39,11 +41,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public Double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 
@@ -67,14 +69,9 @@ public class Produto {
 		return categoria;
 	}
 
-	public Produto(String nome, Double preco, String descricao, Integer quantidadeEmEstoque, Categoria categoria) {
-		this.nome = nome;
-		this.preco = preco;
-		this.descricao = descricao;
-		this.quantidadeEmEstoque = quantidadeEmEstoque;
-		this.categoria = categoria;
+	public Produto() {
 	}
-
+	
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
