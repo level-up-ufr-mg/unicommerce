@@ -5,24 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "clientes")
-@SecondaryTable(name = "enderecos", pkJoinColumns = @javax.persistence.PrimaryKeyJoinColumn(name = "cliente_id"))
+@Table(name = "cliente")
 public class Cliente {
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
+	@Embedded
+	private Long Endereco;
 	private String nome;
 	private String cpf;
 	private String telefone;
-
-	@Embedded
-	private Endereco endereco;
 
 	public Long getId() {
 		return id;
@@ -54,35 +50,5 @@ public class Cliente {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public void setRua(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setNumero(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setEstado(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setCidade(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setBairro(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setComplemento(String string) {
-		// TODO Auto-generated method stub
-		
 	}
 }

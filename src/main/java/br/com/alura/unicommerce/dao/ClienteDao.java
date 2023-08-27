@@ -1,43 +1,38 @@
 package br.com.alura.unicommerce.dao;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 
 import br.com.alura.unicommerce.modelo.Cliente;
 
 public class ClienteDao {
-
 	private EntityManager em;
 
 	public ClienteDao(EntityManager em) {
 		this.em = em;
 	}
 
-	public Cliente buscaPorId(Long id) {
-		return em.find(Cliente.class, id);
+	public void buscaPorId(Cliente cliente) {
+		this.em.persist(cliente);
 	}
 
 	public void cadastra(Cliente cliente) {
-		em.persist(cliente);
+		this.em.persist(cliente);
 	}
 
 	public void atualiza(Cliente cliente) {
-		em.merge(cliente);
+		this.em.merge(cliente);
 	}
 
 	public void remove(Cliente cliente) {
 		cliente = em.merge(cliente);
-		em.remove(cliente);
+		this.em.remove(cliente);
 	}
 
-	public List<Cliente> listaTodos() {
-		String jpql = "SELECT c FROM Cliente c";
-		return em.createQuery(jpql, Cliente.class).getResultList();
+	public void listaTodos(Cliente cliente) {
+		this.em.persist(cliente);
 	}
 
-	public List<Cliente> listaPorNome(String nome) {
-		String jpql = "SELECT c FROM Cliente c WHERE c.nome = :nome";
-		return em.createQuery(jpql, Cliente.class).setParameter("nome", nome).getResultList();
+	public void listaPorNome(Cliente cliente) {
+		this.em.persist(cliente);
 	}
 }
