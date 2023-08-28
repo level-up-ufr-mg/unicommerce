@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,24 +28,19 @@ public class Pedido {
 	
 	@Column(name = "tipo_desconto")
 	private TIPO_DESCONTO tipoDesconto; 
-	//private BigDecimal preco;
-    //private int quantidade;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
 	private List<ItemPedido> itens = new ArrayList<>();
 	
 	public Pedido() {
 	}
 
-	public Pedido(LocalDate data, BigDecimal desconto, TIPO_DESCONTO tipoDesconto, Cliente cliente) {
-		this.data = data;
+	public Pedido(BigDecimal desconto, TIPO_DESCONTO tipoDesconto, Cliente cliente) {
 		this.desconto = desconto;
 		this.tipoDesconto = tipoDesconto;
-		//this.setPreco(preco);
-		//this.quantidade = quantidade;
 		this.cliente = cliente;
 	}
 

@@ -7,32 +7,25 @@ CREATE TABLE `categoria` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
-CREATE TABLE `unicommerce`.`endereco` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `rua` VARCHAR(120) NULL,
-  `numero` VARCHAR(10) NULL,
-  `complemento` VARCHAR(150) NULL,
-  `bairro` VARCHAR(150) NULL,
-  `cidade` VARCHAR(150) NULL,
-  `estado` CHAR(2) NULL,
-  PRIMARY KEY (`id`));
-
-
 CREATE TABLE `cliente` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `NOME` varchar(120) NOT NULL,
   `CPF` varchar(14) NOT NULL,
   `TELEFONE` varchar(14) DEFAULT NULL,
-  `ENDERECO_ID` int DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  CONSTRAINT `ENDERECO_ID` FOREIGN KEY (`ENDERECO_ID`) REFERENCES `endereco` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+  `rua` varchar(120) NOT NULL,
+  `numero` varchar(10) NOT NULL,
+  `complemento` varchar(150) NOT NULL,
+  `bairro` varchar(150) NOT NULL,
+  `cidade` varchar(150) NOT NULL,
+  `estado` char(2) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 CREATE TABLE `pedido` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `DATA` datetime NOT NULL,
   `CLIENTE_ID` int DEFAULT NULL,
-  `DESCONTO` float NOT NULL,
+  `DESCONTO` decimal(10,0) NOT NULL,
   `TIPO_DESCONTO` smallint DEFAULT NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `CLIENTE_ID` FOREIGN KEY (`CLIENTE_ID`) REFERENCES `cliente` (`ID`)
@@ -54,9 +47,9 @@ CREATE TABLE `item_pedido` (
   `PRECO_UNITARIO` decimal(10,0) NOT NULL,
   `QUANTIDADE` int NOT NULL,
   `PEDIDO_ID` int NOT NULL,
-  `PRODUTO_ID` int DEFAULT NULL,
-  `DESCONTO` decimal(10,0) DEFAULT NULL,
-  `TIPO_DESCONTO` smallint DEFAULT NULL,
+  `PRODUTO_ID` int NOT NULL,
+  `DESCONTO` decimal(10,0) NOT NULL,
+  `TIPO_DESCONTO` smallint NOT NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `PEDIDO_ID` FOREIGN KEY (`PEDIDO_ID`) REFERENCES `pedido` (`ID`),
   CONSTRAINT `PRODUTO_ID` FOREIGN KEY (`PRODUTO_ID`) REFERENCES `produto` (`ID`)

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 public class Produto {
 
 	@Id
+	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
@@ -22,18 +24,19 @@ public class Produto {
 	private String nome;
 	
 	private String descricao;
+	
+	@Column(name = "preco", nullable = false)
 	private BigDecimal preco;
 	
-	@Column(name = "quantidade_estoque")
+	@Column(name = "quantidade_estoque", nullable = false)
 	private Integer quantidadeEstoque;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
 	
 	public Produto() {}
 	
 	public Produto(String nome, String descricao, BigDecimal preco, Integer quantidadeEstoque, Categoria categoria) {
-		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;

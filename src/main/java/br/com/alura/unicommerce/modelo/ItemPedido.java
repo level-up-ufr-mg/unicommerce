@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,26 +21,41 @@ public class ItemPedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "preco_unitario")
+	@Column(name = "preco_unitario", precision = 10, scale = 2, nullable = false)
 	private BigDecimal precoUnitario;
-	private BigDecimal desconto;
-	private TIPO_DESCONTO  tipoDesconto; //(QUANTIDADE, PROMOCAO ou NENHUM)Unitario;
-	private int quantidade;
 	
-	@ManyToOne
+	@Column(nullable = false)
+	private Integer quantidade;
+	
+	@Column(precision = 10, scale = 2, nullable = false)
+	private BigDecimal desconto;
+	
+	@Column(length = 50, nullable = false)
+	@Enumerated(EnumType.STRING)
+	private TIPO_DESCONTO_ITEM_PEDIDO  tipoDescontoItemPedido; //(QUANTIDADE, PROMOCAO ou NENHUM)Unitario;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Pedido pedido;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Produto produto;
 
+	
+	public BigDecimal getValor() {
+		return precoUnitario.multiply(new BigDecimal(quantidade));
+	}
+	 
 	public ItemPedido() {
 	}
-
-	public ItemPedido(TIPO_DESCONTO tipoDesconto, int quantidade, Pedido pedido, Produto produto) {
-		this.tipoDesconto = tipoDesconto;
-		this.quantidade = quantidade;
-		this.pedido = pedido;
+	
+	public ItemPedido(TIPO_DESCONTO_ITEM_PEDIDO tipoDescontoItemPedido, Integer quantidade, BigDecimal desconto,
+			 Pedido pedido, Produto produto) {
 		this.precoUnitario = produto.getPreco();
+		this.quantidade = quantidade;
+		this.desconto = desconto;
+		this.tipoDescontoItemPedido = tipoDescontoItemPedido;
+		this.pedido = pedido;
 		this.produto = produto;
 	}
 
@@ -89,12 +107,12 @@ public class ItemPedido {
 		this.desconto = desconto;
 	}
 
-	public TIPO_DESCONTO getTipoDesconto() {
-		return tipoDesconto;
+	public TIPO_DESCONTO_ITEM_PEDIDO getTipoDescontoItemPedidoo() {
+		return tipoDescontoItemPedido;
 	}
 
-	public void setTipoDesconto(TIPO_DESCONTO tipoDesconto) {
-		this.tipoDesconto = tipoDesconto;
+	public void setTipoDescontoItemPedido(TIPO_DESCONTO_ITEM_PEDIDO tipoDescontoItemPedido) {
+		this.tipoDescontoItemPedido = tipoDescontoItemPedido;
 	}
 	
 }

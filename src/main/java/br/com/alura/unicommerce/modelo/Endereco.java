@@ -1,43 +1,39 @@
 package br.com.alura.unicommerce.modelo;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 
-@Entity
-@Table(name = "endereco")
+@Embeddable
 public class Endereco {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+	 */
 	
-	@Column(length = 120)
+	@Column(name = "rua", nullable = false, length = 120)
 	private String rua;
 	
-	@Column(length = 10)
+	@Column(name = "numero", length = 10, nullable = false)
 	private String numero;
 	
-	@Column(length = 150)
+	@Column(name = "complemento", nullable = false, length = 150)
 	private String complemento;
 	
-	@Column(length = 150)
+	@Column(name = "bairro", length = 150, nullable = false)
 	private String bairro;
 	
-	@Column(length = 150)
+	@Column(name = "cidade", nullable = false, length = 150)
 	private String cidade;
 	
-	@Column(length = 2)
+	@Column(name = "estado", nullable = false, length = 2)
 	private String estado;
 	
 	public Endereco() {}
 
-	public Endereco(Long id, String rua, String numero, String complemento, String bairro, String cidade,
+	public Endereco(String rua, String numero, String complemento, String bairro, String cidade,
 			String estado) {
-		this.id = id;
 		this.rua = rua;
 		this.numero = numero;
 		this.complemento = complemento;

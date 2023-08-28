@@ -1,11 +1,15 @@
 package br.com.alura.unicommerce.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,14 +23,20 @@ public class Cliente {
 	@Column(name = "nome", length = 120)
 	private String nome;
 	
-	@Column(name = "cpf",  length = 14, unique = true)
+	//columnDefinition = "CHAR(11)"
+	@Column(name = "cpf",  length = 14, unique = true, nullable = false)
 	private String cpf;
 	
 	@Column(name = "telefone",  length = 14)
 	private String telefone;
 	
-	@ManyToOne
+	//@OneToOne(fetch = FetchType.LAZY)
+	@Embedded
 	private Endereco endereco;
+	
+	
+	 @OneToMany(mappedBy = "cliente") 
+	 private  List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {
 		
