@@ -19,14 +19,14 @@ public class Categoria {
     private Boolean status ;
 
    
-    
+    public Categoria() {
+    }
     
     public Categoria(String nome, Boolean status) {
         this.nome = nome;
         this.status = status;
     }
-    public Categoria() {
-    }
+  
 
     public Long getId() {
         return id;

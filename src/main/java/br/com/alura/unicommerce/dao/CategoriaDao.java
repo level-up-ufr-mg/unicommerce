@@ -30,5 +30,19 @@ public class CategoriaDao {
     	String jpql = " SELECT c FROM Categoria c "; 
         return  em.createQuery(jpql, Categoria.class).getResultList();
     }
+    
+    public List<Object[]> relatorioVendasPorCategoria() {
+        String jpql = " SELECT c.nome, SUM(item.quantidade), "
+        		+ " SUM(item.quantidade * item.produto.preco) "
+        		+ " FROM Pedido pedido "
+        		+ " JOIN pedido.itens item "
+        		+ " JOIN item.produto p "
+        		+ " JOIN p.categoria c "
+        		+ " GROUP BY c.nome ";
+        
+        return em.createQuery(jpql, Object[].class).getResultList();
+    }
+
+    
 
 }

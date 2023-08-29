@@ -50,4 +50,15 @@ public class ClienteDao {
 //        		.setParameter("cpf", cpf)
 //        		.getSingleResult();
 //    }
+    
+    
+    public List<Object[]> relatorioClientesFies() {
+    	String jpql = " SELECT p.cliente.nome, COUNT(p), SUM(p.valorTotal) "
+    				+ " FROM Pedido p "
+    	            + " JOIN p.cliente c "
+    	            + " GROUP BY c.nome ";
+        
+        return em.createQuery(jpql, Object[].class).getResultList();
+    }
+    
 }

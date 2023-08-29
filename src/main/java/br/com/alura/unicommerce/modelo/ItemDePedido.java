@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,11 +28,11 @@ public class ItemDePedido {
 	    @Column(nullable = false)
 	    private Integer quantidade;
 
-	    @ManyToOne
+	    @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "pedido_id", nullable = false)
 	    private Pedido pedido;
 
-	    @ManyToOne
+	    @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "produto_id", nullable = false)
 	    private Produto produto;
 

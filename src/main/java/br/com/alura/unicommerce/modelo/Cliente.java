@@ -25,10 +25,8 @@ public class Cliente {
     @Column(nullable = false)
     private String telefone;
     
-    
     @Embedded
     private Endereco endereco;
-    
     
     public Cliente() {
     	

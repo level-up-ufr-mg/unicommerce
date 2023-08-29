@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -30,7 +32,7 @@ public class Pedido {
 	
 	private LocalDate data = LocalDate.now(); //pega a data atual
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)//todo carregamento ToOne é do tipo Eager ou seja ele gera consultas desnecessáras no banco, nas tabelas que tem o ligação ManyToOne ou OneToOne então é usado o parametro fetch para controlar o carregamento, é feito o controle de quando for Eage ele trocar pra Lazy
 	@JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 	
@@ -53,10 +55,9 @@ public class Pedido {
 		this.valorTotal = this.valorTotal.add(item.getValor());
 	}
 
+	//@Transient anotação que cria campos provisorios ou seja não tem esse campo na tabela
 	
 	public Pedido() {
-		
-		
 		
 	}
 
