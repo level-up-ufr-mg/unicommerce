@@ -5,52 +5,52 @@ import java.util.List;
 import br.com.alura.unicommerce.Dao.ClienteDao;
 import br.com.alura.unicommerce.Util.Factory;
 import br.com.alura.unicommerce.modelo.Cliente;
+import br.com.alura.unicommerce.modelo.Endereco;
 import jakarta.persistence.EntityManager;
 
 //service
-public class ClienteController {
+public class CadastroCliente  {
 
 	public static void main(String[] args) {
 
-		Cliente cliente = new Cliente(null, "Rosa", 2156248571524L, 99000101L, "rua x", 100L, "casa", "centro",
+		Endereco endereco = new Endereco("rua x", 100L, "casa", "centro",
 				"São paulo ", "SAO PAULO");
+		
+		Cliente cliente = new Cliente(null, "Rosa", 2156248571524L, 99000101L, endereco);
 
 		EntityManager em = Factory.getEntityManager();
 		ClienteDao ClienteDao = new ClienteDao(em);
 
-//		Cadastro(cliente, em, ClienteDao);
-//
+		
+		Cadastro(cliente, em, ClienteDao);
+// 
 //		Editar(cliente, em);
 //	
 //		Deletar(cliente, em);
 //	
 
-		BuscaPorID(ClienteDao);
+	//	BuscaPorID(ClienteDao);
 
-		BuscaTodos(ClienteDao); 
+	//	BuscaTodos(ClienteDao); 
 
-		ListaPorNome(ClienteDao);
+	//	ListaPorNome(ClienteDao);
 
 	}
 
 	private static void BuscaPorID(ClienteDao ClienteDao) {
 		Cliente c = ClienteDao.buscaProID(1L);
-		System.out.print(c.getID() + " - " + c.getNOME() + " - " + c.getCPF() + " - " + c.getCOMPLEMENTO() + " - "
-				+ c.getBAIRRO() + " - " + c.getCIDADE() + " - " + c.getESTADO() + " - " + c.getNUMERO() + " - "
-				+ c.getRUA() + " - " + c.getNUMERO());
+		System.out.print(c.getCLIENTE_ID() + " - " + c.getNOME() + " - " + c.getCPF() + " - " + c.getEndereco());
 	}
 
 	private static void BuscaTodos(ClienteDao ClienteDao) {
 		List<Cliente> buscarTodos = ClienteDao.BuscarTodos();
-		buscarTodos.forEach(c -> System.out.print(c.getID() + " - " + c.getNOME() + " - " + c.getCPF() + " - "
-				+ c.getCOMPLEMENTO() + " - " + c.getBAIRRO() + " - " + c.getCIDADE() + " - " + c.getESTADO() + " - "
-				+ c.getNUMERO() + " - " + c.getRUA() + " - " + c.getNUMERO() + "\n \n"));
+		buscarTodos.forEach(c -> System.out.print(c.getCLIENTE_ID() + " - " + c.getNOME() + " - " + c.getCPF() + " - " + c.getEndereco() + "\n \n"));
 	}
 
 	private static void ListaPorNome(ClienteDao clienteDao) {
 		
 		List<Cliente> listaPorNomesClientes = clienteDao.listaPorNomesClientes();
-		listaPorNomesClientes.forEach(c -> System.out.print(c.getID() + " - " + c.getNOME() +"\n \n" ) );
+		listaPorNomesClientes.forEach(c -> System.out.print(c.getCLIENTE_ID() + " - " + c.getNOME() +"\n \n" ) );
 		
 
 	

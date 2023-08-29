@@ -8,7 +8,7 @@ import br.com.alura.unicommerce.modelo.Categoria;
 import jakarta.persistence.EntityManager;
 
 //service 
-public class CategoriaController {
+public class CadastroCategoria {
 
 	public static void main(String[] args) {
 		Categoria celulares = new Categoria(null, "teste", "aaaaaaaa"); // transit
@@ -16,19 +16,19 @@ public class CategoriaController {
 		EntityManager em = Factory.getEntityManager();
 		CategoriaDao categoriaDao = new CategoriaDao(em);
 
-//		Cadastra(celulares, em);
+		Cadastra(celulares, em);
 //
 //		Editar(celulares, em);
 //
 //		Delete(celulares, em, categoriaDao); 
 //		
 //		
-		buscaPorID(categoriaDao);
-	
+	//	buscaPorID(categoriaDao);
+	 
 		
-		BuscarTodos(categoriaDao);
+	//	BuscarTodos(categoriaDao);
 		
-		ListaporNome(categoriaDao); 
+	//	ListaporNome(categoriaDao); 
 
 	}
 

@@ -2,37 +2,44 @@ package br.com.alura.unicommerce.teste;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 import br.com.alura.unicommerce.Dao.CategoriaDao;
 import br.com.alura.unicommerce.Dao.ClienteDao;
-import br.com.alura.unicommerce.Dao.Item_PedidoDao;
+import br.com.alura.unicommerce.Dao.ItemPedidoDao;
 import br.com.alura.unicommerce.Dao.PedidoDao;
 import br.com.alura.unicommerce.Dao.ProdutoDao;
 import br.com.alura.unicommerce.Util.Factory;
+import br.com.alura.unicommerce.VO.RelatorideVendasPorCategoriaVO;
+import br.com.alura.unicommerce.VO.RelatorioDeItensMaisVendidosVO;
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Cliente;
-import br.com.alura.unicommerce.modelo.Item_Pedido;
+import br.com.alura.unicommerce.modelo.Descontos;
+import br.com.alura.unicommerce.modelo.Endereco;
+import br.com.alura.unicommerce.modelo.ItemPedido;
 import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.modelo.Produto;
 import jakarta.persistence.EntityManager;
 
 //service
-public class Item_PedidoController {
+public class CadastroItemPedido {
 
 	public static void main(String[] args) {
-		Cliente cliente = new Cliente(null, "FRANCISCO", 123456789012L, 99000101L, "rua x", 100L, "casa", "centro",
+		
+		Endereco endereco = new Endereco("rua x", 100L, "casa", "centro",
 				"São paulo ", "SAO PAULO");
-		Pedido pedido = new Pedido(null, new Timestamp(System.currentTimeMillis()), cliente, new BigDecimal("00"),
-				"nenhum");
+		Cliente cliente = new Cliente(null, "ssssssssss", 123456789012L, 99000101L,endereco);
+		Pedido pedido = new Pedido(null, new Timestamp(System.currentTimeMillis()), new BigDecimal("00"),
+				Descontos.NENHUM ,cliente);
 		Categoria categoria = new Categoria(null, "alimentos", "ativa");
-		Produto produto = new Produto(null, "macarrao", "macarrao japones", 8L, categoria);
-
-		Item_Pedido item_Pedido = new Item_Pedido(null, new BigDecimal("00"), 5L, pedido, produto, new BigDecimal("00"),
-				"nenhum");
+		Produto produto = new Produto(null, "banana ", "banana prata", 2L, categoria);
+		
+		ItemPedido item_Pedido = new ItemPedido(null, new BigDecimal("10"), 2L, pedido, produto, new BigDecimal("00"),
+				Descontos.NENHUM);
 
 		EntityManager em = Factory.getEntityManager();
 
-		Item_PedidoDao item_PedidoDao = new Item_PedidoDao(em);
+		ItemPedidoDao item_PedidoDao = new ItemPedidoDao(em);
 		PedidoDao pedidoDao = new PedidoDao(em);
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		ClienteDao clienteDao = new ClienteDao(em);
@@ -40,17 +47,36 @@ public class Item_PedidoController {
 
 		Cadastro(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao,
 				clienteDao, categoriaDao);
+//
+//		Editar(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao, clienteDao,
+//				categoriaDao);
+//
+//		Delete(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao, clienteDao,
+//				categoriaDao);
 
-		Editar(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao, clienteDao,
-				categoriaDao);
-
-		Delete(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao, clienteDao,
-				categoriaDao);
-
+		 
+		//relatorio(item_PedidoDao);
+		
+		//RelatorioDeItensMaisVendidos(item_PedidoDao);			
 	}
 
+
+
+	private static void relatorio(ItemPedidoDao item_PedidoDao) {
+		List<RelatorideVendasPorCategoriaVO> relatorio = item_PedidoDao.relatorideVendasPorCategoriaVO();
+		relatorio.forEach(System.out::println);
+	}
+
+	
+	private static void RelatorioDeItensMaisVendidos(ItemPedidoDao itemPedidoDao) {
+		List<RelatorioDeItensMaisVendidosVO> relatorio = itemPedidoDao.relatorioDeItensMaisVendidosVOs();
+		relatorio.forEach(System.out::println);
+		
+	}
+	
+	
 	private static void Cadastro(Cliente cliente, Pedido pedido, Categoria categoria, Produto produto,
-			Item_Pedido item_Pedido, EntityManager em, Item_PedidoDao item_PedidoDao, PedidoDao pedidoDao,
+			ItemPedido item_Pedido, EntityManager em, ItemPedidoDao item_PedidoDao, PedidoDao pedidoDao,
 			ProdutoDao produtoDao, ClienteDao clienteDao, CategoriaDao categoriaDao) {
 		em.getTransaction().begin();
 		clienteDao.cadastra(cliente);
@@ -63,7 +89,7 @@ public class Item_PedidoController {
 	}
 
 	private static void Editar(Cliente cliente, Pedido pedido, Categoria categoria, Produto produto,
-			Item_Pedido item_Pedido, EntityManager em, Item_PedidoDao item_PedidoDao, PedidoDao pedidoDao,
+			ItemPedido item_Pedido, EntityManager em, ItemPedidoDao item_PedidoDao, PedidoDao pedidoDao,
 			ProdutoDao produtoDao, ClienteDao clienteDao, CategoriaDao categoriaDao) {
 		// +++ EDITAR +++
 		em.getTransaction().begin();
@@ -83,7 +109,7 @@ public class Item_PedidoController {
 	}
 
 	private static void Delete(Cliente cliente, Pedido pedido, Categoria categoria, Produto produto,
-			Item_Pedido item_Pedido, EntityManager em, Item_PedidoDao item_PedidoDao, PedidoDao pedidoDao,
+			ItemPedido item_Pedido, EntityManager em, ItemPedidoDao item_PedidoDao, PedidoDao pedidoDao,
 			ProdutoDao produtoDao, ClienteDao clienteDao, CategoriaDao categoriaDao) {
 		// +++ DELETE
 		em.getTransaction().begin();

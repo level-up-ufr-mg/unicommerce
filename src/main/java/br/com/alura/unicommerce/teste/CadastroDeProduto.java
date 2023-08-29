@@ -10,7 +10,8 @@ import br.com.alura.unicommerce.modelo.Produto;
 import jakarta.persistence.EntityManager;
 
 //service
-public class CadastroDeProduto {
+public class CadastroDeProduto { 
+	
 
 	public static void main(String[] args) {
 		Categoria categoria = new Categoria(null, "informatica", "ativada");
@@ -18,19 +19,19 @@ public class CadastroDeProduto {
 
 		EntityManager em = Factory.getEntityManager();
 		ProdutoDao produtodao = new ProdutoDao(em);
-		CategoriaDao categoriadao = new CategoriaDao(em);
+		CategoriaDao categoriadao = new CategoriaDao(em); 
 
-		Cadastrar(categoria, produto, em, produtodao, categoriadao);
-
-		Editar(categoria, produto, em);
-
-		Delete(categoria, produto, em);
-
-		ListaIndisponiveis(produtodao);
-
-		BuscaporId(produtodao);
-		
-		BuscarTodos(produtodao);
+//		Cadastrar(categoria, produto, em, produtodao, categoriadao);
+//
+//		Editar(categoria, produto, em);
+//
+//		Delete(categoria, produto, em);
+//
+//		ListaIndisponiveis(produtodao);
+//
+//		BuscaporId(produtodao);
+//		
+	BuscarTodos(produtodao);
 		
 	}
 

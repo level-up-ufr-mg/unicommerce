@@ -17,8 +17,11 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long PRODUTO_ID;
+	@Column(nullable = false)
 	private String NOME;
+	@Column(nullable = false)
 	private String DESCRICAO;
+	@Column(nullable = false)
 	private Long QUANTIDADE_ESTOQUE;
 	
 	// ==================== Variaveis de Relacionamento================
@@ -28,8 +31,8 @@ public class Produto {
 	// ==================== Variaveis de Relacionamento================
 
 	public Produto() {
-	}
-
+	}  
+ 
 	public Produto(Long iD, String nOME, String dESCRICAO, Long qUANTIDADE_ESTOQUE, Categoria cATEGORIA_ID) {
 		PRODUTO_ID = iD;
 		NOME = nOME;
@@ -79,4 +82,12 @@ public class Produto {
 		categoria = cATEGORIA_ID;
 	}
 
+	@Override
+	public String toString() {
+		return "Produto [PRODUTO_ID=" + PRODUTO_ID + ", NOME=" + NOME + ", DESCRICAO=" + DESCRICAO
+				+ ", QUANTIDADE_ESTOQUE=" + QUANTIDADE_ESTOQUE + ", categoria=" + categoria + "]";
+	}
+
+	
+	
 }

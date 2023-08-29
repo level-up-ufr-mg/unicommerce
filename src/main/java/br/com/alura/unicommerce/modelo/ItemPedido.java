@@ -2,6 +2,7 @@ package br.com.alura.unicommerce.modelo;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,28 +13,38 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(schema = "unicommerce", name = "item_pedido")
-public class Item_Pedido {
+public class ItemPedido {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long iD;
+	@Column(nullable = false)
 	private BigDecimal PRECO_UNITARIO;
+	@Column(nullable = false)
 	private Long QUANTIDADE;
-	private String TIPO_DESCONTO;
+	private Descontos TIPO_DESCONTO;
+	@Column(nullable = false)
 	private BigDecimal DESCONTO_ID;
 	// ==================== Variaveis de Relacionamento================
-	@ManyToOne
+	
+	@ManyToOne // fetch = FetchType.LAZY
 	@JoinColumn(name = "PEDIDO_ID")
 	private Pedido PEDIDO_ID;
-	@ManyToOne
+	
+	
+	@ManyToOne // fetch = FetchType.LAZY
 	@JoinColumn(name = "PRODUTO_ID")
 	private Produto PRODUTO_ID;
+	
+	
+	
 	// ==================== Variaveis de Relacionamento================
-	public Item_Pedido() {
-	}
+	public ItemPedido() {
+	} 
 
-	public Item_Pedido(Long iD, BigDecimal pRECO_UNITARIO, Long qUANTIDADE, Pedido pEDIDO_ID, Produto pRODUTO_ID,
-			BigDecimal dESCONTO_ID, String tIPO_DESCONTO) {
+	public ItemPedido(Long iD, BigDecimal pRECO_UNITARIO, Long qUANTIDADE, Pedido pEDIDO_ID, Produto pRODUTO_ID,
+			BigDecimal dESCONTO_ID, Descontos tIPO_DESCONTO) {
 		this.iD = iD;
 		PRECO_UNITARIO = pRECO_UNITARIO;
 		QUANTIDADE = qUANTIDADE;
@@ -91,12 +102,21 @@ public class Item_Pedido {
 		DESCONTO_ID = dESCONTO_ID;
 	}
 
-	public String getTIPO_DESCONTO() {
+	public Descontos getTIPO_DESCONTO() {
 		return TIPO_DESCONTO;
 	}
 
-	public void setTIPO_DESCONTO(String tIPO_DESCONTO) {
+	public void setTIPO_DESCONTO(Descontos tIPO_DESCONTO) {
 		TIPO_DESCONTO = tIPO_DESCONTO;
 	}
 
+	@Override
+	public String toString() {
+		return "Item_Pedido [iD=" + iD + ", PRECO_UNITARIO=" + PRECO_UNITARIO + ", QUANTIDADE=" + QUANTIDADE
+				+ ", TIPO_DESCONTO=" + TIPO_DESCONTO + ", DESCONTO_ID=" + DESCONTO_ID + ", PEDIDO_ID=" + PEDIDO_ID
+				+ ", PRODUTO_ID=" + PRODUTO_ID + "]";
+	}
+
+	
+	
 }

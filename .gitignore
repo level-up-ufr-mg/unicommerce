@@ -4,3 +4,25 @@
 *.ipr
 
 target/
+
+.gitignore {
+
+.idea
+*.iws
+*.iml
+*.ipr
+
+target/
+
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+
+.settings/
+.project
+.classpath
+bin/
+
+} (editado)
+23 de agosto de 2023

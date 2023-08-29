@@ -43,4 +43,18 @@ public class ProdutoDao {
 	             .getResultList();
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
