@@ -43,6 +43,7 @@ public class ProdutoDao {
 		return em.createQuery(jpql, Produto.class).getResultList();
 	}
 	
+	
 	public List<Produto> buscarPorNome(String nome) {
 		String jpql = "SELECT p FROM Produto p WHERE p.nome = :nome";
 		return em.createQuery(jpql, Produto.class)

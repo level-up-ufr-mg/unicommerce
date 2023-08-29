@@ -11,6 +11,7 @@ public class RelatorioDeVendasVo {
 		this.nomeProduto = nomeProduto;
 		this.quantidadeVendida = quantidadeVendida;
 		this.dataUltimaVenda = dataUltimaVenda;
+		
 	}
 	
 	public String getNomeProduto() {
@@ -19,6 +20,7 @@ public class RelatorioDeVendasVo {
 	public Long getQuantidadeVendida() {
 		return quantidadeVendida;
 	}
+	
 	public LocalDate getDataUltimaVenda() {
 		return dataUltimaVenda;
 	}

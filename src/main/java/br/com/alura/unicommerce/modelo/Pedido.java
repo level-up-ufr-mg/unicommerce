@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "pedido")
@@ -35,6 +36,24 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
 	private List<ItemPedido> itens = new ArrayList<>();
 	
+	@Transient
+	private BigDecimal valorTotal = BigDecimal.ZERO;
+	
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+	public BigDecimal getDescontosDeItens() {
+		return descontosDeItens;
+	}
+
+	@Transient
+	private BigDecimal descontosDeItens;
+	
 	public Pedido() {
 	}
 
@@ -47,7 +66,8 @@ public class Pedido {
 	public Pedido(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -91,6 +111,7 @@ public class Pedido {
 	public void adicionarItem(ItemPedido item) {
 	     item.setPedido(this);
 	     this.itens.add(item);
+	     this.valorTotal = this.valorTotal.add(item.getValor());
 	}
 
 	/*

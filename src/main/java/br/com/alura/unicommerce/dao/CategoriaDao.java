@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.alura.unicommerce.modelo.Categoria;
-import br.com.alura.unicommerce.vo.RelatorioDeVendasCategoriaVo;
 
 public class CategoriaDao {
 
@@ -44,19 +43,7 @@ public class CategoriaDao {
 				.getResultList();
 	}
 	
-	 public List<RelatorioDeVendasCategoriaVo> relatorioDeVendas() {
-		 String jpql = "SELECT new br.com.alura.unicommercevo.RelatorioDeVendasCategoriaVo("
-		 		+ "categoria.nome, "
-		 		+ "SUM(item.quantidade), "
-		 		+ "MAX(pedido.data)) "
-		 		+ "FROM Pedido pedido "
-		 		+ "JOIN pedido.itens item "
-		 		+ "JOIN item.produto produto "
-		 		+ "GROUP BY produto.nome "
-		 		+ "ORDER BY item.quantidade DESC ";
-		 return em.createQuery(jpql, RelatorioDeVendasCategoriaVo.class)
-				 .getResultList();
-	 }
+	
 	
 	
 }

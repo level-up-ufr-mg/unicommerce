@@ -30,9 +30,9 @@ public class ItemPedido {
 	@Column(precision = 10, scale = 2, nullable = false)
 	private BigDecimal desconto;
 	
-	@Column(length = 50, nullable = false)
+	@Column(name = "tipo_desconto", length = 50, nullable = false)
 	@Enumerated(EnumType.STRING)
-	private TIPO_DESCONTO_ITEM_PEDIDO  tipoDescontoItemPedido; //(QUANTIDADE, PROMOCAO ou NENHUM)Unitario;
+	private TIPO_DESCONTO_ITEM_PEDIDO tipoDescontoItemPedido; //(QUANTIDADE, PROMOCAO ou NENHUM);
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
