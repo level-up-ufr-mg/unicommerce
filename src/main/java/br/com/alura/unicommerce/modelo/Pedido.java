@@ -37,7 +37,7 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemDePedido> itens = new ArrayList<>(); //sempre vai começar com uma colção vazia
 	
-	@Column(nullable = false)
+	@Column(precision = 10, scale = 2)
 	private BigDecimal desconto;
 	
 	@Column(nullable = false)
