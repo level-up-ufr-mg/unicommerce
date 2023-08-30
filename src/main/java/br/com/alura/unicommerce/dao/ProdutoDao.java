@@ -12,8 +12,8 @@ public class ProdutoDao {
 	public ProdutoDao(EntityManager em) {
 		this.em = em;
 	}
-	
-	public Produto buscaPorId(Produto id) {
+
+	public Produto buscaPorId(Long id) {
 		return em.find(Produto.class, id);
 	}
 	
@@ -21,7 +21,7 @@ public class ProdutoDao {
 		this.em.persist(produto);
 	}
 
-	public List<Produto> buscarTodos() {
+	public List<Produto> listaTodos() {
 		String jpql = "SELECT p FROM Produto p";
 		return em.createQuery(jpql, Produto.class).getResultList();
 	}

@@ -1,5 +1,6 @@
 package br.com.alura.unicommerce.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +13,20 @@ import javax.persistence.Table;
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(length = 20) // Definindo o tamanho máximo para o campo ID
 	private Long id;
 
 	@Embedded
+	@Column(length = 100) // Definindo o tamanho máximo para o campo Endereco
 	private Long Endereco;
+
+	@Column(length = 50) // Definindo o tamanho máximo para o campo nome
 	private String nome;
+
+	@Column(length = 14) // Definindo o tamanho máximo para o campo cpf
 	private String cpf;
+
+	@Column(length = 15) // Definindo o tamanho máximo para o campo telefone
 	private String telefone;
 
 	public Long getId() {

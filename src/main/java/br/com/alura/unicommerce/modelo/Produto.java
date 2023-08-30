@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,21 +18,33 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
+
+	@Column(length = 100) // Definindo o tamanho máximo para o campo nome
 	private String nome;
+
+	@Column(precision = 10, scale = 2) // Definindo precisão e escala para o campo preco (exemplo: até 10 dígitos
+										// totais e 2 casas decimais)
 	private BigDecimal preco;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 200) // Definindo o tamanho máximo para o campo descricao e tornando-o
+											// obrigatório
 	private String descricao;
+
+	@Column // O tamanho máximo será determinado automaticamente com base no tipo Integer
 	private Integer quantidade_estoque;
 
 	@ManyToOne
+	@JoinColumn(name = "id")
 	private Categoria categoria;
 	
-	public Produto() {  //construtor default
-	}
 	
-	public Produto(String nome, BigDecimal preco, String descricao,
-			Integer quantidade_estoque, Categoria categoria) {
+	
+	
+
+	public Produto() { // construtor default
+	}
+
+	public Produto(String nome, BigDecimal preco, String descricao, Integer quantidade_estoque, Categoria categoria) {
 		super();
 		this.nome = nome;
 		this.preco = preco;

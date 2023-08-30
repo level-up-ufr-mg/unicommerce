@@ -5,10 +5,19 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Endereco {
+	@Column(length = 100) // Definindo o tamanho máximo para o campo rua
 	private String rua;
+
+	@Column(length = 10) // Definindo o tamanho máximo para o campo numero
 	private String numero;
+
+	@Column(length = 50) // Definindo o tamanho máximo para o campo bairro
 	private String bairro;
+
+	@Column(length = 50) // Definindo o tamanho máximo para o campo cidade
 	private String cidade;
+
+	@Column(length = 20) // Definindo o tamanho máximo para o campo estado
 	private String estado;
 
 	@Column(nullable = false)
