@@ -36,8 +36,8 @@ public class PedidoDao {
     
     public List<RelatorioDeVendasVo>  relatorioDeVendas() {
     	String jpql = " SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasVo("
-    			    + " produto.nome, "
-    			    + " SUM(item.quantidade), MAX(pedido.data))"
+    				+ " produto.nome, "
+    			    + " SUM(item.quantidade), MAX(pedido.data)) "
     			    + " FROM Pedido pedido "
     			    + " JOIN pedido.itens item "
     			    + " JOIN item.produto produto "

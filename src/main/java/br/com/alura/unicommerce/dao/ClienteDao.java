@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.alura.unicommerce.modelo.Cliente;
+import br.com.alura.unicommerce.vo.RelatorioClientesFiesVo;
 
 public class ClienteDao {
 
@@ -52,13 +53,14 @@ public class ClienteDao {
 //    }
     
     
-    public List<Object[]> relatorioClientesFies() {
-    	String jpql = " SELECT p.cliente.nome, COUNT(p), SUM(p.valorTotal) "
+    public List<RelatorioClientesFiesVo> relatorioClientesFies() {
+    	String jpql = " SELECT new br.com.alura.unicommerce.vo.RelatorioClientesFiesVo( "
+    				+ " p.cliente.nome, COUNT(p), SUM(p.valorTotal)) "
     				+ " FROM Pedido p "
     	            + " JOIN p.cliente c "
     	            + " GROUP BY c.nome ";
         
-        return em.createQuery(jpql, Object[].class).getResultList();
+        return em.createQuery(jpql, RelatorioClientesFiesVo.class).getResultList();
     }
     
 }

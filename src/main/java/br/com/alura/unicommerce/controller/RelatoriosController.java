@@ -7,9 +7,15 @@ import javax.persistence.EntityManager;
 
 import br.com.alura.unicommerce.dao.CategoriaDao;
 import br.com.alura.unicommerce.dao.ClienteDao;
+import br.com.alura.unicommerce.dao.PedidoDao;
 import br.com.alura.unicommerce.dao.ProdutoDao;
+import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.util.JPAUtil;
+import br.com.alura.unicommerce.vo.RelatorioClientesFiesVo;
+import br.com.alura.unicommerce.vo.RelatorioDeVendasVo;
+import br.com.alura.unicommerce.vo.RelatorioProdutosMaisVendidosVo;
+import br.com.alura.unicommerce.vo.RelatorioVendasPorCategoriaVo;
 
 public class RelatoriosController {
 	
@@ -28,19 +34,13 @@ public class RelatoriosController {
 			
 			EntityManager em = JPAUtil.getEntityManager();
 	        CategoriaDao categoriaDao = new CategoriaDao(em);
-	
-	        List<Object[]> relatorio = categoriaDao.relatorioVendasPorCategoria();
-	        for (Object[] row : relatorio) {
-	            String nomeCategoria = (String) row[0];
-	            Long quantidadeVendida = (Long) row[1];
-	            BigDecimal montanteVendido = (BigDecimal) row[2];
-	
-	            System.out.println("--------------------------");
-	            System.out.println("Categoria: " + nomeCategoria);
-	            System.out.println("Quantidade vendida: " + quantidadeVendida);
-	            System.out.println("Montante vendido: " + montanteVendido);
-	            System.out.println("--------------------------");
-	        }
+   
+	        List<RelatorioVendasPorCategoriaVo> relatorio = categoriaDao.relatorioVendasPorCategoria();
+			for (RelatorioVendasPorCategoriaVo relatorioItem : relatorio) {
+			    System.out.println(relatorioItem);
+			    
+			    
+			}
 	       em.close();
 			
 		}
@@ -49,22 +49,14 @@ public class RelatoriosController {
 				
 				EntityManager em = JPAUtil.getEntityManager();
 		        ClienteDao clienteDao = new ClienteDao(em);
-		
-		        List<Object[]> relatorio = clienteDao.relatorioClientesFies();
-		
-		        for (Object[] resultado : relatorio) {
-		            String nomeCliente = (String) resultado[0];
-		            Long quantidadePedidos = (Long) resultado[1];
-		            BigDecimal montanteGasto = (BigDecimal) resultado[2];
-		
-		            System.out.println("-------------------------");
-		            System.out.println("Cliente: " + nomeCliente);
-		            System.out.println("Quantidade de pedidos: " + quantidadePedidos);
-		            System.out.println("Montante gasto: " + montanteGasto);
-		            System.out.println("-------------------------");
-		        }
-		
-		        em.close();
+
+		        List<RelatorioClientesFiesVo> relatorio = clienteDao.relatorioClientesFies();
+				for (RelatorioClientesFiesVo relatorioItem : relatorio) {
+				    System.out.println(relatorioItem);
+				    
+				    
+				}
+		       em.close();
 			
 		}
 		
@@ -72,13 +64,30 @@ public class RelatoriosController {
 		public static void relatorioProdutosMaisVendidosMetodo() {
 		    EntityManager em = JPAUtil.getEntityManager();
 		    ProdutoDao produtoDao = new ProdutoDao(em);
-
-		    List<String> relatorio = produtoDao.relatorioProdutosMaisVendidos();
-
-		    for (String produto : relatorio) {
-		    	System.out.println("-------------------------");
-		        System.out.println("Produto: " + produto);
-		        System.out.println("-------------------------");
-		    }
+		    
+		    List<RelatorioProdutosMaisVendidosVo> relatorio = produtoDao.relatorioProdutosMaisVendidos();
+			for (RelatorioProdutosMaisVendidosVo relatorioItem : relatorio) {
+			    System.out.println(relatorioItem);
+			    
+			    
+			}
+	       em.close();
+		    
+		}
+		
+		public static void RelatorioDeVendas() {
+			
+			EntityManager em = JPAUtil.getEntityManager();
+			
+			em.getTransaction().begin();
+			
+			PedidoDao pedidoDao = new PedidoDao(em);
+			
+			List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
+			for (RelatorioDeVendasVo relatorioItem : relatorio) {
+			    System.out.println(relatorioItem);
+			    
+			    
+			}
 		}
 }

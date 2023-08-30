@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.alura.unicommerce.modelo.Produto;
+import br.com.alura.unicommerce.vo.RelatorioProdutosMaisVendidosVo;
 
 public class ProdutoDao {
 	
@@ -34,16 +35,17 @@ public class ProdutoDao {
     	return  em.createQuery(jpql, Produto.class).getResultList();
     }
     
-    public List<String> relatorioProdutosMaisVendidos() {
+    public List<RelatorioProdutosMaisVendidosVo> relatorioProdutosMaisVendidos() {
     
-		String jpql = " SELECT item.produto.nome "
+		String jpql = " SELECT new br.com.alura.unicommerce.vo.RelatorioProdutosMaisVendidosVo( "
+					+ " item.produto.nome ) "
 				    + " FROM Pedido pedido "
    			        + " JOIN pedido.itens item "
    			        + " JOIN item.produto produto "
 				  	+ " GROUP BY produto.id "
 					+ " HAVING COUNT(item) > 3";
 		
-		return  em.createQuery(jpql, String.class).getResultList();
+		return  em.createQuery(jpql, RelatorioProdutosMaisVendidosVo.class).getResultList();
 
     }
     

@@ -5,7 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     
     <build>
-	    <plugins>
+		<finalName>unicommerce</finalName>
+		<plugins>
 	        <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-compiler-plugin</artifactId>
@@ -18,7 +19,24 @@
 	            <artifactId>maven-war-plugin</artifactId>
 	            <version>3.2.1</version>
 	        </plugin>
-	    </plugins>
+	        
+	        <plugin>
+		    	<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-help-plugin</artifactId>
+		        <version>3.0.1</version>
+		        <executions>
+		        	<execution>
+		        		<id>show-profiles</id>
+		                <phase>compile</phase>
+		                <goals>
+		                	<goal>active-profiles</goal>
+		                </goals>
+		             </execution>
+		         </executions>
+		     </plugin>        
+	        
+	           
+	     </plugins>
 	</build>
 
     <groupId>br.com.alura</groupId>
@@ -70,11 +88,8 @@
 		    <version>8.0.26</version>
 	   </dependency>
 	   
-	   
-	   
-
-    </dependencies>
-    
+	
+	</dependencies>
     
     <profiles>
         <profile>
