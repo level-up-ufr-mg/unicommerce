@@ -1,5 +1,6 @@
 package br.com.alura.unicommerce.modelo;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
@@ -40,7 +41,6 @@ public class Pedido {
 
 	public Pedido(LocalDateTime data, Long clienteId, BigInteger desconto,
 			br.com.alura.unicommerce.modelo.tipoDesconto tipoDesconto) {
-		super();
 		this.data = data;
 		this.clienteId = clienteId;
 		this.desconto = desconto;
@@ -85,6 +85,11 @@ public class Pedido {
 
 	public void setTipoDesconto(tipoDesconto tipoDesconto) {
 		this.tipoDesconto = tipoDesconto;
+	}
+
+	public BigDecimal getPreco() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -14,11 +14,16 @@ public class Pedido {
 
     private LocalDate data;
 
-    public Pedido(String categoria2, String produto2, String cliente2, BigDecimal preco2, int quantidade2,
-			LocalDate data2) {
-	}
+    public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
+        this.categoria = categoria;
+        this.produto = produto;
+        this.cliente = cliente;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.data = data;
+    }
 
-	public String getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
@@ -40,6 +45,18 @@ public class Pedido {
 
     public LocalDate getData() {
         return data;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "categoria='" + categoria + '\'' +
+                ", produto='" + produto + '\'' +
+                ", cliente='" + cliente + '\'' +
+                ", preco=" + preco +
+                ", quantidade=" + quantidade +
+                ", data=" + data +
+                '}';
     }
 
 }

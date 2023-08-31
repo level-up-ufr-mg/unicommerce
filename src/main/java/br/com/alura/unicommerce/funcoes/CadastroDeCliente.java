@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.teste;
+package br.com.alura.unicommerce.funcoes;
 
 import javax.persistence.EntityManager;
 

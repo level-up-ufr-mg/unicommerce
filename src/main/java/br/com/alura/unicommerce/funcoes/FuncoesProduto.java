@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.teste;
+package br.com.alura.unicommerce.funcoes;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,12 +11,11 @@ import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.util.JPAUtil;
 
-public class CadatroDeProduto {
+public class FuncoesProduto {
 	public static void main(String[] args) {
 		CadastraProduto();
 		BuscaPorId();
-		
-		
+
 	}
 
 	private static void BuscaPorId() {
@@ -25,13 +24,13 @@ public class CadatroDeProduto {
 
 		Produto p = produtoDaoBuscaPorId.buscaPorId(1l);
 		System.out.println(p.getId());
-		
+
 		List<Produto> listaTodos = produtoDaoBuscaPorId.listaTodos();
 		listaTodos.forEach(p2 -> System.out.println(p.getNome()));
 	}
 
 	private static void CadastraProduto() {
-		Categoria ATIVA = new Categoria("ATIVA");
+		Categoria ATIVA = new Categoria();
 		Produto cadeira = new Produto("Cadeira Gammer", new BigDecimal("500.00"), "Movel", 50, ATIVA);
 
 		EntityManager em = JPAUtil.getEntityManager();
