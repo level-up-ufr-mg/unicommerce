@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,10 +19,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "pedido")
 public class Pedido {
+	
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@OneToMany(mappedBy = "ItemPedido")
-	@JoinColumn(name = "id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)	
 	private Long id;
 
 	@Column(name = "data")

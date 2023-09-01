@@ -71,4 +71,10 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
+	public Endereco() {
+		super();
+	}
+	
+	
+
 }

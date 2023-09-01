@@ -33,7 +33,6 @@ public class Produto {
 	private Integer quantidade_estoque;
 
 	@ManyToOne
-	@JoinColumn(name = "id")
 	private Categoria categoria;
 	
 	
@@ -43,8 +42,8 @@ public class Produto {
 	public Produto() { // construtor default
 	}
 
-	public Produto(String nome, BigDecimal preco, String descricao, Integer quantidade_estoque, Categoria categoria) {
-		super();
+	public Produto(Long id , String nome, BigDecimal preco, String descricao, Integer quantidade_estoque, Categoria categoria) {
+		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
 		this.descricao = descricao;

@@ -14,7 +14,6 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(length = 20) // Definindo o tamanho máximo para o campo id
-	@OneToMany(mappedBy = "Produto")
 	private Long id;
 
 	@Column(length = 50) // Definindo o tamanho máximo para o campo nome
@@ -28,7 +27,6 @@ public class Categoria {
 	}	
 	
 	public Categoria(String nome, boolean status) {
-		super();
 		this.nome = nome;
 		Status = status;
 	}	

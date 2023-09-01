@@ -17,8 +17,7 @@ public class Cliente {
 	private Long id;
 
 	@Embedded
-	@Column(length = 100) // Definindo o tamanho máximo para o campo Endereco
-	private Long Endereco;
+	private Endereco endereco;
 
 	@Column(length = 50) // Definindo o tamanho máximo para o campo nome
 	private String nome;
@@ -60,4 +59,11 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	public Cliente() {
+		super();
+	}
+	
+	
+	
 }

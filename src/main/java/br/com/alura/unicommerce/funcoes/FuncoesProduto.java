@@ -13,8 +13,18 @@ import br.com.alura.unicommerce.util.JPAUtil;
 
 public class FuncoesProduto {
 	public static void main(String[] args) {
-		CadastraProduto();
-		BuscaPorId();
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		Categoria ATIVA = new Categoria("Informática", true);
+		Produto cadeira = new Produto(null,"Cadeira Gammer", 
+				new BigDecimal("500.00"), "Movel", 50, ATIVA);
+		
+		
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		CategoriaDao categoriaDao = new CategoriaDao(em);
+		
+		CadastraProduto(em, categoriaDao, produtoDao, ATIVA, cadeira);
+		/* BuscaPorId(); */
 
 	}
 
@@ -29,14 +39,8 @@ public class FuncoesProduto {
 		listaTodos.forEach(p2 -> System.out.println(p.getNome()));
 	}
 
-	private static void CadastraProduto() {
-		Categoria ATIVA = new Categoria();
-		Produto cadeira = new Produto("Cadeira Gammer", new BigDecimal("500.00"), "Movel", 50, ATIVA);
-
-		EntityManager em = JPAUtil.getEntityManager();
-		ProdutoDao produtoDao = new ProdutoDao(em);
-		CategoriaDao categoriaDao = new CategoriaDao(em);
-
+	private static void CadastraProduto(EntityManager em, CategoriaDao categoriaDao, 
+			ProdutoDao produtoDao, Categoria ATIVA, Produto cadeira) {
 		em.getTransaction().begin();
 		categoriaDao.cadastrar(ATIVA);
 		produtoDao.cadastrar(cadeira);

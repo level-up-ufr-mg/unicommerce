@@ -7,24 +7,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "item_pedido")
 public class ItemPedido {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private Pedido pedidoId;
-
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private Produto produtoId;
 
 	@Column(name = "preco_unitario")
 	private Double precoUnitario;
@@ -45,4 +35,23 @@ public class ItemPedido {
 	public enum TipoDesconto {
 		QUANTIDADE, PROMOCAO, NENHUM
 	}
+
+	public ItemPedido(Long id, Double precoUnitario, Integer quantidade, Double desconto, TipoDesconto tipoDesconto) {
+		super();
+		this.id = id;
+		this.precoUnitario = precoUnitario;
+		this.quantidade = quantidade;
+		this.desconto = desconto;
+		this.tipoDesconto = tipoDesconto;
+	}
+	
+	
+	
+	public ItemPedido() {
+		
+	
+	}
+	
+	
+	
 }
