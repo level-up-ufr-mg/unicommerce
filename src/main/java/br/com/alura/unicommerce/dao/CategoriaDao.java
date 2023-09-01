@@ -3,6 +3,7 @@ package br.com.alura.unicommerce.dao;
 import javax.persistence.EntityManager;
 
 import br.com.alura.unicommerce.modelo.Categoria;
+import br.com.alura.unicommerce.modelo.Cliente;
 
 public class CategoriaDao {
 	private EntityManager em;
@@ -11,11 +12,11 @@ public class CategoriaDao {
 		this.em = em;
 	}
 	
-	public void buscarPorId(Categoria categoria) {
-		this.em.persist(categoria);
+	public Cliente buscarPorId(Long id) {
+		return em.find(Cliente.class, id);
 	}
 	
-	public void cadastrar(Categoria categoria) {
+	public void cadastra(Categoria categoria) {
 		this.em.persist(categoria);
 	}
 	

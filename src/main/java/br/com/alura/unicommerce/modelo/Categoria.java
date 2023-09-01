@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,25 +12,24 @@ import javax.persistence.Table;
 public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@Column(length = 20) // Definindo o tamanho máximo para o campo id
 	private Long id;
 
 	@Column(length = 50) // Definindo o tamanho máximo para o campo nome
 	private String nome;
-	
-	private boolean Status; //Booleanos não posuem lenght	
-	
+
+	private boolean Status; // Booleanos não posuem lenght
+
 	// Construtores
-	
+
 	public Categoria() {
-	}	
-	
+	}
+
 	public Categoria(String nome, boolean status) {
 		this.nome = nome;
 		Status = status;
-	}	
-	
-	//getters and setters
+	}
+
+	// getters and setters
 
 	public Long getId() {
 		return id;

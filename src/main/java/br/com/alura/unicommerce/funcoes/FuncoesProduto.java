@@ -15,37 +15,32 @@ public class FuncoesProduto {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
 		
+		BuscaPorId(em);
+
+	}
+
+	private static void BuscaPorId(EntityManager em) {
+		ProdutoDao produtoBuscaPorId = new ProdutoDao(em);
+
+		Produto p = produtoBuscaPorId.buscaPorId(2l);
+		System.out.println(p.getId());
+
+		List<Produto> listaTodos = produtoBuscaPorId.listaTodos();
+		listaTodos.forEach(p2 -> System.out.println(p.getNome()));
+	}
+
+	private static void CadastraProduto(EntityManager em) {
+		
 		Categoria ATIVA = new Categoria("Informática", true);
-		Produto cadeira = new Produto(null,"Cadeira Gammer", 
-				new BigDecimal("500.00"), "Movel", 50, ATIVA);
+		Produto cadeira = new Produto("Cadeira Gamer", new BigDecimal("500.00"), "Movel", 50, ATIVA);
 		
 		
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		CategoriaDao categoriaDao = new CategoriaDao(em);
-		
-		CadastraProduto(em, categoriaDao, produtoDao, ATIVA, cadeira);
-		/* BuscaPorId(); */
-
-	}
-
-	private static void BuscaPorId() {
-		EntityManager em = JPAUtil.getEntityManager();
-		ProdutoDao produtoDaoBuscaPorId = new ProdutoDao(em);
-
-		Produto p = produtoDaoBuscaPorId.buscaPorId(1l);
-		System.out.println(p.getId());
-
-		List<Produto> listaTodos = produtoDaoBuscaPorId.listaTodos();
-		listaTodos.forEach(p2 -> System.out.println(p.getNome()));
-	}
-
-	private static void CadastraProduto(EntityManager em, CategoriaDao categoriaDao, 
-			ProdutoDao produtoDao, Categoria ATIVA, Produto cadeira) {
 		em.getTransaction().begin();
-		categoriaDao.cadastrar(ATIVA);
+		categoriaDao.cadastra(ATIVA);
 		produtoDao.cadastrar(cadeira);
 		em.getTransaction().commit();
 		em.close();
 	}
-
 }

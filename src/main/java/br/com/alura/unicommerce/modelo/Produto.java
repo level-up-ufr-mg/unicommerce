@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,38 +17,35 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	@Column(length = 100) // Definindo o tamanho máximo para o campo nome
+	@Column(length = 100, nullable = false) // Definindo o tamanho máximo para o campo nome
 	private String nome;
 
-	@Column(precision = 10, scale = 2) // Definindo precisão e escala para o campo preco (exemplo: até 10 dígitos
-										// totais e 2 casas decimais)
+	@Column(precision = 10, scale = 2, nullable = false) 
 	private BigDecimal preco;
 
-	@Column(nullable = false, length = 200) // Definindo o tamanho máximo para o campo descricao e tornando-o
-											// obrigatório
+	@Column(length = 200)
 	private String descricao;
 
-	@Column // O tamanho máximo será determinado automaticamente com base no tipo Integer
+	@Column(nullable = false) // O tamanho máximo será determinado automaticamente com base no tipo Integer
 	private Integer quantidade_estoque;
 
 	@ManyToOne
 	private Categoria categoria;
-	
-	
-	
-	
 
+	//Construtor
+	
 	public Produto() { // construtor default
 	}
-
-	public Produto(Long id , String nome, BigDecimal preco, String descricao, Integer quantidade_estoque, Categoria categoria) {
-		this.id = id;
+	
+	public Produto(String nome, BigDecimal preco, String descricao, Integer quantidade_estoque, Categoria categoria) {
 		this.nome = nome;
 		this.preco = preco;
 		this.descricao = descricao;
 		this.quantidade_estoque = quantidade_estoque;
 		this.categoria = categoria;
 	}
+
+	//Getters e Setters
 
 	public Long getId() {
 		return id;

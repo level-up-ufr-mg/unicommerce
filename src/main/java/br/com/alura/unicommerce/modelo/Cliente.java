@@ -13,20 +13,33 @@ import javax.persistence.Table;
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@Column(length = 20) // Definindo o tamanho máximo para o campo ID
 	private Long id;
+
+	@Column(length = 50, nullable = false) // Definindo o tamanho máximo para o campo nome
+	private String nome;
+
+	@Column(length = 14, nullable = false) // Definindo o tamanho máximo para o campo cpf
+	private String cpf;
+
+	@Column(length = 15, nullable = false) // Definindo o tamanho máximo para o campo telefone
+	private String telefone;
 
 	@Embedded
 	private Endereco endereco;
 
-	@Column(length = 50) // Definindo o tamanho máximo para o campo nome
-	private String nome;
+	//Construtor
+	
+	public Cliente() {
+	}	
+	
+	public Cliente(String nome, String cpf, String telefone, Endereco endereco) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.telefone = telefone;
+		this.endereco = endereco;
+	}
 
-	@Column(length = 14) // Definindo o tamanho máximo para o campo cpf
-	private String cpf;
-
-	@Column(length = 15) // Definindo o tamanho máximo para o campo telefone
-	private String telefone;
+	//Getters e Setters
 
 	public Long getId() {
 		return id;
@@ -59,11 +72,4 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
-	public Cliente() {
-		super();
-	}
-	
-	
-	
 }

@@ -5,24 +5,42 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Endereco {
-	@Column(length = 100) // Definindo o tamanho máximo para o campo rua
+	@Column(length = 100, nullable = false) // Definindo o tamanho máximo para o campo rua
 	private String rua;
 
-	@Column(length = 10) // Definindo o tamanho máximo para o campo numero
+	@Column(length = 10, nullable = false) // Definindo o tamanho máximo para o campo numero
 	private String numero;
 
-	@Column(length = 50) // Definindo o tamanho máximo para o campo bairro
-	private String bairro;
-
-	@Column(length = 50) // Definindo o tamanho máximo para o campo cidade
-	private String cidade;
-
-	@Column(length = 20) // Definindo o tamanho máximo para o campo estado
-	private String estado;
-
-	@Column(nullable = false)
+	@Column
 	private String complemento;
 
+	@Column(length = 50, nullable = false) // Definindo o tamanho máximo para o campo bairro
+	private String bairro;
+
+	@Column(length = 50, nullable = false) // Definindo o tamanho máximo para o campo cidade
+	private String cidade;
+
+	@Column(length = 20, nullable = false) // Definindo o tamanho máximo para o campo estado
+	private String estado;
+	
+	//Construtor
+
+	public Endereco() {
+		super();
+	}
+
+	public Endereco(String rua, String numero, String complemento, String bairro, String cidade, String estado) {
+		super();
+		this.rua = rua;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
+	}
+
+	//Getters e Setters
+	
 	public String getRua() {
 		return rua;
 	}
@@ -70,11 +88,4 @@ public class Endereco {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-
-	public Endereco() {
-		super();
-	}
-	
-	
-
 }
