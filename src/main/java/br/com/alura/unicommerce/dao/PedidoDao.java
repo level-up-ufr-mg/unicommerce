@@ -101,7 +101,8 @@ public class PedidoDao {
 	 
 	 public List<RelatorioProdutoVendidosMaisTresVezesVo> buscarProdutosVendidosMaisTresVezes() {
 			String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioProdutoVendidosMaisTresVezesVo( "
-					+ "produto.nome, COUNT(item.quantidade) AS quantidade) "
+					+ " produto.nome, "
+					+ " COUNT(item.quantidade) AS quantidade) "
 					+ " FROM Pedido pedido "
 					+ " JOIN pedido.itens item "
 					+ "	JOIN item.produto produto "

@@ -4,7 +4,6 @@ public class RelatorioProdutoVendidosMaisTresVezesVo {
 	private String nomeProduto;
 	private Long quantidadeVendida;
 
-	
 	public RelatorioProdutoVendidosMaisTresVezesVo(String nomeProduto, Long quantidadeVendida) {
 		this.nomeProduto = nomeProduto;
 		this.quantidadeVendida = quantidadeVendida;

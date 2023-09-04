@@ -1,6 +1,6 @@
 package br.com.alura.unicommerce.modelo;
 
-public enum TIPO_DESCONTO {
+public enum TipoDesconto {
 
 	FIDELIDADE, 
 	NENHUM

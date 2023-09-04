@@ -1,6 +1,6 @@
 package br.com.alura.unicommerce.modelo;
 
-public enum TIPO_DESCONTO_ITEM_PEDIDO {
+public enum TipoDescontoItemPedido {
 
 	QUANTIDADE, 
 	PROMOCAO, 

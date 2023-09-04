@@ -28,7 +28,7 @@ public class Pedido {
 	private BigDecimal desconto;
 	
 	@Column(name = "tipo_desconto")
-	private TIPO_DESCONTO tipoDesconto; 
+	private TipoDesconto tipoDesconto; 
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Cliente cliente;
@@ -57,7 +57,7 @@ public class Pedido {
 	public Pedido() {
 	}
 
-	public Pedido(BigDecimal desconto, TIPO_DESCONTO tipoDesconto, Cliente cliente) {
+	public Pedido(BigDecimal desconto, TipoDesconto tipoDesconto, Cliente cliente) {
 		this.desconto = desconto;
 		this.tipoDesconto = tipoDesconto;
 		this.cliente = cliente;
@@ -92,11 +92,11 @@ public class Pedido {
 		this.desconto = desconto;
 	}
 
-	public TIPO_DESCONTO getTipoDesconto() {
+	public TipoDesconto getTipoDesconto() {
 		return tipoDesconto;
 	}
 
-	public void setTipoDesconto(TIPO_DESCONTO tipoDesconto) {
+	public void setTipoDesconto(TipoDesconto tipoDesconto) {
 		this.tipoDesconto = tipoDesconto;
 	}
 

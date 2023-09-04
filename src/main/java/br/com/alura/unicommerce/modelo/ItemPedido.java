@@ -32,7 +32,7 @@ public class ItemPedido {
 	
 	@Column(name = "tipo_desconto", length = 50, nullable = false)
 	@Enumerated(EnumType.STRING)
-	private TIPO_DESCONTO_ITEM_PEDIDO tipoDescontoItemPedido; //(QUANTIDADE, PROMOCAO ou NENHUM);
+	private TipoDescontoItemPedido tipoDescontoItemPedido; //(QUANTIDADE, PROMOCAO ou NENHUM);
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -49,7 +49,7 @@ public class ItemPedido {
 	public ItemPedido() {
 	}
 	
-	public ItemPedido(TIPO_DESCONTO_ITEM_PEDIDO tipoDescontoItemPedido, Integer quantidade, BigDecimal desconto,
+	public ItemPedido(TipoDescontoItemPedido tipoDescontoItemPedido, Integer quantidade, BigDecimal desconto,
 			 Pedido pedido, Produto produto) {
 		this.precoUnitario = produto.getPreco();
 		this.quantidade = quantidade;
@@ -107,11 +107,11 @@ public class ItemPedido {
 		this.desconto = desconto;
 	}
 
-	public TIPO_DESCONTO_ITEM_PEDIDO getTipoDescontoItemPedidoo() {
+	public TipoDescontoItemPedido getTipoDescontoItemPedidoo() {
 		return tipoDescontoItemPedido;
 	}
 
-	public void setTipoDescontoItemPedido(TIPO_DESCONTO_ITEM_PEDIDO tipoDescontoItemPedido) {
+	public void setTipoDescontoItemPedido(TipoDescontoItemPedido tipoDescontoItemPedido) {
 		this.tipoDescontoItemPedido = tipoDescontoItemPedido;
 	}
 	
