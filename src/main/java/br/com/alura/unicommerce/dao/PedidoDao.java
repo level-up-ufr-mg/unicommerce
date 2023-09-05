@@ -64,7 +64,7 @@ public class PedidoDao {
 //    }
 	
 	public List<RelatorioVendasPorCatergoria> relatorioVendasPorCategoria(){
-		
+		//SELECT new -> qdo o retorno não é uma Entidade mapeada
 		String jpql = "SELECT new br.com.alura.unicommerce.relatorios.RelatorioVendasPorCatergoria(categoria.nome, SUM (item.quantidade) As quantidadeProdutosVendidos, SUM (item.quantidade * (item.precoUnitario - item.desconto)) AS totalVendasCategoria) "
 					+ " FROM Pedido AS pedido "
 					+ " JOIN pedido.itens AS item" 

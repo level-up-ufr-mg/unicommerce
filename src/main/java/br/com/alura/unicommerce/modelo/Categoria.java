@@ -1,13 +1,16 @@
 package br.com.alura.unicommerce.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity //anotação que indica que a classe é uma entidade
-@Table(name = "categoria") //anotação usada se o nome da tabela do bd não for o mesmo da entidade 
+@Entity 
+@Table(name = "categoria")
 public class Categoria {
 
     @Id
@@ -17,6 +20,9 @@ public class Categoria {
     //@Column(name = "nome")//anotação usada se o nome da coluna do bd não for o mesmo da entidade 
     private String nome;
     private Boolean status ;
+    
+//    @OneToMany(mappedBy = "categoria") 
+//    private List<Produto> produtos;
 
    
     public Categoria() {
@@ -26,30 +32,43 @@ public class Categoria {
         this.nome = nome;
         this.status = status;
     }
-  
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public Boolean getStatus() {
+		return status;
+	}
+ 
+//	public List<Produto> getProdutos() {
+//		return produtos;
+//	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		
+    	if(nome.trim().isEmpty() || nome == null) { 
+    		throw new IllegalArgumentException("ERRO: Nome da Categoria inválido.");  
+    	}
+		
+		this.nome = nome;
+	}
 
-    public Boolean getStatus() {
-        return status;
-    }
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
+//	public void setProdutos(List<Produto> produtos) {
+//		this.produtos = produtos;
+//	}
+
+
+	
+	
+
 }
 

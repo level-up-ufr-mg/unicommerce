@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.alura.unicommerce.modelo.Categoria;
-import br.com.alura.unicommerce.util.JPAUtil;
 
 
 public class CategoriaDao {

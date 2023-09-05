@@ -27,7 +27,7 @@ public class CadastraPedido {
 	
 	public static void main(String[] args) {
 	        
-		//popularBancoDeDados();  
+		popularBancoDeDados();  
 		
 		EntityManager em = JPAUtil.getEntityManager();
 		
@@ -83,7 +83,7 @@ public class CadastraPedido {
 //			System.out.println(obj[1]);
 //			System.out.println(obj[2]);
 //		}
-//
+
 
 }
 	
@@ -92,6 +92,7 @@ public class CadastraPedido {
 		Categoria categoria = new Categoria("Eletrônicos", true);
 		Categoria categoria1 = new Categoria("Eletrodomésticos", true);
 		Categoria categoria2 = new Categoria("Brinquedos", true);
+		Categoria categoria3 = new Categoria(" Sapatos", true);
 		
 		Produto produto = new Produto ("Mouse", "Mouse Gamer", 3, categoria, new BigDecimal("90"));
 		Produto produto1 = new Produto ("Geladeira", "Brastemp", 3, categoria1, new BigDecimal("2500"));
@@ -114,6 +115,7 @@ public class CadastraPedido {
 		categoriaDao.cadastra(categoria);
 		categoriaDao.cadastra(categoria1);
 		categoriaDao.cadastra(categoria2);
+		categoriaDao.cadastra(categoria3);
 		
 		produtoDao.cadastra(produto);
 		produtoDao.cadastra(produto1);

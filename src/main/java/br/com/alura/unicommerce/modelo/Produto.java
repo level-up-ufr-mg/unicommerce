@@ -2,6 +2,7 @@ package br.com.alura.unicommerce.modelo;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Produto {
     @Column(name = "quantidade_estoque", nullable = false)
     private int quantidadeEstoque;
 
-    @ManyToOne // vários produtos pertencem a uma única categoria
+    @ManyToOne(cascade = CascadeType.ALL) // vários produtos pertencem a uma única categoria
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
     
@@ -39,7 +40,6 @@ public class Produto {
     }
     
     public Produto(String nome, String descricao, int quantidadeEstoque, Categoria categoria, BigDecimal preco) {
-		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.quantidadeEstoque = quantidadeEstoque;
@@ -52,13 +52,9 @@ public class Produto {
 		return preco;
 	}
 
-
-
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
-
-
 
 	public Long getId() {
         return id;
