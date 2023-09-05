@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import br.com.alura.unicommerce.modelo.Cliente;
+
 public class ProcessadorDeCsv {
 
     public static Pedido[] processaArquivo(String nomeDoArquivo) {
@@ -35,8 +37,8 @@ public class ProcessadorDeCsv {
                 LocalDate data = LocalDate.parse(registro[4], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 String cliente = registro[5];
 
-                Pedido pedido = new Pedido(categoria, produto, cliente, preco, quantidade, data);
-                pedidos[quantidadeDeRegistros] = pedido;
+               Pedido pedido = new Pedido(categoria, produto, cliente, preco, quantidade, data);
+               pedidos[quantidadeDeRegistros] = pedido;
 
                 quantidadeDeRegistros++;
                 if (pedidos[pedidos.length - 1] != null) {
