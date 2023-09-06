@@ -62,13 +62,15 @@ public class Categoria {
 		this.status = status;
 	}
 
+
 //	public void setProdutos(List<Produto> produtos) {
 //		this.produtos = produtos;
 //	}
 
-
 	
-	
-
+	@Override
+	public String toString() {
+		return "Categoria [id=" + id + ", nome=" + nome + ", status=" + status + "]";
+	}
 }
 

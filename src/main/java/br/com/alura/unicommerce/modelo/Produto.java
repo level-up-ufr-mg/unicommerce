@@ -46,13 +46,31 @@ public class Produto {
 		this.categoria = categoria;
 		this.preco = preco;
 	}
+    
+    
 
     
-    public BigDecimal getPreco() {
+    public Produto(Long id, String nome, String descricao, int quantidadeEstoque, Categoria categoria,
+			BigDecimal preco) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.quantidadeEstoque = quantidadeEstoque;
+		this.categoria = categoria;
+		this.preco = preco;
+	}
+
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
 	public void setPreco(BigDecimal preco) {
+		
+		if( preco.compareTo(BigDecimal.ZERO) <= 0) {
+			throw new IllegalArgumentException("ERRO: O preço do produto não pode ser menor ou igual a zero.");
+		}
+	
 		this.preco = preco;
 	}
 
@@ -95,4 +113,12 @@ public class Produto {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", quantidadeEstoque="
+				+ quantidadeEstoque + ", categoria=" + categoria + ", preco=" + preco + "]";
+	}
+    
+    
 }

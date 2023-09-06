@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce;
+package br.com.alura.unicommerce.modelo.test;
 
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import br.com.alura.unicommerce.modelo.Categoria;
 
-class CategoriaDaoTest {
+class CategoriaTest {
 	
 	Categoria categoriaNomeValido = new Categoria("Nome Válido", true);
 	
