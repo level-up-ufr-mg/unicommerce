@@ -30,10 +30,10 @@ public class FuncoesProduto {
 	}
 =======
 
-		/*
-		 * cadastraProduto(em); buscaPorId(em); listaTodos(em);
-		 */
-		listaIndisponiveis(em, );
+		/* cadastraProduto(em); */
+		/* buscaPorId(em);  */
+		/* listaTodos(em); */
+		listaIndisponiveis(em);
 
 	}
 
@@ -64,7 +64,7 @@ public class FuncoesProduto {
 =======
 	private static void cadastraProduto(EntityManager em) {
 		Categoria categoria = new Categoria("Roupas", true);
-		Produto produto = new Produto(null, "Camiseta Branca", new BigDecimal("20.00"), "Vestuário", 100, categoria);
+		Produto produto = new Produto(null, "Regata Preta", new BigDecimal("100.00"), "Vestuário", 0, categoria);
 
 		
 		ProdutoDao produtoDao = new ProdutoDao(em);
@@ -92,19 +92,17 @@ public class FuncoesProduto {
 		List<Produto> listaTodos = produtoDaoListaTodos.listaTodos();
 		listaTodos.forEach(p -> System.out.println(p.getNome()));
 	}
+	
+	private static void listaIndisponiveis(EntityManager em) {
+	    ProdutoDao listaIndisponiveis = new ProdutoDao(em);
 
-	private static void listaIndisponiveis(EntityManager em, Categoria categoria) {
-	    String jpql = "SELECT p FROM Produto p WHERE p.categoria = :categoria AND p.quantidadeEmEstoque = 0";
-	    List<Produto> produtosIndisponiveis = em.createQuery(jpql, Produto.class)
-	            .setParameter("categoria", categoria)
-	            .getResultList();
-
-	    // Agora você pode fazer o que quiser com a lista de produtos indisponíveis, por exemplo, imprimi-los.
-	    for (Produto produto : produtosIndisponiveis) {
-	        System.out.println("Produto Indisponível: " + produto.getNome());
-	    }
+	    List<Produto> indisponiveis = listaIndisponiveis.listaIndisponiveis(0);
+	    indisponiveis.forEach(p -> System.out.println("Nome: " + p.getNome()));
 	}
 
+<<<<<<< HEAD
 	
 >>>>>>> ab5d880 (Adicionando funções)
+=======
+>>>>>>> 241f2c3 (Alterando funcções)
 }

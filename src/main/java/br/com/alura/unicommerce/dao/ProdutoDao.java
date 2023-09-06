@@ -28,6 +28,7 @@ public class ProdutoDao {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	//Busca pela quantidade em estoque igual a 0
 	public List<Produto> listaIndisponiveis(Integer quantidade_estoque) {
@@ -55,6 +56,20 @@ public class ProdutoDao {
 		return em.createQuery(jpql, Produto.class)
 				.setParameter("categoria", categoria)
 >>>>>>> ab5d880 (Adicionando funções)
+=======
+	public List<Produto> listaIndisponiveis(Integer quantidade_estoque, String nome) {
+		String jpql = "SELECT p FROM Produto p WHERE p.quantidade_estoque = :quantidade_estoque, p.nome = :nome";
+		return em.createQuery(jpql, Produto.class)
+				.setParameter("quantidade_estoque", quantidade_estoque)
+	             .setParameter("nome", nome)
+>>>>>>> 241f2c3 (Alterando funcções)
 				.getResultList();
 	}
+	
+	/*public listaIndisponiveis(EntityManager em, Categoria categoria) {
+	    String jpql = "SELECT p FROM Produto p WHERE p.categoria = :categoria AND p.quantidadeEmEstoque = 0";
+	    List<Produto> produtosIndisponiveis = em.createQuery(jpql, Produto.class)
+	            .setParameter("categoria", categoria)
+	            .getResultList();
+	    }*/
 }
