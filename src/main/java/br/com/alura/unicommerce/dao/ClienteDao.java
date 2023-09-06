@@ -11,8 +11,8 @@ public class ClienteDao {
 		this.em = em;
 	}
 
-	public void buscaPorId(Cliente cliente) {
-		this.em.persist(cliente);
+	public Cliente buscaPorId(Long id) {
+		return em.find(Cliente.class, id);
 	}
 
 	public void cadastra(Cliente cliente) {

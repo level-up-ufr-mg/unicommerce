@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Produto;
 
 public class ProdutoDao {
@@ -17,7 +18,7 @@ public class ProdutoDao {
 		return em.find(Produto.class, id);
 	}
 	
-	public void cadastrar(Produto produto) {
+	public void cadastra(Produto produto) {
 		this.em.persist(produto);
 	}
 
@@ -26,6 +27,7 @@ public class ProdutoDao {
 		return em.createQuery(jpql, Produto.class).getResultList();
 	}
 
+<<<<<<< HEAD
 	
 	//Busca pela quantidade em estoque igual a 0
 	public List<Produto> listaIndisponiveis(Integer quantidade_estoque) {
@@ -47,6 +49,12 @@ public class ProdutoDao {
 		String jpql = "SELECT p FROM Produto p WHERE p.categoria.nome = ?1"; //Utilizando ?1
 		return em.createQuery(jpql, Produto.class)
 				.setParameter("?1", quantidade_estoque)
+=======
+	public List<Produto> listaIndisponiveis(Categoria categoria) {
+		String jpql = "SELECT c FROM Categoria c WHERE c.categoria = :categoria";
+		return em.createQuery(jpql, Produto.class)
+				.setParameter("categoria", categoria)
+>>>>>>> ab5d880 (Adicionando funções)
 				.getResultList();
 	}
 }
