@@ -14,95 +14,66 @@ import br.com.alura.unicommerce.util.JPAUtil;
 public class FuncoesProduto {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
-<<<<<<< HEAD
-		
-		/* CadastraProduto(em); */
-		/* BuscaPorId(em); */
+
+		buscaPorId(em);
+		cadastra(em);
+		listaTodos(em);
 		listaIndisponiveis(em);
-		buscaPorNomeDaCategoria(em);
-	}
-
-	private static void buscaPorNomeDaCategoria(EntityManager em) {
-		ProdutoDao produtoDao = new ProdutoDao(em);		
-		
-		List<Produto> indisponiveis = produtoDao.buscaPorNomeDaCategoria("Informática");
-		indisponiveis.forEach(p2 -> System.out.println(p2.getQuantidade_estoque()));
-	}
-=======
-
-		/* cadastraProduto(em); */
-		/* buscaPorId(em);  */
-		/* listaTodos(em); */
-		listaIndisponiveis(em);
-
 	}
 
 	private static void buscaPorId(EntityManager em) {
-		ProdutoDao produtoDaoBuscaPorId = new ProdutoDao(em);
->>>>>>> ab5d880 (Adicionando funções)
+		ProdutoDao buscaPorId = new ProdutoDao(em);
 
-	private static void BuscaPorId(EntityManager em) {
-		ProdutoDao produtoBuscaPorId = new ProdutoDao(em);
-
-		Produto p = produtoBuscaPorId.buscaPorId(2l);
-		System.out.println(p.getId());
-
-		List<Produto> listaTodos = produtoBuscaPorId.listaTodos();
-		listaTodos.forEach(p2 -> System.out.println(p.getNome()));
+		List<Produto> produtosPorId = buscaPorId.buscaPorId(2L);
+		produtosPorId.forEach(p -> {
+		    System.out.print("ID: " + p.getId() + ", ");
+		    System.out.print("Nome: " + p.getNome() + ", ");
+		    System.out.print("Preço: " + p.getPreco() + ", ");
+		    System.out.print("Descrição: " + p.getDescricao() + ", ");
+		    System.out.print("Quantidade em Estoque: " + p.getQuantidade_estoque());
+		});
 	}
 
-<<<<<<< HEAD
-	private static void CadastraProduto(EntityManager em) {		
-		Categoria ATIVA = new Categoria("Informática", true);
-		Produto cadeira = new Produto("Mesa gamer", new BigDecimal("1100.00"), "Movel", 0, ATIVA);
-				
-		ProdutoDao produtoDao = new ProdutoDao(em);
-		CategoriaDao categoriaDao = new CategoriaDao(em);
-		em.getTransaction().begin();
-		categoriaDao.cadastra(ATIVA);
-		produtoDao.cadastrar(cadeira);
-=======
-	private static void cadastraProduto(EntityManager em) {
-		Categoria categoria = new Categoria("Roupas", true);
-		Produto produto = new Produto(null, "Regata Preta", new BigDecimal("100.00"), "Vestuário", 0, categoria);
+	private static void cadastra(EntityManager em) {
+		Categoria categoria = new Categoria("Informática", true);
+		Produto produto = new Produto("Mesa gamer", new BigDecimal("1100.00"), "Movel", 0, categoria);
 
+		CategoriaDao categoriaDao = new CategoriaDao(em);
+		ProdutoDao produtoDao = new ProdutoDao(em);
 		
-		ProdutoDao produtoDao = new ProdutoDao(em);
-		CategoriaDao categoriaDao = new CategoriaDao(em);
-
 		em.getTransaction().begin();
 		categoriaDao.cadastra(categoria);
 		produtoDao.cadastra(produto);
->>>>>>> ab5d880 (Adicionando funções)
 		em.getTransaction().commit();
 		em.close();
 	}
 
-<<<<<<< HEAD
-	private static void listaIndisponiveis(EntityManager em) {
-		ProdutoDao produtoDao = new ProdutoDao(em);
-		
-		List<Produto> indisponiveis = produtoDao.listaIndisponiveis(0);
-		indisponiveis.forEach(p2 -> System.out.println(p2.getQuantidade_estoque()));
-	}
-=======
 	private static void listaTodos(EntityManager em) {
 		ProdutoDao produtoDaoListaTodos = new ProdutoDao(em);
 
 		List<Produto> listaTodos = produtoDaoListaTodos.listaTodos();
-		listaTodos.forEach(p -> System.out.println(p.getNome()));
+		listaTodos.forEach(p -> {
+		    System.out.print("ID: " + p.getId() + ", ");
+		    System.out.print("Nome: " + p.getNome() + ", ");
+		    System.out.print("Preço: " + p.getPreco() + ", ");
+		    System.out.print("Descrição: " + p.getDescricao() + ", ");
+		    System.out.print("Quantidade em Estoque: " + p.getQuantidade_estoque());
+		    System.out.println();
+		});
 	}
-	
+
 	private static void listaIndisponiveis(EntityManager em) {
-	    ProdutoDao listaIndisponiveis = new ProdutoDao(em);
+		ProdutoDao listaIndisponiveis = new ProdutoDao(em);
 
-	    List<Produto> indisponiveis = listaIndisponiveis.listaIndisponiveis(0);
-	    indisponiveis.forEach(p -> System.out.println("Nome: " + p.getNome()));
+		List<Produto> nomesIndisponiveis = listaIndisponiveis.listaIndisponiveis(0);
+		nomesIndisponiveis.forEach(p -> {
+		    System.out.print("ID: " + p.getId() + ", ");
+		    System.out.print("Nome: " + p.getNome() + ", ");
+		    System.out.print("Preço: " + p.getPreco() + ", ");
+		    System.out.print("Descrição: " + p.getDescricao() + ", ");
+		    System.out.print("Quantidade em Estoque: " + p.getQuantidade_estoque());
+		    System.out.println();
+		});
 	}
 
-<<<<<<< HEAD
-	
->>>>>>> ab5d880 (Adicionando funções)
-=======
->>>>>>> 241f2c3 (Alterando funcções)
 }
