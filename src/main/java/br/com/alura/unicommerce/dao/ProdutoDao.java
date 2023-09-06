@@ -26,7 +26,27 @@ public class ProdutoDao {
 		return em.createQuery(jpql, Produto.class).getResultList();
 	}
 
-	public void listaIndisponíveis(Produto produto) {
-		this.em.persist(produto);
+	
+	//Busca pela quantidade em estoque igual a 0
+	public List<Produto> listaIndisponiveis(Integer quantidade_estoque) {
+		String jpql = "SELECT p FROM Produto p WHERE p.quantidade_estoque = :quantidade_estoque"; //Utilizando :par
+		return em.createQuery(jpql, Produto.class)
+				.setParameter("quantidade_estoque", quantidade_estoque)
+				.getResultList();
+	}
+	
+	public List<Produto> listaIndisponiveis02(Integer quantidade_estoque) {
+		String jpql = "SELECT p FROM Produto p WHERE p.quantidade_estoque = ?1"; //Utilizando ?1
+		return em.createQuery(jpql, Produto.class)
+				.setParameter("?1", quantidade_estoque)
+				.getResultList();
+	}
+	
+	
+	public List<Produto> buscaPorNomeDaCategoria(String nome) {
+		String jpql = "SELECT p FROM Produto p WHERE p.categoria.nome = ?1"; //Utilizando ?1
+		return em.createQuery(jpql, Produto.class)
+				.setParameter("?1", quantidade_estoque)
+				.getResultList();
 	}
 }

@@ -17,4 +17,6 @@ public class FuncoesCategoria {
 		Categoria c = buscarPorIdCategoria.buscarPorId(2l);
 		System.out.println(c.getId());
 	}
+	
+	
 }

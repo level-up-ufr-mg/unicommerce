@@ -15,8 +15,17 @@ public class FuncoesProduto {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
 		
-		BuscaPorId(em);
+		/* CadastraProduto(em); */
+		/* BuscaPorId(em); */
+		listaIndisponiveis(em);
+		buscaPorNomeDaCategoria(em);
+	}
 
+	private static void buscaPorNomeDaCategoria(EntityManager em) {
+		ProdutoDao produtoDao = new ProdutoDao(em);		
+		
+		List<Produto> indisponiveis = produtoDao.buscaPorNomeDaCategoria("Informática");
+		indisponiveis.forEach(p2 -> System.out.println(p2.getQuantidade_estoque()));
 	}
 
 	private static void BuscaPorId(EntityManager em) {
@@ -29,12 +38,10 @@ public class FuncoesProduto {
 		listaTodos.forEach(p2 -> System.out.println(p.getNome()));
 	}
 
-	private static void CadastraProduto(EntityManager em) {
-		
+	private static void CadastraProduto(EntityManager em) {		
 		Categoria ATIVA = new Categoria("Informática", true);
-		Produto cadeira = new Produto("Cadeira Gamer", new BigDecimal("500.00"), "Movel", 50, ATIVA);
-		
-		
+		Produto cadeira = new Produto("Mesa gamer", new BigDecimal("1100.00"), "Movel", 0, ATIVA);
+				
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		CategoriaDao categoriaDao = new CategoriaDao(em);
 		em.getTransaction().begin();
@@ -42,5 +49,12 @@ public class FuncoesProduto {
 		produtoDao.cadastrar(cadeira);
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	private static void listaIndisponiveis(EntityManager em) {
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		
+		List<Produto> indisponiveis = produtoDao.listaIndisponiveis(0);
+		indisponiveis.forEach(p2 -> System.out.println(p2.getQuantidade_estoque()));
 	}
 }
