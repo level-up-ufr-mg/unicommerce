@@ -1,10 +1,17 @@
 package br.com.alura.unicommerce.funcoes;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
+import br.com.alura.unicommerce.dao.CategoriaDao;
 import br.com.alura.unicommerce.dao.ClienteDao;
+import br.com.alura.unicommerce.dao.ProdutoDao;
+import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Endereco;
+import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.util.JPAUtil;
 
 public class FuncoesCliente {
@@ -19,75 +26,53 @@ public class FuncoesCliente {
         listaPorNome(em);
     }
 
-    private static void buscaPorId(EntityManager em) {
-        ClienteDao buscaPorId = new ClienteDao(em);
+	private static void buscaPorId(EntityManager em) {
+		ClienteDao buscaPorId = new ClienteDao(em);
 
-        List<Cliente> clientesPorId = buscaPorId.buscaPorId(1L);
-        clientesPorId.forEach(c -> {
-            System.out.print("ID: " + c.getId() + ", ");
-            System.out.print("Nome: " + c.getNome() + ", ");
-            // Adicione mais campos aqui conforme a necessidade
-            System.out.println();
-        });
-    }
+		List<Cliente> clientesPorId = buscaPorId.buscaPorId(2L);
+		clientesPorId.forEach(p -> {
+		    System.out.print("ID: " + p.getId() + ", ");
+		    System.out.print("Nome: " + p.getNome() + ", ");
+		    System.out.print("Preço: " + p.getTelefone() + ", ");
+		    System.out.print("Descrição: " + p.getEndereco() + ", ");
+		});
+	}
 
-    private static void cadastra(EntityManager em) {
-        Cliente cliente = new Cliente("João", "joao@example.com");
-        ClienteDao clienteDao = new ClienteDao(em);
+	private static void cadastra(EntityManager em) {
+		Endereco endereco = new Endereco("Palmeiras", 189, null, "Alvorada", "Doresópolis", "MG");
+		Cliente cliente = new Cliente("Valmir Santos", "158.555.555-55", "(37) 97865-6545", endereco);
 
-        em.getTransaction().begin();
-        clienteDao.cadastra(cliente);
-        em.getTransaction().commit();
-    }
+		ClienteDao ClienteDao = new ClienteDao(em);
+		
+		em.getTransaction().begin();
+		ClienteDao.cadastra(cliente);
+		em.getTransaction().commit();
+		em.close();
+	}
 
-    private static void atualiza(EntityManager em) {
-        ClienteDao clienteDao = new ClienteDao(em);
-        List<Cliente> clientesPorNome = clienteDao.listaPorNome("João");
+	private static void listaTodos(EntityManager em) {
+		ClienteDao clienteDaoListaTodos = new ClienteDao(em);
 
-        if (!clientesPorNome.isEmpty()) {
-            Cliente cliente = clientesPorNome.get(0);
-            cliente.setEmail("joao.novo@example.com");
+		List<Cliente> listaTodos = clienteDaoListaTodos.listaTodos();
+		listaTodos.forEach(p -> {
+		    System.out.print("ID: " + p.getId() + ", ");
+		    System.out.print("Nome: " + p.getNome() + ", ");
+		    System.out.print("Preço: " + p.getTelefone() + ", ");
+		    System.out.print("Descrição: " + p.getEndereco() + ", ");
+		    System.out.println();
+		});
+	}
 
-            em.getTransaction().begin();
-            clienteDao.atualiza(cliente);
-            em.getTransaction().commit();
-        }
-    }
+	private static void listaPorNome(EntityManager em) {
+		ClienteDao listaPorNome = new ClienteDao(em);
 
-    private static void remove(EntityManager em) {
-        ClienteDao clienteDao = new ClienteDao(em);
-        List<Cliente> clientesPorNome = clienteDao.listaPorNome("João");
-
-        if (!clientesPorNome.isEmpty()) {
-            Cliente cliente = clientesPorNome.get(0);
-
-            em.getTransaction().begin();
-            clienteDao.remove(cliente);
-            em.getTransaction().commit();
-        }
-    }
-
-    private static void listaTodos(EntityManager em) {
-        ClienteDao clienteDao = new ClienteDao(em);
-
-        List<Cliente> listaTodos = clienteDao.listaTodos();
-        listaTodos.forEach(c -> {
-            System.out.print("ID: " + c.getId() + ", ");
-            System.out.print("Nome: " + c.getNome() + ", ");
-            // Adicione mais campos aqui conforme a necessidade
-            System.out.println();
-        });
-    }
-
-    private static void listaPorNome(EntityManager em) {
-        ClienteDao clienteDao = new ClienteDao(em);
-
-        List<Cliente> clientesPorNome = clienteDao.listaPorNome("Maria");
-        clientesPorNome.forEach(c -> {
-            System.out.print("ID: " + c.getId() + ", ");
-            System.out.print("Nome: " + c.getNome() + ", ");
-            // Adicione mais campos aqui conforme a necessidade
-            System.out.println();
-        });
-    }
+		List<Cliente> nomesIndisponiveis = listaPorNome.listaPorNome("Valmir Santos");
+		nomesIndisponiveis.forEach(p -> {
+		    System.out.print("ID: " + p.getId() + ", ");
+		    System.out.print("Nome: " + p.getNome() + ", ");
+		    System.out.print("Preço: " + p.getTelefone() + ", ");
+		    System.out.print("Descrição: " + p.getEndereco() + ", ");
+		    System.out.println();
+		});
+	}
 }

@@ -9,7 +9,7 @@ public class Endereco {
 	private String rua;
 
 	@Column(length = 10, nullable = false) // Definindo o tamanho máximo para o campo numero
-	private String numero;
+	private Integer numero;
 
 	@Column
 	private String complemento;
@@ -29,7 +29,7 @@ public class Endereco {
 		super();
 	}
 
-	public Endereco(String rua, String numero, String complemento, String bairro, String cidade, String estado) {
+	public Endereco(String rua, Integer numero, String complemento, String bairro, String cidade, String estado) {
 		super();
 		this.rua = rua;
 		this.numero = numero;
@@ -49,11 +49,11 @@ public class Endereco {
 		this.rua = rua;
 	}
 
-	public String getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
