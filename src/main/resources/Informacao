@@ -1,0 +1,19 @@
+Para gerar um jar do projeto
+
+1 - Baixe o mavem
+2 - Configure o caminho do mvn como variavel de ambiente do seu PATH 
+3 - Verifique se deu certo, abra o cmd e digite mvn -version
+4 - agora pelo cmd navegue até o diretório do seu projeto (C:\Users\dayane.FUOM\Desktop\ALURA\Alura Projeto Unicommerce\unicommerce)
+    - Use o comando 'mvn validate' para validar
+    - Use o comando 'mvn compile' para compilar o projeto
+    - Se der certo vai aparecer "BUILD SUCCESS"
+    - Use o comando 'mvn package' para empacotar o projeto em um arquivo .jar
+    - Vá até seu projeto e localize a o diretório target e verifique se gerou um arquivo .jar
+    
+    
+        
+    - Use o 'mvn clean' esse comando limpa tudo que está dentro do diretorio target 
+    
+    
+   - Use o comando 'mvn deploy' (precisa ter um repositorio) implanta o pacote final em um repositório remoto para 
+     compartilhamento com outros desenvolvedores ou sistemas.
