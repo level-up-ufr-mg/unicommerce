@@ -22,6 +22,11 @@ public class Categoria {
     public Categoria() {
     }
     
+    public Categoria(String nome) throws IllegalArgumentException {
+    	this.setNome(nome);
+    	
+    }
+    
     public Categoria(String nome, Boolean status) {
         this.nome = nome;
         this.status = status;
@@ -41,9 +46,17 @@ public class Categoria {
     }
 
     public void setNome(String nome) {
+    	if (nome == null ) {
+            throw new IllegalArgumentException("Nome inválido, o nome da categoria não pode ser nula.");
+         }
+    	
+    	if (nome.isEmpty() ) {
+            throw new IllegalArgumentException("Nome inválido, o nome da categoria não pode ser vazio.");
+         }
+    	
         this.nome = nome;
     }
-
+    
     public Boolean getStatus() {
         return status;
     }
@@ -51,5 +64,6 @@ public class Categoria {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+   
 }
 

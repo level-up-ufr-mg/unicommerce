@@ -44,7 +44,8 @@ public class ItemDePedido {
 	    private TipoDescontoItemPedido tipoDesconto;
 	    
 	    public BigDecimal getValor() {
-			return precoUnitario.multiply(new BigDecimal(quantidade));
+	    	return precoUnitario.multiply(new BigDecimal(quantidade));
+			//return this.tipoDesconto.aplicaDesconto(precoUnitario.multiply(new BigDecimal(quantidade)));
 		}
 
 

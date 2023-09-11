@@ -43,8 +43,11 @@ public class Produto {
     	
     }
     
+	public Produto(String nome, BigDecimal preco, Categoria categoria) {
+		this.setPreco(preco);	
+	}    
+    
     public Produto(String nome, String descricao, int quantidadeEstoque, Categoria categoria, BigDecimal preco) {
-		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.quantidadeEstoque = quantidadeEstoque;
@@ -60,6 +63,9 @@ public class Produto {
 
 
 	public void setPreco(BigDecimal preco) {
+		if (preco.compareTo( new BigDecimal("0.00")) <= 0) {
+            throw new IllegalArgumentException("O preço não pode ser menor ou igual a 0.");
+        }
 		this.preco = preco;
 	}
 

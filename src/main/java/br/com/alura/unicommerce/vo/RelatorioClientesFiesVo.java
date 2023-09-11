@@ -22,7 +22,7 @@ public class RelatorioClientesFiesVo {
 		return quantidadePedidos;
 	}
 	
-	public BigDecimal getMontante() {
+	public BigDecimal getTotalGasto() {
 		return totalGasto;
 	}
 
