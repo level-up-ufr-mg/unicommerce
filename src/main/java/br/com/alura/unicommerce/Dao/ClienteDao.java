@@ -18,7 +18,7 @@ public class ClienteDao {
 	public void cadastra (Cliente cliente) {
 		this.em.persist(cliente);
 	} 
-	
+	 
 
 	public void Atualizr(Cliente Cliente) {
 		this.em.merge(Cliente);

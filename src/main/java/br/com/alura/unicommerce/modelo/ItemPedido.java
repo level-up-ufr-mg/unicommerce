@@ -18,24 +18,25 @@ public class ItemPedido {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long iD;
+	private Long itemPedidoId;
 	@Column(nullable = false)
-	private BigDecimal PRECO_UNITARIO;
+	private BigDecimal precoUnitario;
 	@Column(nullable = false)
-	private Long QUANTIDADE;
-	private Descontos TIPO_DESCONTO;
+	private Long quantidade;
+	
+	private Descontos tipoDesconto;
 	@Column(nullable = false)
-	private BigDecimal DESCONTO_ID;
+	private BigDecimal descontoId;
 	// ==================== Variaveis de Relacionamento================
 	
 	@ManyToOne // fetch = FetchType.LAZY
-	@JoinColumn(name = "PEDIDO_ID")
-	private Pedido PEDIDO_ID;
+	@JoinColumn(name = "pedidoId")
+	private Pedido pedidoId;
 	
 	
 	@ManyToOne // fetch = FetchType.LAZY
-	@JoinColumn(name = "PRODUTO_ID")
-	private Produto PRODUTO_ID;
+	@JoinColumn(name = "produtoId")
+	private Produto produtoId;
 	
 	
 	
@@ -45,76 +46,76 @@ public class ItemPedido {
 
 	public ItemPedido(Long iD, BigDecimal pRECO_UNITARIO, Long qUANTIDADE, Pedido pEDIDO_ID, Produto pRODUTO_ID,
 			BigDecimal dESCONTO_ID, Descontos tIPO_DESCONTO) {
-		this.iD = iD;
-		PRECO_UNITARIO = pRECO_UNITARIO;
-		QUANTIDADE = qUANTIDADE;
-		PEDIDO_ID = pEDIDO_ID;
-		PRODUTO_ID = pRODUTO_ID;
-		DESCONTO_ID = dESCONTO_ID;
-		TIPO_DESCONTO = tIPO_DESCONTO;
+		this.itemPedidoId = iD;
+		precoUnitario = pRECO_UNITARIO;
+		quantidade = qUANTIDADE; 
+		pedidoId = pEDIDO_ID;
+		produtoId = pRODUTO_ID;
+		descontoId = dESCONTO_ID;
+		tipoDesconto = tIPO_DESCONTO;
 	}
 
-	public Long getiD() {
-		return iD;
+	public Long getItemPedidoId() {
+		return itemPedidoId;
 	}
 
-	public void setiD(Long iD) {
-		this.iD = iD;
+	public void setItemPedidoId(Long iD) {
+		this.itemPedidoId = iD;
 	}
 
-	public BigDecimal getPRECO_UNITARIO() {
-		return PRECO_UNITARIO;
+	public BigDecimal getPrecoUnitario() {
+		return precoUnitario;
 	}
 
-	public void setPRECO_UNITARIO(BigDecimal pRECO_UNITARIO) {
-		PRECO_UNITARIO = pRECO_UNITARIO;
+	public void setPrecoUnitario(BigDecimal pRECO_UNITARIO) {
+		precoUnitario = pRECO_UNITARIO;
 	}
 
-	public Long getQUANTIDADE() {
-		return QUANTIDADE;
+	public Long getQuantidade() {
+		return quantidade;
 	}
 
-	public void setQUANTIDADE(Long qUANTIDADE) {
-		QUANTIDADE = qUANTIDADE;
+	public void setQuantidade(Long qUANTIDADE) {
+		quantidade = qUANTIDADE;
 	}
 
-	public Pedido getPEDIDO_ID() {
-		return PEDIDO_ID;
+	public Pedido getPedidoId() {
+		return pedidoId;
 	}
 
-	public void setPEDIDO_ID(Pedido pEDIDO_ID) {
-		PEDIDO_ID = pEDIDO_ID;
+	public void setPedidoId(Pedido pEDIDO_ID) {
+		pedidoId = pEDIDO_ID;
 	}
 
-	public Produto getPRODUTO_ID() {
-		return PRODUTO_ID;
+	public Produto getProdutoId() {
+		return produtoId;
 	}
 
-	public void setPRODUTO_ID(Produto pRODUTO_ID) {
-		PRODUTO_ID = pRODUTO_ID;
+	public void setProdutoId(Produto pRODUTO_ID) {
+		produtoId = pRODUTO_ID;
 	}
 
-	public BigDecimal getDESCONTO_ID() {
-		return DESCONTO_ID;
+	public BigDecimal getDescontoId() {
+		return descontoId;
 	}
 
-	public void setDESCONTO_ID(BigDecimal dESCONTO_ID) {
-		DESCONTO_ID = dESCONTO_ID;
+	public void setDescontoId(BigDecimal dESCONTO_ID) {
+		descontoId = dESCONTO_ID;
 	}
 
-	public Descontos getTIPO_DESCONTO() {
-		return TIPO_DESCONTO;
+	public Descontos getTipoDesconto() {
+		return tipoDesconto;
 	}
 
-	public void setTIPO_DESCONTO(Descontos tIPO_DESCONTO) {
-		TIPO_DESCONTO = tIPO_DESCONTO;
+	public void setTipoDesconto(Descontos tIPO_DESCONTO) {
+		tipoDesconto = tIPO_DESCONTO;
 	}
 
 	@Override
 	public String toString() {
-		return "Item_Pedido [iD=" + iD + ", PRECO_UNITARIO=" + PRECO_UNITARIO + ", QUANTIDADE=" + QUANTIDADE
-				+ ", TIPO_DESCONTO=" + TIPO_DESCONTO + ", DESCONTO_ID=" + DESCONTO_ID + ", PEDIDO_ID=" + PEDIDO_ID
-				+ ", PRODUTO_ID=" + PRODUTO_ID + "]";
+		return "Item_Pedido [iD=" + itemPedidoId + ", PRECO_UNITARIO=" + precoUnitario + ", QUANTIDADE=" + quantidade
+				+ ", TIPO_DESCONTO=" + tipoDesconto + ", DESCONTO_ID=" + descontoId + ", PEDIDO_ID=" + pedidoId
+				+ ", PRODUTO_ID=" + produtoId + "]";
 	}
 
 	

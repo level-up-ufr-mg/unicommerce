@@ -33,24 +33,24 @@ public class ItemPedidoDao {
 	 
 	public List<RelatorideVendasPorCategoriaVO> relatorideVendasPorCategoriaVO(){
 		String jpql = "SELECT NEW br.com.alura.unicommerce.VO.RelatorideVendasPorCategoriaVO("
-		        + "produto.NOME, "
-		        + "SUM(iten.QUANTIDADE), "
-		        + "SUM(iten.PRECO_UNITARIO)) "
-		        + "FROM ItemPedido iten "  // Use ItemPedido em vez de ITEM_PEDIDO
-		        + "JOIN iten.PRODUTO_ID produto "
-		        + "GROUP BY produto.NOME "
-		        + "ORDER BY MAX(iten.QUANTIDADE) DESC"; // Correção aqui: usar MAX(iten.QUANTIDADE) para ordenar
+		        + "produto.nome, "
+		        + "SUM(iten.quantidade), "
+		        + "SUM(iten.precoUnitario)) "
+		        + "FROM ItemPedido iten "  
+		        + "JOIN iten.produtoId produto "
+		        + "GROUP BY produto.nome "
+		        + "ORDER BY MAX(iten.quantidade) DESC"; // usar MAX(iten.QUANTIDADE) para ordenar
 	    return em.createQuery(jpql, RelatorideVendasPorCategoriaVO.class).getResultList(); 
-	}
+	} 
 
 	public List<RelatorioDeItensMaisVendidosVO> relatorioDeItensMaisVendidosVOs() {
 	    String jpql = "SELECT NEW br.com.alura.unicommerce.VO.RelatorioDeItensMaisVendidosVO ("
-	            + "produto.NOME, MAX(iten.QUANTIDADE))"
+	            + "produto.nome, MAX(iten.quantidade))"
 	            + "FROM ItemPedido iten "
-	            + "JOIN iten.PRODUTO_ID produto "
-	            + "GROUP BY produto.NOME "
-	            + "HAVING MAX(iten.QUANTIDADE) > 3 "
-	            + "ORDER BY MAX(iten.QUANTIDADE) DESC";
+	            + "JOIN iten.produtoId produto "
+	            + "GROUP BY produto.nome "
+	            + "HAVING MAX(iten.quantidade) > 3 "
+	            + "ORDER BY MAX(iten.quantidade) DESC";
 	    
 	    return em.createQuery(jpql, RelatorioDeItensMaisVendidosVO.class).getResultList();
 	}

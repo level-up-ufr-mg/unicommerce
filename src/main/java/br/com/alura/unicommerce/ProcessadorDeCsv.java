@@ -18,7 +18,7 @@ public class ProcessadorDeCsv {
             Path caminhoDoArquivo = caminhoDoArquivo = Path.of(recursoCSV.toURI());
 
             Scanner leitorDeLinhas = new Scanner(caminhoDoArquivo);
-
+ 
             leitorDeLinhas.nextLine();
 
             Pedido[] pedidos = new Pedido[10];

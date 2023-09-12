@@ -14,75 +14,84 @@ import jakarta.persistence.Table;
 @Table(schema = "unicommerce", name = "cliente")
 public class Cliente implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Long CLIENTE_ID;
+	@Column(name = "ID",nullable = false)
+	private Long clienteId;
+	
+	@Column(name ="nome",nullable = false)
+	private String nome;
+	
 	@Column(nullable = false)
-	private String NOME;
+	private Long cpf;
+	
 	@Column(nullable = false)
-	private Long CPF;
-	@Column(nullable = false)
-	private Long TELEFONE;
+	private Long telefone;
+	
 	@Embedded
-	private Endereco endereco;
+	private Endereco tipoDesconto;
 
 	public Cliente() {
-	}
+	} 
 
 	public Cliente(Long cLIENTE_ID, String nOME, Long cPF, Long tELEFONE, Endereco endereco) {
 		super();
-		CLIENTE_ID = cLIENTE_ID;
-		NOME = nOME;
-		CPF = cPF;
-		TELEFONE = tELEFONE;
-		this.endereco = endereco;
+		clienteId = cLIENTE_ID;
+		nome = nOME;
+		cpf = cPF;
+		telefone = tELEFONE;
+		this.tipoDesconto = endereco;
 	}
 
-	public Long getCLIENTE_ID() {
-		return CLIENTE_ID;
+	public Long getClienteId() {
+		return clienteId;
 	}
 
-	public String getNOME() {
-		return NOME;
+	public String getNome() {
+		return nome;
 	}
 
-	public Long getCPF() {
-		return CPF;
+	public Long getCpf() {
+		return cpf;
 	}
 
-	public Long getTELEFONE() {
-		return TELEFONE;
+	public Long getTelefone() {
+		return telefone;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public Endereco getTipoDesconto() {
+		return tipoDesconto;
 	}
 
-	public void setCLIENTE_ID(Long cLIENTE_ID) {
-		CLIENTE_ID = cLIENTE_ID;
+	public void setClienteId(Long cLIENTE_ID) {
+		clienteId = cLIENTE_ID;
 	}
 
-	public void setNOME(String nOME) {
-		NOME = nOME;
+	public void setNome(String nOME) {
+		nome = nOME;
 	}
 
-	public void setCPF(Long cPF) {
-		CPF = cPF;
+	public void setCpf(Long cPF) {
+		cpf = cPF;
 	}
 
-	public void setTELEFONE(Long tELEFONE) {
-		TELEFONE = tELEFONE;
+	public void setTelefone(Long tELEFONE) {
+		telefone = tELEFONE;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setTipoDesconto(Endereco endereco) {
+		this.tipoDesconto = endereco;
 	}
 
 	@Override
 	public String toString() {
-		return "Cliente [CLIENTE_ID=" + CLIENTE_ID + ", NOME=" + NOME + ", CPF=" + CPF + ", TELEFONE=" + TELEFONE
-				+ ", endereco=" + endereco + "]";
+		return "Cliente [ClienteId=" + clienteId + ", Nome=" + nome + ", Cpf=" + cpf + ", Telefone=" + telefone
+				+ ", TipoDesconto=" + tipoDesconto + "]";
 	}
 
+	
 }

@@ -1,5 +1,8 @@
 package br.com.alura.unicommerce.modelo;
 
+import java.math.BigDecimal;
+
+import br.com.alura.unicommerce.Excepion.PrecoInvalidoException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,76 +19,115 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private Long PRODUTO_ID;
+	private Long produtoId;
 	@Column(nullable = false)
-	private String NOME;
+	private String nome;
 	@Column(nullable = false)
-	private String DESCRICAO;
+	private String descricao;
 	@Column(nullable = false)
-	private Long QUANTIDADE_ESTOQUE;
+	private Long quantidadeEstoque;
+	@Column(nullable = false)
+	private BigDecimal Preco;
 	
 	// ==================== Variaveis de Relacionamento================
 	@ManyToOne
-	@JoinColumn(name = "CATEGORIA_ID")
-	private Categoria categoria;
+	@JoinColumn(name = "categoriaId")
+	private Categoria categoriaId;
 	// ==================== Variaveis de Relacionamento================
 
 	public Produto() {
 	}  
  
-	public Produto(Long iD, String nOME, String dESCRICAO, Long qUANTIDADE_ESTOQUE, Categoria cATEGORIA_ID) {
-		PRODUTO_ID = iD;
-		NOME = nOME;
-		DESCRICAO = dESCRICAO;
-		QUANTIDADE_ESTOQUE = qUANTIDADE_ESTOQUE;
-		categoria = cATEGORIA_ID;
-	}
-
-	public Long getID() {
-		return PRODUTO_ID;
-	}
-
-	public String getNOME() { 
-		return NOME;
-	}
-
-	public String getDESCRICAO() {
-		return DESCRICAO;
-	}
-
-	public Long getQUANTIDADE_ESTOQUE() {
-		return QUANTIDADE_ESTOQUE;
-	}
 
 	
-	public Categoria getCATEGORIA_ID() {
-		return categoria;
+
+ 
+	
+	public Produto(Long produtoId, String nome, String descricao, Long quantidadeEstoque, BigDecimal preco,
+			Categoria categoriaId) {
+		this.produtoId = produtoId;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.quantidadeEstoque = quantidadeEstoque;
+		Preco = preco;
+		this.categoriaId = categoriaId;
 	}
 
-	public void setID(Long iD) {
-		PRODUTO_ID = iD;
+
+
+
+	public void setPrecoUntario(BigDecimal preco) throws PrecoInvalidoException {
+	    if (preco.compareTo(BigDecimal.ZERO) <= 0) {
+	        throw new PrecoInvalidoException("O preço unitário deve ser maior que zero.  " + preco);
+	    }
+	    this.Preco = preco;
 	}
 
-	public void setNOME(String nOME) {
-		NOME = nOME;
+
+	public Long getProdutoId() {
+		return produtoId;
 	}
 
-	public void setDESCRICAO(String dESCRICAO) {
-		DESCRICAO = dESCRICAO;
+
+	public String getNome() {
+		return nome;
 	}
 
-	public void setQUANTIDADE_ESTOQUE(Long qUANTIDADE_ESTOQUE) {
-		QUANTIDADE_ESTOQUE = qUANTIDADE_ESTOQUE;
+
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setCATEGORIA_ID(Categoria cATEGORIA_ID) {
-		categoria = cATEGORIA_ID;
+
+	public Long getQuantidadeEstoque() {
+		return quantidadeEstoque;
 	}
+
+
+	public BigDecimal getPreco() {
+		return Preco;
+	}
+
+
+	public Categoria getCategoriaId() {
+		return categoriaId;
+	}
+
+
+	public void setProdutoId(Long produtoId) {
+		this.produtoId = produtoId;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	public void setQuantidadeEstoque(Long quantidadeEstoque) {
+		this.quantidadeEstoque = quantidadeEstoque;
+	}
+
+
+	public void setPreco(BigDecimal preco) {
+		Preco = preco;
+	}
+
+
+	public void setCategoriaId(Categoria categoriaId) {
+		this.categoriaId = categoriaId;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Produto [PRODUTO_ID=" + PRODUTO_ID + ", NOME=" + NOME + ", DESCRICAO=" + DESCRICAO
-				+ ", QUANTIDADE_ESTOQUE=" + QUANTIDADE_ESTOQUE + ", categoria=" + categoria + "]";
+		return "Produto [PRODUTO_ID=" + produtoId + ", NOME=" + nome + ", DESCRICAO=" + descricao
+				+ ", QUANTIDADE_ESTOQUE=" + quantidadeEstoque + ", categoria=" + categoriaId + "]";
 	}
 
 	

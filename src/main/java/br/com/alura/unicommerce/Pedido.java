@@ -21,7 +21,7 @@ public class Pedido {
         this.preco = preco;
         this.quantidade = quantidade;
         this.data = data;
-    }
+    } 
 
     public String getCategoria() {
         return categoria;

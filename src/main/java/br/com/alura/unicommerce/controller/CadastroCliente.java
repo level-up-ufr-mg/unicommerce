@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.teste;
+package br.com.alura.unicommerce.controller;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import br.com.alura.unicommerce.modelo.Endereco;
 import jakarta.persistence.EntityManager;
 
 //service
-public class CadastroCliente  {
+public class CadastroCliente  { 
 
 	public static void main(String[] args) {
 
@@ -39,18 +39,18 @@ public class CadastroCliente  {
 
 	private static void BuscaPorID(ClienteDao ClienteDao) {
 		Cliente c = ClienteDao.buscaProID(1L);
-		System.out.print(c.getCLIENTE_ID() + " - " + c.getNOME() + " - " + c.getCPF() + " - " + c.getEndereco());
+		System.out.print(c.getClienteId() + " - " + c.getNome() + " - " + c.getCpf() + " - " + c.getTipoDesconto());
 	}
 
 	private static void BuscaTodos(ClienteDao ClienteDao) {
 		List<Cliente> buscarTodos = ClienteDao.BuscarTodos();
-		buscarTodos.forEach(c -> System.out.print(c.getCLIENTE_ID() + " - " + c.getNOME() + " - " + c.getCPF() + " - " + c.getEndereco() + "\n \n"));
+		buscarTodos.forEach(c -> System.out.print(c.getClienteId() + " - " + c.getNome() + " - " + c.getCpf() + " - " + c.getTipoDesconto() + "\n \n"));
 	}
 
 	private static void ListaPorNome(ClienteDao clienteDao) {
 		
 		List<Cliente> listaPorNomesClientes = clienteDao.listaPorNomesClientes();
-		listaPorNomesClientes.forEach(c -> System.out.print(c.getCLIENTE_ID() + " - " + c.getNOME() +"\n \n" ) );
+		listaPorNomesClientes.forEach(c -> System.out.print(c.getClienteId() + " - " + c.getNome() +"\n \n" ) );
 		
 
 	
@@ -75,7 +75,7 @@ public class CadastroCliente  {
 
 		em.persist(cliente);// percist
 
-		cliente.setNOME("teste");
+		cliente.setNome("teste");
 
 		em.getTransaction().commit();// para sincronizar ao BD sem fazer o comitt
 

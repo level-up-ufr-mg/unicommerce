@@ -1,5 +1,6 @@
-package br.com.alura.unicommerce.teste;
+package br.com.alura.unicommerce.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import br.com.alura.unicommerce.Dao.CategoriaDao;
@@ -15,13 +16,13 @@ public class CadastroDeProduto {
 
 	public static void main(String[] args) {
 		Categoria categoria = new Categoria(null, "informatica", "ativada");
-		Produto produto = new Produto(null, "computador", "intel", 10L, categoria);
+		Produto produto = new Produto(null,"computador", "intel", 10L,new BigDecimal("70.00") ,categoria);
 
 		EntityManager em = Factory.getEntityManager();
 		ProdutoDao produtodao = new ProdutoDao(em);
 		CategoriaDao categoriadao = new CategoriaDao(em); 
 
-//		Cadastrar(categoria, produto, em, produtodao, categoriadao);
+		Cadastrar(categoria, produto, em, produtodao, categoriadao);
 //
 //		Editar(categoria, produto, em);
 //
@@ -31,31 +32,31 @@ public class CadastroDeProduto {
 //
 //		BuscaporId(produtodao);
 //		
-	BuscarTodos(produtodao);
+	//BuscarTodos(produtodao);
 		
 	}
 
 	private static void ListaIndisponiveis(ProdutoDao produtoDao) {
 		List<Produto> listaPorNomesClientes = produtoDao.BuscaIndisponives("ATIVADO");// DESATIVADO
 		listaPorNomesClientes.forEach(c -> System.out
-				.print("\n\n ID : " + c.getID() + "\n - Nome :  " + c.getNOME() + "\n - Descrição : " + c.getDESCRICAO()
-						+ "\n - Quantidade : " + c.getQUANTIDADE_ESTOQUE() + "\n  " + c.getCATEGORIA_ID() + "\n\n"));
+				.print("\n\n ID : " + c.getCategoriaId() + "\n - Nome :  " + c.getNome() + "\n - Descrição : " + c.getDescricao()
+						+ "\n - Quantidade : " + c.getQuantidadeEstoque() + "\n Preco: "+c.getPreco()+"\n Categoria: " + c.getCategoriaId() + "\n\n"));
 
 	}
 
 	private static void BuscarTodos(ProdutoDao produtoDao) {
 		List<Produto>buscarTodos = produtoDao.BuscarTodos();
 		buscarTodos.forEach(c -> System.out
-				.print("\n\n ID : " + c.getID() + "\n - Nome :  " + c.getNOME() + "\n - Descrição : " + c.getDESCRICAO()
-						+ "\n - Quantidade : " + c.getQUANTIDADE_ESTOQUE() + "\n  " + c.getCATEGORIA_ID() + "\n\n"));
+				.print("\n\n ID : " + c.getCategoriaId() + "\n - Nome :  " + c.getNome() + "\n - Descrição : " + c.getDescricao()
+				+ "\n - Quantidade : " + c.getQuantidadeEstoque() + "\n Preco: "+c.getPreco()+"\n Categoria: " + c.getCategoriaId() + "\n\n"));
 		
 	}
 	
 	private static void BuscaporId(ProdutoDao produtoDao) {
-		Produto p = produtoDao.buscaProID(1L);
+		Produto c = produtoDao.buscaProID(1L);
 		System.out.print(
-				("\n\n ID : " + p.getID() + "\n - Nome :  " + p.getNOME() + "\n - Descrição : " + p.getDESCRICAO()
-						+ "\n - Quantidade : " + p.getQUANTIDADE_ESTOQUE() + "\n  " + p.getCATEGORIA_ID() + "\n\n"));
+				("\n\n ID : " + c.getCategoriaId() + "\n - Nome :  " + c.getNome() + "\n - Descrição : " + c.getDescricao()
+				+ "\n - Quantidade : " + c.getQuantidadeEstoque() + "\n Preco: "+c.getPreco()+"\n Categoria: " + c.getCategoriaId() + "\n\n"));
 
 	}
 
@@ -92,7 +93,7 @@ public class CadastroDeProduto {
 		em.persist(categoria); // percist
 		em.persist(produto);
 
-		categoria.setNOME("unifor");
+		categoria.setNome("unifor");
 
 		// em.flush();// para sincronizar ao BD sem fazer o comitt
 

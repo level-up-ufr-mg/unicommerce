@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.teste;
+package br.com.alura.unicommerce.controller;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -28,25 +28,25 @@ public class CadastroItemPedido {
 		
 		Endereco endereco = new Endereco("rua x", 100L, "casa", "centro",
 				"São paulo ", "SAO PAULO");
-		Cliente cliente = new Cliente(null, "ssssssssss", 123456789012L, 99000101L,endereco);
+		Cliente cliente = new Cliente(null, "unifor", 123456789012L, 99000101L,endereco);
 		Pedido pedido = new Pedido(null, new Timestamp(System.currentTimeMillis()), new BigDecimal("00"),
-				Descontos.NENHUM ,cliente);
+				Descontos.NENHUM ,cliente, BigDecimal.ZERO);
 		Categoria categoria = new Categoria(null, "alimentos", "ativa");
-		Produto produto = new Produto(null, "banana ", "banana prata", 2L, categoria);
-		
-		ItemPedido item_Pedido = new ItemPedido(null, new BigDecimal("10"), 2L, pedido, produto, new BigDecimal("00"),
+		Produto produto = new Produto(null,"banana ", "banana prata", 8L,new BigDecimal("75.00") ,categoria);
+	
+		ItemPedido item_Pedido = new ItemPedido(null, new BigDecimal("10"), 75L, pedido, produto, new BigDecimal("00"),
 				Descontos.NENHUM);
 
 		EntityManager em = Factory.getEntityManager();
 
-		ItemPedidoDao item_PedidoDao = new ItemPedidoDao(em);
+		ItemPedidoDao item_PedidoDao = new ItemPedidoDao(em); 
 		PedidoDao pedidoDao = new PedidoDao(em);
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		ClienteDao clienteDao = new ClienteDao(em);
 		CategoriaDao categoriaDao = new CategoriaDao(em);
 
-		Cadastro(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao,
-				clienteDao, categoriaDao);
+//		Cadastro(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao,
+//				clienteDao, categoriaDao);
 //
 //		Editar(cliente, pedido, categoria, produto, item_Pedido, em, item_PedidoDao, pedidoDao, produtoDao, clienteDao,
 //				categoriaDao);
@@ -55,14 +55,14 @@ public class CadastroItemPedido {
 //				categoriaDao);
 
 		 
-		//relatorio(item_PedidoDao);
+		RelatorideVendasPorCategoria(item_PedidoDao);
 		
-		//RelatorioDeItensMaisVendidos(item_PedidoDao);			
+		 RelatorioDeItensMaisVendidos(item_PedidoDao);			
 	}
 
 
 
-	private static void relatorio(ItemPedidoDao item_PedidoDao) {
+	private static void RelatorideVendasPorCategoria(ItemPedidoDao item_PedidoDao) {
 		List<RelatorideVendasPorCategoriaVO> relatorio = item_PedidoDao.relatorideVendasPorCategoriaVO();
 		relatorio.forEach(System.out::println);
 	}
@@ -102,7 +102,7 @@ public class CadastroItemPedido {
 		// ou ao inves de usaar as classes DAO voce pode simplesmente chamar "
 		// em.persist(nome da entidade ) " chamado todas as entidades
 
-		item_Pedido.setQUANTIDADE(100L);
+		item_Pedido.setQuantidade(100L);
 
 		em.getTransaction().commit();
 		em.close();// termino
@@ -117,7 +117,7 @@ public class CadastroItemPedido {
 		clienteDao.cadastra(cliente);
 		pedidoDao.cadastra(pedido);
 		categoriaDao.cadastra(categoria);
-		produtoDao.cadastra(produto);
+		produtoDao.cadastra(produto); 
 		item_PedidoDao.cadastra(item_Pedido);
 
 //		em.remove(pedido);

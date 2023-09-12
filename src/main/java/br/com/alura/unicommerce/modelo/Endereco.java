@@ -9,17 +9,17 @@ import jakarta.persistence.Embeddable;
 public class Endereco implements Serializable {
 	
 	@Column(nullable = false)
-	private String RUA;
+	private String rua;
 	@Column(nullable = false)
-	private Long NUMERO;
+	private Long numero;
 	@Column(nullable = false)
-	private String COMPLEMENTO;
+	private String complemento;
 	@Column(nullable = false)
-	private String BAIRRO;
+	private String bairro;
 	@Column(nullable = false)
-	private String CIDADE;
+	private String cidade;
 	@Column(nullable = false)
-	private String ESTADO;
+	private String estado;
 	
 
 	public Endereco() {
@@ -27,66 +27,66 @@ public class Endereco implements Serializable {
 	}
 
 	public Endereco(String rUA, Long nUMERO, String cOMPLEMENTO, String bAIRRO, String cIDADE, String eSTADO) {
-		RUA = rUA;
-		NUMERO = nUMERO;
-		COMPLEMENTO = cOMPLEMENTO;
-		BAIRRO = bAIRRO;
-		CIDADE = cIDADE;
-		ESTADO = eSTADO;
+		rua = rUA;
+		numero = nUMERO;
+		complemento = cOMPLEMENTO;
+		bairro = bAIRRO;
+		cidade = cIDADE;
+		estado = eSTADO;
 	}
 
-	public String getRUA() {
-		return RUA;
+	public String getRua() {
+		return rua;
 	}
 
-	public Long getNUMERO() {
-		return NUMERO;
+	public Long getNumero() {
+		return numero;
 	}
 
-	public String getCOMPLEMENTO() {
-		return COMPLEMENTO;
+	public String getComplemento() {
+		return complemento;
 	}
 
-	public String getBAIRRO() {
-		return BAIRRO;
+	public String getBairro() {
+		return bairro;
 	}
 
-	public String getCIDADE() {
-		return CIDADE;
+	public String getCidade() {
+		return cidade;
 	}
 
-	public String getESTADO() {
-		return ESTADO;
+	public String getEstado() {
+		return estado;
 	}
 
-	public void setRUA(String rUA) {
-		RUA = rUA;
+	public void setRua(String rUA) {
+		rua = rUA;
 	}
 
-	public void setNUMERO(Long nUMERO) {
-		NUMERO = nUMERO;
+	public void setNumero(Long nUMERO) {
+		numero = nUMERO;
 	}
 
-	public void setCOMPLEMENTO(String cOMPLEMENTO) {
-		COMPLEMENTO = cOMPLEMENTO;
+	public void setComplemento(String cOMPLEMENTO) {
+		complemento = cOMPLEMENTO;
 	}
 
-	public void setBAIRRO(String bAIRRO) {
-		BAIRRO = bAIRRO;
+	public void setBairro(String bAIRRO) {
+		bairro = bAIRRO;
 	}
 
-	public void setCIDADE(String cIDADE) {
-		CIDADE = cIDADE;
+	public void setCidade(String cIDADE) {
+		cidade = cIDADE;
 	}
 
-	public void setESTADO(String eSTADO) {
-		ESTADO = eSTADO;
+	public void setEstado(String eSTADO) {
+		estado = eSTADO;
 	}
 
 	@Override
 	public String toString() {
-		return "Endereco [RUA=" + RUA + ", NUMERO=" + NUMERO + ", COMPLEMENTO=" + COMPLEMENTO + ", BAIRRO=" + BAIRRO
-				+ ", CIDADE=" + CIDADE + ", ESTADO=" + ESTADO + "]";
+		return "Endereco [RUA=" + rua + ", NUMERO=" + numero + ", COMPLEMENTO=" + complemento + ", BAIRRO=" + bairro
+				+ ", CIDADE=" + cidade + ", ESTADO=" + estado + "]";
 	}
 	
 	

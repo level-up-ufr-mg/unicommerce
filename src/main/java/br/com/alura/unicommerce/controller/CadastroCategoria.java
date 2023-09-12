@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.teste;
+package br.com.alura.unicommerce.controller;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class CadastroCategoria {
 		EntityManager em = Factory.getEntityManager();
 		CategoriaDao categoriaDao = new CategoriaDao(em);
 
-		Cadastra(celulares, em);
+		Cadastra(celulares, em); 
 //
 //		Editar(celulares, em);
 //
@@ -34,18 +34,18 @@ public class CadastroCategoria {
 
 	private static void buscaPorID(CategoriaDao categoriaDao) {
 		Categoria c = categoriaDao.buscaProID(1L);
-		System.out.print(c.getID()+" - "+c.getNOME()+" - "+ c.getSTATUS()+" \n \n ");
+		System.out.print(c.getID()+" - "+c.getNome()+" - "+ c.getStatus()+" \n \n ");
 	}
 	
 	
 	private static void  BuscarTodos(CategoriaDao categoriaDao) {
 		 List<Categoria> buscarTodos = categoriaDao.BuscarTodos();
-		 buscarTodos.forEach(c -> System.out.print(c.getID()+" - "+c.getNOME()+" - "+ c.getSTATUS()+" \n \n ") );
+		 buscarTodos.forEach(c -> System.out.print(c.getID()+" - "+c.getNome()+" - "+ c.getStatus()+" \n \n ") );
 	}	
 	
 	private static void ListaporNome(CategoriaDao categoriaDao) {
 		List<Categoria> listaporNome = categoriaDao.listaPorNomesClientes();
-		listaporNome.forEach(c -> System.out.print(c.getID()+" - "+c.getNOME()+" \n\n"));
+		listaporNome.forEach(c -> System.out.print(c.getID()+" - "+c.getNome()+" \n\n"));
 		
 	}
 	
@@ -68,7 +68,7 @@ public class CadastroCategoria {
 
 		em.persist(celulares);// a entidade oi reconhecida
 
-		celulares.setNOME("test");
+		celulares.setNome("test");
 
 		// em.flush();// ou .commit() // para enviar ao banco de dados
 
