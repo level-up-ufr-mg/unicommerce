@@ -13,6 +13,9 @@ import br.com.alura.unicommerce.vo.RelatorioProdutoVendidosMaisTresVezesVo;
 
 public class PedidoDao {
 
+	public PedidoDao() {	
+	}
+	
 	private EntityManager em;
 
 	public PedidoDao(EntityManager em) {

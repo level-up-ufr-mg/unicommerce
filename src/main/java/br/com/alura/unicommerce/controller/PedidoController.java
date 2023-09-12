@@ -8,7 +8,7 @@ import br.com.alura.unicommerce.dao.ClienteDao;
 import br.com.alura.unicommerce.dao.PedidoDao;
 import br.com.alura.unicommerce.dao.ProdutoDao;
 import br.com.alura.unicommerce.modelo.Cliente;
-import br.com.alura.unicommerce.modelo.ItemPedido;
+import br.com.alura.unicommerce.modelo.ItemDePedido;
 import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.modelo.TipoDesconto;
@@ -54,81 +54,81 @@ public class PedidoController {
 		Pedido pedidoAna1 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteAna);
 
 		pedidoAna1.adicionarItem(
-				new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoAna1, produtoNotebook));
+				new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoAna1, produtoNotebook));
 
 		Pedido pedidoAna2 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteAna);
 
-		pedidoAna2.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoAna2,
+		pedidoAna2.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoAna2,
 				produtoSofa3Lugares));
 
 		Pedido pedidoAna3 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteAna);
 
-		pedidoAna3.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoAna3,
+		pedidoAna3.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoAna3,
 				produtoCleanArchitecture));
 
 		Pedido pedidoELI1 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteEli);
 
-		pedidoELI1.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoELI1,
+		pedidoELI1.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoELI1,
 				produtoMesadeJantar6Lugares));
 
 		Pedido pedidoAna4 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteAna);
 
-		pedidoAna4.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoAna4,
+		pedidoAna4.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoAna4,
 				produtoIPhone13Pro));
 
 		Pedido pedidoDani1 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteDani);
 
-		pedidoDani1.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoDani1,
+		pedidoDani1.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoDani1,
 				produtoMonitorDell27));
 
 		Pedido pedidoGabi1 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteGabi);
 
-		pedidoGabi1.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoGabi1,
+		pedidoGabi1.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoGabi1,
 				produtoImplementingDomainDrivenDesign));
 
 		Pedido pedidoBia1 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteBia);
 
-		pedidoBia1.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoBia1,
+		pedidoBia1.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoBia1,
 				produtoJogoDePneus));
 
 		Pedido pedidoBia2 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteBia);
 
-		pedidoBia2.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoBia2,
+		pedidoBia2.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoBia2,
 				produtoCleanCode));
 
 		Pedido pedidoDani2 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteDani);
 
-		pedidoDani2.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoDani2,
+		pedidoDani2.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoDani2,
 				produtoGalaxyS22Ultra));
 
 		Pedido pedidoCaio1 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteCaio);
 
-		pedidoCaio1.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoCaio1,
+		pedidoCaio1.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoCaio1,
 				produtoMacbookPro16));
 
 		Pedido pedidoDani3 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteDani);
 
-		pedidoDani3.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoDani3,
+		pedidoDani3.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoDani3,
 				produtoRefactoringImprovingTheDesign));
 
 		Pedido pedidoDani4 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteDani);
 
-		pedidoDani4.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoDani4,
+		pedidoDani4.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoDani4,
 				produtoCamaQueenSize));
 
 		Pedido pedidoCaio2 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteCaio);
 
-		pedidoCaio2.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoCaio2,
+		pedidoCaio2.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoCaio2,
 				produtoCentralMultimidia));
 
 		Pedido pedidoCaio3 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteCaio);
 
-		pedidoCaio3.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoCaio3,
+		pedidoCaio3.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoCaio3,
 				produtoBuildingMicroservices));
 
 		Pedido pedidoBia3 = new Pedido(new BigDecimal(0.00), TipoDesconto.NENHUM, clienteBia);
 
-		pedidoBia3.adicionarItem(new ItemPedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoBia3,
+		pedidoBia3.adicionarItem(new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, new BigDecimal(0.00), pedidoBia3,
 				produtoGalaxyTabS8));
 
 		PedidoDao pedidoDao = new PedidoDao(em);

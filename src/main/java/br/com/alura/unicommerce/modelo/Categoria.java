@@ -23,8 +23,8 @@ public class Categoria {
 
 	}
 
-	public Categoria(String nome, boolean status) {
-		this.nome = nome;
+	public Categoria(String nome, boolean status) throws IllegalArgumentException {
+		this.setNome(nome);
 		this.status = status;
 	}
 
@@ -44,5 +44,14 @@ public class Categoria {
 	public String toString() {
 		return "Categoria [id=" + id + ", nome=" + nome + ", status=" + status + "]";
 	}
+
+	public void setNome(String nome) {
+		if (nome == null) throw new IllegalArgumentException("Nome da categoria não pode ser nulo");
+		if (nome == "" || nome.isEmpty()) throw new IllegalArgumentException("Nome da categoria não pode ser vazio");
+	
+		this.nome = nome;
+	}
+	
+	
 
 }

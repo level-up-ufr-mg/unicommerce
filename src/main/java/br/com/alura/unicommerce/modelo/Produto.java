@@ -65,6 +65,10 @@ public class Produto {
 	}
 
 	public void setPreco(BigDecimal preco) {
+		if (preco.compareTo( new BigDecimal("0.00")) <= 0) {
+            throw new IllegalArgumentException("O preço não pode ser menor ou igual a 0.");
+        }
+		
 		this.preco = preco;
 	}
 }

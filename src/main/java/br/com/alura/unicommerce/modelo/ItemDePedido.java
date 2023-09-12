@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "item_pedido")
-public class ItemPedido {
+public class ItemDePedido {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,10 +46,10 @@ public class ItemPedido {
 		return precoUnitario.multiply(new BigDecimal(quantidade));
 	}
 	 
-	public ItemPedido() {
+	public ItemDePedido() {
 	}
 	
-	public ItemPedido(TipoDescontoItemPedido tipoDescontoItemPedido, Integer quantidade, BigDecimal desconto,
+	public ItemDePedido(TipoDescontoItemPedido tipoDescontoItemPedido, Integer quantidade, BigDecimal desconto,
 			 Pedido pedido, Produto produto) {
 		this.precoUnitario = produto.getPreco();
 		this.quantidade = quantidade;

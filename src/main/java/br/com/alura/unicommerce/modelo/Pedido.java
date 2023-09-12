@@ -34,12 +34,12 @@ public class Pedido {
 	private Cliente cliente;
 	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
-	private List<ItemPedido> itens = new ArrayList<>();
+	private List<ItemDePedido> itens = new ArrayList<>();
 	
 	@Transient
 	private BigDecimal valorTotal = BigDecimal.ZERO;
 	
-	public List<ItemPedido> getItens() {
+	public List<ItemDePedido> getItens() {
 		return itens;
 	}
 
@@ -108,7 +108,7 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 	
-	public void adicionarItem(ItemPedido item) {
+	public void adicionarItem(ItemDePedido item) {
 	     item.setPedido(this);
 	     this.itens.add(item);
 	     this.valorTotal = this.valorTotal.add(item.getValor());

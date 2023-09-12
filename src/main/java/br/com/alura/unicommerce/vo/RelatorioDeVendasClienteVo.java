@@ -31,5 +31,6 @@ public class RelatorioDeVendasClienteVo {
 		return "RelatorioDeVendasCategoriaVo [nomeCategria=" + nomeCliente + ", quantidadeVendida=" + quantidadeVendida
 				+ ", montanteVendido=" + montanteVendido + "]";
 	}
+
 	
 }
