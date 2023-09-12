@@ -31,10 +31,10 @@ public class FuncoesCliente {
 
 		List<Cliente> clientesPorId = buscaPorId.buscaPorId(2L);
 		clientesPorId.forEach(p -> {
-		    System.out.print("ID: " + p.getId() + ", ");
-		    System.out.print("Nome: " + p.getNome() + ", ");
-		    System.out.print("Preço: " + p.getTelefone() + ", ");
-		    System.out.print("Descrição: " + p.getEndereco() + ", ");
+		    System.out.println("ID: " + p.getId() + ", ");
+		    System.out.println("Nome: " + p.getNome() + ", ");
+		    System.out.println("Preço: " + p.getTelefone() + ", ");
+		    System.out.println("Descrição: " + p.getEndereco() + ", ");
 		});
 	}
 
@@ -55,10 +55,10 @@ public class FuncoesCliente {
 
 		List<Cliente> listaTodos = clienteDaoListaTodos.listaTodos();
 		listaTodos.forEach(p -> {
-		    System.out.print("ID: " + p.getId() + ", ");
-		    System.out.print("Nome: " + p.getNome() + ", ");
-		    System.out.print("Preço: " + p.getTelefone() + ", ");
-		    System.out.print("Descrição: " + p.getEndereco() + ", ");
+		    System.out.println("ID: " + p.getId() + ", ");
+		    System.out.println("Nome: " + p.getNome() + ", ");
+		    System.out.println("Preço: " + p.getTelefone() + ", ");
+		    System.out.println("Descrição: " + p.getEndereco() + ", ");
 		    System.out.println();
 		});
 	}
@@ -68,10 +68,10 @@ public class FuncoesCliente {
 
 		List<Cliente> nomesIndisponiveis = listaPorNome.listaPorNome("Valmir Santos");
 		nomesIndisponiveis.forEach(p -> {
-		    System.out.print("ID: " + p.getId() + ", ");
-		    System.out.print("Nome: " + p.getNome() + ", ");
-		    System.out.print("Preço: " + p.getTelefone() + ", ");
-		    System.out.print("Descrição: " + p.getEndereco() + ", ");
+		    System.out.println("ID: " + p.getId() + ", ");
+		    System.out.println("Nome: " + p.getNome() + ", ");
+		    System.out.println("Preço: " + p.getTelefone() + ", ");
+		    System.out.println("Descrição: " + p.getEndereco() + ", ");
 		    System.out.println();
 		});
 	}

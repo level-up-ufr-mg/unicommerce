@@ -15,23 +15,17 @@ public class FuncoesProduto {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
 
-		buscaPorId(em);
-		cadastra(em);
 		listaTodos(em);
+		buscaPorId(em);
 		listaIndisponiveis(em);
+		cadastra(em);
 	}
 
 	private static void buscaPorId(EntityManager em) {
 		ProdutoDao buscaPorId = new ProdutoDao(em);
 
-		List<Produto> produtosPorId = buscaPorId.buscaPorId(2L);
-		produtosPorId.forEach(p -> {
-		    System.out.print("ID: " + p.getId() + ", ");
-		    System.out.print("Nome: " + p.getNome() + ", ");
-		    System.out.print("Preço: " + p.getPreco() + ", ");
-		    System.out.print("Descrição: " + p.getDescricao() + ", ");
-		    System.out.print("Quantidade em Estoque: " + p.getQuantidade_estoque());
-		});
+		String produtosPorId = buscaPorId.buscaPorId(2L);
+		System.out.print("Produto buscado: " + u);
 	}
 
 	private static void cadastra(EntityManager em) {
