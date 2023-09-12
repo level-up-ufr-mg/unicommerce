@@ -13,11 +13,11 @@ public class ClienteDao {
 		this.em = em;
 	}
 
-	public List<Cliente> buscaPorId(Long id) {
-		String jpql = "SELECT c FROM Cliente c WHERE c.id = :id";
-		return em.createQuery(jpql, Cliente.class)
+	public String buscaPorId(Long id) {
+		String jpql = "SELECT c.nome FROM Cliente c WHERE c.id = :id";
+		return em.createQuery(jpql, String.class)
 				.setParameter("id", id)
-				.getResultList();
+				.getSingleResult();
 	}
 
 	public void cadastra(Cliente cliente) {

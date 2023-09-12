@@ -1,46 +1,38 @@
 package br.com.alura.unicommerce.funcoes;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.alura.unicommerce.dao.CategoriaDao;
 import br.com.alura.unicommerce.dao.ClienteDao;
-import br.com.alura.unicommerce.dao.ProdutoDao;
-import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Endereco;
-import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.util.JPAUtil;
 
 public class FuncoesCliente {
     public static void main(String[] args) {
+    	long nmroIdDoCliente = 20L;
+    	
         EntityManager em = JPAUtil.getEntityManager();
-
-        buscaPorId(em);
-        cadastra(em);
-        atualiza(em);
-        remove(em);
-        listaTodos(em);
-        listaPorNome(em);
+        Endereco endereco = new Endereco("Rua da Praia", 789, "Casa 2", "Bairro Praiano", "Cidade Litorânea", "SC");
+		Cliente cliente = new Cliente("Ana Costa", "456.789.123-00", "(48) 55555-5555", endereco);
+        
+		cadastra(em, cliente);
+        buscaPorId(em, nmroIdDoCliente);
+		atualiza(em, cliente);
+		remove(em, cliente);
+		listaTodos(em);
+		listaPorNome(em);
     }
 
-	private static void buscaPorId(EntityManager em) {
+	private static void buscaPorId(EntityManager em, Long nmroIdDoCliente) {
 		ClienteDao buscaPorId = new ClienteDao(em);
 
-		List<Cliente> clientesPorId = buscaPorId.buscaPorId(2L);
-		clientesPorId.forEach(p -> {
-		    System.out.println("ID: " + p.getId() + ", ");
-		    System.out.println("Nome: " + p.getNome() + ", ");
-		    System.out.println("Preço: " + p.getTelefone() + ", ");
-		    System.out.println("Descrição: " + p.getEndereco() + ", ");
-		});
+		String clientesPorId = buscaPorId.buscaPorId(nmroIdDoCliente);
+		System.out.println("ID: " + clientesPorId);
 	}
 
-	private static void cadastra(EntityManager em) {
-		Endereco endereco = new Endereco("Palmeiras", 189, null, "Alvorada", "Doresópolis", "MG");
-		Cliente cliente = new Cliente("Valmir Santos", "158.555.555-55", "(37) 97865-6545", endereco);
+	private static void cadastra(EntityManager em, Cliente cliente) {
 
 		ClienteDao ClienteDao = new ClienteDao(em);
 		
@@ -48,6 +40,18 @@ public class FuncoesCliente {
 		ClienteDao.cadastra(cliente);
 		em.getTransaction().commit();
 		em.close();
+	}
+	
+	private static void atualiza(EntityManager em, Cliente cliente) {
+	    em.getTransaction().begin();
+	    em.merge(cliente);
+	    em.getTransaction().commit();
+	}
+
+	private static void remove(EntityManager em, Cliente cliente) {
+	    em.getTransaction().begin();
+	    em.remove(cliente);
+	    em.getTransaction().commit();
 	}
 
 	private static void listaTodos(EntityManager em) {

@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,13 +16,19 @@ public class ItemPedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne
+	private Produto produto;
+	
+	@ManyToOne
+    private Pedido pedido;
 
 	@Column(name = "preco_unitario")
 	private Double precoUnitario;
 
 	@Column(name = "quantidade")
 	private Integer quantidade;
-
+	
 	@Column(name = "desconto")
 	private Double desconto;
 

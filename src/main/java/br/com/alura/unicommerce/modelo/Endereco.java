@@ -11,7 +11,7 @@ public class Endereco {
 	@Column(length = 10, nullable = false) // Definindo o tamanho máximo para o campo numero
 	private Integer numero;
 
-	@Column
+	@Column(nullable = true)
 	private String complemento;
 
 	@Column(length = 50, nullable = false) // Definindo o tamanho máximo para o campo bairro
