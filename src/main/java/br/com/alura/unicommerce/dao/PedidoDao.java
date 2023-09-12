@@ -17,6 +17,10 @@ import br.com.alura.unicommerce.relatorios.RelatorioVendasPorCatergoria;
 public class PedidoDao {
 
 	private EntityManager em;
+	
+	public PedidoDao() {
+		
+	}
 
     public PedidoDao(EntityManager em) {
         this.em = em;

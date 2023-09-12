@@ -35,11 +35,27 @@ public class Cliente {
     }
 
     public Cliente(String nome, String cpf, String telefone, Endereco endereco) {
-		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.endereco = endereco;
+	}
+    
+	public Cliente(Long id, String nome, String cpf, String telefone, Endereco endereco) {
+		this.id = id;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.telefone = telefone;
+		this.endereco = endereco;
+	}
+	
+	
+
+	public Cliente(String nome, String cpf, String telefone) {
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.telefone = telefone;
 	}
 
 	public Long getId() {
