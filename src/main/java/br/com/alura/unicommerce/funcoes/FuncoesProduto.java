@@ -13,9 +13,8 @@ import br.com.alura.unicommerce.util.JPAUtil;
 
 public class FuncoesProduto {
 	public static void main(String[] args) {
-    	long nmroIdDoCliente = 20L;
-    	
 		EntityManager em = JPAUtil.getEntityManager();
+    	long nmroIdDoCliente = 20L;
 		
 		Categoria categoria = new Categoria("Informática", true);
 		Produto produto = new Produto("Mesa gamer", new BigDecimal("1100.00"), "Movel", 0, categoria);

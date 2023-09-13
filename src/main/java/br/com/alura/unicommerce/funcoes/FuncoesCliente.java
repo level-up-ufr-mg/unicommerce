@@ -11,9 +11,9 @@ import br.com.alura.unicommerce.util.JPAUtil;
 
 public class FuncoesCliente {
     public static void main(String[] args) {
+    	EntityManager em = JPAUtil.getEntityManager();
     	long nmroIdDoCliente = 20L;
-    	
-        EntityManager em = JPAUtil.getEntityManager();
+        
         Endereco endereco = new Endereco("Rua da Praia", 789, "Casa 2", "Bairro Praiano", "Cidade Litorânea", "SC");
 		Cliente cliente = new Cliente("Ana Costa", "456.789.123-00", "(48) 55555-5555", endereco);
         
