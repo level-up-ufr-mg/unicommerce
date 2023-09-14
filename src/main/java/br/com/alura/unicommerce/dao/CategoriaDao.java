@@ -13,11 +13,11 @@ public class CategoriaDao {
 		this.em = em;
 	}
 
-	public List<Categoria> buscaPorId(Long id) {
+	public Categoria buscaPorId(Long id) {
 		String jpql = "SELECT c FROM Categoria c WHERE c.id = :id";
 		return em.createQuery(jpql, Categoria.class)
 				.setParameter("id", id)
-				.getResultList();
+				.getSingleResult();
 	}
 	
 	public void cadastra(Categoria categoria) { //Feito apenas para mostrar, pois a adição da categoria acontece na adição do produto

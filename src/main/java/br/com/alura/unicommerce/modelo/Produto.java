@@ -1,6 +1,8 @@
 package br.com.alura.unicommerce.modelo;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,21 +19,18 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-
-	@Column(length = 100, nullable = false) // Definindo o tamanho máximo para o campo nome
-	private String nome;
-
-	@Column(precision = 10, scale = 2, nullable = false) 
-	private BigDecimal preco;
-
-	@Column(length = 200)
-	private String descricao;
-
-	@Column(nullable = false) // O tamanho máximo será determinado automaticamente com base no tipo Integer
-	private Integer quantidade_estoque;
-
 	@ManyToOne
 	private Categoria categoria;
+	@OneToMany
+	private List<ItemPedido> itens = new ArrayList<>();	
+	@Column(length = 100, nullable = false) // Definindo o tamanho máximo para o campo nome
+	private String nome;
+	@Column(precision = 10, scale = 2, nullable = false) 
+	private BigDecimal preco;
+	@Column(length = 200)
+	private String descricao;
+	@Column(nullable = false) // O tamanho máximo será determinado automaticamente com base no tipo Integer
+	private Integer quantidade_estoque;
 
 	//Construtor
 	

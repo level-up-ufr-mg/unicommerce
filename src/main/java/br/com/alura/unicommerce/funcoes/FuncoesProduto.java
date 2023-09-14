@@ -14,15 +14,16 @@ import br.com.alura.unicommerce.util.JPAUtil;
 public class FuncoesProduto {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
-    	long nmroIdDoCliente = 20L;
+    	long nmroIdDoCliente = 2;
 		
-		Categoria categoria = new Categoria("Informática", true);
-		Produto produto = new Produto("Mesa gamer", new BigDecimal("1100.00"), "Movel", 0, categoria);
+		CategoriaDao categoriaDao = new CategoriaDao(em);
+		Categoria categoria = categoriaDao.buscaPorId(1l);
+		Produto produto = new Produto("Mesa normal", new BigDecimal("1100.00"), "Movel", 0, categoria);
 
-		listaTodos(em);
-		listaIndisponiveis(em);
+//		listaTodos(em);
+//		listaIndisponiveis(em);
 		buscaPorId(em, nmroIdDoCliente);
-		cadastra(em, categoria, produto);
+//		cadastra(em, categoria, produto);
 	}
 
 	private static void buscaPorId(EntityManager em, long nmroIdDoCliente) {

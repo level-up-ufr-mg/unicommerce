@@ -13,19 +13,14 @@ public class FuncoesCategoria {
 		EntityManager em = JPAUtil.getEntityManager();
 				
 		buscaPorId(em);
-		listaTodas(em);
+//		listaTodas(em);
 	}
 	
 	private static void buscaPorId(EntityManager em) {
 		CategoriaDao buscaPorId = new CategoriaDao(em);
 
-		List<Categoria> categoriasPorId = buscaPorId.buscaPorId(7L);
-		categoriasPorId.forEach(c -> {
-		    System.out.print("ID: " + c.getId() + ", ");
-		    System.out.print("Nome: " + c.getNome() + ", ");
-		    System.out.print("Ativo: " + c.isStatus());
-		    System.out.println();
-		});
+		Categoria categoriasPorId = buscaPorId.buscaPorId(1L);
+		System.out.print(categoriasPorId);
 	}
 
 	private static void listaTodas(EntityManager em) {

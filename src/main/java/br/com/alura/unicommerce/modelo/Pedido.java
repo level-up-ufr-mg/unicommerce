@@ -2,6 +2,8 @@ package br.com.alura.unicommerce.modelo;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,10 +24,12 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)	
 	private Long id;
-	@Column(name = "data")
-	private LocalDateTime data;
 	@ManyToOne
 	private Cliente cliente;
+	@OneToMany
+	private List<ItemPedido> itens = new ArrayList<>();
+	@Column(name = "data")
+	private LocalDateTime data;
 	@Column(name = "desconto")
 	private BigInteger desconto;
 	@Enumerated(EnumType.STRING)
@@ -66,6 +71,11 @@ public class Pedido {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public void adicionarItem(ItemPedido item) {
+		item.setPedido(this);
+		this.itens.add(item);
 	}
 
 	public BigInteger getDesconto() {

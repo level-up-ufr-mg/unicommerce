@@ -1,5 +1,7 @@
 package br.com.alura.unicommerce.modelo;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,7 +23,7 @@ public class ItemPedido {
 	@ManyToOne
 	private Pedido pedido;
 	@Column(name = "preco_unitario")
-	private Double precoUnitario;
+	private BigDecimal precoUnitario;
 	@Column(name = "quantidade")
 	private Integer quantidade;
 	@Column(name = "desconto")
@@ -45,6 +47,7 @@ public class ItemPedido {
 	public ItemPedido(Produto produto, Pedido pedido, Integer quantidade, Double desconto, TipoDesconto tipoDesconto) {
 		super();
 		this.produto = produto;
+		this.precoUnitario = produto.getPreco();
 		this.pedido = pedido;
 		this.quantidade = quantidade;
 		this.desconto = desconto;
@@ -77,11 +80,11 @@ public class ItemPedido {
 		this.pedido = pedido;
 	}
 
-	public Double getPrecoUnitario() {
+	public BigDecimal getPrecoUnitario() {
 		return precoUnitario;
 	}
 
-	public void setPrecoUnitario(Double precoUnitario) {
+	public void setPrecoUnitario(BigDecimal precoUnitario) {
 		this.precoUnitario = precoUnitario;
 	}
 
@@ -107,5 +110,5 @@ public class ItemPedido {
 
 	public void setTipoDesconto(TipoDesconto tipoDesconto) {
 		this.tipoDesconto = tipoDesconto;
-	}
+	}	
 }
