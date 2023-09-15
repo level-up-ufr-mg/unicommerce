@@ -1,6 +1,6 @@
 package br.com.alura.unicommerce.modelo;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,12 +27,10 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	@Column(name = "itens")
 	private List<ItemPedido> itens = new ArrayList<>();
-	@Column(nullable = false, name = "data")
+	@Column(name = "data")
 	private LocalDateTime data;
-	@Column(nullable = false, name = "desconto")
-	private BigInteger desconto;
-	@Enumerated(EnumType.STRING)
-	private tipoDesconto tipoDesconto;
+	@Column(name = "valor_total")
+	private BigDecimal valorTotal = BigDecimal.ZERO;
 
 	// Constructor
 
@@ -42,11 +38,8 @@ public class Pedido {
 	}	
 
 	public Pedido(Cliente cliente) {
-		super();
 		this.cliente = cliente;
 	}
-
-
 
 	// Getters and Setters
 
@@ -56,14 +49,6 @@ public class Pedido {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public LocalDateTime getData() {
-		return data;
-	}
-
-	public void setData(LocalDateTime data) {
-		this.data = data;
 	}
 
 	public Cliente getCliente() {
@@ -77,21 +62,7 @@ public class Pedido {
 	public void adicionarItem(ItemPedido item) {
 		item.setPedido(this);
 		this.itens.add(item);
+		this.valorTotal = this.valorTotal.add(item.getValor());
 	}
 
-	public BigInteger getDesconto() {
-		return desconto;
-	}
-
-	public void setDesconto(BigInteger desconto) {
-		this.desconto = desconto;
-	}
-
-	public tipoDesconto getTipoDesconto() {
-		return tipoDesconto;
-	}
-
-	public void setTipoDesconto(tipoDesconto tipoDesconto) {
-		this.tipoDesconto = tipoDesconto;
-	}
 }

@@ -14,10 +14,7 @@ public class ProdutoDao {
 	}
 
 	public Produto buscaPorId(Long id) {
-		String jpql = "SELECT p.nome FROM Produto p WHERE p.id = :id";
-		return em.createQuery(jpql, Produto.class)
-				.setParameter("id", id)
-				.getSingleResult();
+		return em.find(Produto.class, id);
 	}
 	
 	public void cadastra(Produto produto) {
@@ -43,4 +40,5 @@ public class ProdutoDao {
 				.setParameter("?1", quantidade_estoque)
 				.getResultList();
 	}
+	
 }

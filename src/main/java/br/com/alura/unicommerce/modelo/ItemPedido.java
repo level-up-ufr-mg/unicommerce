@@ -39,7 +39,7 @@ public class ItemPedido {
 		QUANTIDADE, PROMOCAO, NENHUM
 	}
 
-//	Contructors
+	//	Contructors
 
 	public ItemPedido() {
 	}
@@ -51,11 +51,7 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 
-
-
-
-
-//	Getters e Setters
+	//	Getters e Setters
 
 	public Long getId() {
 		return id;
@@ -111,5 +107,9 @@ public class ItemPedido {
 
 	public void setTipoDesconto(TipoDesconto tipoDesconto) {
 		this.tipoDesconto = tipoDesconto;
+	}
+
+	public BigDecimal getValor() {
+		return precoUnitario.multiply(new BigDecimal(quantidade));
 	}
 }

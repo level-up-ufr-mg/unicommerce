@@ -20,10 +20,15 @@ public class FuncoesCategoria {
 	private static void cadastra(EntityManager em) {
 
 		CategoriaDao categoriaDao = new CategoriaDao(em);
-		Categoria categoria = new Categoria("Informatica", true);
+		Categoria categoria = new Categoria("Eletrônicos", true);
+		Categoria categoria2 = new Categoria("Moda", true);
+		Categoria categoria3 = new Categoria("Esportes", false);
+
 
 		em.getTransaction().begin();
 		categoriaDao.cadastra(categoria);
+		categoriaDao.cadastra(categoria2);
+		categoriaDao.cadastra(categoria3);
 		em.getTransaction().commit();
 		em.close();
 	}
