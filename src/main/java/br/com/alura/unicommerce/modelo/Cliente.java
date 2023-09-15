@@ -18,7 +18,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	@OneToMany
+	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedido = new ArrayList<>();
 	@Column(length = 50, nullable = false) // Definindo o tamanho máximo para o campo nome
 	private String nome;

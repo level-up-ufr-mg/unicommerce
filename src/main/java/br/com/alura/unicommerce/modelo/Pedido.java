@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,36 +20,36 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "pedido")
 public class Pedido {
-	
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
 	private Cliente cliente;
-	@OneToMany
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+	@Column(name = "itens")
 	private List<ItemPedido> itens = new ArrayList<>();
-	@Column(name = "data")
+	@Column(nullable = false, name = "data")
 	private LocalDateTime data;
-	@Column(name = "desconto")
+	@Column(nullable = false, name = "desconto")
 	private BigInteger desconto;
 	@Enumerated(EnumType.STRING)
 	private tipoDesconto tipoDesconto;
-	
-//	Constructor
+
+	// Constructor
+
 	public Pedido() {
-	}
+	}	
 
-	public Pedido(LocalDateTime data, Cliente cliente, BigInteger desconto,
-			br.com.alura.unicommerce.modelo.tipoDesconto tipoDesconto) {
+	public Pedido(Cliente cliente) {
 		super();
-		this.data = data;
 		this.cliente = cliente;
-		this.desconto = desconto;
-		this.tipoDesconto = tipoDesconto;
 	}
 
-//	Getters and Setters
+
+
+	// Getters and Setters
+
 	public Long getId() {
 		return id;
 	}
@@ -92,5 +93,5 @@ public class Pedido {
 
 	public void setTipoDesconto(tipoDesconto tipoDesconto) {
 		this.tipoDesconto = tipoDesconto;
-	}	
+	}
 }

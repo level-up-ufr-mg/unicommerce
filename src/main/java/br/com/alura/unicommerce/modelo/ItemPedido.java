@@ -44,15 +44,16 @@ public class ItemPedido {
 	public ItemPedido() {
 	}
 
-	public ItemPedido(Produto produto, Pedido pedido, Integer quantidade, Double desconto, TipoDesconto tipoDesconto) {
-		super();
+	public ItemPedido(Produto produto, Pedido pedido, Integer quantidade) {
 		this.produto = produto;
 		this.precoUnitario = produto.getPreco();
 		this.pedido = pedido;
 		this.quantidade = quantidade;
-		this.desconto = desconto;
-		this.tipoDesconto = tipoDesconto;
 	}
+
+
+
+
 
 //	Getters e Setters
 
@@ -110,5 +111,5 @@ public class ItemPedido {
 
 	public void setTipoDesconto(TipoDesconto tipoDesconto) {
 		this.tipoDesconto = tipoDesconto;
-	}	
+	}
 }

@@ -11,11 +11,23 @@ import br.com.alura.unicommerce.util.JPAUtil;
 public class FuncoesCategoria {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
-				
-		buscaPorId(em);
+
+		cadastra(em);
+//		buscaPorId(em);
 //		listaTodas(em);
 	}
-	
+
+	private static void cadastra(EntityManager em) {
+
+		CategoriaDao categoriaDao = new CategoriaDao(em);
+		Categoria categoria = new Categoria("Informatica", true);
+
+		em.getTransaction().begin();
+		categoriaDao.cadastra(categoria);
+		em.getTransaction().commit();
+		em.close();
+	}
+
 	private static void buscaPorId(EntityManager em) {
 		CategoriaDao buscaPorId = new CategoriaDao(em);
 
@@ -28,10 +40,10 @@ public class FuncoesCategoria {
 
 		List<Categoria> listaTodasCategorias = listaTodas.listaTodas();
 		listaTodasCategorias.forEach(c -> {
-		    System.out.print("ID: " + c.getId() + ", ");
-		    System.out.print("Nome: " + c.getNome() + ", ");
-		    System.out.print("Ativo: " + c.isStatus());
-		    System.out.println();
+			System.out.print("ID: " + c.getId() + ", ");
+			System.out.print("Nome: " + c.getNome() + ", ");
+			System.out.print("Ativo: " + c.isStatus());
+			System.out.println();
 		});
 	}
 

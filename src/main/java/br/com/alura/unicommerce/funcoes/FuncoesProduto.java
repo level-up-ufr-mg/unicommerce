@@ -14,16 +14,12 @@ import br.com.alura.unicommerce.util.JPAUtil;
 public class FuncoesProduto {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
-    	long nmroIdDoCliente = 2;
-		
-		CategoriaDao categoriaDao = new CategoriaDao(em);
-		Categoria categoria = categoriaDao.buscaPorId(1l);
-		Produto produto = new Produto("Mesa normal", new BigDecimal("1100.00"), "Movel", 0, categoria);
+		long nmroIdDoCliente = 2;
 
 //		listaTodos(em);
 //		listaIndisponiveis(em);
-		buscaPorId(em, nmroIdDoCliente);
-//		cadastra(em, categoria, produto);
+//		buscaPorId(em, nmroIdDoCliente);
+		cadastra(em);
 	}
 
 	private static void buscaPorId(EntityManager em, long nmroIdDoCliente) {
@@ -33,11 +29,13 @@ public class FuncoesProduto {
 		System.out.print("Produto buscado: " + produtosPorId);
 	}
 
-	private static void cadastra(EntityManager em, Categoria categoria, Produto produto) {
-
+	private static void cadastra(EntityManager em) {
 		CategoriaDao categoriaDao = new CategoriaDao(em);
+		Categoria categoria = categoriaDao.buscaPorId(2l);
+		Produto produto = new Produto("i5 12700h", new BigDecimal("1300.00"), "Computador", 4, categoria);
+
 		ProdutoDao produtoDao = new ProdutoDao(em);
-		
+
 		em.getTransaction().begin();
 		categoriaDao.cadastra(categoria);
 		produtoDao.cadastra(produto);
@@ -50,12 +48,12 @@ public class FuncoesProduto {
 
 		List<Produto> listaTodos = produtoDaoListaTodos.listaTodos();
 		listaTodos.forEach(p -> {
-		    System.out.print("ID: " + p.getId() + ", ");
-		    System.out.print("Nome: " + p.getNome() + ", ");
-		    System.out.print("Preço: " + p.getPreco() + ", ");
-		    System.out.print("Descrição: " + p.getDescricao() + ", ");
-		    System.out.print("Quantidade em Estoque: " + p.getQuantidade_estoque());
-		    System.out.println();
+			System.out.print("ID: " + p.getId() + ", ");
+			System.out.print("Nome: " + p.getNome() + ", ");
+			System.out.print("Preço: " + p.getPreco() + ", ");
+			System.out.print("Descrição: " + p.getDescricao() + ", ");
+			System.out.print("Quantidade em Estoque: " + p.getQuantidade_estoque());
+			System.out.println();
 		});
 	}
 
@@ -64,12 +62,12 @@ public class FuncoesProduto {
 
 		List<Produto> nomesIndisponiveis = listaIndisponiveis.listaIndisponiveis(0);
 		nomesIndisponiveis.forEach(p -> {
-		    System.out.print("ID: " + p.getId() + ", ");
-		    System.out.print("Nome: " + p.getNome() + ", ");
-		    System.out.print("Preço: " + p.getPreco() + ", ");
-		    System.out.print("Descrição: " + p.getDescricao() + ", ");
-		    System.out.print("Quantidade em Estoque: " + p.getQuantidade_estoque());
-		    System.out.println();
+			System.out.print("ID: " + p.getId() + ", ");
+			System.out.print("Nome: " + p.getNome() + ", ");
+			System.out.print("Preço: " + p.getPreco() + ", ");
+			System.out.print("Descrição: " + p.getDescricao() + ", ");
+			System.out.print("Quantidade em Estoque: " + p.getQuantidade_estoque());
+			System.out.println();
 		});
 	}
 

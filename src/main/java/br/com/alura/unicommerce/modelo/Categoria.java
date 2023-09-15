@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "categoria")
 public class Categoria {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToMany(mappedBy = "categoria")
 	private List<Produto> produto = new ArrayList<>();	
