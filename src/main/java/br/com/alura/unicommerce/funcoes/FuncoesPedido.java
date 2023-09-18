@@ -16,18 +16,24 @@ import br.com.alura.unicommerce.modelo.ItemPedido;
 import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.util.JPAUtil;
+import br.com.alura.unicommerce.vo.RelatorioDeVendasVo;
 
 public class FuncoesPedido {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
-		popularBancoDeDados(em);
+//		popularBancoDeDados(em);
+//		cadastraPedido(em);
+		Pedido pedido = em.find(Pedido.class, 1l);
+		System.out.println(pedido.getItens().size());
+	}
 
+	private static void cadastraPedido(EntityManager em) {
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		ClienteDao clienteDao = new ClienteDao(em);
 
-		Produto produto = produtoDao.buscaPorId(19l);
-		Produto produto2 = produtoDao.buscaPorId(20l);
-		Produto produto3 = produtoDao.buscaPorId(21l);
+		Produto produto = produtoDao.buscaPorId(1l);
+		Produto produto2 = produtoDao.buscaPorId(2l);
+		Produto produto3 = produtoDao.buscaPorId(3l);
 		Cliente cliente = clienteDao.buscaPorId(1l);
 
 		em.getTransaction().begin();
@@ -48,12 +54,8 @@ public class FuncoesPedido {
 		BigDecimal totalVendidoBigDecimal = pedidoDao.valorTotalVendido();
 		System.out.println("Valor total vendido: " + totalVendidoBigDecimal);
 
-		List<Object[]> relatorio = pedidoDao.relatorioDeVendas();
-		for (Object[] obj : relatorio) {
-			System.out.println(obj[0]);
-			System.out.println(obj[1]);
-			System.out.println(obj[2]);
-		}
+		List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
+		relatorio.forEach(System.out::println);
 
 		em.close();
 	}
@@ -65,9 +67,10 @@ public class FuncoesPedido {
 		Categoria categoria2 = categoriaDao.buscaPorId(2l);
 		Categoria categoria3 = categoriaDao.buscaPorId(3l);
 		
-		Produto produto = new Produto("Smartphone Samsung", new BigDecimal("699.99"), "Eletrônicos", 15, categoria);
-		Produto produto2 = new Produto("Vestido Floral", new BigDecimal("49.99"), "Moda", 30, categoria2);
-		Produto produto3 = new Produto("Tênis de Corrida Nike", new BigDecimal("129.99"), "Esportes", 25, categoria3);
+		Produto produto2 = new Produto("Samsung Galaxy S21", new BigDecimal("999.99"), "Smartphone", 10, categoria);
+		Produto produto3 = new Produto("Camiseta Polo", new BigDecimal("29.99"), "Vestuário", 50, categoria2);
+		Produto produto4 = new Produto("Tênis de Corrida", new BigDecimal("89.99"), "Calçados", 20, categoria3);
+
 
 		Endereco endereco = new Endereco("Rua da Praia", 789, "Casa 2", "Bairro Praiano", "Cidade Litorânea", "SC");
 		Cliente cliente = new Cliente("Marcelo", "111.111.111-11", "(37) 89795-8575", endereco);
@@ -78,7 +81,7 @@ public class FuncoesPedido {
 		em.getTransaction().begin();
 
 		categoriaDao.cadastra(categoria);
-		produtoDao.cadastra(produto);
+		produtoDao.cadastra(produto4);
 		produtoDao.cadastra(produto2);
 		produtoDao.cadastra(produto3);
 		clienteDao.cadastra(cliente);

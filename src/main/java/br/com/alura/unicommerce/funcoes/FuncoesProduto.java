@@ -25,7 +25,7 @@ public class FuncoesProduto {
 	private static void buscaPorId(EntityManager em, long nmroIdDoCliente) {
 		ProdutoDao buscaPorId = new ProdutoDao(em);
 
-		String produtosPorId = buscaPorId.buscaPorId(nmroIdDoCliente);
+		String produtosPorId = buscaPorId.buscaPorId(1l);
 		System.out.print("Produto buscado: " + produtosPorId);
 	}
 

@@ -41,4 +41,10 @@ public class ProdutoDao {
 				.getResultList();
 	}
 	
+	
+		public List<Produto> produtosPorCategoria(String nome) {
+			return em.createNamedQuery("Produto.produtosPorCategoria", Produto.class)
+					.setParameter("nome", nome)
+					.getResultList();
+		}
 }

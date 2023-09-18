@@ -2,12 +2,12 @@ package br.com.alura.unicommerce.vo;
 
 import java.time.LocalDate;
 
-public class RelatorioDeVendasVO {
+public class RelatorioDeVendasVo {
 	 private String nomeProduto;
 	 private long quantidadeVendida;
 	 private LocalDate dataUltimaVenda;
 	 
-	public RelatorioDeVendasVO(String nomeProduto, long quantidadeVendida, LocalDate dataUltimaVenda) {
+	public RelatorioDeVendasVo(String nomeProduto, long quantidadeVendida, LocalDate dataUltimaVenda) {
 		this.nomeProduto = nomeProduto;
 		this.quantidadeVendida = quantidadeVendida;
 		this.dataUltimaVenda = dataUltimaVenda;
@@ -21,5 +21,11 @@ public class RelatorioDeVendasVO {
 	}
 	public LocalDate getDataUltimaVenda() {
 		return dataUltimaVenda;
+	}
+
+	@Override
+	public String toString() {
+		return "RelatorioDeVendasVo [nomeProduto=" + nomeProduto + ", quantidadeVendida=" + quantidadeVendida
+				+ ", dataUltimaVenda=" + dataUltimaVenda + "]";
 	}
 }
