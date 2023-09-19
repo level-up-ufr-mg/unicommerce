@@ -5,17 +5,17 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Endereco {
-	@Column(length = 100, nullable = false) // Definindo o tamanho máximo para o campo rua
+	@Column(name = "Rua", length = 100, nullable = false) // Definindo o tamanho máximo para o campo rua
 	private String rua;
-	@Column(length = 10, nullable = false) // Definindo o tamanho máximo para o campo numero
+	@Column(name = "Numero", length = 10, nullable = false) // Definindo o tamanho máximo para o campo numero
 	private Integer numero;
-	@Column(nullable = true)
+	@Column(name = "Complemento", nullable = true, length = 150)
 	private String complemento;
-	@Column(length = 50, nullable = false) // Definindo o tamanho máximo para o campo bairro
+	@Column(name = "Bairro", length = 50, nullable = false) // Definindo o tamanho máximo para o campo bairro
 	private String bairro;
-	@Column(length = 50, nullable = false) // Definindo o tamanho máximo para o campo cidade
+	@Column(name = "Cidade", length = 50, nullable = false) // Definindo o tamanho máximo para o campo cidade
 	private String cidade;
-	@Column(length = 20, nullable = false) // Definindo o tamanho máximo para o campo estado
+	@Column(name = "Estado", length = 20, nullable = false) // Definindo o tamanho máximo para o campo estado
 	private String estado;
 	
 	//Construtor
@@ -25,8 +25,7 @@ public class Endereco {
 	}
 
 	public Endereco(String rua, Integer numero, String complemento, String bairro, String cidade, String estado) {
-		super();
-		this.rua = rua;
+ 		this.rua = rua;
 		this.numero = numero;
 		this.complemento = complemento;
 		this.bairro = bairro;

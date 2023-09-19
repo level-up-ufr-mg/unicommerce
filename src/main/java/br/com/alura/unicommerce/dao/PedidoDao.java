@@ -20,8 +20,9 @@ public class PedidoDao {
 	}
 
 	public Pedido buscaPorId(Long id) {
-		String jpql = "SELECT c FROM Pedido c WHERE c.id = :id";
-		return em.createQuery(jpql, Pedido.class).setParameter("id", id).getSingleResult();
+		if (id == null) throw new IllegalArgumentException();
+		Pedido econtrado = em.find(Pedido.class, id);
+		return econtrado;
 	}
 
 	public BigDecimal valorTotalVendido() {

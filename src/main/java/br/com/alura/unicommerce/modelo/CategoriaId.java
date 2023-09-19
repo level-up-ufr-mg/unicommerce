@@ -2,11 +2,14 @@ package br.com.alura.unicommerce.modelo;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class CategoriaId implements Serializable {
 	private String tipo;
+
+	@Column(length = 50, unique = true)
 	private String nome;
 
 	public CategoriaId() {

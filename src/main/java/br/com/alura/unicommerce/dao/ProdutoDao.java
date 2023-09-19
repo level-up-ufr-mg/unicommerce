@@ -21,7 +21,9 @@ public class ProdutoDao {
 	}
 
 	public Produto buscaPorId(Long id) {
-		return em.find(Produto.class, id);
+		if (id == null) throw new IllegalArgumentException();
+		Produto econtrado = em.find(Produto.class, id);
+		return econtrado;
 	}
 
 	public void cadastra(Produto produto) {

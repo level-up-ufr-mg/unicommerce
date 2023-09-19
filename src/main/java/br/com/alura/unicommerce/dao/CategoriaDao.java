@@ -14,20 +14,18 @@ public class CategoriaDao {
 	}
 
 	public Categoria buscaPorId(Long id) {
-		String jpql = "SELECT c FROM Categoria c WHERE c.id = :id";
-		return em.createQuery(jpql, Categoria.class)
-				.setParameter("id", id)
-				.getSingleResult();
+		if (id == null) throw new IllegalArgumentException();
+		Categoria econtrado = em.find(Categoria.class, id);
+		return econtrado;
 	}
-	
-	public void cadastra(Categoria categoria) { //Feito apenas para mostrar, pois a adição da categoria acontece na adição do produto
-		this.em.persist(categoria);
+
+	public void cadastra(Categoria categoria) {
+		em.persist(categoria);
 	}
 
 	public List<Categoria> listaTodas() {
 		String jpql = "SELECT c FROM Categoria c";
 		return em.createQuery(jpql, Categoria.class).getResultList();
 	}
-
 
 }

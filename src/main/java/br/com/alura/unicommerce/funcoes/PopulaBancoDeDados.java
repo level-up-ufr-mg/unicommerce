@@ -35,12 +35,12 @@ public class PopulaBancoDeDados {
 		ProdutoDao produtoDao = new ProdutoDao(em);
 
 		Endereco endereco = new Endereco("Rua da Praia", 789, "Casa 2", "Bairro Praiano", "Cidade Litorânea", "SC");
-		Cliente cliente = new Cliente("Marcelo", "111.111.111-11", "(37) 89795-8575", null, endereco);
+		Cliente cliente = new Cliente("Marcelo", "111.111.111-11", "(37) 89795-8575", endereco);
 		Endereco endereco1 = new Endereco("Avenida Central", 456, "Bloco A", "Centro", "Cidade Grande", "SP");
-		Cliente cliente2 = new Cliente("Ana", "222.222.222-22", "(11) 98765-4321", null, endereco1);
+		Cliente cliente2 = new Cliente("Ana", "222.222.222-22", "(11) 98765-4321", endereco1);
 		Endereco endereco2 = new Endereco("Rua das Flores", 123, "Casa 5", "Jardim Primavera", "Cidade Pequena", "RJ");
-		Cliente cliente3 = new Cliente("Carlos", "333.333.333-33", "(21) 87654-3210", null, endereco2);
-		ClienteDao clienteDao = new ClienteDao(em);
+		Cliente cliente3 = new Cliente("Carlos", "333.333.333-33", "(21) 87654-3210", endereco2);
+		ClienteDao clienteDao = new ClienteDao(em); 
 
 		Pedido pedido = new Pedido(cliente, LocalDate.now(), new BigDecimal(2), TipoDeDescontoPedido.NENHUM, 
 				new BigDecimal(0));
@@ -55,21 +55,23 @@ public class PopulaBancoDeDados {
 		pedido3.adicionarItem(new ItemDePedido(produto3, pedido3, 7, new BigDecimal(0), 
 				TipoDeDescontoItemDePedido.NENHUM));
 		PedidoDao pedidoDao = new PedidoDao(em);
-
 		
 		em.getTransaction().begin();
 		categoriaDao.cadastra(categoria);
 		categoriaDao.cadastra(categoria2);
 		categoriaDao.cadastra(categoria3);
+		
 		produtoDao.cadastra(produto);
 		produtoDao.cadastra(produto2);
 		produtoDao.cadastra(produto3);
+		
 		clienteDao.cadastra(cliente);
 		clienteDao.cadastra(cliente2);
 		clienteDao.cadastra(cliente3);
-//		pedidoDao.cadastra(pedido);
-//		pedidoDao.cadastra(pedido2);
-//		pedidoDao.cadastra(pedido3);
+		
+		pedidoDao.cadastra(pedido);
+		pedidoDao.cadastra(pedido2);
+		pedidoDao.cadastra(pedido3);
 
 		em.getTransaction().commit();
 		em.close();

@@ -14,7 +14,9 @@ public class ClienteDao {
 	}
 
 	public Cliente buscaPorId(Long id) {
-		return em.find(Cliente.class, id);
+		if (id == 0) throw new IllegalArgumentException();
+		Cliente econtrado = em.find(Cliente.class, id);
+		return econtrado;
 	}
 
 	public void cadastra(Cliente cliente) {

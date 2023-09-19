@@ -5,11 +5,11 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class DadosPessoais {
-	@Column(length = 50, nullable = false) // Definindo o tamanho máximo para o campo nome
+	@Column(name = "Nome", length = 100, nullable = false) // Definindo o tamanho máximo para o campo nome
 	private String nome;
-	@Column(length = 14, nullable = false) // Definindo o tamanho máximo para o campo cpf
+	@Column(name = "CPF", length = 14, nullable = false) // Definindo o tamanho máximo para o campo cpf
 	private String cpf;
-	@Column(length = 15, nullable = false) // Definindo o tamanho máximo para o campo telefone
+	@Column(name = "Telefone", length = 15, nullable = false) // Definindo o tamanho máximo para o campo telefone
 	private String telefone;
 
 	//Construtores

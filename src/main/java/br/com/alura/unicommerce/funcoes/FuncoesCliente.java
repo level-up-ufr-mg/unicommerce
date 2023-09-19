@@ -28,7 +28,7 @@ public class FuncoesCliente {
 	private static void buscaPorId(EntityManager em, Long nmroIdDoCliente) {
 		ClienteDao buscaPorId = new ClienteDao(em);
 
-		String clientesPorId = buscaPorId.buscaPorId(nmroIdDoCliente);
+		Cliente clientesPorId = buscaPorId.buscaPorId(nmroIdDoCliente);
 		System.out.println("ID: " + clientesPorId);
 	}
 
