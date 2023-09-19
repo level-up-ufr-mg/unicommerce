@@ -15,44 +15,68 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "itens_pedido")
-public class ItemPedido {
+public class ItemDePedido {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Produto produto;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Pedido pedido;
+	
 	@Column(name = "preco_unitario")
 	private BigDecimal precoUnitario;
+	
 	@Column(name = "quantidade")
 	private Integer quantidade;
+	
 	@Column(name = "desconto")
-	private Double desconto;
+	private BigDecimal desconto;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_desconto")
-	private TipoDesconto tipoDesconto;
+	private TipoDeDescontoItemDePedido tipoDeDescontoItemDePedido;
 
-	// Construtores, getters e setters
+	/************************************************
+	*                                              *
+	*       	    		ENUM              		*
+	*                                              *
+	************************************************/
+		
+//	private enum TipoDeDesconto {
+//		QUANTIDADE,
+//		PROMOCAO,
+//		NENHUM
+//	}
 
-	// Enum para o tipo de desconto
-	public enum TipoDesconto {
-		QUANTIDADE, PROMOCAO, NENHUM
+	/************************************************
+	*                                              *
+	*           		Construtor              	*
+	*                                              *
+	************************************************/
+
+
+	public ItemDePedido() {
 	}
 
-	//	Contructors
-
-	public ItemPedido() {
-	}
-
-	public ItemPedido(Produto produto, Pedido pedido, Integer quantidade) {
+	public ItemDePedido(Produto produto, Pedido pedido, Integer quantidade, BigDecimal desconto,
+			TipoDeDescontoItemDePedido tipoDeDescontoItemDePedido) {
 		this.produto = produto;
 		this.precoUnitario = produto.getPreco();
 		this.pedido = pedido;
 		this.quantidade = quantidade;
+		this.desconto = desconto;
+		this.tipoDeDescontoItemDePedido = tipoDeDescontoItemDePedido;
 	}
 
-	//	Getters e Setters
+	/************************************************
+	*                                              *
+	*        		Getters e Setters              	*
+	*                                              *
+	************************************************/
 
 	public Long getId() {
 		return id;
@@ -94,20 +118,20 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 
-	public Double getDesconto() {
+	public BigDecimal getDesconto() {
 		return desconto;
 	}
 
-	public void setDesconto(Double desconto) {
+	public void setDesconto(BigDecimal desconto) {
 		this.desconto = desconto;
 	}
 
-	public TipoDesconto getTipoDesconto() {
-		return tipoDesconto;
+	public TipoDeDescontoItemDePedido getTipoDesconto() {
+		return tipoDeDescontoItemDePedido;
 	}
 
-	public void setTipoDesconto(TipoDesconto tipoDesconto) {
-		this.tipoDesconto = tipoDesconto;
+	public void setTipoDesconto(TipoDeDescontoItemDePedido tipoDesconto) {
+		this.tipoDeDescontoItemDePedido = tipoDesconto;
 	}
 
 	public BigDecimal getValor() {

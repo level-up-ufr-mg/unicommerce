@@ -3,8 +3,6 @@ package br.com.alura.unicommerce.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +17,13 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Embedded
 	private DadosPessoais dadosPessoais;
+	
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedido = new ArrayList<>();
+	
 	@Embedded
 	private Endereco endereco;
 

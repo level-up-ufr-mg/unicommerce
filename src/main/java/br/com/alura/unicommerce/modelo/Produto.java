@@ -29,7 +29,7 @@ public class Produto {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
 	@OneToMany
-	private List<ItemPedido> itens = new ArrayList<>();	
+	private List<ItemDePedido> itens = new ArrayList<>();	
 	@Column(length = 100, nullable = false) // Definindo o tamanho máximo para o campo nome
 	private String nome;
 	@Column(precision = 10, scale = 2, nullable = false) 

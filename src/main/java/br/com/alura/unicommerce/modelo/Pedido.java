@@ -29,7 +29,7 @@ public class Pedido {
 
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	@Column(name = "Itens")
-	private List<ItemPedido> itens = new ArrayList<>();
+	private List<ItemDePedido> itens = new ArrayList<>();
 	
 	@Column(nullable = false, name = "data")
 	private LocalDate data;
@@ -38,25 +38,45 @@ public class Pedido {
 	private BigDecimal desconto;
 	
 	@Column(nullable = false, name = "Tipo_de_Desconto")
-	private TipoDeDesconto tipoDeDesconto;
+	private TipoDeDescontoPedido tipoDeDescontoPedido;
 	
 	@Column(nullable = false, name = "valor_total")
 	private BigDecimal valorTotal = BigDecimal.ZERO;
 
-	// Constructor ----------------------------------------------------
+	/************************************************
+	*                                              *
+	*     	 	 		Enum	              	   *
+	*                                              *
+	************************************************/
+	
+	public enum TipoDeDesconto {
+		FIDELIDADE,
+		NENHUM
+	}
+
+	/************************************************
+	*                                              *
+	*      	 		Constructor              		*
+	*                                              *
+	************************************************/
 
 	public Pedido() {
 	}
-
-	public Pedido(Cliente cliente, List<ItemPedido> itens, LocalDate data, BigDecimal desconto,
-			TipoDeDesconto tipoDeDesconto, BigDecimal valorTotal) {
+	
+	public Pedido(Cliente cliente, LocalDate data, BigDecimal desconto,
+			TipoDeDescontoPedido tipoDeDescontoPedido, BigDecimal valorTotal) {
 		this.cliente = cliente;
 		this.data = data;
 		this.desconto = desconto;
-		this.tipoDeDesconto = tipoDeDesconto;
+		this.tipoDeDescontoPedido = tipoDeDescontoPedido;
+		this.valorTotal = valorTotal;
 	}
 
-	// Getters and Setters ----------------------------------------------------
+	/************************************************
+	*                                              *
+	*      			Getters and Setters        		*
+	*                                              *
+	************************************************/
 
 	public Long getId() {
 		return id;
@@ -74,11 +94,11 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public List<ItemPedido> getItens() {
+	public List<ItemDePedido> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<ItemPedido> itens) {
+	public void setItens(List<ItemDePedido> itens) {
 		this.itens = itens;
 	}
 
@@ -98,7 +118,7 @@ public class Pedido {
 		this.valorTotal = valorTotal;
 	}
 
-	public void adicionarItem(ItemPedido item) {
+	public void adicionarItem(ItemDePedido item) {
 		item.setPedido(this);
 		this.itens.add(item);
 		this.valorTotal = this.valorTotal.add(item.getValor());

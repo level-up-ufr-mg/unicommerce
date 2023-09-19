@@ -13,10 +13,11 @@ import br.com.alura.unicommerce.dao.ProdutoDao;
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Endereco;
-import br.com.alura.unicommerce.modelo.ItemPedido;
+import br.com.alura.unicommerce.modelo.ItemDePedido;
 import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.modelo.Produto;
-import br.com.alura.unicommerce.modelo.tipoDesconto;
+import br.com.alura.unicommerce.modelo.TipoDeDescontoItemDePedido;
+import br.com.alura.unicommerce.modelo.TipoDeDescontoPedido;
 import br.com.alura.unicommerce.util.JPAUtil;
 import br.com.alura.unicommerce.vo.RelatorioDeVendasVo;
 
@@ -44,8 +45,10 @@ public class FuncoesPedido {
 
 		em.getTransaction().begin();
 
-		Pedido pedido = new Pedido();
-		pedido.adicionarItem(new ItemPedido(produto, pedido, 10));
+		Pedido pedido = new Pedido(cliente, LocalDate.now(), new BigDecimal(0), TipoDeDescontoPedido.NENHUM, 
+				new BigDecimal(0));
+		pedido.adicionarItem(new ItemDePedido(produto, pedido, 10, new BigDecimal(0), 
+				TipoDeDescontoItemDePedido.NENHUM));
 
 		PedidoDao pedidoDao = new PedidoDao(em);
 		pedidoDao.cadastra(pedido);
@@ -74,7 +77,7 @@ public class FuncoesPedido {
 
 
 		Endereco endereco = new Endereco("Rua da Praia", 789, "Casa 2", "Bairro Praiano", "Cidade Litorânea", "SC");
-		Cliente cliente = new Cliente("Marcelo", "111.111.111-11", "(37) 89795-8575", endereco);
+		Cliente cliente = new Cliente("Marcelo", "111.111.111-11", "(37) 89795-8575", null, endereco);
 
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		ClienteDao clienteDao = new ClienteDao(em);

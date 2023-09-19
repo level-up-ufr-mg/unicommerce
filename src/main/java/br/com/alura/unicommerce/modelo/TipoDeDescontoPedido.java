@@ -1,7 +1,6 @@
 package br.com.alura.unicommerce.modelo;
 
-//Embedable removido
-public enum tipoDesconto {
+public enum TipoDeDescontoPedido {
 	FIDELIDADE,
 	NENHUM
 }
