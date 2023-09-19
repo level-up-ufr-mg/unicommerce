@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,28 +17,23 @@ import javax.persistence.Table;
 @Table(name = "cliente")
 public class Cliente {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Embedded
+	private DadosPessoais dadosPessoais;
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedido = new ArrayList<>();
-	@Column(length = 50, nullable = false) // Definindo o tamanho máximo para o campo nome
-	private String nome;
-	@Column(length = 14, nullable = false) // Definindo o tamanho máximo para o campo cpf
-	private String cpf;
-	@Column(length = 15, nullable = false) // Definindo o tamanho máximo para o campo telefone
-	private String telefone;
 	@Embedded
 	private Endereco endereco;
 
 	//Construtor
-	
+
 	public Cliente() {
-	}	
-	
-	public Cliente(String nome, String cpf, String telefone, Endereco endereco) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.telefone = telefone;
+	}
+
+	public Cliente(String nome, String cpf, String telefone, List<Pedido> pedido, Endereco endereco) {
+		this.dadosPessoais = new DadosPessoais(nome, cpf, telefone);
+		this.pedido = pedido;
 		this.endereco = endereco;
 	}
 
@@ -50,29 +46,13 @@ public class Cliente {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public String getNome() {
-		return nome;
+		return this.dadosPessoais.getNome();
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	
+	public DadosPessoais getDadosPessoais() {
+		return dadosPessoais;
 	}
 
 	public Endereco getEndereco() {
@@ -82,5 +62,7 @@ public class Cliente {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+	
+	
 	
 }

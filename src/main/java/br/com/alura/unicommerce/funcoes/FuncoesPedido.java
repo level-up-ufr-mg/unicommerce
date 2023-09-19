@@ -23,8 +23,10 @@ public class FuncoesPedido {
 		EntityManager em = JPAUtil.getEntityManager();
 //		popularBancoDeDados(em);
 //		cadastraPedido(em);
-		Pedido pedido = em.find(Pedido.class, 1l);
-		System.out.println(pedido.getItens().size());
+		PedidoDao pedidoDao = new PedidoDao(em);
+		Pedido pedido = pedidoDao.buscarPedidoComCliente(8l);
+		em.close();
+		System.out.println(pedido.getCliente().getNome());
 	}
 
 	private static void cadastraPedido(EntityManager em) {

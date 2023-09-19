@@ -1,6 +1,7 @@
 package br.com.alura.unicommerce.funcoes;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -19,13 +20,15 @@ public class FuncoesProduto {
 //		listaTodos(em);
 //		listaIndisponiveis(em);
 //		buscaPorId(em, nmroIdDoCliente);
-		cadastra(em);
+//		cadastra(em);
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		produtoDao.buscarPorParametrosComCriteria("Samsung Galaxy S21", null, null);
 	}
 
 	private static void buscaPorId(EntityManager em, long nmroIdDoCliente) {
 		ProdutoDao buscaPorId = new ProdutoDao(em);
 
-		String produtosPorId = buscaPorId.buscaPorId(1l);
+		Produto produtosPorId = buscaPorId.buscaPorId(nmroIdDoCliente);
 		System.out.print("Produto buscado: " + produtosPorId);
 	}
 
