@@ -1,6 +1,7 @@
 package br.com.alura.unicommerce.funcoes;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ import br.com.alura.unicommerce.modelo.Endereco;
 import br.com.alura.unicommerce.modelo.ItemPedido;
 import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.modelo.Produto;
+import br.com.alura.unicommerce.modelo.tipoDesconto;
 import br.com.alura.unicommerce.util.JPAUtil;
 import br.com.alura.unicommerce.vo.RelatorioDeVendasVo;
 
@@ -22,7 +24,11 @@ public class FuncoesPedido {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
 //		popularBancoDeDados(em);
-//		cadastraPedido(em);
+		cadastraPedido(em);
+//		buscarPedidoComCliente(em);
+	}
+
+	private static void buscarPedidoComCliente(EntityManager em) {
 		PedidoDao pedidoDao = new PedidoDao(em);
 		Pedido pedido = pedidoDao.buscarPedidoComCliente(8l);
 		em.close();
@@ -34,22 +40,15 @@ public class FuncoesPedido {
 		ClienteDao clienteDao = new ClienteDao(em);
 
 		Produto produto = produtoDao.buscaPorId(1l);
-		Produto produto2 = produtoDao.buscaPorId(2l);
-		Produto produto3 = produtoDao.buscaPorId(3l);
 		Cliente cliente = clienteDao.buscaPorId(1l);
 
 		em.getTransaction().begin();
 
-		Pedido pedido = new Pedido(cliente);
+		Pedido pedido = new Pedido();
 		pedido.adicionarItem(new ItemPedido(produto, pedido, 10));
-		pedido.adicionarItem(new ItemPedido(produto2, pedido, 40));
-
-		Pedido pedido2 = new Pedido(cliente);
-		pedido.adicionarItem(new ItemPedido(produto3, pedido, 2));
 
 		PedidoDao pedidoDao = new PedidoDao(em);
 		pedidoDao.cadastra(pedido);
-		pedidoDao.cadastra(pedido2);
 
 		em.getTransaction().commit();
 

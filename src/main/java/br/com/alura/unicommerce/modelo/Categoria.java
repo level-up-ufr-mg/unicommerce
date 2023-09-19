@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,13 +16,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "categoria")
 public class Categoria {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+
+	@EmbeddedId
+	private CategoriaId id;
 	@OneToMany(mappedBy = "categoria")
 	private List<Produto> produto = new ArrayList<>();	
-	@Column(length = 50) // Definindo o tamanho máximo para o campo nome
-	private String nome;
 	private boolean Status; // Booleanos não posuem lenght
 
 	// Construtores
@@ -29,19 +29,10 @@ public class Categoria {
 	}
 
 	public Categoria(String nome, boolean status) {
-		this.nome = nome;
-		Status = status;
+		this.id = new CategoriaId(nome, "xpto");
 	}
 	
 	//	Getters and Setters
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public List<Produto> getProduto() {
 		return produto;
@@ -52,11 +43,7 @@ public class Categoria {
 	}
 
 	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+		return this.id.getNome();
 	}
 
 	public boolean isStatus() {

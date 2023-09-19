@@ -23,26 +23,40 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Cliente cliente;
+
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-	@Column(name = "itens")
+	@Column(name = "Itens")
 	private List<ItemPedido> itens = new ArrayList<>();
-	@Column(name = "data")
+	
+	@Column(nullable = false, name = "data")
 	private LocalDate data;
-	@Column(name = "valor_total")
+	
+	@Column(nullable = false, name = "Desconto", precision = 10, scale = 2)
+	private BigDecimal desconto;
+	
+	@Column(nullable = false, name = "Tipo_de_Desconto")
+	private TipoDeDesconto tipoDeDesconto;
+	
+	@Column(nullable = false, name = "valor_total")
 	private BigDecimal valorTotal = BigDecimal.ZERO;
 
-	// Constructor
+	// Constructor ----------------------------------------------------
 
 	public Pedido() {
-	}	
-
-	public Pedido(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
-	// Getters and Setters
+	public Pedido(Cliente cliente, List<ItemPedido> itens, LocalDate data, BigDecimal desconto,
+			TipoDeDesconto tipoDeDesconto, BigDecimal valorTotal) {
+		this.cliente = cliente;
+		this.data = data;
+		this.desconto = desconto;
+		this.tipoDeDesconto = tipoDeDesconto;
+	}
+
+	// Getters and Setters ----------------------------------------------------
 
 	public Long getId() {
 		return id;
