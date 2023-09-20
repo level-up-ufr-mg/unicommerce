@@ -24,7 +24,6 @@ public record DadosCadastroProduto(
 		Integer quantidadeEstoque,
 		
 		@NotNull(message = "O id da Categoria deve ser válido")
-		Categoria categoria		
-		) {
-
+		Categoria categoria) {		
+		
 }

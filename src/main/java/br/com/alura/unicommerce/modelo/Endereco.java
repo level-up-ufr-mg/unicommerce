@@ -2,6 +2,8 @@ package br.com.alura.unicommerce.modelo;
 
 import javax.persistence.Embeddable;
 
+import br.com.alura.unicommerce.record.DadosCadastroEndereco;
+
 @Embeddable
 public class Endereco {
 	
@@ -14,6 +16,16 @@ public class Endereco {
     
     public Endereco() {
     	
+    }
+    
+    //Construtor com a record de Endereco
+    public Endereco(DadosCadastroEndereco dados) {
+    	this.rua = dados.rua();
+    	this.numero = String.valueOf(dados.numero());
+    	this.complemento = dados.complemento();
+    	this.bairro = dados.bairro(); 
+    	this.cidade = dados.cidade();
+    	this.estado = dados.estado();
     }
     
     public Endereco(String rua, String numero, String complemento, String bairro, String cidade, String estado) {

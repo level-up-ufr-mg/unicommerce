@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.Valid;
+
+import br.com.alura.unicommerce.record.DadosCadastroCliente;
 
 @Entity
 @Table(name = "cliente") 
@@ -48,14 +51,20 @@ public class Cliente {
 		this.telefone = telefone;
 		this.endereco = endereco;
 	}
-	
-	
 
 	public Cliente(String nome, String cpf, String telefone) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
+	}
+
+	public Cliente(DadosCadastroCliente dados) {
+		this.nome = dados.nome();
+		this.cpf = dados.cpf();
+		this.telefone = dados.telefone();
+		this.endereco = new Endereco (dados.endereco()); // a variável endereço recebe um objeto completo de Endereço
+		
 	}
 
 	public Long getId() {
