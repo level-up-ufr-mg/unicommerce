@@ -1,13 +1,12 @@
 package br.com.alura.unicommerce.modelo;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.com.alura.unicommerce.record.DadosCadastroCategoria;
 
 @Entity 
 @Table(name = "categoria")
@@ -32,6 +31,12 @@ public class Categoria {
         this.nome = nome;
         this.status = status;
     }
+    
+    //Construtor que recebe a DTO para ser retornada no Controller
+    public Categoria(DadosCadastroCategoria dados) {
+        this.nome = dados.nome();
+        this.status = dados.status();
+    }
 
 	public Long getId() {
 		return id;
@@ -44,10 +49,7 @@ public class Categoria {
 	public Boolean getStatus() {
 		return status;
 	}
- 
-//	public List<Produto> getProdutos() {
-//		return produtos;
-//	}
+
 
 	public void setNome(String nome) {
 		

@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import br.com.alura.unicommerce.record.DadosCadastroProduto;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -35,7 +38,13 @@ public class Produto {
     @Column(name = "preco", precision = 10, scale = 2, nullable = false)
     private BigDecimal preco;
     
-    public Produto() {
+    //Construtor que recebe a Record (DTO)
+    public Produto(DadosCadastroProduto dados, Categoria dadosIdCategoria) {
+    	this.nome = dados.nome();
+    	this.preco = dados.preco();
+    	this.descricao = dados.descricao();
+    	this.quantidadeEstoque = dados.quantidadeEstoque();
+    	this.categoria = dadosIdCategoria;
     	
     }
     
@@ -46,13 +55,9 @@ public class Produto {
 		this.categoria = categoria;
 		this.preco = preco;
 	}
-    
-    
-
-    
+     
     public Produto(Long id, String nome, String descricao, int quantidadeEstoque, Categoria categoria,
 			BigDecimal preco) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
