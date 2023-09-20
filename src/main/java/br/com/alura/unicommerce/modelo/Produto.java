@@ -38,6 +38,10 @@ public class Produto {
     @Column(name = "preco", precision = 10, scale = 2, nullable = false)
     private BigDecimal preco;
     
+    public Produto() {
+    }
+    
+    
     //Construtor que recebe a Record (DTO)
     public Produto(DadosCadastroProduto dados, Categoria dadosIdCategoria) {
     	this.nome = dados.nome();
