@@ -1,5 +1,7 @@
 CREATE DATABASE unicommerce;
 
+drop database unicommerce;
+
 USE unicommerce;
 
 CREATE TABLE categoria (
@@ -50,4 +52,28 @@ CREATE TABLE item_pedido (
     FOREIGN KEY (pedido_id) REFERENCES pedido(id),
     FOREIGN KEY (produto_id) REFERENCES produto(id)
 );
+
+USE unicommerce;
+CREATE TABLE usuario (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    senha VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE
+);
+
+USE unicommerce;
+ALTER TABLE cliente
+ADD COLUMN usuario_id INT;
+
+USE unicommerce;
+ALTER TABLE produto
+ADD preco DECIMAL(10, 2) NOT NULL;
+
+USE unicommerce;
+ALTER TABLE pedido
+ADD valor_total DECIMAL(10, 2);
+
+USE unicommerce;
+UPDATE cliente
+SET usuario_id = 3
+WHERE id IN (3);
 

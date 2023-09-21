@@ -26,6 +26,20 @@ public class RelatorioVendasPorCategoriaVo {
 	public BigDecimal getTotalVendido() {
 		return totalVendido;
 	}
+	
+	
+
+	public void setNomeCategoria(String nomeCategoria) {
+		this.nomeCategoria = nomeCategoria;
+	}
+
+	public void setQuantidadeVendida(Long quantidadeVendida) {
+		this.quantidadeVendida = quantidadeVendida;
+	}
+
+	public void setTotalVendido(BigDecimal totalVendido) {
+		this.totalVendido = totalVendido;
+	}
 
 	@Override
 	public String toString() {

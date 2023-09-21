@@ -1,30 +1,31 @@
 package br.com.alura.unicommerce.modelo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 
 
 @Entity 
 @Table(name = "pedido")
-public class Pedido {
+public class Pedido implements Serializable{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,17 +49,43 @@ public class Pedido {
 	
 	@Column(name = "valor_total")
 	private BigDecimal valorTotal = BigDecimal.ZERO;
+
+	@Transient
+	private Integer quantidadeDeItens;
+	
+	@Transient
+	private BigDecimal descontoDeItens;
+	
+	@Transient
+	private BigDecimal total;
+	
+	
 	
 	public void adicionarItem(ItemDePedido item) {
 		item.setPedido(this);
 		this.itens.add(item);
 		this.valorTotal = this.valorTotal.add(item.getValor());
 	}
-
-	//@Transient anotação que cria campos provisorios ou seja não tem esse campo na tabela
 	
-	public Pedido() {
+	public Pedido( Cliente cliente, List<ItemDePedido> itens, BigDecimal desconto,
+			TipoDescontoPedido tipo_desconto) {
+		this.cliente = cliente;
+		adicionaItens(itens);
+		this.desconto = desconto;
+		this.tipo_desconto = tipo_desconto;
+	}
+
+	private void adicionaItens(List<ItemDePedido> itens2) {
+		itens.forEach(item -> adicionaItem(item));
 		
+	}
+
+	private void adicionaItem(ItemDePedido item) {
+	    this.total = this.total.add(item.getValor());
+	    this.quantidadeDeItens = this.quantidadeDeItens + item.getQuantidade();
+	    this.descontoDeItens = this.descontoDeItens.add(item.getDesconto());
+        item.setPedido(this);
+	    itens.add(item);		
 	}
 
 	public Pedido(Cliente cliente, BigDecimal desconto, TipoDescontoPedido tipo_desconto) {
@@ -66,7 +93,31 @@ public class Pedido {
 		this.desconto = desconto;
 		this.tipo_desconto = tipo_desconto;
 	}
-	
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public Integer getQuantidadeDeItens() {
+		return quantidadeDeItens;
+	}
+
+	public void setQuantidadeDeItens(Integer quantidadeDeItens) {
+		this.quantidadeDeItens = quantidadeDeItens;
+	}
+
+	public BigDecimal getDescontoDeItens() {
+		return descontoDeItens;
+	}
+
+	public void setDescontoDeItens(BigDecimal descontoDeItens) {
+		this.descontoDeItens = descontoDeItens;
+	}
+
 	public List<ItemDePedido> getItens() {
 		return itens;
 	}

@@ -9,7 +9,7 @@ public enum TipoDescontoItemPedido {
 	QUANTIDADE
 	
 	
-//	NENHUM(BigDecimal.ZERO),
+//	NENHUM( BigDecimal.ZERO),
 //	PROMOCAO(new BigDecimal("0.1")),
 //	QUANTIDADE(new BigDecimal("0.15"));
 //	

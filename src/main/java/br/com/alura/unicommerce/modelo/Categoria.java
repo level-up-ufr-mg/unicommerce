@@ -1,14 +1,16 @@
 package br.com.alura.unicommerce.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity //anotação que indica que a classe é uma entidade
 @Table(name = "categoria") //anotação usada se o nome da tabela do bd não for o mesmo da entidade 
-public class Categoria {
+public class Categoria implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +18,7 @@ public class Categoria {
     
     //@Column(name = "nome")//anotação usada se o nome da coluna do bd não for o mesmo da entidade 
     private String nome;
-    private Boolean status ;
+    private Boolean status = true;
 
    
     public Categoria() {
@@ -31,7 +33,11 @@ public class Categoria {
         this.nome = nome;
         this.status = status;
     }
-  
+    
+    
+    public Categoria(DadosCadastraCategoria dados) {
+    	this.nome = dados.nome();
+    }
 
     public Long getId() {
         return id;
@@ -64,6 +70,13 @@ public class Categoria {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+	@Override
+	public String toString() {
+		return "Categoria [nome=" + nome + ", status=" + status + "]";
+	}
+    
+    
    
 }
 

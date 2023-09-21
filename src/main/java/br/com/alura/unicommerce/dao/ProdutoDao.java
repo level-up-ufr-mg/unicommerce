@@ -3,12 +3,15 @@ package br.com.alura.unicommerce.dao;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import org.springframework.stereotype.Repository;
 
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.vo.RelatorioProdutosMaisVendidosVo;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
+
+@Repository
 public class ProdutoDao {
 	
 	private EntityManager em;

@@ -1,11 +1,14 @@
 package br.com.alura.unicommerce.dao;
 
 import java.util.List;
-import javax.persistence.EntityManager;
+
+import org.springframework.stereotype.Repository;
 
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.vo.RelatorioClientesFiesVo;
+import jakarta.persistence.EntityManager;
 
+@Repository
 public class ClienteDao {
 
     private EntityManager em;
@@ -27,12 +30,12 @@ public class ClienteDao {
     }
 
     public void remove(Cliente cliente) {
-    	cliente = em.merge(cliente); //Caso a entidade esteja em detached aqui está forçando ela a entrar no estado managed
+    	cliente = em.merge(cliente);// Caso a entidade esteja em detached aqui está forçando ela a entrar no estado managed
         this.em.remove(cliente);
     }
 
     public List<Cliente> listaTodos() {
-    	String jpql = " SELECT c FROM Cliente c "; // esse Cliente não é o nome da tabela não, é o nome da entidade que como está ligada na tabela do bd  
+    	String jpql = " SELECT c FROM Cliente c "; /// esse Cliente não é o nome da tabela não, é o nome da entidade que como está ligada na tabela do bd  
         return  em.createQuery(jpql, Cliente.class).getResultList();
     }
     
@@ -44,13 +47,13 @@ public class ClienteDao {
         		.getResultList();
    }
     
-//    //Exemplo quando eu quero filtrar somente um registro
-//    public String listaPorCPF(String cpf) {
-//    	String jpql = "SELECT c.nome FROM Cliente c WHERE c.cpf = :cpf";
-//        return  em.createQuery(jpql, String.class)
-//        		.setParameter("cpf", cpf)
-//        		.getSingleResult();
-//    }
+   // Exemplo quando //eu quero filtrar somente um registro
+    public String listaPorCPF(String cpf) {
+    	String jpql = "SELECT c.nome FROM Cliente c WHERE c.cpf = :cpf";
+        return  em.createQuery(jpql, String.class)
+        		.setParameter("cpf", cpf)
+        		.getSingleResult();
+    }
     
     
     public List<RelatorioClientesFiesVo> relatorioClientesFies() {

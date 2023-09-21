@@ -1,0 +1,70 @@
+----------------------------------POST-------------------------------
+
+http://localhost:8081/api/categorias
+{
+    "nome": "Automoveis"
+}
+
+
+http://localhost:8081/api/clientes
+{
+    "nome": "Joana",
+    "cpf": "85016385017",
+    "telefone":"(37)99999-9999",
+    "endereco": {
+        "rua": "Rua 1",
+        "numero": 20,
+        "complemento": "casa",
+        "bairro": "lagoa",
+        "cidade": "Formiga",
+        "estado": "MG"
+    }
+
+}
+
+
+http://localhost:8081/api/produtos 
+{
+    "nome": "Teclado",
+    "preco": 100.00,
+    "descricao": "Teclado Gamer",
+    "quantidadeEstoque": 3,
+    "categoria": {
+        "id": 1
+    }
+    
+}
+
+
+http://localhost:8081/api/pedidos
+{
+    "clienteId": 1,
+    "tipoDesconto": "NENHUM",
+    "desconto": 100,
+    "totalPedidos": 19600.00,
+    "produtos": [{ 
+             "id":1,
+             "quantidade": 2,
+             "desconto": 200,
+             "tipoDesconto": "NENHUM"
+              },
+              { 
+             "id":2,
+             "quantidade": 2,
+             "desconto": 200,
+             "tipoDesconto": "NENHUM"
+              }
+    ]
+             
+}
+
+
+http://localhost:8081/api/usuario
+{
+    "email": "joana@uniformg.edu.br",
+    "senha": "123"
+
+}
+
+
+

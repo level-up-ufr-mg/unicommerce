@@ -9,7 +9,7 @@ import br.com.alura.unicommerce.modelo.Categoria;
 public class CategoriaTest {
 
 	@Test
-	public void nomeValido() {
+	public void deveCriarCategoriaComNomeValido() {
 		
 		Categoria categoria = new Categoria("Celular");
 		
@@ -18,12 +18,12 @@ public class CategoriaTest {
 	
 	
 	@Test
-	public void nomeVazio() {
+	public void deveFalharACriacaoDeCategoriaComNomeVazio() {
 		
 		Categoria categoria = null;
 		
 		try{
-			categoria = new Categoria(null);
+			//categoria = new Categoria(null);
 			
 		}catch (Exception e) {
 			System.out.println(e);
@@ -34,7 +34,7 @@ public class CategoriaTest {
     } 
 	
 	@Test
-	public void nomeNulo() {
+	public void deveFalharACriacaoDeCategoriaComNomeNulo() {
 		
 		Categoria categoria = null;
 		

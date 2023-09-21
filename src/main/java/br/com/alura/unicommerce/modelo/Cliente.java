@@ -1,16 +1,21 @@
 package br.com.alura.unicommerce.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cliente") 
-public class Cliente {
+public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,16 +33,38 @@ public class Cliente {
     @Embedded
     private Endereco endereco;
     
+    @OneToOne
+    @NotNull
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+    
     public Cliente() {
     	
     }
 
-    public Cliente(String nome, String cpf, String telefone, Endereco endereco) {
-		super();
+    public Cliente(String nome, String cpf, String telefone, Endereco endereco, Usuario usuario) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.endereco = endereco;
+		this.usuario = usuario;
+	}
+
+    public Cliente (DadosCadastraCliente dados) {
+    	this.nome = dados.nome();
+    	this.cpf = dados.cpf();
+    	this.telefone = dados.telefone();
+    	this.endereco = new Endereco (dados.endereco());
+    } 
+    
+    
+    
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Long getId() {

@@ -13,46 +13,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.alura.unicommerce.modelo.Categoria;
-import br.com.alura.unicommerce.modelo.DadosCadastraCategoria;
-import br.com.alura.unicommerce.repository.CategoriaRepository;
-import br.com.alura.unicommerce.vo.RelatorioVendasPorCategoriaVo;
+import br.com.alura.unicommerce.modelo.Cliente;
+import br.com.alura.unicommerce.modelo.DadosCadastraCliente;
+import br.com.alura.unicommerce.modelo.DadosListagemCliente;
+import br.com.alura.unicommerce.repository.ClienteRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
-
 @RestController
-@RequestMapping("/api/categorias")
-public class CategoriaController {
+@RequestMapping("/api/clientes")
+public class ClienteController {
+
 	
 	@Autowired
-	private CategoriaRepository repository;
+	private ClienteRepository repository;
+	
 	
 	@PostMapping
 	@Transactional
-    public ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastraCategoria dados, BindingResult result) {		
-		
-		if (result.hasErrors()) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    public ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastraCliente dados, BindingResult result) {		
 	
-		repository.save(new Categoria(dados));
+		if (result.hasErrors()) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		
+		repository.save(new Cliente(dados));
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 	
 	}
 	
-	@GetMapping("/vendas")
-	public ResponseEntity<Page<RelatorioVendasPorCategoriaVo>> relatorioVendasCategoria(Pageable paginacao){
-		
-		Page<Categoria> categorias = repository.findAll(paginacao);
-		return ResponseEntity.ok(repository.getRelatorioVendasPorCategoria(paginacao));
+	@GetMapping
+	public Page<DadosListagemCliente> listar(@PageableDefault(size = 5, sort = {"nome"})Pageable paginacao){
+
+		return repository.findAll(paginacao).map(DadosListagemCliente::new);
 		
 	}
 	
+	
 }
-		
-		
-	
-	
-	
-	
-

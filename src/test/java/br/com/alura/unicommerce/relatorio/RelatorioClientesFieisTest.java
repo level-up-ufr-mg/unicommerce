@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.google.protobuf.Internal.ListAdapter;
+//import com.google.protobuf.Internal.ListAdapter; // comentei essa importação pois começou a dar erro quando começei a migrar o projeto para Spring boot
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,7 +38,7 @@ public class RelatorioClientesFieisTest {
 		
 		
 		Endereco endereco = new Endereco ( "Avenida Brasil", "168", "Casa", "Ouro Negro", "Formiga", "MG");
-		Cliente  cliente = new Cliente("Dayane Costa", "00000000000", "37998751208", endereco);
+		Cliente  cliente = new Cliente("Dayane Costa", "00000000000", "37998751208", endereco, null);
 		
 		Pedido pedido = new Pedido(cliente, new BigDecimal("30"), TipoDescontoPedido.NENHUM);
 		ItemDePedido itemPedido = new ItemDePedido(2, pedido, produto, new BigDecimal("30") , TipoDescontoItemPedido.NENHUM);

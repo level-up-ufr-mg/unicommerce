@@ -1,9 +1,11 @@
 package br.com.alura.unicommerce.modelo;
 
-import javax.persistence.Embeddable;
+import java.io.Serializable;
+
+import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class Endereco {
+public class Endereco implements Serializable {
 	
 	private String rua;
     private String numero;
@@ -11,21 +13,25 @@ public class Endereco {
     private String bairro;
     private String cidade;
     private String estado;
+       
     
     public Endereco() {
     	
     }
-    
 
     public Endereco(String rua, String numero, String complemento, String bairro, String cidade, String estado) {
-		super();
-		this.rua = rua;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.estado = estado;
+		
 	}
+
+	public Endereco(DadosEndereco dados) {
+		this.rua = dados.rua();
+		this.numero = String.valueOf(dados.numero());
+		this.complemento = dados.complemento();
+		this.bairro = dados.bairro();
+		this.cidade = dados.cidade();
+		this.estado = dados.estado();;
+	}
+
 
 	public String getRua() {
         return rua;

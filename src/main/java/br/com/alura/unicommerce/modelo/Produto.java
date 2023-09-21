@@ -1,24 +1,27 @@
 package br.com.alura.unicommerce.modelo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.JoinColumn;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 
 @Entity
 @Table(name = "produto")
 @NamedQuery(name = "Produto.produtosPorCategoria", 
             query = "SELECT p FROM Produto p "
             		+ "WHERE p.categoria.nome = :nome")// quando você quiser fazer a consulta direto na entidade
-public class Produto {
+public class Produto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +45,7 @@ public class Produto {
     public Produto() {
     	
     }
+
     
 	public Produto(String nome, BigDecimal preco, Categoria categoria) {
 		this.setPreco(preco);	
@@ -56,7 +60,18 @@ public class Produto {
 	}
 
     
-    public BigDecimal getPreco() {
+    public Produto(DadosCadastraProduto dados, Categoria dadosIdCategoria) {
+		this.nome = dados.nome();
+		this.preco = dados.preco();
+		this.descricao = dados.descricao();
+		this.quantidadeEstoque = dados.quantidadeEstoque();
+		this.categoria = dadosIdCategoria;
+		
+	}
+    
+    
+
+	public BigDecimal getPreco() {
 		return preco;
 	}
 

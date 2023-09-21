@@ -2,15 +2,17 @@ package br.com.alura.unicommerce.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
 import br.com.alura.unicommerce.modelo.Categoria;
-import br.com.alura.unicommerce.util.JPAUtil;
 import br.com.alura.unicommerce.vo.RelatorioVendasPorCategoriaVo;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
-
+@Repository
 public class CategoriaDao {
 	
+	@PersistenceContext
 	private EntityManager em;
 
     public CategoriaDao(EntityManager em) {
@@ -24,7 +26,10 @@ public class CategoriaDao {
     }
     
     public void cadastra(Categoria categoria) {
+    	em.getTransaction().begin();
         this.em.persist(categoria);
+        em.getTransaction().commit();
+        
     }
     
     public List<Categoria> listaTodos() {
