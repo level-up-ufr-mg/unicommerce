@@ -2,33 +2,47 @@ package br.com.alura.unicommerce.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import org.springframework.stereotype.Component;
 
 import br.com.alura.unicommerce.modelo.Cliente;
+import br.com.alura.unicommerce.util.JPAUtil;
+import jakarta.persistence.EntityManager;
 
-public class ClienteDao {
+@Component
+public class ClienteDao implements Dao<Cliente> {
 
 	private EntityManager em;
 
-	public ClienteDao(EntityManager em) {
-		this.em = em;
+	public ClienteDao() {
+		this.em = JPAUtil.getEntityManager();
 	}
-	
-	public void cadastrar(Cliente cliente) {
-		this.em.persist(cliente);
+
+	@Override
+	public void save(Cliente t) {
+		em.getTransaction().begin();
+		em.persist(t);
+		em.getTransaction().commit();
 	}
-	
-	public void atualizar(Cliente cliente) {
-		this.em.merge(cliente);
+
+	@Override
+	public void delete(Cliente t) {
+		em.getTransaction().begin();
+		em.remove(t);
+		em.getTransaction().commit();
 	}
-	
-	public void remover(Cliente cliente) {
-		cliente = em.merge(cliente);
-		this.em.remove(cliente);
+
+	@Override
+	public void update(Cliente t) {
+		em.getTransaction().begin();
+		em.merge(t);
+		em.getTransaction().commit();
 	}
-	
-	public Cliente buscarPorId(Long id) {
-		return em.find(Cliente.class, id);
+
+	@Override
+	public Cliente get(Long id) {
+		if (id == null) throw new IllegalArgumentException();
+		Cliente cliente = em.find(Cliente.class, id);
+		return cliente;
 	}
 	
 	public List<Cliente> buscarTodos() {
@@ -42,4 +56,5 @@ public class ClienteDao {
 				.setParameter("nome", nome)
 				.getResultList();
 	}
+
 }

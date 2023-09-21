@@ -2,16 +2,17 @@ package br.com.alura.unicommerce.modelo;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "item_pedido")
@@ -58,6 +59,14 @@ public class ItemDePedido {
 		this.pedido = pedido;
 		this.produto = produto;
 	}
+
+	public ItemDePedido(TipoDescontoItemPedido TipoDescontoItemPedido, @Positive Integer quantidade, BigDecimal desconto, Produto produto) {
+		this.quantidade = quantidade;
+		this.desconto = desconto;
+		this.tipoDescontoItemPedido = TipoDescontoItemPedido;
+		this.produto = produto;
+	}
+		
 
 	public Long getId() {
 		return id;

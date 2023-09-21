@@ -1,11 +1,12 @@
 package br.com.alura.unicommerce.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import br.com.alura.unicommerce.dto.CategoriaDTO;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "categoria")
@@ -22,13 +23,19 @@ public class Categoria {
 	public Categoria() {
 
 	}
+	
+	public Categoria(CategoriaDTO dados) {
+		this.id = dados.id();
+		this.nome = dados.nome();
+		this.status = true;
+	}
 
 	public Categoria(String nome, boolean status) throws IllegalArgumentException {
 		this.setNome(nome);
 		this.status = status;
 	}
 
-	public Long getLong() {
+	public Long getId() {
 		return id;
 	}
 
@@ -52,6 +59,8 @@ public class Categoria {
 		this.nome = nome;
 	}
 	
-	
+	 public void excluir() {
+	        this.status = false;
+	    }
 
 }

@@ -2,11 +2,13 @@ package br.com.alura.unicommerce.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import org.springframework.stereotype.Component;
 
 import br.com.alura.unicommerce.modelo.Categoria;
+import jakarta.persistence.EntityManager;
 
-public class CategoriaDao {
+@Component
+public class CategoriaDao implements Dao<Categoria> {
 
 	private EntityManager em;
 
@@ -41,6 +43,35 @@ public class CategoriaDao {
 		return em.createQuery(jpql, Categoria.class)
 				.setParameter("nome", nome)
 				.getResultList();
+	}
+
+	@Override
+	public Categoria get(Long id) {
+		if (id == null) throw new IllegalArgumentException();
+		Categoria encontrado = em.find(Categoria.class, id);
+		return encontrado;
+	}
+	
+	
+	@Override
+	public void save(Categoria t) {
+		em.getTransaction().begin();
+		em.persist(t);
+		em.getTransaction().commit();
+	}
+
+	@Override
+	public void delete(Categoria t) {
+		em.getTransaction().begin();
+		em.remove(t);
+		em.getTransaction().commit();
+	}
+
+	@Override
+	public void update(Categoria t) {
+		em.getTransaction().begin();
+		em.merge(t);
+		em.getTransaction().commit();
 	}
 	
 }

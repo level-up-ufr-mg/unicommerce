@@ -1,48 +1,87 @@
 package br.com.alura.unicommerce.controller;
 
-import javax.persistence.EntityManager;
+import java.net.URI;
+import java.util.Optional;
 
-import br.com.alura.unicommerce.dao.ClienteDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import br.com.alura.unicommerce.dto.ClienteDTO;
+import br.com.alura.unicommerce.dto.DadosListagemCliente;
 import br.com.alura.unicommerce.modelo.Cliente;
-import br.com.alura.unicommerce.modelo.Endereco;
-import br.com.alura.unicommerce.util.JPAUtil;
+import br.com.alura.unicommerce.service.ClienteService;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
+@RestController
+@RequestMapping("api/clientes")
 public class ClienteController {
-	public static void main(String[] args) {
 
-		cadastrarCliente();
+	@Autowired
+	ClienteService service;
+
+	@PostMapping
+	@Transactional
+	public ResponseEntity<Object> inserirCliente(@RequestBody @Valid Cliente cliente) {
+		System.out.println(cliente);
+		service.inserirCliente(cliente);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente).toUri();
+		return ResponseEntity.created(uri).body(cliente);
 	}
-	
-	private static void cadastrarCliente() {
-		EntityManager em = JPAUtil.getEntityManager();
-		
-				
-		Endereco enderecoAna = new Endereco("Rua Frederico Moura", "110", "Casa", "Cidade Nova", "Franca", "SP");
-		Endereco enderecoEli = new Endereco("Avenida Almirante Maximiano Fonseca", "500", "Apto 01", "Zona Portuária", "Rio Grande", "RS");
-		Endereco enderecoDani = new Endereco("Rua Domingos Olímpio", "50", "", "Centro", "Sobral", "CE");
-		Endereco enderecoBia = new Endereco("Rodovia Raposo Tavares", "80", "", "Lageadinho", "Cotia", "SP");
-		Endereco enderecoCaio = new Endereco("Avenida Afonso Pena", "44", "Apto 310", "Boa Viagem", "Belo Horizonte", "MG");
-		Endereco enderecoGabi = new Endereco("Rua Tenente-Coronel Cardoso", "190", "Casa", "Centro", "Campos dos Goytacazes", "RJ");
 
-		Cliente ana = new Cliente("ANA", "520.770.180-03", "(81)2868-1314", enderecoAna);
-		Cliente eli = new Cliente("ELI", "011.308.890-68", "(95)3847-3831", enderecoEli);
-		Cliente dani = new Cliente("DANI", "131.102.310-00", "(37)3418-8122", enderecoDani);
-		Cliente bia = new Cliente("BIA", "351.700.140-66", "(98)3364-2143", enderecoBia);
-		Cliente caio = new Cliente("CAIO", "530.260.510-47", "(55)2177-8561", enderecoCaio);
-		Cliente gabi = new Cliente("GABI", "530.260.510-47", "(55)2177-8561", enderecoGabi);
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> buscaClientePorId(@PathVariable("id") Long clienteId) {
 
-		ClienteDao clienteDao = new ClienteDao(em);
+		if (clienteId == null)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
-		em.getTransaction().begin();
-		clienteDao.cadastrar(ana);
-		clienteDao.cadastrar(eli);
-		clienteDao.cadastrar(dani);
-		clienteDao.cadastrar(bia);
-		clienteDao.cadastrar(caio);
-		clienteDao.cadastrar(gabi);
+		Optional<Cliente> cliente = service.buscaPorId(clienteId);
 
-		em.getTransaction().commit();
-		em.close();
+		if (cliente.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
+		return ResponseEntity.status(HttpStatus.OK).body(new ClienteDTO(cliente.get()));
+	}
+
+	@PutMapping(value = "/{id}")
+	@Transactional
+	public ResponseEntity<Cliente> update(@PathVariable("id") Long clienteId, @RequestBody Cliente cliente) {
+		cliente = service.update(clienteId, cliente);
+		return ResponseEntity.ok().body(cliente);
+	}
+
+	@DeleteMapping(value = "/{clienteId}")
+	public ResponseEntity<ClienteDTO> delete(@PathVariable Long clienteId) {
+		service.delete(clienteId);
+		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping
+	public ResponseEntity<Page<DadosListagemCliente>> findAll(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "5") Integer linesPerPage,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy) {
+
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+
+		Page<DadosListagemCliente> list = service.findAllPaged(pageRequest);
+
+		return ResponseEntity.ok().body(list);
 	}
 
 }

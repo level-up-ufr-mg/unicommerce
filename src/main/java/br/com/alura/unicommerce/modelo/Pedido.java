@@ -5,17 +5,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "pedido")
@@ -34,25 +34,28 @@ public class Pedido {
 	private Cliente cliente;
 	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
-	private List<ItemDePedido> itens = new ArrayList<>();
+	private List<ItemDePedido> itemPedidos = new ArrayList<>();
 	
 	@Transient
 	private BigDecimal valorTotal = BigDecimal.ZERO;
 	
-	public List<ItemDePedido> getItens() {
-		return itens;
+	public List<ItemDePedido> getItemPedidos() {
+		return itemPedidos;
 	}
 
 	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
 
-	public BigDecimal getDescontosDeItens() {
-		return descontosDeItens;
+	public BigDecimal getDescontosDeitemPedidos() {
+		return descontosDeitemPedidos;
 	}
 
 	@Transient
-	private BigDecimal descontosDeItens;
+	private BigDecimal descontosDeitemPedidos;
+	
+	@Transient
+	private Long quantidadeDeItens;
 	
 	public Pedido() {
 	}
@@ -68,6 +71,14 @@ public class Pedido {
 	}
 	
 	
+	public Pedido(Cliente cliente, TipoDesconto tipoDesconto, BigDecimal desconto, List<ItemDePedido> itemPedidos) {
+		this.desconto = desconto;
+		this.tipoDesconto = tipoDesconto;
+		this.cliente = cliente;
+		//this.itemPedidos = itemPedidos.stream().map(item -> adicionarItem(item));
+		adicionarItemPedidos(itemPedidos);
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -110,8 +121,14 @@ public class Pedido {
 	
 	public void adicionarItem(ItemDePedido item) {
 	     item.setPedido(this);
-	     this.itens.add(item);
+	     this.itemPedidos.add(item);
+	     this.quantidadeDeItens = this.quantidadeDeItens + item.getQuantidade();
+	     this.descontosDeitemPedidos = this.descontosDeitemPedidos.add(item.getDesconto());
 	     this.valorTotal = this.valorTotal.add(item.getValor());
+	}
+	
+	public void adicionarItemPedidos(List<ItemDePedido> itemPedido) {
+		itemPedidos.forEach(item -> adicionarItem(item));;
 	}
 
 	/*

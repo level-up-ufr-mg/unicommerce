@@ -1,7 +1,8 @@
 package br.com.alura.unicommerce.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import br.com.alura.unicommerce.dto.EnderecoDTO;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Endereco {
@@ -42,6 +43,15 @@ public class Endereco {
 		this.estado = estado;
 	}
 
+	public Endereco(EnderecoDTO dados) {
+		 this.rua = dados.rua();
+	     this.bairro = dados.bairro();
+	     this.estado = dados.estado();
+	     this.cidade = dados.cidade();
+	     this.numero = dados.numero();
+	     this.complemento = dados.complemento();
+	}
+
 	public String getRua() {
 		return rua;
 	}
@@ -64,6 +74,30 @@ public class Endereco {
 
 	public String getEstado() {
 		return estado;
+	}
+	
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override
