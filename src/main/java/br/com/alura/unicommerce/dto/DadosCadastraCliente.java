@@ -20,6 +20,8 @@ public record DadosCadastraCliente(
 		String telefone,
 		
 		@Valid
-		DadosEndereco endereco) {
+		DadosEndereco endereco
+		
+		) {
 
 }

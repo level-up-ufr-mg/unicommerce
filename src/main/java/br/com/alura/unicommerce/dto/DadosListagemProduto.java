@@ -2,6 +2,8 @@ package br.com.alura.unicommerce.dto;
 
 import java.math.BigDecimal;
 
+import br.com.alura.unicommerce.modelo.Produto;
+
 
 public record DadosListagemProduto(
 		

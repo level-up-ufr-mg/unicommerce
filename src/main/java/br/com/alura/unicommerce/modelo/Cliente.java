@@ -2,6 +2,7 @@ package br.com.alura.unicommerce.modelo;
 
 import java.io.Serializable;
 
+import br.com.alura.unicommerce.dto.DadosCadastraCliente;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -55,6 +56,7 @@ public class Cliente implements Serializable {
     	this.cpf = dados.cpf();
     	this.telefone = dados.telefone();
     	this.endereco = new Endereco (dados.endereco());
+
     } 
     
     

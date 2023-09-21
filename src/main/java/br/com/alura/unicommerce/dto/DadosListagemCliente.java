@@ -1,5 +1,7 @@
 package br.com.alura.unicommerce.dto;
 
+import br.com.alura.unicommerce.modelo.Cliente;
+
 public record DadosListagemCliente(
 		
 		String nome,

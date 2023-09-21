@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.unicommerce.modelo.Categoria;
-import br.com.alura.unicommerce.modelo.DadosCadastraProduto;
-import br.com.alura.unicommerce.modelo.DadosListagemProduto;
+import br.com.alura.unicommerce.dto.DadosCadastraProduto;
+import br.com.alura.unicommerce.dto.DadosListagemProduto;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.repository.CategoriaRepository;
 import br.com.alura.unicommerce.repository.ProdutoRepository;

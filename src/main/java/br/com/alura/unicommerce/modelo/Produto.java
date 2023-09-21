@@ -3,6 +3,7 @@ package br.com.alura.unicommerce.modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import br.com.alura.unicommerce.dto.DadosCadastraProduto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

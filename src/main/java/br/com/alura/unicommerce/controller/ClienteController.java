@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.unicommerce.modelo.Cliente;
-import br.com.alura.unicommerce.modelo.DadosCadastraCliente;
-import br.com.alura.unicommerce.modelo.DadosListagemCliente;
+import br.com.alura.unicommerce.dto.DadosCadastraCliente;
+import br.com.alura.unicommerce.dto.DadosListagemCliente;
 import br.com.alura.unicommerce.repository.ClienteRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.alura.unicommerce.modelo.DadosCadastraUsuario;
+import br.com.alura.unicommerce.dto.DadosCadastraUsuario;
 import br.com.alura.unicommerce.modelo.Usuario;
 import br.com.alura.unicommerce.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;

@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.alura.unicommerce.modelo.DadosCadastraPedido;
+import br.com.alura.unicommerce.dto.DadosCadastraPedido;
 import br.com.alura.unicommerce.modelo.Pedido;
-import br.com.alura.unicommerce.repository.PedidoRepository;
 import br.com.alura.unicommerce.service.ClienteService;
 import br.com.alura.unicommerce.service.PedidoService;
 import br.com.alura.unicommerce.service.ProdutoService;
@@ -22,10 +21,6 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/pedidos")
 public class PedidoController {
-	
-	
-	@Autowired
-	private PedidoRepository repository;
 	
 	@Autowired
 	private PedidoService service;

@@ -2,6 +2,7 @@ package br.com.alura.unicommerce.modelo;
 
 import java.io.Serializable;
 
+import br.com.alura.unicommerce.dto.DadosEndereco;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
