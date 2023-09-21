@@ -4,3 +4,13 @@
 *.ipr
 
 target/
+
+.DSStore
+..DS_Store
+/.DS_Store
+/._.DS_Store
+
+.settings/
+.project
+.classpath
+bin/
