@@ -16,106 +16,111 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "item_pedido")
 public class ItemDePedido {
-	
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
 
-	    @Column(name = "preco_unitario", precision = 10, scale = 2, nullable = false)
-	    private BigDecimal precoUnitario;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	    @Column(nullable = false)
-	    private Integer quantidade;
+	@Column(name = "preco_unitario", precision = 10, scale = 2, nullable = false)
+	private BigDecimal precoUnitario;
 
-	    @ManyToOne
-	    @JoinColumn(name = "pedido_id", nullable = false)
-	    private Pedido pedido;
+	@Column(nullable = false)
+	private Integer quantidade;
 
-	    @ManyToOne
-	    @JoinColumn(name = "produto_id", nullable = false)
-	    private Produto produto;
+	@ManyToOne
+	@JoinColumn(name = "pedido_id", nullable = false)
+	private Pedido pedido;
 
-	    @Column(precision = 10, scale = 2)
-	    private BigDecimal desconto;
+	@ManyToOne
+	@JoinColumn(name = "produto_id", nullable = false)
+	private Produto produto;
 
-	    @Column(name = "tipo_desconto", length = 20, nullable = false)
-	    @Enumerated(EnumType.STRING)
-	    private TipoDescontoItemPedido tipoDesconto;
-	    
-	    public BigDecimal getValor() {
-			return precoUnitario.multiply(new BigDecimal(quantidade));
-		}
+	@Column(precision = 10, scale = 2)
+	private BigDecimal desconto;
 
+	@Column(name = "tipo_desconto", length = 20, nullable = false)
+	@Enumerated(EnumType.STRING)
+	private TipoDescontoItemPedido tipoDesconto;
 
-		public ItemDePedido() {
-			
-		}
+	public BigDecimal getValor() {
+		return precoUnitario.multiply(new BigDecimal(quantidade));
+	}
 
-		public ItemDePedido(Integer quantidade, Pedido pedido, Produto produto,
-				BigDecimal desconto, TipoDescontoItemPedido tipoDesconto) {
-			this.quantidade = quantidade;
-			this.pedido = pedido;
-			this.produto = produto;
-			this.desconto = desconto;
-			this.tipoDesconto = tipoDesconto;
-			this.precoUnitario = produto.getPreco();
-		}
+	public ItemDePedido() {
 
-		public Long getId() {
-			return id;
-		}
+	}
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	// Construtor para para incluir um item na lista de Pedido
+	public ItemDePedido(Produto produto, Integer quantidade) {
+		this.produto = produto;
+		this.quantidade = quantidade;
 
-		public BigDecimal getPrecoUnitario() {
-			return precoUnitario;
-		}
+	}
 
-		public void setPrecoUnitario(BigDecimal precoUnitario) {
-			this.precoUnitario = precoUnitario;
-		}
+	public ItemDePedido(Integer quantidade, Pedido pedido, Produto produto, BigDecimal desconto,
+			TipoDescontoItemPedido tipoDesconto) {
+		this.quantidade = quantidade;
+		this.pedido = pedido;
+		this.produto = produto;
+		this.desconto = desconto;
+		this.tipoDesconto = tipoDesconto;
+		this.precoUnitario = produto.getPreco();
+	}
 
-		public Integer getQuantidade() {
-			return quantidade;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public void setQuantidade(Integer quantidade) {
-			this.quantidade = quantidade;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		public Pedido getPedido() {
-			return pedido;
-		}
+	public BigDecimal getPrecoUnitario() {
+		return precoUnitario;
+	}
 
-		public void setPedido(Pedido pedido) {
-			this.pedido = pedido;
-		}
+	public void setPrecoUnitario(BigDecimal precoUnitario) {
+		this.precoUnitario = precoUnitario;
+	}
 
-		public Produto getProduto() {
-			return produto;
-		}
+	public Integer getQuantidade() {
+		return quantidade;
+	}
 
-		public void setProduto(Produto produto) {
-			this.produto = produto;
-		}
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
 
-		public BigDecimal getDesconto() {
-			return desconto;
-		}
+	public Pedido getPedido() {
+		return pedido;
+	}
 
-		public void setDesconto(BigDecimal desconto) {
-			this.desconto = desconto;
-		}
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
 
-		public TipoDescontoItemPedido getTipoDesconto() {
-			return tipoDesconto;
-		}
+	public Produto getProduto() {
+		return produto;
+	}
 
-		public void setTipoDesconto(TipoDescontoItemPedido tipoDesconto) {
-			this.tipoDesconto = tipoDesconto;
-		}	    
-	    
-	    
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+	public BigDecimal getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(BigDecimal desconto) {
+		this.desconto = desconto;
+	}
+
+	public TipoDescontoItemPedido getTipoDesconto() {
+		return tipoDesconto;
+	}
+
+	public void setTipoDesconto(TipoDescontoItemPedido tipoDesconto) {
+		this.tipoDesconto = tipoDesconto;
+	}
+
 }

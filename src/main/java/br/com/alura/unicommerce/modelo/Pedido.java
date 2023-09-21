@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -57,6 +58,34 @@ public class Pedido {
 	public Pedido() {
 		
 	}
+
+	public Pedido(Cliente cliente, List<ItemDePedido> itens) {
+		this.cliente = cliente;
+		this.itens = itens;
+		adicionaItens(itens); //Para cada item, adicione em itens
+	}
+	
+	public void adicionaItens(List<ItemDePedido> itemPedidos) {
+		itemPedidos.forEach(item -> adicionarItem(item));
+		
+	}
+	
+	public void adicionaItem(ItemDePedido item) {
+		this.valorTotal = this.valorTotal.add(item.getValor()); //atualiza o valor total
+		this.quantidadeDeItens = this.quantidadeDeItens + item.getQuantidade(); //atualiza a qtd
+		//this.descontoDeItens = this.descontoDeItens.add(item.getDesconto());
+		itens.add(item);
+	}
+	
+	@Transient
+	private BigDecimal total;
+	
+	@Transient
+	private Long descontoDeItens;
+	
+	@Transient
+	private Long quantidadeDeItens;
+
 
 	public Pedido(Cliente cliente, BigDecimal desconto, TipoDescontoPedido tipo_desconto) {
 		this.cliente = cliente;
