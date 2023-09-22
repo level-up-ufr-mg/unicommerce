@@ -7,14 +7,22 @@ import javax.persistence.EntityManager;
 import br.com.alura.unicommerce.dao.CategoriaDao;
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.util.JPAUtil;
+import br.com.alura.unicommerce.vo.RelatorioDeVendasPorCategoriaVo;
 
 public class ControllerCategoria {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
 
-		cadastra(em);
+//		cadastra(em);
 //		buscaPorId(em);
 //		listaTodas(em);
+
+		CategoriaDao categoriaDao = new CategoriaDao(em);
+//		BigDecimal totalVendidoBigDecimal = pedidoDao.valorTotalVendido();
+//		System.out.println("Valor total vendido: " + totalVendidoBigDecimal);
+
+		List<RelatorioDeVendasPorCategoriaVo> relatorio = categoriaDao.relatorioDeVendasPorCategoriaVo();
+		relatorio.forEach(System.out::println);
 	}
 
 	private static void cadastra(EntityManager em) {

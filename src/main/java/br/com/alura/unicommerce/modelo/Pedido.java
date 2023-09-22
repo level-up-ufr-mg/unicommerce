@@ -32,7 +32,6 @@ public class Pedido {
 	private Cliente cliente;
 
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
-	@Column(nullable = false, name = "Itens")
 	private List<ItemDePedido> itens = new ArrayList<>();
 	
 	@Column(nullable = false, name = "Tipo_de_Desconto")

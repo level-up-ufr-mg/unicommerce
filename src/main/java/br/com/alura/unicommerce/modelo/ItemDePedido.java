@@ -24,11 +24,9 @@ public class ItemDePedido {
 	private Long id;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@Column(name = "Produto_ID")
 	private Produto produto;
 
 	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@Column(name = "Pedido_ID")
 	private Pedido pedido;
 
 	@Column(nullable = false, name = "Preco_Unitario")

@@ -1,7 +1,6 @@
 package br.com.alura.unicommerce.Controller;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -21,8 +20,19 @@ import br.com.alura.unicommerce.vo.RelatorioDeVendasVo;
 public class ControllerPedido {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
+
 		cadastraPedido(em);
 		buscarPedidoComCliente(em);
+		relatorioDeVendas(em);
+	}
+
+	private static void relatorioDeVendas(EntityManager em) {
+		PedidoDao pedidoDao = new PedidoDao(em);
+//		BigDecimal totalVendidoBigDecimal = pedidoDao.valorTotalVendido();
+//		System.out.println("Valor total vendido: " + totalVendidoBigDecimal);
+
+		List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
+		relatorio.forEach(System.out::println);
 	}
 
 	private static void buscarPedidoComCliente(EntityManager em) {
@@ -40,9 +50,9 @@ public class ControllerPedido {
 		Produto produto03 = produtoDao.buscaPorId(3l);
 		Produto produto04 = produtoDao.buscaPorId(4l);
 		Produto produto05 = produtoDao.buscaPorId(5l);
-		
+
 		ClienteDao clienteDao = new ClienteDao(em);
-		
+
 		Cliente cliente01 = clienteDao.buscaPorId(1l);
 		Cliente cliente02 = clienteDao.buscaPorId(2l);
 		Cliente cliente03 = clienteDao.buscaPorId(3l);
@@ -51,33 +61,28 @@ public class ControllerPedido {
 
 		em.getTransaction().begin();
 
-		Pedido pedido01 = new Pedido(cliente01, LocalDate.now(), new BigDecimal(1), TipoDeDescontoPedido.NENHUM, 
-				new BigDecimal(0));
-		pedido01.adicionarItem(new ItemDePedido(produto01, pedido01, 10, new BigDecimal(0), 
-				TipoDeDescontoItemDePedido.NENHUM));
-		
-		Pedido pedido02 = new Pedido(cliente02, LocalDate.now(), new BigDecimal(2), TipoDeDescontoPedido.FIDELIDADE, 
-				new BigDecimal(15));
-		pedido02.adicionarItem(new ItemDePedido(produto02, pedido02, 3, new BigDecimal(0), 
-				TipoDeDescontoItemDePedido.NENHUM));
-		
-		Pedido pedido03 = new Pedido(cliente03, LocalDate.now(), new BigDecimal(1), TipoDeDescontoPedido.NENHUM, 
-				new BigDecimal(0));
-		pedido03.adicionarItem(new ItemDePedido(produto03, pedido03, 10, new BigDecimal(20), 
-				TipoDeDescontoItemDePedido.PROMOCAO));
-		
-		Pedido pedido04 = new Pedido(cliente04, LocalDate.now(), new BigDecimal(3), TipoDeDescontoPedido.NENHUM, 
-				new BigDecimal(0));
-		pedido04.adicionarItem(new ItemDePedido(produto04, pedido04, 8, new BigDecimal(30), 
-				TipoDeDescontoItemDePedido.QUANTIDADE));
-		
-		Pedido pedido05 = new Pedido(cliente05, LocalDate.now(), new BigDecimal(1), TipoDeDescontoPedido.FIDELIDADE, 
-				new BigDecimal(15));
-		pedido05.adicionarItem(new ItemDePedido(produto05, pedido05, 2, new BigDecimal(20), 
-				TipoDeDescontoItemDePedido.PROMOCAO));
+		Pedido pedido01 = new Pedido(cliente01, new BigDecimal(1), TipoDeDescontoPedido.NENHUM, new BigDecimal(0));
+		pedido01.adicionarItem(
+				new ItemDePedido(produto01, pedido01, 10, new BigDecimal(0), TipoDeDescontoItemDePedido.NENHUM));
+
+		Pedido pedido02 = new Pedido(cliente02, new BigDecimal(2), TipoDeDescontoPedido.FIDELIDADE, new BigDecimal(15));
+		pedido02.adicionarItem(
+				new ItemDePedido(produto02, pedido02, 3, new BigDecimal(0), TipoDeDescontoItemDePedido.NENHUM));
+
+		Pedido pedido03 = new Pedido(cliente03, new BigDecimal(1), TipoDeDescontoPedido.NENHUM, new BigDecimal(0));
+		pedido03.adicionarItem(
+				new ItemDePedido(produto03, pedido03, 10, new BigDecimal(20), TipoDeDescontoItemDePedido.PROMOCAO));
+
+		Pedido pedido04 = new Pedido(cliente04, new BigDecimal(3), TipoDeDescontoPedido.NENHUM, new BigDecimal(0));
+		pedido04.adicionarItem(
+				new ItemDePedido(produto04, pedido04, 8, new BigDecimal(30), TipoDeDescontoItemDePedido.QUANTIDADE));
+
+		Pedido pedido05 = new Pedido(cliente05, new BigDecimal(1), TipoDeDescontoPedido.FIDELIDADE, new BigDecimal(15));
+		pedido05.adicionarItem(
+				new ItemDePedido(produto05, pedido05, 2, new BigDecimal(20), TipoDeDescontoItemDePedido.PROMOCAO));
 
 		PedidoDao pedidoDao = new PedidoDao(em);
-		
+
 		pedidoDao.cadastra(pedido01);
 		pedidoDao.cadastra(pedido02);
 		pedidoDao.cadastra(pedido03);
@@ -85,12 +90,6 @@ public class ControllerPedido {
 		pedidoDao.cadastra(pedido05);
 
 		em.getTransaction().commit();
-
-		BigDecimal totalVendidoBigDecimal = pedidoDao.valorTotalVendido();
-		System.out.println("Valor total vendido: " + totalVendidoBigDecimal);
-
-		List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
-		relatorio.forEach(System.out::println);
 
 		em.close();
 	}
