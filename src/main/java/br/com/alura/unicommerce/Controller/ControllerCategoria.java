@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.funcoes;
+package br.com.alura.unicommerce.Controller;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import br.com.alura.unicommerce.dao.CategoriaDao;
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.util.JPAUtil;
 
-public class FuncoesCategoria {
+public class ControllerCategoria {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
 
@@ -20,15 +20,19 @@ public class FuncoesCategoria {
 	private static void cadastra(EntityManager em) {
 
 		CategoriaDao categoriaDao = new CategoriaDao(em);
-		Categoria categoria = new Categoria("Eletrônicos", true);
-		Categoria categoria2 = new Categoria("Moda", true);
-		Categoria categoria3 = new Categoria("Esportes", false);
+		Categoria categoria01 = new Categoria("Eletrônicos");
+		Categoria categoria02 = new Categoria("Moda");
+		Categoria categoria03 = new Categoria("Esportes");
+		Categoria categoria04 = new Categoria("Decoração");
+		Categoria categoria05 = new Categoria("Eletrodomésticos");
 
 
 		em.getTransaction().begin();
-		categoriaDao.cadastra(categoria);
-		categoriaDao.cadastra(categoria2);
-		categoriaDao.cadastra(categoria3);
+		categoriaDao.cadastra(categoria01);
+		categoriaDao.cadastra(categoria02);
+		categoriaDao.cadastra(categoria03);
+		categoriaDao.cadastra(categoria04);
+		categoriaDao.cadastra(categoria05);
 		em.getTransaction().commit();
 		em.close();
 	}

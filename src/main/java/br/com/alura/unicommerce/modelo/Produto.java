@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,39 +19,37 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "produto")
-@NamedQuery(name = "Produto.produtosPorCategoria", 
-query = "SELECT p FROM Produto p WHERE p.categoria.id.nome = :nome") 
+@NamedQuery(name = "Produto.produtosPorCategoria", query = "SELECT p FROM Produto p WHERE p.categoria.id.nome = :nome")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Produto {
 	@Id
 	@Column(nullable = false, name = "ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CategoriaID", nullable = false)
 	private Categoria categoria;
-	
+
 	@OneToMany
-	private List<ItemDePedido> itens = new ArrayList<>();	
-	
+	private List<ItemDePedido> itens = new ArrayList<>();
+
 	@Column(name = "Nome", length = 100, nullable = false) // Definindo o tamanho máximo para o campo nome
 	private String nome;
-	
-	@Column(name = "Preco", precision = 10, scale = 2, nullable = false) 
+
+	@Column(name = "Preco", precision = 10, scale = 2, nullable = false)
 	private BigDecimal preco;
-	
+
 	@Column(name = "Descrição", length = 200)
 	private String descricao;
-	
-	@Column(name = "Quantidade_em_Estoque", nullable = false) // O tamanho máximo será determinado automaticamente com base no tipo Integer
+
+	@Column(name = "Quantidade_em_Estoque", nullable = false)
 	private Integer quantidade_estoque;
 
-	//Construtor
-	
+	// Construtor
+
 	public Produto() { // construtor default
 	}
-	
+
 	public Produto(String nome, BigDecimal preco, String descricao, Integer quantidade_estoque, Categoria categoria) {
 		this.nome = nome;
 		this.preco = preco;
@@ -61,7 +58,7 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-	//Getters e Setters
+	// Getters e Setters
 
 	public Long getId() {
 		return id;

@@ -14,17 +14,26 @@ public class PedidoDao {
 	public PedidoDao(EntityManager em) {
 		this.em = em;
 	}
-
-	public void cadastra(Pedido pedido) {
-		this.em.persist(pedido);
-	}
-
+	
+	
 	public Pedido buscaPorId(Long id) {
-		if (id == null) throw new IllegalArgumentException();
-		Pedido econtrado = em.find(Pedido.class, id);
-		return econtrado;
-	}
+        if (id == null) throw new IllegalArgumentException();
+        Pedido encontrado = em.find(Pedido.class, id);
+        return encontrado;
+    }
 
+    public void cadastra(Pedido pedido) {
+        em.persist(pedido);
+    }
+
+    public void atualiza(Pedido pedido) {
+        em.merge(pedido);
+    }
+
+    public void remove(Pedido pedido) {
+        em.remove(pedido);
+    }
+	
 	public BigDecimal valorTotalVendido() {
 		String jpql = "SELECT SUM(p.valorTotal) FROM Pedido p";
 		return em.createQuery(jpql, BigDecimal.class).getSingleResult();

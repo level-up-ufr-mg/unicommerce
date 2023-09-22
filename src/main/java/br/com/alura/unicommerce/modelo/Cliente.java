@@ -3,6 +3,7 @@ package br.com.alura.unicommerce.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -14,16 +15,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cliente")
-public class Cliente {
+public class Cliente{
 	@Id
 	@Column(name = "ID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Embedded
 	private DadosPessoais dadosPessoais;
 
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
 	private List<Pedido> pedido = new ArrayList<>();
 
 	@Embedded
@@ -65,4 +66,9 @@ public class Cliente {
 		this.endereco = endereco;
 	}
 
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", dadosPessoais=" + dadosPessoais + ", pedido=" + pedido + ", endereco="
+				+ endereco + "]";
+	}
 }

@@ -1,58 +1,115 @@
 package br.com.alura.unicommerce.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "categoria")
+@Table(name = "Categoria")
 public class Categoria {
 
-	@EmbeddedId
-	private CategoriaId id;
-	
-	@OneToMany(mappedBy = "categoria")
-	private List<Produto> produto = new ArrayList<>();	
-	
-	private boolean Status; // Booleanos não posuem lenght
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private String nome;
+	private boolean status;
 
-	// Construtores
+//	=====================================
+//	-------------------------------------
+
+	public Categoria(String nome) {
+		this.nome = nome;
+		this.status = true;
+	}
 
 	public Categoria() {
+		super();
 	}
 
-	public Categoria(String nome, boolean status) {
-		this.id = new CategoriaId(nome, "xpto");
-	}
-	
-	//	Getters and Setters
-
-	public List<Produto> getProduto() {
-		return produto;
+	public long getId() {
+		return id;
 	}
 
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
-		return this.id.getNome();
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public boolean isStatus() {
-		return Status;
+		return status;
 	}
 
 	public void setStatus(boolean status) {
-		Status = status;
+		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "Categoria [id=" + id + ", produto=" + produto + ", Status=" + Status + "]";
-	}
+//	@EmbeddedId
+//	private CategoriaId id;
+//	
+////	@OneToMany(mappedBy = "categoria")
+////	private List<Produto> produto = new ArrayList<>();	
+//
+//	
+//	private boolean Status; // Booleanos não posuem lenght
+//
+//	// Construtores
+//
+//	public Categoria() {
+//	}
+//
+//	public Categoria(String nome, boolean status) {
+//		this.id = new CategoriaId(nome, "xpto");
+//	}
+//	
+//	//	Getters and Setters
+//	
+//	public CategoriaId getId() {
+//		return id;
+//	}
+//
+//	public void setId(CategoriaId id) {
+//		this.id = id;
+//	}
+//
+////	public List<Produto> getProduto() {
+////		return produto;
+////	}
+////
+////	public void setProduto(List<Produto> produto) {
+////		this.produto = produto;
+////	}
+//
+////	public Produto getProduto() {
+////		return produto;
+////	}
+////
+////	public void setProduto(Produto produto) {
+////		this.produto = produto;
+////	}
+//	
+//	public String getNome() {
+//		return this.id.getNome();
+//	}
+//
+//	public boolean isStatus() {
+//		return Status;
+//	}
+//
+//	public void setStatus(boolean status) {
+//		Status = status;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Categoria [id=" + id +   ", Status=" + Status + "]";
+//	}
 }

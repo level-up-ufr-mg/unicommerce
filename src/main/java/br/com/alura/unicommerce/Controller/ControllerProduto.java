@@ -1,7 +1,6 @@
-package br.com.alura.unicommerce.funcoes;
+package br.com.alura.unicommerce.Controller;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,12 +8,10 @@ import javax.persistence.EntityManager;
 import br.com.alura.unicommerce.dao.CategoriaDao;
 import br.com.alura.unicommerce.dao.ProdutoDao;
 import br.com.alura.unicommerce.modelo.Categoria;
-import br.com.alura.unicommerce.modelo.CategoriaId;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.util.JPAUtil;
-import javassist.expr.NewArray;
 
-public class FuncoesProduto {
+public class ControllerProduto {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
 		long nmroIdDoCliente = 2;
@@ -22,15 +19,16 @@ public class FuncoesProduto {
 //		listaTodos(em);
 //		listaIndisponiveis(em);
 //		buscaPorId(em, nmroIdDoCliente);
-//		cadastra(em);
 //		buscarPorParametrosComCriteria(em);
+		cadastra(em);
 		
-		em.find(Categoria.class, new CategoriaId("Moda", "xpto"));
+	//	em.find(Categoria.class, new CategoriaId("Moda", "xpto"));
 		
 	}
 
 	private static void buscarPorParametrosComCriteria(EntityManager em) {
 		ProdutoDao produtoDao = new ProdutoDao(em);
+		
 		produtoDao.buscarPorParametrosComCriteria("Samsung Galaxy S21", null, null);
 	}
 
@@ -43,14 +41,35 @@ public class FuncoesProduto {
 
 	private static void cadastra(EntityManager em) {
 		CategoriaDao categoriaDao = new CategoriaDao(em);
-		Categoria categoria = categoriaDao.buscaPorId(3l);
-		Produto produto = new Produto("Vestido de Seda", new BigDecimal("1300.00"), "Vestido", 10, categoria);
-
+		
+		Categoria categoria01 = categoriaDao.buscaPorId(1l);
+		Produto produto01 = new Produto("Vestido de Seda", new BigDecimal("1300.00"),
+				"Vestido", 10, categoria01);
+		
+		Categoria categoria02 = categoriaDao.buscaPorId(2l);
+		Produto produto02 = new Produto("Samsung Galaxy S21", new BigDecimal("999.99"),
+				"Smartphone", 10, categoria02);
+		
+		Categoria categoria03 = categoriaDao.buscaPorId(3l);
+		Produto produto03 = new Produto("Camiseta Polo", new BigDecimal("29.99"),
+				"Vestuário", 50, categoria03);
+		
+		Categoria categoria04 = categoriaDao.buscaPorId(4l);
+		Produto produto04 = new Produto("Tênis de Corrida", new BigDecimal("89.99"),
+				"Calçados", 20, categoria04);
+		
+		Categoria categoria05 = categoriaDao.buscaPorId(5l);
+		Produto produto05 = new Produto("Camiseta Polo", new BigDecimal("49.99"),
+				"Roupas", 30, categoria05);
+		
 		ProdutoDao produtoDao = new ProdutoDao(em);
 
 		em.getTransaction().begin();
-		categoriaDao.cadastra(categoria);
-		produtoDao.cadastra(produto);
+		produtoDao.cadastra(produto01);
+		produtoDao.cadastra(produto02);
+		produtoDao.cadastra(produto03);
+		produtoDao.cadastra(produto04);
+		produtoDao.cadastra(produto05);
 		em.getTransaction().commit();
 		em.close();
 	}

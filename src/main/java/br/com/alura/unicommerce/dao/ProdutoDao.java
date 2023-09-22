@@ -19,16 +19,24 @@ public class ProdutoDao {
 	public ProdutoDao(EntityManager em) {
 		this.em = em;
 	}
-
+	
 	public Produto buscaPorId(Long id) {
-		if (id == null) throw new IllegalArgumentException();
-		Produto econtrado = em.find(Produto.class, id);
-		return econtrado;
-	}
+        if (id == null) throw new IllegalArgumentException();
+        Produto encontrado = em.find(Produto.class, id);
+        return encontrado;
+    }
 
-	public void cadastra(Produto produto) {
-		this.em.persist(produto);
-	}
+    public void cadastra(Produto produto) {
+        em.persist(produto);
+    }
+
+    public void atualiza(Produto produto) {
+        em.merge(produto);
+    }
+
+    public void remove(Produto produto) {
+        em.remove(produto);
+    }
 
 	public List<Produto> listaTodos() {
 		String jpql = "SELECT p FROM Produto p";

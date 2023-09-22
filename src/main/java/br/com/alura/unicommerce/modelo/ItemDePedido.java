@@ -2,6 +2,7 @@ package br.com.alura.unicommerce.modelo;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,36 +17,37 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "itens_pedido")
 public class ItemDePedido {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", nullable = false)
 	private Long id;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@Column(name = "Produto_ID")
 	private Produto produto;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@Column(name = "Pedido_ID")
 	private Pedido pedido;
-	
-	@Column(name = "preco_unitario")
+
+	@Column(nullable = false, name = "Preco_Unitario")
 	private BigDecimal precoUnitario;
-	
-	@Column(name = "quantidade")
+
+	@Column(nullable = false, name = "Quantidade")
 	private Integer quantidade;
-	
-	@Column(name = "desconto")
+
+	@Column(nullable = false, name = "Desconto")
 	private BigDecimal desconto;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_desconto")
+	@Column(nullable = false, name = "Tipo_Desconto")
 	private TipoDeDescontoItemDePedido tipoDeDescontoItemDePedido;
 
 	/************************************************
-	*                                              *
-	*       	    		ENUM              		*
-	*                                              *
-	************************************************/
-		
+	 * * ENUM * *
+	 ************************************************/
+
 //	private enum TipoDeDesconto {
 //		QUANTIDADE,
 //		PROMOCAO,
@@ -53,11 +55,8 @@ public class ItemDePedido {
 //	}
 
 	/************************************************
-	*                                              *
-	*           		Construtor              	*
-	*                                              *
-	************************************************/
-
+	 * * Construtor * *
+	 ************************************************/
 
 	public ItemDePedido() {
 	}
@@ -73,10 +72,8 @@ public class ItemDePedido {
 	}
 
 	/************************************************
-	*                                              *
-	*        		Getters e Setters              	*
-	*                                              *
-	************************************************/
+	 * * Getters e Setters * *
+	 ************************************************/
 
 	public Long getId() {
 		return id;
