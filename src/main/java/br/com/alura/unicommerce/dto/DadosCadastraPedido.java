@@ -7,7 +7,6 @@ import java.util.Optional;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.ItemDePedido;
 import br.com.alura.unicommerce.modelo.Pedido;
-import br.com.alura.unicommerce.modelo.TipoDescontoPedido;
 import br.com.alura.unicommerce.service.ClienteService;
 import br.com.alura.unicommerce.service.ProdutoService;
 import jakarta.validation.constraints.NotNull;
@@ -16,10 +15,6 @@ public record DadosCadastraPedido(
 		
 		@NotNull
 		Long clienteId,
-		
-		String tipoDesconto, 
-		
-		BigDecimal desconto,
 		
 		@NotNull
 		BigDecimal totalPedidos,
@@ -33,8 +28,7 @@ public record DadosCadastraPedido(
 		List<ItemDePedido> itens = produtos.stream().map(produto -> produto.converter(produtoService)).toList();
 		if (cliente.isPresent()) {
 			
-		Pedido novoPedido = new Pedido(cliente.get(), itens, desconto,
-				TipoDescontoPedido.valueOf(tipoDesconto));
+		Pedido novoPedido = new Pedido(cliente.get(), itens);
 		return novoPedido;
 		}
 		return null;

@@ -1,6 +1,10 @@
 package br.com.alura.unicommerce.modelo;
+import java.util.Collection;
+import java.util.List;
 
-import java.io.Serializable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.alura.unicommerce.dto.DadosCadastraUsuario;
 import jakarta.persistence.Column;
@@ -9,30 +13,33 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
+
 
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable {
+public class Usuario implements UserDetails {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(nullable = false)
-    private String email;
+	@Column(name = "email" , nullable = false)
+    private String login;
     
     @Column(nullable = false)
     private String senha;
     
+    public Usuario() {
+	}
     
     public Usuario(DadosCadastraUsuario dados) {
-    	this.email = dados.email();
+    	this.login = dados.login();
     	this.senha = dados.senha();
 	}
+    
 
-	public Usuario(String email, String senha) {
-		this.email = email;
+	public Usuario(String login, String senha) {
+		this.login = login;
 		this.senha = senha;
 	}
 
@@ -44,12 +51,12 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getSenha() {
@@ -62,7 +69,42 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + "]";
+		return "Usuario [id=" + id + ", email=" + login + ", senha=" + senha + "]";
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	}
+
+	@Override
+	public String getPassword() {
+		return senha;
+	}
+
+	@Override
+	public String getUsername() {
+		return login;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
     
     

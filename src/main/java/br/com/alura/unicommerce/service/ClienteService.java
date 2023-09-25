@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.alura.unicommerce.dao.ClienteDao;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Pedido;
+import br.com.alura.unicommerce.repository.ClienteRepository;
 import br.com.alura.unicommerce.vo.RelatorioClientesFiesVo;
 import jakarta.validation.constraints.NotNull;
 
@@ -18,6 +19,10 @@ public class ClienteService {
 	
 	@Autowired
 	private ClienteDao clienteDao;
+	
+	@Autowired
+	private ClienteRepository repository;
+	
 
 	public List<RelatorioClientesFiesVo> getRelatorioClienteFieis(List<Pedido> listaDePedidos) {
 		
@@ -37,5 +42,12 @@ public class ClienteService {
 		Cliente cliente = clienteDao.buscaPorId(clienteId);
 		
 		return Optional.ofNullable(cliente);
+	}
+
+
+	public void cadastra(Cliente cliente) {
+
+		repository.save(cliente);
+		
 	}
 }

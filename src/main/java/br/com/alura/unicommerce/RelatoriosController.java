@@ -1,4 +1,4 @@
-//package br.com.alura.unicommerce.controller;
+//package br.com.alura.unicommerce;
 //
 //import java.math.BigDecimal;
 //import java.util.List;
@@ -91,3 +91,6 @@
 //			}
 //		}
 //}
+
+
+

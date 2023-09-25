@@ -6,6 +6,7 @@ import br.com.alura.unicommerce.dto.DadosCadastraCliente;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,7 +35,7 @@ public class Cliente implements Serializable {
     @Embedded
     private Endereco endereco;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @NotNull
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
@@ -50,16 +51,16 @@ public class Cliente implements Serializable {
 		this.endereco = endereco;
 		this.usuario = usuario;
 	}
+ 
 
-    public Cliente (DadosCadastraCliente dados) {
+    public Cliente (DadosCadastraCliente dados, Usuario dadosIdUsuario) {
     	this.nome = dados.nome();
     	this.cpf = dados.cpf();
     	this.telefone = dados.telefone();
     	this.endereco = new Endereco (dados.endereco());
+    	this.usuario = dados.usuario();
 
     } 
-    
-    
     
 	public Usuario getUsuario() {
 		return usuario;

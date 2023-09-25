@@ -13,9 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 
 @Entity
 @Table(name = "produto")
@@ -43,12 +41,12 @@ public class Produto implements Serializable {
     @Column(name = "preco", precision = 10, scale = 2, nullable = false)
     private BigDecimal preco;
     
+    
     public Produto() {
     	
     }
 
-    
-	public Produto(String nome, BigDecimal preco, Categoria categoria) {
+    public Produto(String nome, BigDecimal preco, Categoria categoria) {
 		this.setPreco(preco);	
 	}    
     
@@ -70,15 +68,12 @@ public class Produto implements Serializable {
 		
 	}
     
-    
-
-	public BigDecimal getPreco() {
+    public BigDecimal getPreco() {
 		return preco;
 	}
 
 
-
-	public void setPreco(BigDecimal preco) {
+    public void setPreco(BigDecimal preco) {
 		if (preco.compareTo( new BigDecimal("0.00")) <= 0) {
             throw new IllegalArgumentException("O preço não pode ser menor ou igual a 0.");
         }
@@ -127,3 +122,4 @@ public class Produto implements Serializable {
         this.categoria = categoria;
     }
 }
+

@@ -55,6 +55,11 @@ public class PedidoDao {
     			.setParameter("id", id)
     			.getSingleResult();
     }
+
+	public Object listaTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     
 }

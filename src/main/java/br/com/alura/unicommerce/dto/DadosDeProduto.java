@@ -1,11 +1,9 @@
 package br.com.alura.unicommerce.dto;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 import br.com.alura.unicommerce.modelo.ItemDePedido;
 import br.com.alura.unicommerce.modelo.Produto;
-import br.com.alura.unicommerce.modelo.TipoDescontoItemPedido;
 import br.com.alura.unicommerce.service.ProdutoService;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -16,11 +14,7 @@ public record DadosDeProduto(
 		Long id,
 		
 		@Positive
-		int  quantidade,
-		
-		BigDecimal desconto,
-		
-		String tipoDesconto) {
+		int  quantidade) {
 
 	public ItemDePedido converter(ProdutoService produtoService) {
 		
@@ -28,7 +22,7 @@ public record DadosDeProduto(
 		
 		if(produto.isPresent()){
 			
-			ItemDePedido item = new ItemDePedido(quantidade, produto.get(), desconto, TipoDescontoItemPedido.valueOf(tipoDesconto));
+			ItemDePedido item = new ItemDePedido(quantidade, produto.get());
 			return item;
 		}
 		return null;

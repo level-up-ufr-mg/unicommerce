@@ -1,9 +1,11 @@
 package br.com.alura.unicommerce.dto;
 
-public record DadosCadastraUsuario(
+public record DdadosAutenticacao(
 		
 		String login,
 		
 		String senha) {
 
+	
+	
 }

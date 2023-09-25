@@ -6,4 +6,5 @@ import br.com.alura.unicommerce.modelo.Pedido;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long>  {
 
+
 }

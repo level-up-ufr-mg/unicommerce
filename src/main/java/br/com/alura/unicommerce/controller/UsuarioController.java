@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.unicommerce.dto.DadosCadastraUsuario;
-import br.com.alura.unicommerce.modelo.Usuario;
-import br.com.alura.unicommerce.repository.UsuarioRepository;
+import br.com.alura.unicommerce.service.AtenticacaoService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -19,16 +18,17 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/usuario")
 public class UsuarioController {
 	
-	@Autowired
-	private UsuarioRepository repository;
+	@Autowired 
+	AtenticacaoService service;
 
 	@PostMapping
 	@Transactional
     public ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastraUsuario dados, BindingResult result) {	
 		
 	if (result.hasErrors()) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-		
-		repository.save(new Usuario(dados));
+	
+	    service.cadastra(dados);
+
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 		

@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "item_pedido")
@@ -24,7 +25,7 @@ public class ItemDePedido implements Serializable {
 	    private Long id;
 
 	    @Column(name = "preco_unitario", precision = 10, scale = 2, nullable = false)
-	    private BigDecimal precoUnitario;
+	    private BigDecimal precoUnitario = BigDecimal.ZERO;;
 
 	    @Column(nullable = false)
 	    private Integer quantidade;
@@ -38,34 +39,26 @@ public class ItemDePedido implements Serializable {
 	    private Produto produto;
 
 	    @Column(precision = 10, scale = 2)
-	    private BigDecimal desconto;
+	    private BigDecimal desconto = BigDecimal.ZERO;;
 
 	    @Column(name = "tipo_desconto", length = 20, nullable = false)
 	    @Enumerated(EnumType.STRING)
 	    private TipoDescontoItemPedido tipoDesconto;
 	    
-	    public BigDecimal getValor() {
-	    	return precoUnitario.multiply(new BigDecimal(quantidade));
-			//return this.tipoDesconto.aplicaDesconto(precoUnitario.multiply(new BigDecimal(quantidade)));
-		}
-
-  
-	    public ItemDePedido(Integer quantidade, Produto produto, BigDecimal desconto,
-				TipoDescontoItemPedido tipoDesconto) {
-			this.quantidade = quantidade;
-			this.produto = produto;
-			this.desconto = desconto;
-			this.tipoDesconto = tipoDesconto;
-		}
-
-
-
-
+	    @Transient
+		private BigDecimal total = BigDecimal.ZERO;
+	    
+	    
 		public ItemDePedido() {
 			
 		}
+	    
+	    public ItemDePedido(Integer quantidade, Produto produto) {
+			this.quantidade = quantidade;
+			this.produto = produto;
+		}
 
-		public ItemDePedido(Integer quantidade, Pedido pedido, Produto produto,
+	    public ItemDePedido(Integer quantidade, Pedido pedido, Produto produto,
 				BigDecimal desconto, TipoDescontoItemPedido tipoDesconto) {
 			this.quantidade = quantidade;
 			this.pedido = pedido;
@@ -75,6 +68,8 @@ public class ItemDePedido implements Serializable {
 			this.precoUnitario = produto.getPreco();
 		}
 
+		
+		
 		public Long getId() {
 			return id;
 		}
@@ -127,9 +122,20 @@ public class ItemDePedido implements Serializable {
 			return tipoDesconto;
 		}
 
-		public void setTipoDesconto(TipoDescontoItemPedido tipoDesconto) {
-			this.tipoDesconto = tipoDesconto;
-		}	    
-	    
+		
+		public BigDecimal getTotal() {
+			return total;
+		}
+
+
+		public void setTotal(BigDecimal total) {
+			this.total = total;
+		}
+
+    
+		public BigDecimal getValor() {
+	    	return precoUnitario.multiply(new BigDecimal(quantidade));
+			//return this.tipoDesconto.aplicaDesconto(precoUnitario.multiply(new BigDecimal(quantidade)));
+		}
 	    
 }

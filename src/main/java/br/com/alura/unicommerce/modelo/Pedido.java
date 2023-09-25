@@ -19,8 +19,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-
 
 
 @Entity 
@@ -41,7 +39,7 @@ public class Pedido implements Serializable{
     private List<ItemDePedido> itens = new ArrayList<>(); //sempre vai começar com uma colção vazia
 	
 	@Column(nullable = false)
-	private BigDecimal desconto;
+	private BigDecimal desconto = BigDecimal.ZERO;
 	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -50,89 +48,20 @@ public class Pedido implements Serializable{
 	@Column(name = "valor_total")
 	private BigDecimal valorTotal = BigDecimal.ZERO;
 
-	@Transient
-	private Integer quantidadeDeItens;
-	
-	@Transient
-	private BigDecimal descontoDeItens;
-	
-	@Transient
-	private BigDecimal total;
-	
-	
-	
-	public void adicionarItem(ItemDePedido item) {
-		item.setPedido(this);
-		this.itens.add(item);
-		this.valorTotal = this.valorTotal.add(item.getValor());
-	}
-	
-	public Pedido( Cliente cliente, List<ItemDePedido> itens, BigDecimal desconto,
-			TipoDescontoPedido tipo_desconto) {
-		this.cliente = cliente;
-		adicionaItens(itens);
-		this.desconto = desconto;
-		this.tipo_desconto = tipo_desconto;
-	}
 
-	private void adicionaItens(List<ItemDePedido> itens2) {
-		itens.forEach(item -> adicionaItem(item));
+	
+	public Pedido() {
 		
 	}
 
-	private void adicionaItem(ItemDePedido item) {
-	    this.total = this.total.add(item.getValor());
-	    this.quantidadeDeItens = this.quantidadeDeItens + item.getQuantidade();
-	    this.descontoDeItens = this.descontoDeItens.add(item.getDesconto());
-        item.setPedido(this);
-	    itens.add(item);		
-	}
 
-	public Pedido(Cliente cliente, BigDecimal desconto, TipoDescontoPedido tipo_desconto) {
+	public Pedido(Cliente cliente, List<ItemDePedido> itens) {
 		this.cliente = cliente;
-		this.desconto = desconto;
-		this.tipo_desconto = tipo_desconto;
-	}
+		adicionaItens(itens);
+	//	this.valorTotal = this.valorTotal.add(((ItemDePedido) itens).getValor());
 
-	public BigDecimal getTotal() {
-		return total;
 	}
-
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
-
-	public Integer getQuantidadeDeItens() {
-		return quantidadeDeItens;
-	}
-
-	public void setQuantidadeDeItens(Integer quantidadeDeItens) {
-		this.quantidadeDeItens = quantidadeDeItens;
-	}
-
-	public BigDecimal getDescontoDeItens() {
-		return descontoDeItens;
-	}
-
-	public void setDescontoDeItens(BigDecimal descontoDeItens) {
-		this.descontoDeItens = descontoDeItens;
-	}
-
-	public List<ItemDePedido> getItens() {
-		return itens;
-	}
-
-	public void setItens(List<ItemDePedido> itens) {
-		this.itens = itens;
-	}
-
-	public BigDecimal getValorTotal() {
-		return valorTotal;
-	}
-
-	public void setValorTotal(BigDecimal valorTotal) {
-		this.valorTotal = valorTotal;
-	}
+	
 
 	public Long getId() {
 		return id;
@@ -158,6 +87,14 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 	}
 
+	public List<ItemDePedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemDePedido> itens) {
+		this.itens = itens;
+	}
+
 	public BigDecimal getDesconto() {
 		return desconto;
 	}
@@ -170,9 +107,50 @@ public class Pedido implements Serializable{
 		return tipo_desconto;
 	}
 
-	public void setTipo_desconto(TipoDescontoPedido tipo_desconto) {
-		this.tipo_desconto = tipo_desconto;
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
 	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+	
+	
+	
+	public BigDecimal getTotal() {
+		
+		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal desconto = getDesconto();
+		
+		for (ItemDePedido item : itens) {
+			total = total.add(item.getTotal());
+		}
+		
+		return total.subtract(desconto);
+	}
+
+
+	private void adicionaItens(List<ItemDePedido> itemPedidos) {
+		for (ItemDePedido item : itemPedidos) {
+			this.adicionaItem(item);
+		}
+		
+	}
+
+	private void adicionaItem(ItemDePedido item) {
+        item.setPedido(this);
+	    itens.add(item);		
+	}
+	
+
+	public void aplicaPoliticaDeDesconto(Integer quantidadeDePedidos) {
+		if (quantidadeDePedidos > 5) {
+			this.tipo_desconto = TipoDescontoPedido.QUANTIDADE;
+		}
+		
+	}
+	
 	
 	
 

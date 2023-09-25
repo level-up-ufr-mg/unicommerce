@@ -2,6 +2,7 @@ package br.com.alura.unicommerce.dto;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import br.com.alura.unicommerce.modelo.Usuario;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -20,7 +21,9 @@ public record DadosCadastraCliente(
 		String telefone,
 		
 		@Valid
-		DadosEndereco endereco
+		DadosEndereco endereco,
+		
+		Usuario usuario
 		
 		) {
 

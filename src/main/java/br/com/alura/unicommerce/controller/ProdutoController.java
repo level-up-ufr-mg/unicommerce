@@ -1,6 +1,7 @@
 package br.com.alura.unicommerce.controller;
 
 
+import java.net.URI;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.dto.DadosCadastraProduto;
+import br.com.alura.unicommerce.dto.DadosDetalhamentoCliente;
+import br.com.alura.unicommerce.dto.DadosDetalhamentoProduto;
 import br.com.alura.unicommerce.dto.DadosListagemProduto;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.repository.CategoriaRepository;
@@ -38,7 +42,7 @@ public class ProdutoController {
 	
 	@PostMapping
 	@Transactional
-    public  ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastraProduto dados, BindingResult result) {
+    public  ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastraProduto dados, BindingResult result, UriComponentsBuilder uriBuilder) {
 		
 		if (result.hasErrors()) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		
@@ -51,7 +55,14 @@ public class ProdutoController {
 		Optional<Categoria> obj = categoriaRepository.findById(idCategoria);	
 		
 		if (!obj.isEmpty()){
-			repository.save(new Produto(dados, dadosIdCategoria));			
+			
+			Produto produto = new Produto(dados, dadosIdCategoria);
+			repository.save(produto);	
+			
+            URI uri = uriBuilder.path("/api/clientes/{id}").buildAndExpand(produto.getId()).toUri();
+			
+			//return ResponseEntity.created(uri).body(new DadosDetalhamentoProduto(produto));
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		                                              
 		return new ResponseEntity<>(HttpStatus.OK);
