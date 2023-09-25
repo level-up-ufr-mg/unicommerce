@@ -8,21 +8,27 @@ import br.com.alura.unicommerce.dao.ClienteDao;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Endereco;
 import br.com.alura.unicommerce.util.JPAUtil;
+import br.com.alura.unicommerce.vo.RelatorioDeVendasPorClienteVo;
 
 public class ControllerCliente {
     public static void main(String[] args) {
     	EntityManager em = JPAUtil.getEntityManager();
-    	long nmroIdDoCliente = 20L;
         
-		cadastra(em);
-        buscaPorId(em, nmroIdDoCliente);
-		atualiza(em);
-		remove(em);
-		listaTodos(em);
-		listaPorNome(em);
+    	
+    	ClienteDao clienteDao = new ClienteDao(em);
+    	
+    	List<RelatorioDeVendasPorClienteVo> relatorio = clienteDao.relatorioDeVendasPorClienteVo();
+    	relatorio.forEach(System.out::println);
+//		cadastra(em);
+//        buscaPorId(em);
+//		atualiza(em);
+//		remove(em);
+//		listaTodos(em);
+//		listaPorNome(em);
     }
 
-	private static void buscaPorId(EntityManager em, Long nmroIdDoCliente) {
+	private static void buscaPorId(EntityManager em) {
+    	long nmroIdDoCliente = 20L;
 		ClienteDao buscaPorId = new ClienteDao(em);
 
 		Cliente clientesPorId = buscaPorId.buscaPorId(nmroIdDoCliente);

@@ -10,6 +10,7 @@ import br.com.alura.unicommerce.dao.ProdutoDao;
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.util.JPAUtil;
+import br.com.alura.unicommerce.vo.RelatorioDeVendasPorProdutoVendidoVo;
 
 public class ControllerProduto {
 	public static void main(String[] args) {
@@ -20,9 +21,13 @@ public class ControllerProduto {
 //		listaIndisponiveis(em);
 //		buscaPorId(em, nmroIdDoCliente);
 //		buscarPorParametrosComCriteria(em);
-		cadastra(em);
+//		cadastra(em);
 		
 	//	em.find(Categoria.class, new CategoriaId("Moda", "xpto"));
+		
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		List<RelatorioDeVendasPorProdutoVendidoVo> relatorio = produtoDao.relatorioDeVendasPorProdutoVendidoVo();
+		relatorio.forEach(System.out::println);
 		
 	}
 

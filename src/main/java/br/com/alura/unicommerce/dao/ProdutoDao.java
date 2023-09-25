@@ -12,6 +12,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import br.com.alura.unicommerce.modelo.Produto;
+import br.com.alura.unicommerce.vo.RelatorioDeVendasPorProdutoVendidoVo;
 
 public class ProdutoDao {
 	private EntityManager em;
@@ -106,5 +107,17 @@ public class ProdutoDao {
 		}
 		query.where(filtros);
 		return em.createQuery(query).getResultList();
+	}
+
+	public List<RelatorioDeVendasPorProdutoVendidoVo> relatorioDeVendasPorProdutoVendidoVo() {
+		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasPorProdutoVendidoVo(" 
+				+ "prod.nome, "
+				+ "COUNT(it.quantidade)) " 
+				+ "FROM Produto prod "
+				+ "JOIN prod.itens it " 
+				+ "JOIN it.pedido ped " 
+				+ "GROUP BY prod.nome "
+				+ "HAVING count(it.quantidade) > 3";
+		return em.createQuery(jpql, RelatorioDeVendasPorProdutoVendidoVo.class).getResultList();
 	}
 }

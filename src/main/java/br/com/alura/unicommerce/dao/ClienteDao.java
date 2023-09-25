@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import com.mysql.cj.Query;
+
 import br.com.alura.unicommerce.modelo.Cliente;
+import br.com.alura.unicommerce.vo.RelatorioDeVendasPorClienteVo;
 
 public class ClienteDao {
 	private EntityManager em;
@@ -14,7 +17,8 @@ public class ClienteDao {
 	}
 
 	public Cliente buscaPorId(Long id) {
-		if (id == 0) throw new IllegalArgumentException();
+		if (id == 0)
+			throw new IllegalArgumentException();
 		Cliente econtrado = em.find(Cliente.class, id);
 		return econtrado;
 	}
@@ -38,8 +42,14 @@ public class ClienteDao {
 
 	public List<Cliente> listaPorNome(String nome) {
 		String jpql = "SELECT c FROM Cliente c WHERE c.nome = :nome";
-		return em.createQuery(jpql, Cliente.class)
-				.setParameter("nome", nome)
-				.getResultList();
+		return em.createQuery(jpql, Cliente.class).setParameter("nome", nome).getResultList();
+	}
+
+	public List<RelatorioDeVendasPorClienteVo> relatorioDeVendasPorClienteVo() {
+		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasPorClienteVo(" + "c.dadosPessoais.nome, "
+				+ "COUNT(p.id), " + "SUM(ip.precoUnitario * ip.quantidade) as montante) " + "FROM Cliente c "
+				+ "LEFT JOIN c.pedido p " + "LEFT JOIN p.itens ip " + "GROUP BY c.dadosPessoais.nome "
+				+ "ORDER BY montante DESC ";
+		return em.createQuery(jpql, RelatorioDeVendasPorClienteVo.class).setMaxResults(3).getResultList();
 	}
 }

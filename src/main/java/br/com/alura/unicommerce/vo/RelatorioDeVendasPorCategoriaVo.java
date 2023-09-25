@@ -11,7 +11,6 @@ public class RelatorioDeVendasPorCategoriaVo {
 	}
 
 	public RelatorioDeVendasPorCategoriaVo(String nomeProduto, long quantidadeVendida, BigDecimal montante) {
-		super();
 		this.nomeCategoria = nomeProduto;
 		this.quantidadeVendida = quantidadeVendida;
 		this.montante = montante;

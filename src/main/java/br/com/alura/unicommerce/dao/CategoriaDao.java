@@ -39,10 +39,15 @@ public class CategoriaDao {
 	}
 
 	public List<RelatorioDeVendasPorCategoriaVo> relatorioDeVendasPorCategoriaVo() {
-		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasVo(" + "categoria.nome, "
-				+ "SUM(item.quantidade), " + "SUM(item.quantidade * (item.precoUnitario - item.desconto)) as montante) "
-				+ "FROM Pedido pedido " + "RIGHT JOIN pedido.itens item " + "JOIN item.produto produto "
-				+ "JOIN produto.categoria categoria " + "GROUP BY categoria.nome, item.quantidade "
+		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasPorCategoriaVo(" 
+				+ "categoria.nome, "
+				+ "SUM(item.quantidade), " 
+				+ "SUM(item.quantidade * (item.precoUnitario - item.desconto)) as montante) "
+				+ "FROM Pedido pedido " 
+				+ "JOIN pedido.itens item " 
+				+ "JOIN item.produto produto "
+				+ "JOIN produto.categoria categoria " 
+				+ "GROUP BY categoria.nome, item.quantidade "
 				+ "ORDER BY categoria.nome ";
 		return em.createQuery(jpql, RelatorioDeVendasPorCategoriaVo.class).getResultList();
 	}
