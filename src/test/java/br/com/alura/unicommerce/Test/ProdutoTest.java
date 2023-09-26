@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.alura.util.Categoria.Categoria;
-import br.com.alura.util.Produto.Produto;
+import br.com.alura.util.Domain.Categoria.Categoria;
+import br.com.alura.util.Domain.Produto.Produto;
 import br.com.unicommerce.Service.PrecoInvalidoException;
 
 class ProdutoTest {
