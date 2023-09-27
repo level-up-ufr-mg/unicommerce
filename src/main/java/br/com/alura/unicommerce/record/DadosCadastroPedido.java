@@ -30,7 +30,6 @@ public record DadosCadastroPedido(
 			return new Pedido(cliente.get(), itens); //Dados da requisição no Postman
 		}
 		
-		
 		return null;
 	}
 }

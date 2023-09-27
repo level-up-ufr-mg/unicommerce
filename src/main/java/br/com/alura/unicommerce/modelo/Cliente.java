@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 
@@ -31,6 +32,9 @@ public class Cliente {
     
     @Embedded
     private Endereco endereco;
+    
+    @OneToOne
+    private Usuario usuario;
     
     
     public Cliente() {
