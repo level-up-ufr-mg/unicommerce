@@ -15,10 +15,7 @@ public class ControllerCliente {
     	EntityManager em = JPAUtil.getEntityManager();
         
     	
-    	ClienteDao clienteDao = new ClienteDao(em);
-    	
-    	List<RelatorioDeVendasPorClienteVo> relatorio = clienteDao.relatorioDeVendasPorClienteVo();
-    	relatorio.forEach(System.out::println);
+    	geraRelatorio(em);
 //		cadastra(em);
 //        buscaPorId(em);
 //		atualiza(em);
@@ -26,6 +23,13 @@ public class ControllerCliente {
 //		listaTodos(em);
 //		listaPorNome(em);
     }
+
+	private static void geraRelatorio(EntityManager em) {
+		ClienteDao clienteDao = new ClienteDao(em);
+    	
+    	List<RelatorioDeVendasPorClienteVo> relatorio = clienteDao.relatorioDeVendasPorClienteVo();
+    	relatorio.forEach(System.out::println);
+	}
 
 	private static void buscaPorId(EntityManager em) {
     	long nmroIdDoCliente = 20L;

@@ -30,7 +30,7 @@ public class RelatorioDeVendasPorClienteVo {
 
 	@Override
 	public String toString() {
-		return "Cliente = " + clienteString + ", Número de Pedidos = "
+		return "Cliente = " + clienteString + ", Numero de Pedidos = "
 				+ numeroDePedidosInteger + ", montante = " + montante + "]";
 	}
 
