@@ -46,14 +46,14 @@ public class CategoriaController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<CategoriaDTO> busacarPorId(@PathVariable Long id) {
-		CategoriaDTO dto = service.buscaCategoriaPorId(id);
+	public ResponseEntity<CategoriaDTO> busacarPorId(@PathVariable("id") Long categoriaId) {
+		CategoriaDTO dto = service.buscaCategoriaPorId(categoriaId);
 		return ResponseEntity.ok().body(dto);
 	}
 
-	@PutMapping(value = "/{categoriaId}")
+	@PutMapping(value = "/{id}")
 	@Transactional
-	public ResponseEntity<CategoriaDTO> update(@PathVariable Long categoriaId, @RequestBody @Valid CategoriaDTO dto) {
+	public ResponseEntity<CategoriaDTO> update(@PathVariable("id") Long categoriaId, @RequestBody @Valid CategoriaDTO dto) {
 		dto = service.update(categoriaId, dto);
 		return ResponseEntity.ok().body(dto);
 	}
@@ -92,8 +92,10 @@ public class CategoriaController {
 
 	@DeleteMapping("/{id}")
 	@Transactional
-	public void excluir(@PathVariable Long id) {
+	public ResponseEntity excluir(@PathVariable Long id) {
 		service.delete(id);
+		
+		return ResponseEntity.notFound().build();
 	}
 
 }

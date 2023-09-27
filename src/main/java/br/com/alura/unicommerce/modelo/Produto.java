@@ -27,7 +27,7 @@ public class Produto {
 	private String descricao;
 	
 	@Column(name = "preco", nullable = false)
-	private BigDecimal preco;
+	private BigDecimal preco = BigDecimal.ZERO;
 	
 	@Column(name = "quantidade_estoque", nullable = false)
 	private Integer quantidadeEstoque;

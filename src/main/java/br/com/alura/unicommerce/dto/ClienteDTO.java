@@ -1,51 +1,34 @@
 package br.com.alura.unicommerce.dto;
 
+import java.util.Optional;
+
 import br.com.alura.unicommerce.modelo.Cliente;
-import br.com.alura.unicommerce.modelo.Endereco;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class ClienteDTO{
-		
-	private Long id;
+public record ClienteDTO(Long id,
+
+		@NotBlank(message = "{nome.obrigatorio}") String nome,
+
+		@NotBlank(message = "cpf.obrigatorio") String cpf,
+
+		String telefone,
+
+		@NotNull(message = "{endereco.obrigatorio}") 
+		@Valid EnderecoDTO endereco,
+
+		@Valid UsuarioDTO usuario) {
+
 	
-	@NotBlank
-    private String nome;
-    
-	@NotBlank
-    private String cpf;
-    
-    private String telefone;
-	
-    @NotNull @Valid 
-    private EnderecoDTO endereco;
+	public ClienteDTO(Optional<Cliente> obj) {
+		this(obj.get().getId(), obj.get().getNome(), obj.get().getCpf(), obj.get().getTelefone(), new EnderecoDTO(obj.get().getEndereco()), new UsuarioDTO(obj.get().getUsuario()));
+	}
 
 	public ClienteDTO(Cliente obj) {
-		this.id = obj.getId();
-		this.nome = obj.getNome();
-		this.cpf = obj.getCpf();
-		this.telefone = obj.getTelefone();
-		this.endereco = new EnderecoDTO(obj.getEndereco());
+		this(obj.getId(), obj.getNome(), obj.getCpf(), obj.getTelefone(), new EnderecoDTO(obj.getEndereco()), new UsuarioDTO(obj.getUsuario()));
+
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public EnderecoDTO getEndereco() {
-		return endereco;
-	}
+		
 }

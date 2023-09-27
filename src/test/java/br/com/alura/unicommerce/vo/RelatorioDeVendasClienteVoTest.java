@@ -16,8 +16,9 @@ import br.com.alura.unicommerce.modelo.Endereco;
 import br.com.alura.unicommerce.modelo.ItemDePedido;
 import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.modelo.Produto;
-import br.com.alura.unicommerce.modelo.TipoDesconto;
 import br.com.alura.unicommerce.modelo.TipoDescontoItemPedido;
+import br.com.alura.unicommerce.modelo.TipoDescontoPedido;
+import br.com.alura.unicommerce.modelo.Usuario;
 import br.com.alura.unicommerce.service.ClienteService;
 
 public class RelatorioDeVendasClienteVoTest {
@@ -33,26 +34,28 @@ public class RelatorioDeVendasClienteVoTest {
 		Produto tecladoGamer = new Produto ("Teclado", "Teclado Gamer", new BigDecimal("160"), 5, eletronicos);
 		Produto foneGamer = new Produto ("Fone", "Fone Gamer",  new BigDecimal("230"), 10, eletronicos);
 		
-		
+		Usuario usuarioMarcos = new Usuario ("Marcos Silva", "123456");
+		Usuario usuarioEvandro = new Usuario ("Evandro", "123456");
+
 		Endereco endereco = new Endereco ( "Suriname", "107", "Casa", "Vila Maria Cristina", "Formiga", "MG");
-		Cliente  cliente = new Cliente("Marcos Silva", "000.000.000-00", "37999999999", endereco);
+		Cliente  cliente = new Cliente("Marcos Silva", "000.000.000-00", "37999999999", endereco, usuarioMarcos);
 
 		
-		Pedido pedidoUm = new Pedido( BigDecimal.ZERO, TipoDesconto.NENHUM, new Cliente("Evandro", "444.444.444-66", "(11)99999-9999"));
+		Pedido pedidoUm = new Pedido( BigDecimal.ZERO, TipoDescontoPedido.NENHUM, new Cliente("Evandro", "444.444.444-66", "(11)99999-9999"));
 		ItemDePedido pedidoUmItemDoPedido = new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, BigDecimal.ZERO, pedidoUm, mouseGamer );
 		pedidoUm.adicionarItem(pedidoUmItemDoPedido);
 		
 		listaComUmPedido.add(pedidoUm);
 		listaCompleta.add(pedidoUm);
 		
-		Pedido pedidoDois = new Pedido(BigDecimal.ZERO, TipoDesconto.NENHUM, new Cliente("Marcos", "555.444.444-66", "(11)99999-9999"));
+		Pedido pedidoDois = new Pedido(BigDecimal.ZERO, TipoDescontoPedido.NENHUM, new Cliente("Marcos", "555.444.444-66", "(11)99999-9999"));
 		ItemDePedido pedidoDoisItemDoPedido = new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, BigDecimal.ZERO, pedidoDois, mouseGamer);
 		ItemDePedido pedidoDoisItemDoPedido2 = new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, BigDecimal.ZERO, pedidoDois, tecladoGamer);
 		pedidoDois.adicionarItem(pedidoDoisItemDoPedido);
 		pedidoDois.adicionarItem(pedidoDoisItemDoPedido2);
 		listaCompleta.add(pedidoDois);
 		
-		Pedido pedidoTres = new Pedido(BigDecimal.ZERO, TipoDesconto.NENHUM, new Cliente("Dayane", "666.444.444-66", "(11)99999-9999"));
+		Pedido pedidoTres = new Pedido(BigDecimal.ZERO, TipoDescontoPedido.NENHUM, new Cliente("Dayane", "666.444.444-66", "(11)99999-9999"));
 		ItemDePedido pedidoTresItemDoPedido = new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, BigDecimal.ZERO, pedidoTres, mouseGamer);
 		ItemDePedido pedidoTresItemDoPedido2 = new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1, BigDecimal.ZERO, pedidoTres, tecladoGamer);
 		ItemDePedido pedidoTresItemDoPedido3 = new ItemDePedido(TipoDescontoItemPedido.NENHUM, 1,  BigDecimal.ZERO, pedidoTres, foneGamer);
@@ -62,7 +65,7 @@ public class RelatorioDeVendasClienteVoTest {
 		listaCompleta.add(pedidoTres);
 		System.out.println("Inicializou os dados");
 		
-		Pedido pedidoQuatro = new Pedido(new BigDecimal("30"), TipoDesconto.NENHUM, cliente);
+		Pedido pedidoQuatro = new Pedido(new BigDecimal("30"), TipoDescontoPedido.NENHUM, cliente);
 		listaVazia.add(pedidoQuatro);
 	}
 	

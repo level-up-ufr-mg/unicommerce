@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,12 +19,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.unicommerce.dto.ClienteDTO;
 import br.com.alura.unicommerce.dto.DadosListagemCliente;
+import br.com.alura.unicommerce.dto.UsuarioDTO;
 import br.com.alura.unicommerce.modelo.Cliente;
+import br.com.alura.unicommerce.modelo.Usuario;
 import br.com.alura.unicommerce.service.ClienteService;
+import br.com.alura.unicommerce.service.UsuarioService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -34,14 +38,35 @@ public class ClienteController {
 	@Autowired
 	ClienteService service;
 
+	@Autowired
+	UsuarioService serviceUsuario;
+
 	@PostMapping
-	@Transactional
-	public ResponseEntity<Object> inserirCliente(@RequestBody @Valid Cliente cliente) {
-		System.out.println(cliente);
-		service.inserirCliente(cliente);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente).toUri();
-		return ResponseEntity.created(uri).body(cliente);
+	 @Transactional
+    public ResponseEntity<Object> cadastrar(@RequestBody @Valid ClienteDTO dados, BindingResult result, UriComponentsBuilder uriBuilder) { 
+		if (result.hasErrors()) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	
+			UsuarioDTO usuarioId = dados.usuario();
+	
+			Long idUsuario = usuarioId.id();
+	
+			Usuario dadosIdUsuario = serviceUsuario.buscaPorId(idUsuario);
+	
+			Optional<Usuario> obj = Optional.ofNullable(serviceUsuario.buscaPorId(idUsuario));
+	
+			if (!obj.isEmpty()){ 
+	 
+				Cliente cliente = new Cliente(dados, dadosIdUsuario);
+	
+				service.inserirCliente(cliente);
+	
+				URI uri = uriBuilder.path("/api/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
+	
+				return ResponseEntity.created(uri).body(new DadosListagemCliente(cliente));
+			}
+			return null;
 	}
+
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> buscaClientePorId(@PathVariable("id") Long clienteId) {
@@ -54,18 +79,18 @@ public class ClienteController {
 		if (cliente.isEmpty())
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
-		return ResponseEntity.status(HttpStatus.OK).body(new ClienteDTO(cliente.get()));
+		return ResponseEntity.status(HttpStatus.OK).body(new ClienteDTO(cliente));
 	}
 
 	@PutMapping(value = "/{id}")
 	@Transactional
-	public ResponseEntity<Cliente> update(@PathVariable("id") Long clienteId, @RequestBody Cliente cliente) {
-		cliente = service.update(clienteId, cliente);
+	public ResponseEntity<Object> update(@PathVariable("id") Long clienteId, @RequestBody ClienteDTO dados) {
+		ClienteDTO cliente = service.update(clienteId, dados);
 		return ResponseEntity.ok().body(cliente);
 	}
 
-	@DeleteMapping(value = "/{clienteId}")
-	public ResponseEntity<ClienteDTO> delete(@PathVariable Long clienteId) {
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<ClienteDTO> delete(@PathVariable("id") Long clienteId) {
 		service.delete(clienteId);
 		return ResponseEntity.noContent().build();
 	}

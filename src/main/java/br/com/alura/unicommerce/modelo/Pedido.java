@@ -25,10 +25,10 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private LocalDate data = LocalDate.now();
-	private BigDecimal desconto;
+	private BigDecimal desconto = BigDecimal.ZERO;
 	
 	@Column(name = "tipo_desconto")
-	private TipoDesconto tipoDesconto; 
+	private TipoDescontoPedido tipoDescontoPedido; 
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Cliente cliente;
@@ -60,9 +60,9 @@ public class Pedido {
 	public Pedido() {
 	}
 
-	public Pedido(BigDecimal desconto, TipoDesconto tipoDesconto, Cliente cliente) {
+	public Pedido(BigDecimal desconto, TipoDescontoPedido tipoDescontoPedido, Cliente cliente) {
 		this.desconto = desconto;
-		this.tipoDesconto = tipoDesconto;
+		this.tipoDescontoPedido = tipoDescontoPedido;
 		this.cliente = cliente;
 	}
 
@@ -71,9 +71,9 @@ public class Pedido {
 	}
 	
 	
-	public Pedido(Cliente cliente, TipoDesconto tipoDesconto, BigDecimal desconto, List<ItemDePedido> itemPedidos) {
+	public Pedido(Cliente cliente, TipoDescontoPedido tipoDescontoPedido, BigDecimal desconto, List<ItemDePedido> itemPedidos) {
 		this.desconto = desconto;
-		this.tipoDesconto = tipoDesconto;
+		this.tipoDescontoPedido = tipoDescontoPedido;
 		this.cliente = cliente;
 		//this.itemPedidos = itemPedidos.stream().map(item -> adicionarItem(item));
 		adicionarItemPedidos(itemPedidos);
@@ -103,12 +103,12 @@ public class Pedido {
 		this.desconto = desconto;
 	}
 
-	public TipoDesconto getTipoDesconto() {
-		return tipoDesconto;
+	public TipoDescontoPedido getTipoDescontoPedido() {
+		return tipoDescontoPedido;
 	}
 
-	public void setTipoDesconto(TipoDesconto tipoDesconto) {
-		this.tipoDesconto = tipoDesconto;
+	public void setTipoDesconto(TipoDescontoPedido tipoDescontoPedido) {
+		this.tipoDescontoPedido = tipoDescontoPedido;
 	}
 
 	public Cliente getCliente() {

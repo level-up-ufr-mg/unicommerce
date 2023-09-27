@@ -7,7 +7,7 @@ import java.util.Optional;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.ItemDePedido;
 import br.com.alura.unicommerce.modelo.Pedido;
-import br.com.alura.unicommerce.modelo.TipoDesconto;
+import br.com.alura.unicommerce.modelo.TipoDescontoPedido;
 import br.com.alura.unicommerce.service.ClienteService;
 import br.com.alura.unicommerce.service.ProdutoService;
 import jakarta.validation.constraints.NotNull;
@@ -29,7 +29,7 @@ public record DadosDePedido(Long clienteId,
 		System.out.println(cliente);
 		
 		if (cliente.isPresent()) 
-			return new Pedido(cliente.get(), TipoDesconto.valueOf(tipoDesconto), desconto, itens);
+			return new Pedido(cliente.get(), TipoDescontoPedido.valueOf(tipoDesconto), desconto, itens);
 		
 		return null;
 	}

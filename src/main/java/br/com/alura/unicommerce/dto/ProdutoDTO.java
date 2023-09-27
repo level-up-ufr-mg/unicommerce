@@ -8,10 +8,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record ProdutoDTO(
-		@NotBlank
+		@NotBlank(message = "nome.obrigatorio")
 		String nome, 
 		
-		@NotNull
+		@NotNull(message = "{descricao.obrigatorio}")
 		String descricao,
 		
 		BigDecimal preco, 

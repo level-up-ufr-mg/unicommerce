@@ -29,9 +29,8 @@ public class PedidoDTO{
 	public PedidoDTO(Pedido obj) {
 		this.id = obj.getId();
 		this.data = obj.getData();
-		this.cliente = new ClienteDTO(obj.getCliente());
-		this.clienteId = new ClienteDTO(obj.getCliente()).getId();
-		this.nomeCliente = new ClienteDTO(obj.getCliente()).getNome();
+		this.clienteId = cliente.id();
+		this.nomeCliente = cliente.nome();
 		//this.produto = new ProdutoDTO(obj.getProduto());
 	}
 

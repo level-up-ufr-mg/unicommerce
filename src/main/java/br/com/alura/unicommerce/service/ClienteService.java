@@ -12,8 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.alura.unicommerce.dao.ClienteDao;
+import br.com.alura.unicommerce.dto.CategoriaDTO;
+import br.com.alura.unicommerce.dto.ClienteDTO;
 import br.com.alura.unicommerce.dto.DadosListagemCliente;
+import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.repository.ClienteRepository;
@@ -54,16 +56,25 @@ public class ClienteService {
 		return list.map(x -> new DadosListagemCliente(x));
 	}
 
-	public void inserirCliente(Cliente cliente) {
-		repository.save(cliente);
-	}
+	
+	 
+	  public void inserirCliente(Cliente cliente) {
 
-	public Cliente update(Long clienteId, Cliente cliente) {
+			//System.out.println(cliente);
+
+			if (cliente == null)
+				throw new IllegalArgumentException("Falha ao cadastrar cadastrar o cliente.");
+			repository.save(cliente);
+		}
+	
+
+	public ClienteDTO update(Long clienteId, ClienteDTO cliente) {
 		try {
 			Cliente entity = repository.getReferenceById(clienteId);
-			entity = repository.save(cliente);
-			return cliente;
-		} catch (EntityNotFoundException e) {
+			entity = repository.save(new Cliente(cliente));
+			return new ClienteDTO(entity);
+		}
+		catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + clienteId);
 		}
 	}

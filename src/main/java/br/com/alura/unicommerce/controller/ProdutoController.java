@@ -58,8 +58,8 @@ public class ProdutoController {
 	
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Object> findById(@PathVariable Long id) {
-		Optional<Produto> prouduto = service.findById(id);
+	public ResponseEntity<Object> findById(@PathVariable("id") Long produtoId) {
+		Optional<Produto> prouduto = service.findById(produtoId);
 		return ResponseEntity.ok().body(prouduto);
 	}
 	
@@ -86,7 +86,7 @@ public class ProdutoController {
 	
 	@PutMapping(value = "/{id}")
 	@Transactional
-	public ResponseEntity<Object> update(@PathVariable Long ProdutoId, @RequestBody ProdutoForm form){
+	public ResponseEntity<Object> update(@PathVariable("id") Long ProdutoId, @RequestBody ProdutoForm form){
 		service.update(ProdutoId, form);
 		return ResponseEntity.ok().body(form);
 	}

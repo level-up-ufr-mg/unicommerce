@@ -64,7 +64,7 @@ public class CategoriaService {
 		try {
 			Categoria entity = repository.getReferenceById(categoriaId);
 			entity = repository.save(new Categoria(dto));
-			return dto;
+			return new CategoriaDTO(entity);
 		}
 		catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + categoriaId);

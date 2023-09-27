@@ -23,13 +23,13 @@ public class ItemDePedido {
 	private Long id;
 	
 	@Column(name = "preco_unitario", precision = 10, scale = 2, nullable = false)
-	private BigDecimal precoUnitario;
+	private BigDecimal precoUnitario = BigDecimal.ZERO;
 	
 	@Column(nullable = false)
 	private Integer quantidade;
 	
 	@Column(precision = 10, scale = 2, nullable = false)
-	private BigDecimal desconto;
+	private BigDecimal desconto = BigDecimal.ZERO;
 	
 	@Column(name = "tipo_desconto", length = 50, nullable = false)
 	@Enumerated(EnumType.STRING)

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public record CategoriaDTO(Long id, 
 		
-		@NotBlank
+		@NotBlank(message = "nome.obrigatorio")
 		String nome, 
 		
 		boolean status) {

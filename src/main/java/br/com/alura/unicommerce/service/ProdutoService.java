@@ -75,10 +75,10 @@ public class ProdutoService {
 		entity.setQuantidadeEstoque(form.getQuantidadeEstoque());
 		entity.setPreco(form.getPreco());
 		
-//		entity.getCategoria().clear();
-//		for (CategoriaDTO catDto : dto.getCategoria()) {
-//			Categoria categoria = categoriaRepository.getReferenceById(catDto.getId());
-//			entity.getCategoria().add(categoria);
+//		entity.getProduto().clear();
+//		for (CProdutoDTO catDto : dto.getProduto()) {
+//			Produto produto = produtoRepository.getReferenceById(catDto.getId());
+//			entity.getProduto().add(produto);
 //		}
 	}
 
