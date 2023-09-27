@@ -35,13 +35,18 @@ import lombok.ToString;
 @ToString
 public class Usuario implements UserDetails {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String login;
 	private String senha;
 	
-	@OneToOne(mappedBy = "user_id",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "userId",cascade = CascadeType.ALL)
 	private Cliente cliente;
 	
 	 

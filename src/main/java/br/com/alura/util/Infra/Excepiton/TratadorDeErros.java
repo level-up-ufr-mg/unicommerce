@@ -16,7 +16,7 @@ public class TratadorDeErros {
 		return ResponseEntity.notFound().build();
 	}
 
-	//código omitido
+	 
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity tratarErro400(MethodArgumentNotValidException ex) {
@@ -26,7 +26,7 @@ public class TratadorDeErros {
 
 	}
 	
-	//código omitido
+	 
 
 	private record DadosErroValidacao(String campo, String mensagem) {
 	        public DadosErroValidacao(FieldError erro) {

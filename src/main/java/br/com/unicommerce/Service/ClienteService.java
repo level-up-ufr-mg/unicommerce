@@ -1,6 +1,16 @@
 package br.com.unicommerce.Service;
 
+import java.util.Optional;
+
+import br.com.alura.util.Domain.Cliente.Cliente;
+import jakarta.validation.constraints.NotNull;
+
 public class ClienteService {
+
+	public Optional<Cliente> buscaPorId(@NotNull Long clienteId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 //	EntityManager em = Factory.getEntityManager();
 //

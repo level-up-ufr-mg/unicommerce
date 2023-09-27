@@ -14,7 +14,7 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 	
 	   @Query("SELECT NEW br.com.alura.util.VO.RelatorideVendasPorCategoriaVO("
 	   		+ "c.nome, SUM(ip.quantidade), "
-	   		+ "SUM(ip.precoUnitario * ip.quantidade - ip.descontoId)) " +
+	   		+ "SUM(ip.precoUnitario * ip.quantidade - ip.desconto)) " +
 	           "FROM Produto p " +
 	            "INNER JOIN ItemPedido ip ON p.produtoId = ip.produtoId " +
 	            "INNER JOIN Categoria c ON p.categoriaId.categoriaId = c.categoriaId " +

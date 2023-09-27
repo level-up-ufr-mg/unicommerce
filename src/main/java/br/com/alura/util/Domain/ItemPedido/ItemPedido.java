@@ -7,6 +7,8 @@ import br.com.alura.util.Domain.Pedido.Pedido;
 import br.com.alura.util.Domain.Produto.Produto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,24 +37,30 @@ public class ItemPedido  {
 	}
 
 
+	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long itemPedidoId;
 	
 	
-	@Column(nullable = false)
+	@Column(name = "PRECO_UNITARIO", precision = 10, scale = 2, nullable = false)
 	private BigDecimal precoUnitario;
 	
 	
 	@Column(nullable = false)
 	private Long quantidade;
 	
-	
+	@Column(name = "TIPO_DESCONTO", length = 20, nullable = false)
+	@Enumerated(EnumType.STRING)
 	private Descontos tipoDesconto;
 	
 	
-	@Column(nullable = false)
-	private BigDecimal descontoId;
+	@Column(precision = 10, scale = 2,name = "DESCONTO")
+	private BigDecimal desconto;
+	
+	
 	// ==================== Variaveis de Relacionamento================
 	
 	@ManyToOne // fetch = FetchType.LAZY
@@ -69,6 +77,28 @@ public class ItemPedido  {
 	
 	
 	// ==================== Variaveis de Relacionamento================
+	
+	
+	
+	
+ 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

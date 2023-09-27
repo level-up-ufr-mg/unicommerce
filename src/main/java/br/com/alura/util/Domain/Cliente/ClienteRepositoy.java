@@ -6,6 +6,12 @@ public interface ClienteRepositoy extends JpaRepository<Cliente, Long> {
 
 	 boolean existsByCpf(Long novoCPF);
 
+ 
+
+
+
+	 
+
 	
 	
 	

@@ -1,11 +1,15 @@
 package br.com.alura.util.Controler;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ExitCodeEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,73 +31,44 @@ public class CadastroCliente {
 
 	@Autowired
 	private ClienteRepositoy repository;
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
- 
 	@PostMapping
-	   @Transactional
-	   public ResponseEntity<String> cadastra(@RequestBody @Valid DadosCadastroClienteDTO dados) {
-	       if (dados.cpf().toString().length() == 11 && dados.telefone().toString().length() == 11 && dados != null) {
-	           boolean registroCpfExistente = repository.existsByCpf(dados.cpf());
+	@Transactional
+	public ResponseEntity<String> cadastra(@RequestBody @Valid DadosCadastroClienteDTO dados) {
+		if (dados.cpf().toString().length() == 11 && dados.telefone().toString().length() == 11 && dados != null) {
+			boolean registroCpfExistente = repository.existsByCpf(dados.cpf());
 
-	           if (registroCpfExistente == true) {
-	               return ResponseEntity.status(HttpStatus.CONFLICT)
-	                       .body("Já existe um registro cadastrado com o CPF informado.");
-	           } else {
-	              
-	               Usuario usuario = new Usuario(dados.usuario().getLogin(), dados.usuario().getSenha());
-	               usuarioRepository.save(usuario);
-	                
-	               Cliente cliente = new Cliente(dados);
-	               cliente.setUser_id(usuario);
-	               repository.save(cliente);
+			if (registroCpfExistente == true) {
+				return ResponseEntity.status(HttpStatus.CONFLICT)
+						.body("Já existe um registro cadastrado com o CPF informado.");
+			} else {
 
-	               return ResponseEntity.status(HttpStatus.OK).body("Cadastro realizado com sucesso.");
-	           }
-	       } else {
-	           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Por favor, insira os dados corretamente.");
-	       }
-	   }
-	 
-	
-	
-	
+				Usuario usuario = new Usuario(dados.usuario().getLogin(), dados.usuario().getSenha());
+				boolean UsusarioJaExistente = usuarioRepository.existsByLogin(dados.usuario().getLogin());
+				if (UsusarioJaExistente == true) {
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao Cadastra. Login ja existente ");
+				} else {
+					usuarioRepository.save(usuario);
+					Cliente cliente = new Cliente(dados);
+					cliente.setUserId(usuario);
+					repository.save(cliente);
+					return ResponseEntity.status(HttpStatus.OK).body("Cadastro realizado com sucesso.");
+				}
+			}
+
+		} else {
+
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Por favor, insira os dados corretamente.");
+		}
+	}
+
 	@GetMapping
 	public Page<ListaDadosClieteDTO> Lista(@PageableDefault(size = 5, sort = { "nome" }) Pageable paginacao) {
 		return repository.findAll(paginacao).map(ListaDadosClieteDTO::new);
-	} 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}
 
 //	public static void main(String[] args) {
 //

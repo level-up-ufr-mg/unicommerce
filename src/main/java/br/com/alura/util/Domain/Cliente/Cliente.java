@@ -49,10 +49,10 @@ public class Cliente implements Serializable {
 	
 	@Embedded
 	private Endereco endereco;
-
+ 
 	@OneToOne 
-	@JoinColumn(name = "user_id") 
-	private Usuario user_id;
+	@JoinColumn(name = "UserID") 
+	private Usuario userId;
 	
  
 	public Cliente(@Valid DadosCadastroClienteDTO dados) {
@@ -62,7 +62,7 @@ public class Cliente implements Serializable {
 	
 	this.endereco = new Endereco(dados.endereco());
 	
-	this.user_id = new Usuario(dados.usuario().getLogin(),dados.usuario().getSenha());
+	this.userId = new Usuario(dados.usuario().getLogin(),dados.usuario().getSenha());
 	}
 
 
