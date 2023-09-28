@@ -54,19 +54,23 @@ public class Produto {
 		this.nome = dados.nome();
 		this.descricao = dados.descricao();
 		this.quantidadeEstoque = dados.quantidadeEstoque();
-		this.preco = dados.preco();
+		this.preco = dados.preco(); 
 		this.categoriaId = categoria;
 	} 
   
-
  
-
-	public void setPrecoUntario(BigDecimal preco) throws PrecoInvalidoException {
-	    if (preco.compareTo(BigDecimal.ZERO) <= 0) {
-	        throw new PrecoInvalidoException("O preço unitário deve ser maior que zero.  " + preco);
-	    }
-	    this.preco = preco;
+	
+	 
+	public void setPreco(BigDecimal preco) {
+		if (preco.compareTo( new BigDecimal("0.00")) <= 0) {
+            throw new IllegalArgumentException("O preço não pode ser menor ou igual a 0.");
+        }
+		this.preco = preco;
 	}
+
+
+
+
  
 	
 	

@@ -1,9 +1,14 @@
 package br.com.unicommerce.Service;
 
-public class PrecoInvalidoException extends Exception {
+public class PrecoInvalidoException extends RuntimeException {
 
 	
-	  public PrecoInvalidoException(String message) {
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public PrecoInvalidoException(String message) {
 	      System.out.print(""+message);
-	    }
+	    } 
 }

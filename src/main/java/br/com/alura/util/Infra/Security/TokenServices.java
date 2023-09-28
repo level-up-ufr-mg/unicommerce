@@ -16,7 +16,7 @@ import br.com.alura.util.Domain.Usuario.Usuario;
 @Service
 public class TokenServices {
 
-	@Value("${api.security.token.secret}")
+	@Value("${br.com.alura.util.Infra.Security}")
 	private String secret;
 	
 	

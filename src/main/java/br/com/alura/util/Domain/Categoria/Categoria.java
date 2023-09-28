@@ -33,13 +33,14 @@ public class Categoria {
 	@Column(name = "STATUS_ID")
 	private Boolean status;
 
-	public Categoria(@Valid DadosCadastroCategoriaDTO dados) {
-		this.setNomes(dados.nome());
+	public Categoria(DadosCadastroCategoriaDTO dados) {
+		this.nome = dados.nome();
 		this.status = true;
 	}
 
-	public Categoria(Categoria categoria) {
-		this.setNome(categoria.nome);
+	public Categoria(String nome) throws IllegalArgumentException {
+		this.setNome(nome);
+		this.status = true;
 	}
 
 	public void AtualizarInformacoes(@Valid AtualizarDadosCategoriaDTO dados) {
@@ -53,15 +54,26 @@ public class Categoria {
 		}
 	}
 
-	public void setNomes(String nome) {
-		if (nome == null) {
+	public void setNome(String nome) {
+		//CategoriaService service = null;
 
-			throw new IllegalArgumentException("Nome inválido, o nome da categoria não pode ser nula");
-		} else if (nome.isEmpty()) {
-			throw new IllegalArgumentException("Nome inválido, o nome da categoria não pode ser nula");
+		if (nome == null) {
+			throw new IllegalArgumentException("Nome inválido, o nome da categoria não pode ser nula.");
+		} 
+		else if (nome.isEmpty()) {
+			throw new IllegalArgumentException("Nome inválido, o nome da categoria não pode ser vazio.");
 		}
+//		else if (nome != null && !nome.isEmpty()) {
+//			throw new IllegalArgumentException("Cadastro Bem Sucedido");
+//		} 
+		
+		// o metodo deveria veiricar se tem um nome que é valido, porem isso acaba influencinado nos test de produto 
+		
+//		else if (service.exiteNome(nome) == true) {
+//			throw new IllegalArgumentException("Categoria Ja Existente no banco " + service);
+//		}
+
 		this.nome = nome;
 	}
-
 
 }

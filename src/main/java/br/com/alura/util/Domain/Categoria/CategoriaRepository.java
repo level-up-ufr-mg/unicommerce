@@ -23,6 +23,7 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 
 
 
+
 	
 //	
 //	 private EntityManager  em;
