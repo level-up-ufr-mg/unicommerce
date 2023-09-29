@@ -1,13 +1,12 @@
 package br.com.alura.unicommerce.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import br.com.alura.util.Domain.Categoria.Categoria;
-import br.com.alura.util.Domain.Categoria.CategoriaRepository;
+import br.com.alura.util.domain.categoria.Categoria;
+import br.com.alura.util.repository.CategoriaRepository;
 
 public class CadastroCategoriaTest {
 
