@@ -22,8 +22,8 @@ public class ControllerPedido {
 		EntityManager em = JPAUtil.getEntityManager();
 
 		cadastraPedido(em);
-//		buscarPedidoComCliente(em);
-//		relatorioDeVendas(em);
+		buscarPedidoComCliente(em);
+		relatorioDeVendas(em);
 	}
 
 	private static void relatorioDeVendas(EntityManager em) {
