@@ -31,9 +31,11 @@ import br.com.alura.unicommerce.dto.DadosListagemCliente;
 import br.com.alura.unicommerce.repository.ClienteRepository;
 import br.com.alura.unicommerce.repository.UsuarioRepository;
 import br.com.alura.unicommerce.service.ClienteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearer-key")
 @RestController
 @RequestMapping("/api/clientes")
 public class ClienteController {

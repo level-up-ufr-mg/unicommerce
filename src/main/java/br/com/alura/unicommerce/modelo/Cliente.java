@@ -2,6 +2,8 @@ package br.com.alura.unicommerce.modelo;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.alura.unicommerce.dto.DadosCadastraCliente;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
