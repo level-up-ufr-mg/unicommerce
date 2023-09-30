@@ -1,5 +1,6 @@
 package br.com.alura.unicommerce.infra.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,17 +12,23 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurations {
+	
+	@Autowired
+	private SecutityFilter securityFilter;
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf(csrf -> csrf.disable())
 				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeRequests(authorize -> authorize.antMatchers(HttpMethod.POST, "/login").permitAll()		
-				.anyRequest().authenticated())
+				.authorizeRequests(authorize -> authorize.antMatchers(HttpMethod.POST, "/login").permitAll() //usa o método post
+				.antMatchers("/swagger-ui.html/", "/v3/api-docs/**", "/swagger-ui/**").permitAll()//não usam métodos HTTP
+				.anyRequest().authenticated()
+				.and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class))
 				.build();
 	}
 

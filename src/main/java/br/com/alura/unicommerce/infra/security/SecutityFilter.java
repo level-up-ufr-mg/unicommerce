@@ -8,14 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import br.com.alura.unicommerce.repository.UsuarioRepository;
 
 @Component
 public class SecutityFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private TokenService tokenService;
+	
+	private UsuarioRepository usuarioRepository;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -25,6 +31,11 @@ public class SecutityFilter extends OncePerRequestFilter {
 		
 		if(tokenJwt != null) {
 			var subject = tokenService.getSubject(tokenJwt); // Valida o token e recupera o subjetc (Login)
+			var usuario = usuarioRepository.findByEmail(subject);
+			
+			var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+			
+			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
 
 		// Para continuar o fluxo da requisição e chamar os próximos filtros
