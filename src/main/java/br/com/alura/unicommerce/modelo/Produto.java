@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,10 +29,11 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "Categoria_ID", nullable = false)
 	private Categoria categoria;
 
-	@OneToMany
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	private List<ItemDePedido> itens = new ArrayList<>();
 
 	@Column(name = "Nome", length = 100, nullable = false) // Definindo o tamanho máximo para o campo nome
@@ -44,17 +47,19 @@ public class Produto {
 
 	@Column(name = "Quantidade_em_Estoque", nullable = false)
 	private Integer quantidade_estoque;
-
-	// Construtor
+	
+//					*******************
+//					** 	Constructor  **
+//					*******************
 
 	public Produto() { // construtor default
 	}
 
 	public Produto(String nome, BigDecimal preco, String descricao, Integer quantidade_estoque, Categoria categoria) {
-		this.nome = nome;
-		this.preco = preco;
-		this.descricao = descricao;
-		this.quantidade_estoque = quantidade_estoque;
+		this.setNome(nome);
+		this.setPreco(preco);
+		this.setDescricao(descricao);
+		this.setQuantidade_estoque(quantidade_estoque);
 		this.categoria = categoria;
 	}
 
@@ -73,6 +78,7 @@ public class Produto {
 	}
 
 	public void setNome(String nome) {
+		if (nome == null || nome.isBlank()) throw new IllegalArgumentException("O nome não pode ser NULO ou VAZIO.");
 		this.nome = nome;
 	}
 

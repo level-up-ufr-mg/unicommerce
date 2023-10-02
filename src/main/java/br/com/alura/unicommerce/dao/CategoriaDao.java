@@ -1,10 +1,15 @@
 package br.com.alura.unicommerce.dao;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.com.alura.unicommerce.modelo.Categoria;
+import br.com.alura.unicommerce.modelo.Pedido;
+import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.vo.RelatorioDeVendasPorCategoriaVo;
 
 public class CategoriaDao {
@@ -15,8 +20,6 @@ public class CategoriaDao {
 	}
 
 	public Categoria buscaPorId(Long id) {
-		if (id == null)
-			throw new IllegalArgumentException();
 		Categoria encontrada = em.find(Categoria.class, id);
 		return encontrada;
 	}
@@ -33,21 +36,24 @@ public class CategoriaDao {
 		em.remove(categoria);
 	}
 
+	public String buscaNomePorNome(String nome) {
+	    String jpql = "SELECT c.nome FROM Categoria c WHERE c.nome = :nome";
+	    TypedQuery<String> query = em.createQuery(jpql, String.class);
+	    query.setParameter("nome", nome);
+        return query.getSingleResult();
+	}
+
+
 	public List<Categoria> listaTodas() {
 		String jpql = "SELECT c FROM Categoria c";
 		return em.createQuery(jpql, Categoria.class).getResultList();
 	}
 
 	public List<RelatorioDeVendasPorCategoriaVo> relatorioDeVendasPorCategoriaVo() {
-		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasPorCategoriaVo(" 
-				+ "categoria.nome, "
-				+ "SUM(item.quantidade), " 
-				+ "SUM(item.quantidade * (item.precoUnitario - item.desconto)) as montante) "
-				+ "FROM Pedido pedido " 
-				+ "JOIN pedido.itens item " 
-				+ "JOIN item.produto produto "
-				+ "JOIN produto.categoria categoria " 
-				+ "GROUP BY categoria.nome, item.quantidade "
+		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasPorCategoriaVo(" + "categoria.nome, "
+				+ "SUM(item.quantidade), " + "SUM(item.quantidade * (item.precoUnitario - item.desconto)) as montante) "
+				+ "FROM Pedido pedido " + "JOIN pedido.itens item " + "JOIN item.produto produto "
+				+ "JOIN produto.categoria categoria " + "GROUP BY categoria.nome, item.quantidade "
 				+ "ORDER BY categoria.nome ";
 		return em.createQuery(jpql, RelatorioDeVendasPorCategoriaVo.class).getResultList();
 	}

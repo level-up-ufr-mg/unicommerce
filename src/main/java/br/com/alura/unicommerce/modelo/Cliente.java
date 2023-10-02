@@ -24,7 +24,7 @@ public class Cliente{
 	@Embedded
 	private DadosPessoais dadosPessoais;
 
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Pedido> pedido = new ArrayList<>();
 
 	@Embedded

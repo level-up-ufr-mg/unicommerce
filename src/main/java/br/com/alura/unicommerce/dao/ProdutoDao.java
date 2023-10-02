@@ -20,24 +20,25 @@ public class ProdutoDao {
 	public ProdutoDao(EntityManager em) {
 		this.em = em;
 	}
-	
+
 	public Produto buscaPorId(Long id) {
-        if (id == null) throw new IllegalArgumentException();
-        Produto encontrado = em.find(Produto.class, id);
-        return encontrado;
-    }
+		if (id == null)
+			throw new IllegalArgumentException();
+		Produto encontrado = em.find(Produto.class, id);
+		return encontrado;
+	}
 
-    public void cadastra(Produto produto) {
-        em.persist(produto);
-    }
+	public void cadastra(Produto produto) {
+		em.persist(produto);
+	}
 
-    public void atualiza(Produto produto) {
-        em.merge(produto);
-    }
+	public void atualiza(Produto produto) {
+		em.merge(produto);
+	}
 
-    public void remove(Produto produto) {
-        em.remove(produto);
-    }
+	public void remove(Produto produto) {
+		em.remove(produto);
+	}
 
 	public List<Produto> listaTodos() {
 		String jpql = "SELECT p FROM Produto p";
@@ -47,7 +48,6 @@ public class ProdutoDao {
 	// Busca pela quantidade em estoque igual a 0
 	public List<Produto> listaIndisponiveis(Integer quantidade_estoque) {
 		String jpql = "SELECT p FROM Produto p WHERE p.quantidade_estoque = :quantidade_estoque"; // Utilizando
-																									// :parâmetro
 		return em.createQuery(jpql, Produto.class).setParameter("quantidade_estoque", quantidade_estoque)
 				.getResultList();
 	}
@@ -89,12 +89,12 @@ public class ProdutoDao {
 		}
 		return query.getResultList();
 	}
-	
+
 	public List<Produto> buscarPorParametrosComCriteria(String nome, BigDecimal preco, LocalDate dataCadastro) {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Produto> query = builder.createQuery(Produto.class);
 		Root<Produto> from = query.from(Produto.class);
-		
+
 		Predicate filtros = builder.and();
 		if (nome != null && !nome.trim().isEmpty()) {
 			filtros = builder.and(filtros, builder.equal(from.get("nome"), nome));
@@ -110,14 +110,9 @@ public class ProdutoDao {
 	}
 
 	public List<RelatorioDeVendasPorProdutoVendidoVo> relatorioDeVendasPorProdutoVendidoVo() {
-		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasPorProdutoVendidoVo(" 
-				+ "prod.nome, "
-				+ "COUNT(it.quantidade)) " 
-				+ "FROM Produto prod "
-				+ "JOIN prod.itens it " 
-				+ "JOIN it.pedido ped " 
-				+ "GROUP BY prod.nome "
-				+ "HAVING count(it.quantidade) > 3";
+		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasPorProdutoVendidoVo(" + "prod.nome, "
+				+ "COUNT(it.quantidade)) " + "FROM Produto prod " + "JOIN prod.itens it " + "JOIN it.pedido ped "
+				+ "GROUP BY prod.nome " + "HAVING count(it.quantidade) > 3";
 		return em.createQuery(jpql, RelatorioDeVendasPorProdutoVendidoVo.class).getResultList();
 	}
 }

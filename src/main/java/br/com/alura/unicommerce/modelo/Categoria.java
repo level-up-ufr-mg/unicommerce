@@ -9,23 +9,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Categoria")
 public class Categoria {
-
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String nome;
 	private boolean status;
-
-//	=====================================
-//	-------------------------------------
+	
+//				*******************
+//				** 	Constructor  **
+//				*******************
 
 	public Categoria(String nome) {
-		this.nome = nome;
-		this.status = true;
+		
+		this.setNome(nome);;
+		this.setStatus(true);;
 	}
 
 	public Categoria() {
-		super();
 	}
 
 	public long getId() {
@@ -41,7 +42,9 @@ public class Categoria {
 	}
 
 	public void setNome(String nome) {
+		if (nome == null || nome.isBlank()) throw new IllegalArgumentException("O Nome da categoria não pode ser NULO ou VAZIO.");
 		this.nome = nome;
+		
 	}
 
 	public boolean isStatus() {

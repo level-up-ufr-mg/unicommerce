@@ -1,6 +1,7 @@
 package br.com.alura.tdd.modelo;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 public class Funcionario {
@@ -8,9 +9,9 @@ public class Funcionario {
 	private LocalDate dataAdmissao;
 	private BigDecimal salario;
 
-	public Funcionario(String nome, LocalDate dataAdmissao, BigDecimal salario) {
+	public Funcionario(String nome, BigDecimal salario) {
 		this.nome = nome;
-		this.dataAdmissao = dataAdmissao;
+		this.dataAdmissao = LocalDate.now();
 		this.salario = salario;
 	}
 
@@ -28,6 +29,27 @@ public class Funcionario {
 
 	public void reajustarSalario(BigDecimal reajuste) {
 		this.salario = this.salario.add(reajuste);
+		arredondaSalario();
 	}
 
+	private void arredondaSalario() {
+		this.salario = this.salario.setScale(2, RoundingMode.HALF_UP);
+	}
 }
+
+
+//
+//
+//								****************************************
+//								** 	04 Como testar métodos privados?  **
+//								****************************************
+//
+//
+//				public void reajustarSalario(BigDecimal reajuste) {
+//					this.salario = this.salario.add(reajuste);
+//					arredondaSalario();
+//				}
+//				
+//				private void arredondaSalario() {
+//					this.salario = this.salario.setScale(2, RoundingMode.HALF_UP);
+//				}

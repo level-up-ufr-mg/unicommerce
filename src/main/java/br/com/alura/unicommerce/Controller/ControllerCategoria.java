@@ -13,9 +13,9 @@ public class ControllerCategoria {
 	public static void main(String[] args) {
 		EntityManager em = JPAUtil.getEntityManager();
 
-//		cadastra(em);
-//		buscaPorId(em);
-//		listaTodas(em);
+		cadastra(em);
+		buscaPorId(em);
+		listaTodas(em);
 
 		CategoriaDao categoriaDao = new CategoriaDao(em);
 //		BigDecimal totalVendidoBigDecimal = pedidoDao.valorTotalVendido();
