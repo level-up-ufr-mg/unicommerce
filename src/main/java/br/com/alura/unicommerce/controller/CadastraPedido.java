@@ -3,8 +3,6 @@ package br.com.alura.unicommerce.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import br.com.alura.unicommerce.dao.CategoriaDao;
 import br.com.alura.unicommerce.dao.ClienteDao;
 import br.com.alura.unicommerce.dao.PedidoDao;
@@ -20,6 +18,7 @@ import br.com.alura.unicommerce.modelo.TipoDescontoPedido;
 import br.com.alura.unicommerce.relatorios.RelatorioClientesFieis;
 import br.com.alura.unicommerce.relatorios.RelatorioVendas;
 import br.com.alura.unicommerce.util.JPAUtil;
+import jakarta.persistence.EntityManager;
 
 
 public class CadastraPedido {

@@ -1,7 +1,5 @@
 package br.com.alura.unicommerce.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +14,7 @@ import br.com.alura.unicommerce.record.DadosCadastroPedido;
 import br.com.alura.unicommerce.service.ClienteService;
 import br.com.alura.unicommerce.service.PedidoService;
 import br.com.alura.unicommerce.service.ProdutoService;
+import jakarta.validation.Valid;
 
 
 @RestController

@@ -2,10 +2,9 @@ package br.com.alura.unicommerce.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import br.com.alura.unicommerce.relatorios.RelatorioProdutosVendidosMaisDe3x;
 import br.com.alura.unicommerce.util.JPAUtil;
+import jakarta.persistence.EntityManager;
 
 public class TestaPedidoDao {
 	

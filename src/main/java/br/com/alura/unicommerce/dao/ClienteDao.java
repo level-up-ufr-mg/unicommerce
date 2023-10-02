@@ -1,9 +1,9 @@
 package br.com.alura.unicommerce.dao;
 
 import java.util.List;
-import javax.persistence.EntityManager;
 
 import br.com.alura.unicommerce.modelo.Cliente;
+import jakarta.persistence.EntityManager;
 
 public class ClienteDao {
 

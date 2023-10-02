@@ -1,7 +1,8 @@
 package br.com.alura.unicommerce.record;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotBlank;
+
+import jakarta.validation.Valid;
 
 public record DadosCadastroCliente(
 		@NotBlank

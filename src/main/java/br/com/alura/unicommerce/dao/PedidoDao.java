@@ -3,13 +3,12 @@ package br.com.alura.unicommerce.dao;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.relatorios.RelatorioClientesFieis;
 import br.com.alura.unicommerce.relatorios.RelatorioProdutosVendidosMaisDe3x;
 import br.com.alura.unicommerce.relatorios.RelatorioVendas;
 import br.com.alura.unicommerce.relatorios.RelatorioVendasPorCatergoria;
+import jakarta.persistence.EntityManager;
 
 
 

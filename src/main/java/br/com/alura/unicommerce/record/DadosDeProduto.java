@@ -2,12 +2,11 @@ package br.com.alura.unicommerce.record;
 
 import java.util.Optional;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-
 import br.com.alura.unicommerce.modelo.ItemDePedido;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.service.ProdutoService;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public record DadosDeProduto(
 

@@ -1,8 +1,7 @@
 package br.com.alura.unicommerce.modelo;
 
-import javax.persistence.Embeddable;
-
 import br.com.alura.unicommerce.record.DadosCadastroEndereco;
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Endereco {

@@ -1,17 +1,17 @@
 package br.com.alura.unicommerce.controller;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.record.DadosCadastroCategoria;
 import br.com.alura.unicommerce.repository.CategoriaRepository;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/categoria")

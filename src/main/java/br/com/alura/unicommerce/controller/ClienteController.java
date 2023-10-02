@@ -1,10 +1,5 @@
 package br.com.alura.unicommerce.controller;
 
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.record.DadosCadastroCliente;
 import br.com.alura.unicommerce.repository.ClienteRepository;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/cliente")

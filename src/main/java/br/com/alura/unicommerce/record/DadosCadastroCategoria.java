@@ -1,8 +1,9 @@
 package br.com.alura.unicommerce.record;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 //Dados que serão enviados no corpo da requisição para a API
 public record DadosCadastroCategoria(
