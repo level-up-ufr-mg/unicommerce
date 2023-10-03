@@ -1,4 +1,6 @@
 package br.com.alura.util.domain.categoria;
+import java.util.Map;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +34,9 @@ public class Categoria {
 	@Column(name = "STATUS_ID")
 	private Boolean status;
 
+	
+	
+	
 	public Categoria(DadosCadastroCategoriaDTO dados) {
 		this.nome = dados.nome();
 		this.status = true;
@@ -75,4 +80,9 @@ public class Categoria {
 		this.nome = nome;
 	}
 
+	public Long getId() {
+		return categoriaId;
+	}
+
+	 
 }

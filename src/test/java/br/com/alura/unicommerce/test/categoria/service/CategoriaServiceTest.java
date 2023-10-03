@@ -1,14 +1,14 @@
-package br.com.alura.unicommerce.Test;
+package br.com.alura.unicommerce.test.categoria.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.alura.util.domain.categoria.Categoria;
 import br.com.alura.util.repository.CategoriaRepository;
-
-public class CadastroCategoriaTest {
+public class CategoriaServiceTest {
 
 
 	 

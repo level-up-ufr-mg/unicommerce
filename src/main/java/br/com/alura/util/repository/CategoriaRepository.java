@@ -12,6 +12,8 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 
  
 	 boolean existsByNome(String nome);
+	 
+	 
 	   @Query("SELECT NEW br.com.alura.util.service.relatorio.RelatorideVendasPorCategoriaVO("
 	   		+ "c.nome, SUM(ip.quantidade), "
 	   		+ "SUM(ip.precoUnitario * ip.quantidade - ip.desconto)) " +

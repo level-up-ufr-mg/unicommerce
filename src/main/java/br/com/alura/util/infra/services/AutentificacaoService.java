@@ -1,4 +1,4 @@
-package br.com.alura.util.service.infra.services;
+package br.com.alura.util.infra.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

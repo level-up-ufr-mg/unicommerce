@@ -1,4 +1,4 @@
-package br.com.alura.util.service.infra.services;
+package br.com.alura.util.infra.services;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -16,7 +16,7 @@ import br.com.alura.util.domain.usuario.Usuario;
 @Service
 public class TokenServices {
 
-	@Value("${br.com.alura.util.Infra.Security}")
+	@Value("${br.com.alura.util.infra.services}")
 	private String secret;
 	
 	

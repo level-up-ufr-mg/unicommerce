@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.util.domain.usuario.CadastroUsuarioDto;
 import br.com.alura.util.domain.usuario.Usuario;
-import br.com.alura.util.service.infra.record.DadosTokenJWT;
-import br.com.alura.util.service.infra.services.TokenServices;
+import br.com.alura.util. infra.record.DadosTokenJWT;
+import br.com.alura.util .infra.services.TokenServices;
 import jakarta.validation.Valid;
 
 @RestController

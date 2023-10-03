@@ -20,10 +20,12 @@ import br.com.alura.util.domain.cliente.ListaDadosClieteDTO;
 import br.com.alura.util.domain.usuario.Usuario;
 import br.com.alura.util.repository.ClienteRepositoy;
 import br.com.alura.util.repository.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/cliente")
+@SecurityRequirement(name = "bearer-key")
 public class ClienteController {
 
 	@Autowired

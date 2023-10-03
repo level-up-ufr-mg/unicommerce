@@ -1,4 +1,4 @@
-package br.com.alura.util.service.infra.filter;
+package br.com.alura.util.infra.filter;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.com.alura.util.repository.UsuarioRepository;
-import br.com.alura.util.service.infra.services.TokenServices;
+import br.com.alura.util. infra.services.TokenServices;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

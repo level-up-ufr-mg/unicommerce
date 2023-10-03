@@ -1,5 +1,6 @@
 package br.com.alura.util.controller;
 
+import java.net.URI;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,21 +19,30 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.util.domain.categoria.AtualizarDadosCategoriaDTO;
 import br.com.alura.util.domain.categoria.Categoria;
 import br.com.alura.util.domain.categoria.DadosCadastroCategoriaDTO;
+import br.com.alura.util.domain.categoria.DadosCategoria;
+import br.com.alura.util.domain.categoria.DadosMensagem;
 import br.com.alura.util.domain.categoria.ListaDadosCategoriaDTO;
 import br.com.alura.util.repository.CategoriaRepository;
+import br.com.alura.util.service.CategoriaService;
 import br.com.alura.util.service.relatorio.RelatorideVendasPorCategoriaVO;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RequestMapping(value = "/api/categoria")
 @RestController
+@SecurityRequirement(name = "bearer-key")
 public class CategoriaController {
  
 	@Autowired
 	private CategoriaRepository repository;
+	
+	@Autowired
+	private CategoriaService service;
 
 	@PostMapping 
 	@Transactional
@@ -46,7 +57,20 @@ public class CategoriaController {
 	}
 
 	
-	 
+//	 @PostMapping
+//	    @Transactional
+//	    public ResponseEntity<DadosCategoria> criaNovaCategoria(@RequestBody @Valid DadosCadastroCategoriaDTO form,
+//	                                                    UriComponentsBuilder uriBuilder, BindingResult result) throws Exception {
+//	    	
+//	        if(result.hasFieldErrors())
+//	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+//
+//	        Categoria novaCategoria = form.toEntity();
+//	        service.cadastra(novaCategoria);
+//
+//	        URI uri = uriBuilder.path("/api/categorias/{id}").buildAndExpand(novaCategoria.getId()).toUri();
+//	        return ResponseEntity.created(uri).body(new DadosCategoria(novaCategoria));
+//	    }
 	
 	@GetMapping
 	public ResponseEntity<Page<ListaDadosCategoriaDTO>> lista(@PageableDefault(size = 5, sort = { "nome" }) Pageable paginacao) {
@@ -59,7 +83,16 @@ public class CategoriaController {
 	}
 
 	
-	
+	   @GetMapping("/{id}")
+	    public ResponseEntity<Object> obtemCategoriaPorId(@PathVariable("id") Long idCategoria) throws Exception{
+	        if(idCategoria == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new DadosMensagem("Id para buscar categoria inválido"));
+	        
+	        Optional<Categoria> encontrada = service.buscaPorId(idCategoria);
+	        
+	        if(encontrada.isEmpty()) return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new DadosMensagem("Categoria não encontrada"));
+
+	        return ResponseEntity.status(HttpStatus.OK).body(new DadosCategoria(encontrada.get()));
+	    }
 	
 	
 	@PutMapping

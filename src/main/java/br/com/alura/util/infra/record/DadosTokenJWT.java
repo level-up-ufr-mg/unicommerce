@@ -1,4 +1,4 @@
-package br.com.alura.util.service.infra.record;
+package br.com.alura.util.infra.record;
 
 public record DadosTokenJWT( String token ) {
 
