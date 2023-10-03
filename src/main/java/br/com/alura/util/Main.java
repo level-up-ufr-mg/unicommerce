@@ -1,7 +1,4 @@
-package br.com.alura.unicommerce;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+ package br.com.alura.util;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -11,24 +8,27 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Main {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        Pedido[] pedidos = ProcessadorDeCsv.processaArquivo("pedidos.csv");
+        Pedidos[] pedidos = ProcessadorDeCsv.processaArquivo("pedidos.csv");
 
         int totalDeProdutosVendidos = 0;
         int totalDePedidosRealizados = 0;
         BigDecimal montanteDeVendas = BigDecimal.ZERO;
-        Pedido pedidoMaisBarato = null;
-        Pedido pedidoMaisCaro = null;
+        Pedidos pedidoMaisBarato = null;
+        Pedidos pedidoMaisCaro = null;
 
         String[] categoriasProcessadas = new String[10];
         int totalDeCategorias = 0;
 
         for (int i = 0; i < pedidos.length; i++) {
-            Pedido pedidoAtual = pedidos[i];
+            Pedidos pedidoAtual = pedidos[i];
 
             if (pedidoAtual == null) {
                 break;
@@ -79,3 +79,4 @@ public class Main {
         logger.info("### FIM DO RELATÓRIO ###");
     }
 }
+

@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce;
+package br.com.alura.util;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -12,16 +12,16 @@ import java.util.Scanner;
 
 public class ProcessadorDeCsv {
 
-    public static Pedido[] processaArquivo(String nomeDoArquivo) {
+    public static Pedidos[] processaArquivo(String nomeDoArquivo) {
         try {
             URL recursoCSV = ClassLoader.getSystemResource(nomeDoArquivo);
             Path caminhoDoArquivo = caminhoDoArquivo = Path.of(recursoCSV.toURI());
 
             Scanner leitorDeLinhas = new Scanner(caminhoDoArquivo);
-
+ 
             leitorDeLinhas.nextLine();
 
-            Pedido[] pedidos = new Pedido[10];
+            Pedidos[] pedidos = new Pedidos[10];
 
             int quantidadeDeRegistros = 0;
             while (leitorDeLinhas.hasNextLine()) {
@@ -35,7 +35,7 @@ public class ProcessadorDeCsv {
                 LocalDate data = LocalDate.parse(registro[4], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 String cliente = registro[5];
 
-                Pedido pedido = new Pedido(categoria, produto, cliente, preco, quantidade, data);
+                Pedidos pedido = new Pedidos(categoria, produto, cliente, preco, quantidade, data);
                 pedidos[quantidadeDeRegistros] = pedido;
 
                 quantidadeDeRegistros++;
@@ -52,3 +52,4 @@ public class ProcessadorDeCsv {
         }
     }
 }
+
