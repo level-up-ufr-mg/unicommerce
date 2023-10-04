@@ -3,6 +3,8 @@ package br.com.alura.unicommerce;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.alura.unicommerce.Pedido;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
