@@ -1,19 +1,64 @@
 package br.com.alura.unicommerce.modelo.test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Assertions;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Produto;
+import br.com.alura.unicommerce.repository.CategoriaRepository;
+import br.com.alura.unicommerce.repository.ProdutoRepository;
 
+
+@SpringBootTest
 class ProdutoTest {
 
 	Produto p = new Produto();
 	Categoria categoriaVacina = new Categoria("Saúde", true);
+	
+	
+	//Para o teste cadastrar do endeponint /produto
+	
+	
+	
+	
 
+//    @Autowired
+//    private ProdutoRepository produtoRepository;
+//    
+//    @Autowired
+//    private MockMvc mockMvc;
+//
+//
+//	@Test
+//	@DisplayName("Garante que o endpoint /produto faz o cadastro")
+//	void garanteQueOEndpointProdutoCadastraUmProduto() {
+//		
+//		mockMvc.perform(MockMvcRequestBuilders.post("/produto").
+//		
+//		Produto vacina = new Produto(1l, "Vacina", "Sarampo", 5000, categoriaVacina, new BigDecimal("75.00"));
+//		
+//		produtoRepository.save(vacina);
+//		
+//		System.out.println("Dados do produto: " + vacina.getDescricao());
+//		
+//		produtoRepository.delete(vacina);
+//		
+//	}
+
+	
+	
 	@Test
 	void naoPermitePrecoMenorOuIgualAZero() {
 

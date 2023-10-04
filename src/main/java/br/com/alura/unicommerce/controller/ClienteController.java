@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.record.DadosCadastroCliente;
 import br.com.alura.unicommerce.repository.ClienteRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/cliente")
+@SecurityRequirement(name = "bearer-key") //configuração OpenApi
 public class ClienteController {
 	
 	@Autowired

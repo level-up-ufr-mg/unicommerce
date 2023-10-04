@@ -26,7 +26,7 @@ public class SecurityConfigurations {
 		return http.csrf(csrf -> csrf.disable())
 				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/login").permitAll() //usa o método post
-				.requestMatchers("/swagger-ui.html/", "/v3/api-docs/**", "/swagger-ui/**").permitAll()//não usam métodos HTTP
+				.requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()//não usam métodos HTTP
 				.anyRequest().authenticated()
 				.and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class))
 				.build();

@@ -21,11 +21,13 @@ import br.com.alura.unicommerce.record.DadosCadastroProduto;
 import br.com.alura.unicommerce.record.DadosListaDeProdutos;
 import br.com.alura.unicommerce.repository.CategoriaRepository;
 import br.com.alura.unicommerce.repository.ProdutoRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/produto")
+@SecurityRequirement(name = "bearer-key") //configuração OpenApi
 public class ProdutoController {
 	
 	@Autowired

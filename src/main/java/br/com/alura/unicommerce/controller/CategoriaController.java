@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.record.DadosCadastroCategoria;
 import br.com.alura.unicommerce.repository.CategoriaRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/categoria")
+@SecurityRequirement(name = "bearer-key") //configuração OpenApi
 public class CategoriaController {
 	
 	@Autowired //para que o Spring inicialize

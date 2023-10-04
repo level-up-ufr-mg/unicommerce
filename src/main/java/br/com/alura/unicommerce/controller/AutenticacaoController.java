@@ -13,6 +13,7 @@ import br.com.alura.unicommerce.infra.security.TokenService;
 import br.com.alura.unicommerce.modelo.Usuario;
 import br.com.alura.unicommerce.record.DadosAutenticacao;
 import br.com.alura.unicommerce.record.DadosTokenJwt;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
