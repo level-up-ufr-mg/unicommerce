@@ -1,6 +1,7 @@
 package br.com.alura.unicommerce.modelo;
 
 import br.com.alura.unicommerce.record.DadosCadastroCategoria;
+import br.com.alura.unicommerce.record.DadosNovaCategoria;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,11 +32,16 @@ public class Categoria {
         this.status = status;
     }
     
+    public Categoria(String nome) {
+        this.nome = nome;
+    }
+    
     //Construtor que recebe a DTO para ser retornada no Controller
     public Categoria(DadosCadastroCategoria dados) {
         this.nome = dados.nome();
         this.status = dados.status();
     }
+    
 
 	public Long getId() {
 		return id;
