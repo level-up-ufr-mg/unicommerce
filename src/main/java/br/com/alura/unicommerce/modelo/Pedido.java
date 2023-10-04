@@ -43,7 +43,7 @@ public class Pedido implements Serializable{
 	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private TipoDescontoPedido tipo_desconto;
+	 private TipoDescontoPedido tipo_desconto = TipoDescontoPedido.NENHUM;
 	
 	@Column(name = "valor_total")
 	private BigDecimal valorTotal = BigDecimal.ZERO;
