@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.alura.unicommerce.Relatorios.RelatorioDeVendasPorCategoriaVo;
 import br.com.alura.unicommerce.dao.CategoriaDao;
 import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.util.JPAUtil;
-import br.com.alura.unicommerce.vo.RelatorioDeVendasPorCategoriaVo;
 
 public class ControllerCategoria {
 	public static void main(String[] args) {

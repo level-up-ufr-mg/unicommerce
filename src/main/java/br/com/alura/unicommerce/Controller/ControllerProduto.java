@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.alura.unicommerce.Relatorios.RelatorioDeVendasPorProdutoVendidoVo;
 import br.com.alura.unicommerce.dao.CategoriaDao;
 import br.com.alura.unicommerce.dao.ProdutoDao;
 import br.com.alura.unicommerce.modelo.Categoria;
@@ -16,17 +17,17 @@ public class ControllerProduto {
 		EntityManager em = JPAUtil.getEntityManager();
 		long nmroIdDoCliente = 2;
 
-//		listaTodos(em);
-//		listaIndisponiveis(em);
-//		buscaPorId(em, nmroIdDoCliente);
-//		buscarPorParametrosComCriteria(em);
-//		cadastra(em);
+		listaTodos(em);
+		listaIndisponiveis(em);
+		buscaPorId(em, nmroIdDoCliente);
+		buscarPorParametrosComCriteria(em);
+		cadastra(em);
 
 		// em.find(Categoria.class, new CategoriaId("Moda", "xpto"));
 
-//		ProdutoDao produtoDao = new ProdutoDao(em);
-//		List<RelatorioDeVendasPorProdutoVendidoVo> relatorio = produtoDao.relatorioDeVendasPorProdutoVendidoVo();
-//		relatorio.forEach(System.out::println);
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		List<RelatorioDeVendasPorProdutoVendidoVo> relatorio = produtoDao.relatorioDeVendasPorProdutoVendidoVo();
+		relatorio.forEach(System.out::println);
 
 		CategoriaDao categoriaDao = new CategoriaDao(em);
 		String buscardor = categoriaDao.buscaNomePorNome("Saude");

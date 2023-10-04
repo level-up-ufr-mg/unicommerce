@@ -11,8 +11,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import br.com.alura.unicommerce.Relatorios.RelatorioDeVendasPorProdutoVendidoVo;
 import br.com.alura.unicommerce.modelo.Produto;
-import br.com.alura.unicommerce.vo.RelatorioDeVendasPorProdutoVendidoVo;
 
 public class ProdutoDao {
 	private EntityManager em;

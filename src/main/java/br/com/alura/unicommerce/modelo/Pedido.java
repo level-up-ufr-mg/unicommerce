@@ -117,7 +117,7 @@ public class Pedido {
 	}
 
 	public BigDecimal getValorTotal() {
-		return valorTotal;
+		return this.tipoDeDescontoPedido.aplicaDescontoSobre(this.valorTotal);
 	}
 
 	public void setValorTotal(BigDecimal valorTotal) {

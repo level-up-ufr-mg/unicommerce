@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.alura.unicommerce.Relatorios.RelatorioDeVendasPorClienteVo;
 import br.com.alura.unicommerce.dao.ClienteDao;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Endereco;
 import br.com.alura.unicommerce.util.JPAUtil;
-import br.com.alura.unicommerce.vo.RelatorioDeVendasPorClienteVo;
 
 public class ControllerCliente {
     public static void main(String[] args) {
@@ -16,12 +16,12 @@ public class ControllerCliente {
         
     	
     	geraRelatorio(em);
-//		cadastra(em);
-//        buscaPorId(em);
-//		atualiza(em);
-//		remove(em);
-//		listaTodos(em);
-//		listaPorNome(em);
+		cadastra(em);
+        buscaPorId(em);
+		atualiza(em);
+		remove(em);
+		listaTodos(em);
+		listaPorNome(em);
     }
 
 	private static void geraRelatorio(EntityManager em) {

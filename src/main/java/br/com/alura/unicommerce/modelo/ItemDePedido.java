@@ -130,6 +130,6 @@ public class ItemDePedido {
 	}
 
 	public BigDecimal getValor() {
-		return precoUnitario.multiply(new BigDecimal(quantidade));
+		return tipoDeDescontoItemDePedido.aplicaDescontoSobre(precoUnitario).multiply(new BigDecimal(quantidade));
 	}
 }

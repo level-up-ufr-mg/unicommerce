@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.alura.unicommerce.Relatorios.RelatorioDeVendasPorClienteVo;
 import br.com.alura.unicommerce.dao.ClienteDao;
 import br.com.alura.unicommerce.dao.PedidoDao;
 import br.com.alura.unicommerce.dao.ProdutoDao;
@@ -15,7 +16,6 @@ import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.modelo.TipoDeDescontoItemDePedido;
 import br.com.alura.unicommerce.modelo.TipoDeDescontoPedido;
 import br.com.alura.unicommerce.util.JPAUtil;
-import br.com.alura.unicommerce.vo.RelatorioDeVendasVo;
 
 public class ControllerPedido {
 	public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class ControllerPedido {
 //		BigDecimal totalVendidoBigDecimal = pedidoDao.valorTotalVendido();
 //		System.out.println("Valor total vendido: " + totalVendidoBigDecimal);
 
-		List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
+		List<RelatorioDeVendasPorClienteVo> relatorio = pedidoDao.relatorioDeVendas();
 		relatorio.forEach(System.out::println);
 	}
 

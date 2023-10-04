@@ -87,6 +87,7 @@ public class Produto {
 	}
 
 	public void setPreco(BigDecimal preco) {
+		if (preco == null || preco.compareTo(BigDecimal.ZERO) <= 0) throw new IllegalArgumentException("O valor não pode ser NULO, VAZIO ou NEGATIVO.");
 		this.preco = preco;
 	}
 
@@ -103,6 +104,7 @@ public class Produto {
 	}
 
 	public void setQuantidade_estoque(Integer quantidade_estoque) {
+		if (quantidade_estoque == null || quantidade_estoque < 0) throw new IllegalArgumentException("A quantidade em estoque não pode ser NULA ou NEGATIVA."); 
 		this.quantidade_estoque = quantidade_estoque;
 	}
 }

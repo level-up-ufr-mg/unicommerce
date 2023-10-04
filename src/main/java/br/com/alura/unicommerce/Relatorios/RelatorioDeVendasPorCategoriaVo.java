@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.vo;
+package br.com.alura.unicommerce.Relatorios;
 
 import java.math.BigDecimal;
 

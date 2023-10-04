@@ -1,16 +1,12 @@
 package br.com.alura.unicommerce.dao;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.com.alura.unicommerce.Relatorios.RelatorioDeVendasPorCategoriaVo;
 import br.com.alura.unicommerce.modelo.Categoria;
-import br.com.alura.unicommerce.modelo.Pedido;
-import br.com.alura.unicommerce.modelo.Produto;
-import br.com.alura.unicommerce.vo.RelatorioDeVendasPorCategoriaVo;
 
 public class CategoriaDao {
 	private EntityManager em;

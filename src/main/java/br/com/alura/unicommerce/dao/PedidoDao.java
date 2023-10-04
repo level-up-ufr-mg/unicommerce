@@ -5,14 +5,17 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.alura.unicommerce.Relatorios.RelatorioDeVendasPorClienteVo;
 import br.com.alura.unicommerce.modelo.Pedido;
-import br.com.alura.unicommerce.vo.RelatorioDeVendasVo;
+import br.com.alura.unicommerce.util.JPAUtil;
 
 public class PedidoDao {
-	private EntityManager em;
+	private EntityManager em = JPAUtil.getEntityManager();
 
+	public PedidoDao() {
+	}
+	
 	public PedidoDao(EntityManager em) {
-		this.em = em;
 	}
 
 	public Pedido buscaPorId(Long id) {
@@ -39,12 +42,12 @@ public class PedidoDao {
 		return em.createQuery(jpql, BigDecimal.class).getSingleResult();
 	}
 
-	public List<RelatorioDeVendasVo> relatorioDeVendas() {
+	public List<RelatorioDeVendasPorClienteVo> relatorioDeVendas() {
 		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasVo(" + "produto.nome, "
 				+ "SUM(item.quantidade), " + "MAX(pedido.data)) " + "FROM Pedido pedido " + "JOIN pedido.itens item "
 				+ "JOIN item.produto produto " + "GROUP BY produto.nome, item.quantidade, pedido.data "
 				+ "ORDER BY item.quantidade DESC ";
-		return em.createQuery(jpql, RelatorioDeVendasVo.class).getResultList();
+		return em.createQuery(jpql, RelatorioDeVendasPorClienteVo.class).getResultList();
 	}
 
 	public Pedido buscarPedidoComCliente(Long id) {

@@ -20,9 +20,9 @@ public class DadosPessoais {
 	}
 
 	public DadosPessoais(String nome, String cpf, String telefone) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.telefone = telefone;
+		this.setNome(nome);
+		this.setCpf(cpf);
+		this.setTelefone(telefone);
 	}
 	
 	//Getters and Setters
