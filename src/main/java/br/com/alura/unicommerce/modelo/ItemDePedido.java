@@ -60,10 +60,10 @@ public class ItemDePedido {
 		this.produto = produto;
 	}
 
-	public ItemDePedido(TipoDescontoItemPedido TipoDescontoItemPedido, @Positive Integer quantidade, BigDecimal desconto, Produto produto) {
+	public ItemDePedido(@Positive Integer quantidade, Produto produto) {
 		this.quantidade = quantidade;
-		this.desconto = desconto;
-		this.tipoDescontoItemPedido = TipoDescontoItemPedido;
+		//this.desconto = desconto;
+		//this.tipoDescontoItemPedido = TipoDescontoItemPedido;
 		this.produto = produto;
 	}
 		

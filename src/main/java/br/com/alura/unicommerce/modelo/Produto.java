@@ -48,12 +48,7 @@ public class Produto {
 		this.categoria = categoria;
 	}
 	
-	/*
-	 * public Produto(String nome, String descricao, BigDecimal preco, Integer
-	 * quantidadeEstoque, Long categoriaId) { this.nome = nome; this.descricao =
-	 * descricao; this.preco = preco; this.quantidadeEstoque = quantidadeEstoque;
-	 * this.categoriaId = categoriaId; }
-	 */
+
 	public Long getId() {
 		return id;
 	}

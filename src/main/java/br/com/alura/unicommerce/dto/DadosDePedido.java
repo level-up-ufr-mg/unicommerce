@@ -13,8 +13,6 @@ import br.com.alura.unicommerce.service.ProdutoService;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosDePedido(Long clienteId, 
-		String tipoDesconto, 
-		BigDecimal desconto,
 		@NotNull BigDecimal totalPedido,
 		@NotNull List<DadosDeProduto> produtos
 
@@ -29,7 +27,7 @@ public record DadosDePedido(Long clienteId,
 		System.out.println(cliente);
 		
 		if (cliente.isPresent()) 
-			return new Pedido(cliente.get(), TipoDescontoPedido.valueOf(tipoDesconto), desconto, itens);
+			return new Pedido(cliente.get(), itens);
 		
 		return null;
 	}

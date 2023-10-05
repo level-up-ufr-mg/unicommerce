@@ -14,16 +14,16 @@ public record DadosDeProduto(
 		@NotNull
 		Long id, 
 		@Positive
-		Integer quantidade, 
-		BigDecimal desconto, String tipoDesconto) {
+		Integer quantidade 
+		) {
 
 	public ItemDePedido converter(ProdutoService produtoService) {
 		Optional<Produto> produto = produtoService.findById(id);
 		
-		System.out.println(produto);
+		System.out.println(produto.toString());
 		
 		if(produto.isPresent()) 
-			return new ItemDePedido(TipoDescontoItemPedido.valueOf(tipoDesconto), quantidade, desconto, produto.get()); 
+			return new ItemDePedido(quantidade, produto.get()); 
 			
 		 return null;
 		

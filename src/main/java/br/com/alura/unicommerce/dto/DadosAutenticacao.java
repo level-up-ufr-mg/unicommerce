@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.modelo.usuario;
+package br.com.alura.unicommerce.dto;
 
 public record DadosAutenticacao(String login, String senha) {
 

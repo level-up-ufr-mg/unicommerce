@@ -18,15 +18,15 @@ public record ClienteDTO(Long id,
 		@NotNull(message = "{endereco.obrigatorio}") 
 		@Valid EnderecoDTO endereco,
 
-		@Valid UsuarioDTO usuario) {
+		@Valid UsuarioLoginDTO usuario) {
 
 	
 	public ClienteDTO(Optional<Cliente> obj) {
-		this(obj.get().getId(), obj.get().getNome(), obj.get().getCpf(), obj.get().getTelefone(), new EnderecoDTO(obj.get().getEndereco()), new UsuarioDTO(obj.get().getUsuario()));
+		this(obj.get().getId(), obj.get().getNome(), obj.get().getCpf(), obj.get().getTelefone(), new EnderecoDTO(obj.get().getEndereco()), new UsuarioLoginDTO(obj.get().getUsuario()));
 	}
 
 	public ClienteDTO(Cliente obj) {
-		this(obj.getId(), obj.getNome(), obj.getCpf(), obj.getTelefone(), new EnderecoDTO(obj.getEndereco()), new UsuarioDTO(obj.getUsuario()));
+		this(obj.getId(), obj.getNome(), obj.getCpf(), obj.getTelefone(), new EnderecoDTO(obj.getEndereco()), new UsuarioLoginDTO(obj.getUsuario()));
 
 	}
 

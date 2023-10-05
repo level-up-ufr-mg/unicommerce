@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.alura.unicommerce.dto.DadosAutenticacao;
 import br.com.alura.unicommerce.infra.security.DadosTokenJWT;
 import br.com.alura.unicommerce.infra.security.TokenService;
 import br.com.alura.unicommerce.modelo.Usuario;
-import br.com.alura.unicommerce.modelo.usuario.DadosAutenticacao;
 import jakarta.validation.Valid;
 
 @RestController
@@ -26,19 +26,22 @@ public class AutenticacaoController {
 	private TokenService tokenService;
 
 	@PostMapping
-	public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
-		
+	public ResponseEntity<Object> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
+
 		try {
-				var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-		        var authentication = manager.authenticate(authenticationToken);
-		        
-		        var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
-	
-		        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
-			
-		}catch(Exception e) {
+
+			var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+
+			var authentication = manager.authenticate(authenticationToken);
+
+			var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+
+			return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
+
 	}
 }

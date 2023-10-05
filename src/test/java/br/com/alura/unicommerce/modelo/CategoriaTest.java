@@ -11,7 +11,7 @@ public class CategoriaTest {
 
 	@Test
 	void deveCriarCategoriaComNomeValido() {
-		Categoria novaCategoria = new Categoria("Celular", true);
+		Categoria novaCategoria = new Categoria("Celular");
 
 		assertEquals("Celular", novaCategoria.getNome());
 	}
@@ -22,7 +22,7 @@ public class CategoriaTest {
 		Categoria novaCategoria = null;
 
 		try {
-			novaCategoria = new Categoria(null, true);
+			novaCategoria = new Categoria();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -34,13 +34,13 @@ public class CategoriaTest {
 	@Test
 	void deveValidarCategoriaComNomeVazio() {
 		assertThrows(IllegalArgumentException.class, () -> novaCategoria = new
-				 Categoria("", true));
+				 Categoria(""));
 	}
 	
 	@Test
 	void deveValidarMudarONomeDaCategoriaParaNomeVazio() {
 		
-		Categoria novaCategoria = new Categoria("Celular", true);
+		Categoria novaCategoria = new Categoria("Celular");
 
 		novaCategoria.setNome("");
 		

@@ -22,17 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.alura.unicommerce.dto.DadosListagemProduto;
 import br.com.alura.unicommerce.dto.ProdutoDTO;
 import br.com.alura.unicommerce.form.ProdutoForm;
 import br.com.alura.unicommerce.modelo.Produto;
 import br.com.alura.unicommerce.service.CategoriaService;
 import br.com.alura.unicommerce.service.ProdutoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/produtos")
+@SecurityRequirement(name = "bearer-key")
 public class ProdutoController {
 
 	@Autowired

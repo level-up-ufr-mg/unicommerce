@@ -24,11 +24,13 @@ import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.service.ClienteService;
 import br.com.alura.unicommerce.service.PedidoService;
 import br.com.alura.unicommerce.service.ProdutoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/pedidos")
+@SecurityRequirement(name = "bearer-key")
 public class PedidoController {
 
 	@Autowired

@@ -71,9 +71,9 @@ public class Pedido {
 	}
 	
 	
-	public Pedido(Cliente cliente, TipoDescontoPedido tipoDescontoPedido, BigDecimal desconto, List<ItemDePedido> itemPedidos) {
-		this.desconto = desconto;
-		this.tipoDescontoPedido = tipoDescontoPedido;
+	public Pedido(Cliente cliente,  List<ItemDePedido> itemPedidos) {
+		//this.desconto = desconto;
+		//this.tipoDescontoPedido = tipoDescontoPedido;
 		this.cliente = cliente;
 		//this.itemPedidos = itemPedidos.stream().map(item -> adicionarItem(item));
 		adicionarItemPedidos(itemPedidos);

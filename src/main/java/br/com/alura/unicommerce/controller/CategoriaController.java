@@ -22,11 +22,13 @@ import br.com.alura.unicommerce.dto.CategoriaDTO;
 import br.com.alura.unicommerce.dto.DadosListagemCategoria;
 import br.com.alura.unicommerce.service.CategoriaService;
 import br.com.alura.unicommerce.vo.RelatorioDeVendasCategoriaVo;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/categorias")
+@SecurityRequirement(name = "bearer-key")
 public class CategoriaController {
 
 	@Autowired

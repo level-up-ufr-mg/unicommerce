@@ -12,10 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.alura.unicommerce.dto.CategoriaDTO;
 import br.com.alura.unicommerce.dto.ClienteDTO;
 import br.com.alura.unicommerce.dto.DadosListagemCliente;
-import br.com.alura.unicommerce.modelo.Categoria;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Pedido;
 import br.com.alura.unicommerce.repository.ClienteRepository;

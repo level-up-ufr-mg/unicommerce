@@ -20,7 +20,7 @@ public class TokenService {
 	private static final String ISSUER = "API Unicommerce";
 	
 	@Value("${api.security.token.secret}")
-	private String secret;
+    private String secret;
 	
     public String gerarToken(Usuario usuario) {
         try {

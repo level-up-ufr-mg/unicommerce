@@ -30,9 +30,9 @@ public class Categoria {
 		this.status = true;
 	}
 
-	public Categoria(String nome, boolean status) throws IllegalArgumentException {
+	public Categoria(String nome) throws IllegalArgumentException {
 		this.setNome(nome);
-		this.status = status;
+		this.status = Boolean.TRUE;
 	}
 
 	public Long getId() {

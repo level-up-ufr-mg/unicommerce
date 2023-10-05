@@ -7,4 +7,5 @@ import br.com.alura.unicommerce.modelo.Usuario;
 
 public interface UsuarioRepository  extends JpaRepository<Usuario, Long> {
     UserDetails findByLogin(String login);
+
 }

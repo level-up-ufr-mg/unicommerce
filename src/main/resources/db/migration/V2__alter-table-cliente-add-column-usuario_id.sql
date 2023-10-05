@@ -1,1 +1,0 @@
-alter table cliente add usuario_id int not null;

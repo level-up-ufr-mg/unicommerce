@@ -23,50 +23,53 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.unicommerce.dto.ClienteDTO;
 import br.com.alura.unicommerce.dto.DadosListagemCliente;
-import br.com.alura.unicommerce.dto.UsuarioDTO;
+import br.com.alura.unicommerce.dto.UsuarioLoginDTO;
 import br.com.alura.unicommerce.modelo.Cliente;
 import br.com.alura.unicommerce.modelo.Usuario;
 import br.com.alura.unicommerce.service.ClienteService;
 import br.com.alura.unicommerce.service.UsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/clientes")
+@SecurityRequirement(name = "bearer-key")
 public class ClienteController {
 
 	@Autowired
 	ClienteService service;
 
-	@Autowired
-	UsuarioService serviceUsuario;
+	 @Autowired
+	 UsuarioService serviceUsuario;
 
 	@PostMapping
-	 @Transactional
-    public ResponseEntity<Object> cadastrar(@RequestBody @Valid ClienteDTO dados, BindingResult result, UriComponentsBuilder uriBuilder) { 
-		if (result.hasErrors()) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	
-			UsuarioDTO usuarioId = dados.usuario();
-	
-			Long idUsuario = usuarioId.id();
-	
-			Usuario dadosIdUsuario = serviceUsuario.buscaPorId(idUsuario);
-	
-			Optional<Usuario> obj = Optional.ofNullable(serviceUsuario.buscaPorId(idUsuario));
-	
-			if (!obj.isEmpty()){ 
-	 
-				Cliente cliente = new Cliente(dados, dadosIdUsuario);
-	
-				service.inserirCliente(cliente);
-	
-				URI uri = uriBuilder.path("/api/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
-	
-				return ResponseEntity.created(uri).body(new DadosListagemCliente(cliente));
-			}
-			return null;
-	}
+	@Transactional
+	public ResponseEntity<Object> cadastrar(@RequestBody @Valid ClienteDTO dados, BindingResult result,
+			UriComponentsBuilder uriBuilder) {
+		if (result.hasErrors())
+			ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
+		UsuarioLoginDTO usuarioId = dados.usuario();
+
+		Long idUsuario = usuarioId.id();
+
+		var dadosIdUsuario = serviceUsuario.buscaPorId(idUsuario);
+
+		Optional<Usuario> obj = Optional.ofNullable(serviceUsuario.buscaPorId(idUsuario));
+
+		if (!obj.isEmpty()) {
+
+			Cliente cliente = new Cliente(dados, dadosIdUsuario);
+
+			service.inserirCliente(cliente);
+
+			URI uri = uriBuilder.path("/api/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
+
+			return ResponseEntity.created(uri).body(new DadosListagemCliente(cliente));
+		}
+		return null;
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> buscaClientePorId(@PathVariable("id") Long clienteId) {

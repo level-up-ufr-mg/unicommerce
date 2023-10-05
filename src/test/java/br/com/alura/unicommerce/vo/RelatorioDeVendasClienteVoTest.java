@@ -29,7 +29,7 @@ public class RelatorioDeVendasClienteVoTest {
 	
 	@BeforeAll
 	static void preparaOsDados() {
-		Categoria eletronicos = new Categoria("Eletrônicos", true);
+		Categoria eletronicos = new Categoria("Eletrônicos");
 		Produto mouseGamer = new Produto ("Mouse", "Mouse Gamer",  new BigDecimal("90"), 3, eletronicos);
 		Produto tecladoGamer = new Produto ("Teclado", "Teclado Gamer", new BigDecimal("160"), 5, eletronicos);
 		Produto foneGamer = new Produto ("Fone", "Fone Gamer",  new BigDecimal("230"), 10, eletronicos);

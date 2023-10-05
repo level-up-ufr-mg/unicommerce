@@ -28,6 +28,7 @@ public class SecurityConfigurations {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/api/login").permitAll();
+                    req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
@@ -39,8 +40,16 @@ public class SecurityConfigurations {
     	return configuration.getAuthenticationManager();
     }
     
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	
+	  @Bean public PasswordEncoder passwordEncoder() { return new
+	  BCryptPasswordEncoder(); }
+	 
+    
+	/*
+	 * @Bean public BCryptPasswordEncoder passwordEncoder() { return new
+	 * BCryptPasswordEncoder(); }
+	 */
+    
+    
+    
 }
