@@ -5,19 +5,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "pedido")
@@ -25,79 +26,89 @@ public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID", nullable = false)
 	private Long id;
-	
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+
+	private LocalDate data = LocalDate.now();
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
 
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
-	private List<ItemDePedido> itens = new ArrayList<>();
-	
-	@Column(nullable = false, name = "Tipo_de_Desconto")
-	@Enumerated(EnumType.STRING)
-	private TipoDeDescontoPedido tipoDeDescontoPedido;
-	
-	@Column(nullable = false, name = "Data")
-	private LocalDate data;
-	
-	@Column(nullable = false, name = "Desconto", precision = 5, scale = 2)
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+	private List<ItemDePedido> itens = new ArrayList<>(); // sempre vai começar com uma colção vazia
+
+	@Column(nullable = false)
 	private BigDecimal desconto;
-	
-	@Transient
-	private BigDecimal valorTotal;
-	
-	@Transient
-	private BigDecimal descontosDeItens;
-	
-	@Transient
-	private Long quantidadeDeItensLong;
 
-	
-	/************************************************
-	*                                              *
-	*     	 	 		Enum	              	   *
-	*                                              *
-	************************************************/
-	
-	/************************************************
-	*                                              *
-	*      	 		Constructor              		*
-	*                                              *
-	************************************************/
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private TipoDescontoPedido tipo_desconto;
 
-	public Pedido() {
+	@Column(name = "valor_total")
+	private BigDecimal valorTotal = BigDecimal.ZERO;
+
+	@Transient
+	private Integer quantidadeDeItens;
+
+	@Transient
+	private BigDecimal descontoDeItens;
+
+	@Transient
+	private BigDecimal total;
+
+	public void adicionarItem(ItemDePedido item) {
+		item.setPedido(this);
+		this.itens.add(item);
+		this.valorTotal = this.valorTotal.add(item.getValor());
 	}
-	
-	public Pedido(Cliente cliente, BigDecimal desconto,
-			TipoDeDescontoPedido tipoDeDescontoPedido, BigDecimal valorTotal) {
+
+	public Pedido(Cliente cliente, List<ItemDePedido> itens, BigDecimal desconto, TipoDescontoPedido tipo_desconto) {
 		this.cliente = cliente;
-		this.data = LocalDate.now();
+		adicionaItens(itens);
 		this.desconto = desconto;
-		this.tipoDeDescontoPedido = tipoDeDescontoPedido;
-		this.valorTotal = valorTotal;
+		this.tipo_desconto = tipo_desconto;
 	}
 
-	/************************************************
-	*                                              *
-	*      			Getters and Setters        		*
-	*                                              *
-	************************************************/
-
-	public Long getId() {
-		return id;
+	private void adicionaItens(List<ItemDePedido> itens2) {
+		itens.forEach(item -> adicionaItem(item));
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	private void adicionaItem(ItemDePedido item) {
+		this.total = this.total.add(item.getValor());
+		this.quantidadeDeItens = this.quantidadeDeItens + item.getQuantidade();
+		this.descontoDeItens = this.descontoDeItens.add(item.getDesconto());
+		item.setPedido(this);
+		itens.add(item);
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
+	public Pedido(Cliente cliente, BigDecimal desconto, TipoDescontoPedido tipo_desconto) {
 		this.cliente = cliente;
+		this.desconto = desconto;
+		this.tipo_desconto = tipo_desconto;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public Integer getQuantidadeDeItens() {
+		return quantidadeDeItens;
+	}
+
+	public void setQuantidadeDeItens(Integer quantidadeDeItens) {
+		this.quantidadeDeItens = quantidadeDeItens;
+	}
+
+	public BigDecimal getDescontoDeItens() {
+		return descontoDeItens;
+	}
+
+	public void setDescontoDeItens(BigDecimal descontoDeItens) {
+		this.descontoDeItens = descontoDeItens;
 	}
 
 	public List<ItemDePedido> getItens() {
@@ -108,6 +119,22 @@ public class Pedido {
 		this.itens = itens;
 	}
 
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public LocalDate getData() {
 		return data;
 	}
@@ -116,17 +143,27 @@ public class Pedido {
 		this.data = data;
 	}
 
-	public BigDecimal getValorTotal() {
-		return this.tipoDeDescontoPedido.aplicaDescontoSobre(this.valorTotal);
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setValorTotal(BigDecimal valorTotal) {
-		this.valorTotal = valorTotal;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public void adicionarItem(ItemDePedido item) {
-		item.setPedido(this);
-		this.itens.add(item);
-		this.valorTotal = this.valorTotal.add(item.getValor());
+	public BigDecimal getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(BigDecimal desconto) {
+		this.desconto = desconto;
+	}
+
+	public TipoDescontoPedido getTipo_desconto() {
+		return tipo_desconto;
+	}
+
+	public void setTipo_desconto(TipoDescontoPedido tipo_desconto) {
+		this.tipo_desconto = tipo_desconto;
 	}
 }

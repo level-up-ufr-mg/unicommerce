@@ -2,12 +2,15 @@ package br.com.alura.unicommerce.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
-import br.com.alura.unicommerce.Relatorios.RelatorioDeVendasPorClienteVo;
 import br.com.alura.unicommerce.modelo.Cliente;
+import br.com.alura.unicommerce.vo.RelatorioClientesFiesVo;
+import jakarta.persistence.EntityManager;
 
+@Repository
 public class ClienteDao {
+
 	private EntityManager em;
 
 	public ClienteDao(EntityManager em) {
@@ -15,44 +18,41 @@ public class ClienteDao {
 	}
 
 	public Cliente buscaPorId(Long id) {
-		if (id == 0)
-			throw new IllegalArgumentException();
-		Cliente econtrado = em.find(Cliente.class, id);
-		return econtrado;
+		return em.find(Cliente.class, id);
 	}
 
 	public void cadastra(Cliente cliente) {
-		em.persist(cliente);
+		this.em.persist(cliente);
 	}
 
 	public void atualiza(Cliente cliente) {
-		em.merge(cliente);
+		this.em.merge(cliente);
 	}
 
 	public void remove(Cliente cliente) {
-		em.remove(cliente);
+		cliente = em.merge(cliente);
+		this.em.remove(cliente);
 	}
 
 	public List<Cliente> listaTodos() {
-		String jpql = "SELECT c FROM Cliente c";
+		String jpql = " SELECT c FROM Cliente c ";
 		return em.createQuery(jpql, Cliente.class).getResultList();
 	}
 
 	public List<Cliente> listaPorNome(String nome) {
-		String jpql = "SELECT c FROM Cliente c WHERE c.nome = :nome";
-		return em.createQuery(jpql, Cliente.class).setParameter("nome", nome).getResultList();
+		String jpql = " SELECT c FROM Cliente c WHERE c.nome LIKE :nome ";
+		return em.createQuery(jpql, Cliente.class).setParameter("nome", "%" + nome + "%").getResultList();
 	}
 
-	public List<RelatorioDeVendasPorClienteVo> relatorioDeVendasPorClienteVo() {
-		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasPorClienteVo(" 
-				+ "c.dadosPessoais.nome, "
-				+ "COUNT(p.id), " 
-				+ "SUM(ip.precoUnitario * ip.quantidade) as montante) " 
-				+ "FROM Cliente c "
-				+ "LEFT JOIN c.pedido p " 
-				+ "LEFT JOIN p.itens ip " 
-				+ "GROUP BY c.dadosPessoais.nome "
-				+ "ORDER BY montante DESC ";
-		return em.createQuery(jpql, RelatorioDeVendasPorClienteVo.class).setMaxResults(3).getResultList();
+	public String listaPorCPF(String cpf) {
+		String jpql = "SELECT c.nome FROM Cliente c WHERE c.cpf = :cpf";
+		return em.createQuery(jpql, String.class).setParameter("cpf", cpf).getSingleResult();
+	}
+
+	public List<RelatorioClientesFiesVo> relatorioClientesFies() {
+		String jpql = " SELECT new br.com.alura.unicommerce.vo.RelatorioClientesFiesVo( "
+				+ " p.cliente.nome, COUNT(p), SUM(p.valorTotal)) " + " FROM Pedido p " + " JOIN p.cliente c "
+				+ " GROUP BY c.nome ";
+		return em.createQuery(jpql, RelatorioClientesFiesVo.class).getResultList();
 	}
 }

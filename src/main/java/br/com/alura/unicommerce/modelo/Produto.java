@@ -1,69 +1,77 @@
 package br.com.alura.unicommerce.modelo;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import br.com.alura.unicommerce.dto.DadosCadastraProduto;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "produto")
-@NamedQuery(name = "Produto.produtosPorCategoria", query = "SELECT p FROM Produto p WHERE p.categoria.id.nome = :nome")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@NamedQuery(name = "Produto.produtosPorCategoria", query = "SELECT p FROM Produto p "
+		+ "WHERE p.categoria.nome = :nome") // quando você quiser fazer a consulta direto na entidade
 public class Produto {
+
 	@Id
-	@Column(nullable = false, name = "ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "Categoria_ID", nullable = false)
-	private Categoria categoria;
-
-	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-	private List<ItemDePedido> itens = new ArrayList<>();
-
-	@Column(name = "Nome", length = 100, nullable = false) // Definindo o tamanho máximo para o campo nome
+	@Column(nullable = false)
 	private String nome;
 
-	@Column(name = "Preco", precision = 10, scale = 2, nullable = false)
-	private BigDecimal preco;
-
-	@Column(name = "Descrição", length = 200)
 	private String descricao;
 
-	@Column(name = "Quantidade_em_Estoque", nullable = false)
-	private Integer quantidade_estoque;
-	
-//					*******************
-//					** 	Constructor  **
-//					*******************
+	@Column(name = "quantidade_estoque", nullable = false)
+	private int quantidadeEstoque;
 
-	public Produto() { // construtor default
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "categoria_id", nullable = false)
+	private Categoria categoria;
+
+	@Column(name = "preco", precision = 10, scale = 2, nullable = false)
+	private BigDecimal preco;
+
+	public Produto() {
 	}
 
-	public Produto(String nome, BigDecimal preco, String descricao, Integer quantidade_estoque, Categoria categoria) {
-		this.setNome(nome);
+	public Produto(String nome, BigDecimal preco, Categoria categoria) {
 		this.setPreco(preco);
-		this.setDescricao(descricao);
-		this.setQuantidade_estoque(quantidade_estoque);
-		this.categoria = categoria;
 	}
 
-	// Getters e Setters
+	public Produto(String nome, String descricao, int quantidadeEstoque, Categoria categoria, BigDecimal preco) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.quantidadeEstoque = quantidadeEstoque;
+		this.categoria = categoria;
+		this.preco = preco;
+	}
+
+	public Produto(DadosCadastraProduto dados, Categoria dadosIdCategoria) {
+		this.nome = dados.nome();
+		this.preco = dados.preco();
+		this.descricao = dados.descricao();
+		this.quantidadeEstoque = dados.quantidadeEstoque();
+		this.categoria = dadosIdCategoria;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		if (preco.compareTo(new BigDecimal("0.00")) <= 0) {
+			throw new IllegalArgumentException("O preço não pode ser menor ou igual a 0.");
+		}
+		this.preco = preco;
+	}
 
 	public Long getId() {
 		return id;
@@ -78,17 +86,7 @@ public class Produto {
 	}
 
 	public void setNome(String nome) {
-		if (nome == null || nome.isBlank()) throw new IllegalArgumentException("O nome não pode ser NULO ou VAZIO.");
 		this.nome = nome;
-	}
-
-	public BigDecimal getPreco() {
-		return preco;
-	}
-
-	public void setPreco(BigDecimal preco) {
-		if (preco == null || preco.compareTo(BigDecimal.ZERO) <= 0) throw new IllegalArgumentException("O valor não pode ser NULO, VAZIO ou NEGATIVO.");
-		this.preco = preco;
 	}
 
 	public String getDescricao() {
@@ -99,12 +97,19 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public Integer getQuantidade_estoque() {
-		return quantidade_estoque;
+	public int getQuantidadeEstoque() {
+		return quantidadeEstoque;
 	}
 
-	public void setQuantidade_estoque(Integer quantidade_estoque) {
-		if (quantidade_estoque == null || quantidade_estoque < 0) throw new IllegalArgumentException("A quantidade em estoque não pode ser NULA ou NEGATIVA."); 
-		this.quantidade_estoque = quantidade_estoque;
+	public void setQuantidadeEstoque(int quantidadeEstoque) {
+		this.quantidadeEstoque = quantidadeEstoque;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 }

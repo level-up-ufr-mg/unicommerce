@@ -3,55 +3,45 @@ package br.com.alura.unicommerce.dao;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
-import br.com.alura.unicommerce.Relatorios.RelatorioDeVendasPorClienteVo;
 import br.com.alura.unicommerce.modelo.Pedido;
-import br.com.alura.unicommerce.util.JPAUtil;
+import br.com.alura.unicommerce.vo.RelatorioDeVendasVo;
+import jakarta.persistence.EntityManager;
 
+@Repository
 public class PedidoDao {
-	private EntityManager em = JPAUtil.getEntityManager();
 
-	public PedidoDao() {
-	}
-	
+	private EntityManager em;
+
 	public PedidoDao(EntityManager em) {
+		this.em = em;
 	}
 
-	public Pedido buscaPorId(Long id) {
-		if (id == null)
-			throw new IllegalArgumentException();
-		Pedido encontrado = em.find(Pedido.class, id);
-		return encontrado;
+	public Pedido buscaPorId(Integer id) {
+		return em.find(Pedido.class, id);
 	}
 
 	public void cadastra(Pedido pedido) {
-		em.persist(pedido);
-	}
-
-	public void atualiza(Pedido pedido) {
-		em.merge(pedido);
-	}
-
-	public void remove(Pedido pedido) {
-		em.remove(pedido);
+		this.em.persist(pedido);
 	}
 
 	public BigDecimal valorTotalVendido() {
-		String jpql = "SELECT SUM(p.valorTotal) FROM Pedido p";
+		String jpql = " SELECT SUM(p.valorTotal) FROM Pedido p ";
 		return em.createQuery(jpql, BigDecimal.class).getSingleResult();
+
 	}
 
-	public List<RelatorioDeVendasPorClienteVo> relatorioDeVendas() {
-		String jpql = "SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasVo(" + "produto.nome, "
-				+ "SUM(item.quantidade), " + "MAX(pedido.data)) " + "FROM Pedido pedido " + "JOIN pedido.itens item "
-				+ "JOIN item.produto produto " + "GROUP BY produto.nome, item.quantidade, pedido.data "
-				+ "ORDER BY item.quantidade DESC ";
-		return em.createQuery(jpql, RelatorioDeVendasPorClienteVo.class).getResultList();
+	public List<RelatorioDeVendasVo> relatorioDeVendas() {
+		String jpql = " SELECT new br.com.alura.unicommerce.vo.RelatorioDeVendasVo(" + " produto.nome, "
+				+ " SUM(item.quantidade), MAX(pedido.data)) " + " FROM Pedido pedido " + " JOIN pedido.itens item "
+				+ " JOIN item.produto produto " + " GROUP BY produto.nome " + " ORDER BY SUM(item.quantidade) DESC ";
+		return em.createQuery(jpql, RelatorioDeVendasVo.class).getResultList();
+
 	}
 
-	public Pedido buscarPedidoComCliente(Long id) {
-		return em.createQuery("SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id = :id", Pedido.class)
+	public Pedido buscaPedidoComCliente(Long id) {
+		return em.createQuery("SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id = :id" + "", Pedido.class)
 				.setParameter("id", id).getSingleResult();
 	}
 }

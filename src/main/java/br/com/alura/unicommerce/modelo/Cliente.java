@@ -1,47 +1,59 @@
 package br.com.alura.unicommerce.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import br.com.alura.unicommerce.dto.DadosCadastraCliente;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cliente")
-public class Cliente{
+public class Cliente {
 	@Id
-	@Column(name = "ID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Embedded
-	private DadosPessoais dadosPessoais;
-
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-	private List<Pedido> pedido = new ArrayList<>();
-
+	@Column(nullable = false)
+	private String nome;
+	@Column(nullable = false)
+	private String cpf;
+	@Column(nullable = false)
+	private String telefone;
 	@Embedded
 	private Endereco endereco;
-
-	// Construtor
+//	@OneToOne
+//	@NotNull
+//	@JoinColumn(name = "usuario_id", nullable = false)
+//	private Usuario usuario;
 
 	public Cliente() {
 	}
 
 	public Cliente(String nome, String cpf, String telefone, Endereco endereco) {
-		this.dadosPessoais = new DadosPessoais(nome, cpf, telefone);
+		this.nome = nome;
+		this.cpf = cpf;
+		this.telefone = telefone;
 		this.endereco = endereco;
+//		this.usuario = usuario;
 	}
 
-	// Getters e Setters
-	
+	public Cliente(DadosCadastraCliente dados) {
+		this.nome = dados.nome();
+		this.cpf = dados.cpf();
+		this.telefone = dados.telefone();
+		this.endereco = new Endereco(dados.endereco());
+	}
+
+//	public Usuario getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(Usuario usuario) {
+//		this.usuario = usuario;
+//	}
+
 	public Long getId() {
 		return id;
 	}
@@ -51,11 +63,27 @@ public class Cliente{
 	}
 
 	public String getNome() {
-		return this.dadosPessoais.getNome();
+		return nome;
 	}
 
-	public DadosPessoais getDadosPessoais() {
-		return dadosPessoais;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public Endereco getEndereco() {
@@ -64,11 +92,5 @@ public class Cliente{
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	@Override
-	public String toString() {
-		return "Cliente [id=" + id + ", dadosPessoais=" + dadosPessoais + ", pedido=" + pedido + ", endereco="
-				+ endereco + "]";
 	}
 }
