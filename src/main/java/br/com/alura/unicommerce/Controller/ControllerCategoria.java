@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.alura.unicommerce.Categoria.CategoriaRepository;
-import br.com.alura.unicommerce.Categoria.DadosCadastroCategoria;
-import br.com.alura.unicommerce.modelo.Categoria;
+import br.com.alura.unicommerce.DTO.DadosCadastroCategoria;
+import br.com.alura.unicommerce.Domain.Categoria.Categoria;
+import br.com.alura.unicommerce.Domain.Repository.CategoriaRepository;
 
 @RestController
 @RequestMapping

@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.controller;
+package br.com.alura.unicommerce.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.alura.unicommerce.modelo.Cliente;
-import br.com.alura.unicommerce.dto.DadosCadastraCliente;
-import br.com.alura.unicommerce.dto.DadosListagemCliente;
-import br.com.alura.unicommerce.repository.ClienteRepository;
+import br.com.alura.unicommerce.DTO.DadosCadastraCliente;
+import br.com.alura.unicommerce.DTO.DadosListagemCliente;
+import br.com.alura.unicommerce.Domain.Cliente.Cliente;
+import br.com.alura.unicommerce.Domain.Repository.ClienteRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 

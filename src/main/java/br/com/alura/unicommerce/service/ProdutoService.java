@@ -5,20 +5,20 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.alura.unicommerce.dao.ProdutoDao;
-import br.com.alura.unicommerce.modelo.Produto;
-import jakarta.validation.constraints.NotNull;
+import br.com.alura.unicommerce.Domain.Produto;
+import br.com.alura.unicommerce.Domain.Repository.ProdutoRepository;
+import br.com.alura.unicommerce.Infra.Exceptions.ResourceNotFoundException;
 
 @Service
 public class ProdutoService {
 
 	@Autowired
-	private ProdutoDao produtoDao;
-	
-	public Optional<Produto> buscaPorId(@NotNull Long id) {
-		
-		Produto produto = produtoDao.buscaPorId(id);
-		
-		return Optional.ofNullable(produto);
+	private ProdutoRepository repository;
+
+	public Optional<Produto> buscaPorId(Long produtoId) {
+		Optional<Produto> obj = repository.findById(produtoId);
+		Produto entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		return Optional.ofNullable(entity);
 	}
+
 }

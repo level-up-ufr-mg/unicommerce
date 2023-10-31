@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.alura.unicommerce.modelo.Categoria;
-import br.com.alura.unicommerce.dto.DadosCadastraProduto;
-import br.com.alura.unicommerce.dto.DadosListagemProduto;
-import br.com.alura.unicommerce.modelo.Produto;
-import br.com.alura.unicommerce.repository.CategoriaRepository;
-import br.com.alura.unicommerce.repository.ProdutoRepository;
+import br.com.alura.unicommerce.DTO.DadosCadastraProduto;
+import br.com.alura.unicommerce.DTO.DadosListagemProduto;
+import br.com.alura.unicommerce.Domain.Produto;
+import br.com.alura.unicommerce.Domain.Categoria.Categoria;
+import br.com.alura.unicommerce.Domain.Repository.CategoriaRepository;
+import br.com.alura.unicommerce.Domain.Repository.ProdutoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 

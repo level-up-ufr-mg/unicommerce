@@ -1,5 +1,5 @@
-package br.com.alura.unicommerce;
-
-public class WebApplication {
-
-}
+//package br.com.alura.unicommerce;
+//
+//public class WebApplication {
+//
+//}
