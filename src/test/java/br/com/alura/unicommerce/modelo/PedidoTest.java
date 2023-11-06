@@ -12,7 +12,7 @@
 //
 //import br.com.alura.unicommerce.Domain.Endereco;
 //import br.com.alura.unicommerce.Domain.Produto;
-//import br.com.alura.unicommerce.Domain.TipoDeDescontoItemDePedido;
+//import br.com.alura.unicommerce.Domain.TipoDescontoItemPedido;
 //import br.com.alura.unicommerce.Domain.Categoria.Categoria;
 //import br.com.alura.unicommerce.Domain.Cliente.Cliente;
 //import br.com.alura.unicommerce.Domain.ItemPedido.ItemDePedido;
@@ -44,27 +44,27 @@
 //		
 //		Pedido pedidoUm = new Pedido(cliente, new BigDecimal(1), TipoDeDescontoPedido.NENHUM, new BigDecimal(0)); 
 //		ItemDePedido umPedidoItemDePedido = new ItemDePedido(vestido, pedidoUm, 1, new BigDecimal(0), 
-//				TipoDeDescontoItemDePedido.NENHUM);
+//				TipoDescontoItemPedido.NENHUM);
 //		pedidoUm.adicionarItem(umPedidoItemDePedido);	
 //		listaComUmPedido.add(pedidoUm);
 //		listaCompleta.add(pedidoUm);
 //		
 //		Pedido pedidoDois = new Pedido(cliente, new BigDecimal(1), TipoDeDescontoPedido.NENHUM, new BigDecimal(0)); 
 //		ItemDePedido doisPedidoItemDePedido01 = new ItemDePedido(vestido, pedidoDois, 1, new BigDecimal(0), 
-//				TipoDeDescontoItemDePedido.NENHUM);
+//				TipoDescontoItemPedido.NENHUM);
 //		ItemDePedido doisPedidoItemDePedido02 = new ItemDePedido(bermuda, pedidoDois, 1, new BigDecimal(0), 
-//				TipoDeDescontoItemDePedido.NENHUM);
+//				TipoDescontoItemPedido.NENHUM);
 //		pedidoDois.adicionarItem(doisPedidoItemDePedido01);
 //		pedidoDois.adicionarItem(doisPedidoItemDePedido02);
 //		listaCompleta.add(pedidoDois);
 //		
 //		Pedido pedidoTres = new Pedido(cliente, new BigDecimal(1), TipoDeDescontoPedido.NENHUM, new BigDecimal(0)); 
 //		ItemDePedido tresPedidoItemDePedido01 = new ItemDePedido(vestido, pedidoTres, 1, new BigDecimal(0), 
-//				TipoDeDescontoItemDePedido.NENHUM);
+//				TipoDescontoItemPedido.NENHUM);
 //		ItemDePedido tresPedidoItemDePedido02 = new ItemDePedido(camisa, pedidoTres, 1, new BigDecimal(0), 
-//				TipoDeDescontoItemDePedido.NENHUM);
+//				TipoDescontoItemPedido.NENHUM);
 //		ItemDePedido tresPedidoItemDePedido03 = new ItemDePedido(bermuda, pedidoTres, 1, new BigDecimal(0), 
-//				TipoDeDescontoItemDePedido.NENHUM);
+//				TipoDescontoItemPedido.NENHUM);
 //		pedidoTres.adicionarItem(tresPedidoItemDePedido01);
 //		pedidoTres.adicionarItem(tresPedidoItemDePedido02);
 //		pedidoTres.adicionarItem(tresPedidoItemDePedido03);	

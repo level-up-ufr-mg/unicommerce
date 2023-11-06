@@ -1,7 +1,6 @@
 package br.com.alura.unicommerce.Domain.Categoria;
 
 import br.com.alura.unicommerce.DTO.DadosCadastraCategoria;
-import br.com.alura.unicommerce.DTO.DadosCadastroCategoria;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,18 +17,8 @@ public class Categoria{
 	private String nome;
 	private Boolean status = true;
 
-	public Categoria(DadosCadastroCategoria dados) {
+	public Categoria() {
 	}
-
-//	public Categoria(String nome) throws IllegalArgumentException {
-//		this.setNome(nome);
-//
-//	}
-//
-//	public Categoria(String nome, Boolean status) {
-//		this.nome = nome;
-//		this.status = status;
-//	}
 
 	public Categoria(DadosCadastraCategoria dados) {
 		this.nome = dados.nome();

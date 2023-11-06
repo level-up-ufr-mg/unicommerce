@@ -68,13 +68,6 @@ public class Pedido {
 		this.valorTotal = this.valorTotal.add(item.getValor());
 	}
 
-//	public Pedido(Cliente cliente, List<ItemDePedido> itens, BigDecimal desconto, TipoDescontoPedido tipo_desconto) {
-//		this.cliente = cliente;
-//		adicionaItens(itens);
-//		this.desconto = desconto;
-//		this.tipo_desconto = tipo_desconto;
-//	}
-
 	private void adicionaItens(List<ItemDePedido> itens2) {
 		itens.forEach(item -> adicionaItem(item));
 	}
@@ -86,12 +79,6 @@ public class Pedido {
 		item.setPedido(this);
 		itens.add(item);
 	}
-
-//	public Pedido(Cliente cliente, BigDecimal desconto, TipoDescontoPedido tipo_desconto) {
-//		this.cliente = cliente;
-//		this.desconto = desconto;
-//		this.tipo_desconto = tipo_desconto;
-//	}
 
 	public BigDecimal getTotal() {
 		return total;

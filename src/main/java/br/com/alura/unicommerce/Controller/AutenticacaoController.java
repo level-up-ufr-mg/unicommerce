@@ -12,15 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alura.unicommerce.DTO.DadosAtualizacao;
 import br.com.alura.unicommerce.DTO.DadosTokenJWT;
 import br.com.alura.unicommerce.Domain.Usuario.Usuario;
+import br.com.alura.unicommerce.service.TokenService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/login")
 public class AutenticacaoController {
+	
 	@Autowired
 	private AuthenticationManager manager;
+	
 	@Autowired
-	private br.com.alura.unicommerce.service.TokenService tokenService;
+	private TokenService tokenService;
+
 	@PostMapping
 	public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAtualizacao dados) {
 		var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());

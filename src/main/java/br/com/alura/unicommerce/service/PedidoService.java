@@ -31,7 +31,7 @@ public class PedidoService {
 		System.out.println(pedido);
 
 		if (pedido == null)
-			throw new IllegalArgumentException("Falha ao cadastrar cadastrar o pedido.");
+			throw new IllegalArgumentException("Falha ao cadastrar o pedido.");
 		repository.save(pedido);
 	}
 
@@ -56,22 +56,3 @@ public class PedidoService {
 	}
 
 }
-
-//package br.com.alura.unicommerce.service;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import br.com.alura.unicommerce.Domain.Pedido.Pedido;
-//
-//@Service
-//public class PedidoService {
-//
-//	@Autowired
-//	private PedidoDao pedidoDao;
-//	
-//	public void cadastra(Pedido pedido) {
-//		
-//		pedidoDao.cadastra(pedido);;
-//	}
-//}

@@ -54,15 +54,4 @@ public class PedidoController {
 					.body("Ocorreu uma falha no cadastro do pedido");
 		}
 	}
-	
-//	@PostMapping
-//	@Transactional
-//	public ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastraPedido dados, BindingResult result) {
-//
-//		if (result.hasErrors())
-//			ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-//		Pedido novoPedido = dados.converter(clienteService, produtoService);
-//		service.insert(novoPedido);
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
 }

@@ -9,8 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cliente")
@@ -18,8 +20,6 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@OneToOne
-	private Usuario usuario;
 	@Column(nullable = false)
 	private String nome;
 	@Column(nullable = false)
@@ -28,20 +28,20 @@ public class Cliente {
 	private String telefone;
 	@Embedded
 	private Endereco endereco;
-//	@OneToOne
-//	@NotNull
-//	@JoinColumn(name = "usuario_id", nullable = false)
-//	private Usuario usuario;
+	@OneToOne
+	@NotNull
+	@JoinColumn(name = "usuario_id", nullable = false)
+	private Usuario usuario;
 
 	public Cliente() {
 	}
 
-	public Cliente(String nome, String cpf, String telefone, Endereco endereco) {
+	public Cliente(String nome, String cpf, String telefone, Endereco endereco, @NotNull Usuario usuario) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.endereco = endereco;
-//		this.usuario = usuario;
+		this.usuario = usuario;
 	}
 
 	public Cliente(DadosCadastraCliente dados) {
@@ -51,13 +51,13 @@ public class Cliente {
 		this.endereco = new Endereco(dados.endereco());
 	}
 
-//	public Usuario getUsuario() {
-//		return usuario;
-//	}
-//
-//	public void setUsuario(Usuario usuario) {
-//		this.usuario = usuario;
-//	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Long getId() {
 		return id;

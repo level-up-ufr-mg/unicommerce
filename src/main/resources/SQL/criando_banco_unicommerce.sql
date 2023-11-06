@@ -77,3 +77,8 @@ UPDATE cliente
 SET usuario_id = 3
 WHERE id IN (3);
 
+CREATE TABLE Usuarios (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    login VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
