@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.alura.unicommerce.DTO.DadosCadastraProduto;
+import br.com.alura.unicommerce.DTO.DadosCadastroProduto;
 import br.com.alura.unicommerce.DTO.DadosListagemProduto;
 import br.com.alura.unicommerce.Domain.Categoria.Categoria;
 import br.com.alura.unicommerce.Domain.Produto.Produto;
@@ -37,7 +37,7 @@ public class ProdutoController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastraProduto dados, BindingResult result,
+	public ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastroProduto dados, BindingResult result,
 			UriComponentsBuilder uriBuilder) {
 
 		if (result.hasErrors())

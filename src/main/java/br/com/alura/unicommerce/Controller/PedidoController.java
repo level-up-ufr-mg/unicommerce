@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.alura.unicommerce.DTO.DadosCadastraPedido;
+import br.com.alura.unicommerce.DTO.DadosCadastroPedido;
 import br.com.alura.unicommerce.DTO.DadosDetalhamentoPedido;
 import br.com.alura.unicommerce.Domain.Pedido.Pedido;
 import br.com.alura.unicommerce.Domain.Repository.PedidoRepository;
@@ -43,7 +43,7 @@ public class PedidoController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<Object> cadastraPedido(@RequestBody @Valid DadosCadastraPedido dadosDePedido,
+	public ResponseEntity<Object> cadastraPedido(@RequestBody @Valid DadosCadastroPedido dadosDePedido,
 			UriComponentsBuilder uriBuilder, BindingResult result) {
 		
 		try {

@@ -8,7 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import br.com.alura.unicommerce.DTO.DadosCadastraUsuario;
+import br.com.alura.unicommerce.DTO.DadosCadastroUsuario;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +28,7 @@ public class Usuario implements UserDetails {
     public Usuario() {
 	}
     
-    public Usuario(DadosCadastraUsuario dados) {
+    public Usuario(DadosCadastroUsuario dados) {
     	this.login = dados.login();
     	this.senha = dados.senha();
 	}

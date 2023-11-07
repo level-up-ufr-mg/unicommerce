@@ -2,7 +2,7 @@ package br.com.alura.unicommerce.Domain.Produto;
 
 import java.math.BigDecimal;
 
-import br.com.alura.unicommerce.DTO.DadosCadastraProduto;
+import br.com.alura.unicommerce.DTO.DadosCadastroProduto;
 import br.com.alura.unicommerce.Domain.Categoria.Categoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,7 +55,7 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public Produto(DadosCadastraProduto dados, Categoria dadosIdCategoria) {
+	public Produto(DadosCadastroProduto dados, Categoria dadosIdCategoria) {
 		this.nome = dados.nome();
 		this.preco = dados.preco();
 		this.descricao = dados.descricao();

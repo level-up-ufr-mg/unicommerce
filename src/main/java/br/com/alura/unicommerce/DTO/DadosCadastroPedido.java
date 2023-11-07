@@ -11,7 +11,7 @@ import br.com.alura.unicommerce.service.ClienteService;
 import br.com.alura.unicommerce.service.ProdutoService;
 import jakarta.validation.constraints.NotNull;
 
-public record DadosCadastraPedido(
+public record DadosCadastroPedido(
 
 		@NotNull Long clienteId,
 

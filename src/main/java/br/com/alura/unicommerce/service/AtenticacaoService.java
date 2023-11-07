@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.com.alura.unicommerce.DTO.DadosCadastraUsuario;
+import br.com.alura.unicommerce.DTO.DadosCadastroUsuario;
 import br.com.alura.unicommerce.Domain.Repository.UsuarioRepository;
 import br.com.alura.unicommerce.Domain.Usuario.Usuario;
 import jakarta.validation.Valid;
@@ -16,7 +16,7 @@ public class AtenticacaoService implements UserDetailsService {
 	@Autowired
 	private UsuarioRepository repository;
 
-	public void cadastra(@Valid DadosCadastraUsuario dados) {
+	public void cadastra(@Valid DadosCadastroUsuario dados) {
 		repository.save(new Usuario(dados));
 	}
 
