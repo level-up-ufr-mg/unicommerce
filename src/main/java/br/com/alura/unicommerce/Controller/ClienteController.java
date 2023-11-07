@@ -86,7 +86,7 @@ public class ClienteController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<DadosListagemCliente>> listar(@PageableDefault(size = 5, sort = { "nome" }) Pageable paginacao) {
+	public Page<DadosListagemCliente> listar(@PageableDefault(size = 5, sort = { "nome" }) Pageable paginacao) {
 		Page page = repository.findAll(paginacao).map(DadosListagemCliente::new);
 		return repository.findAll(paginacao).map(DadosListagemCliente::new);
 	}
