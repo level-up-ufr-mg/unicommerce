@@ -1,7 +1,7 @@
 package br.com.alura.unicommerce.Domain.Cliente;
 
-import br.com.alura.unicommerce.DTO.DadosCadastraCliente;
-import br.com.alura.unicommerce.Domain.Endereco;
+import br.com.alura.unicommerce.DTO.DadosCadastroCliente;
+import br.com.alura.unicommerce.Domain.Endereco.Endereco;
 import br.com.alura.unicommerce.Domain.Usuario.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -36,19 +36,12 @@ public class Cliente {
 	public Cliente() {
 	}
 
-	public Cliente(String nome, String cpf, String telefone, Endereco endereco, @NotNull Usuario usuario) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.telefone = telefone;
-		this.endereco = endereco;
-		this.usuario = usuario;
-	}
-
-	public Cliente(DadosCadastraCliente dados) {
+	public Cliente(DadosCadastroCliente dados, Usuario dadosIdUsuario) {
 		this.nome = dados.nome();
 		this.cpf = dados.cpf();
 		this.telefone = dados.telefone();
 		this.endereco = new Endereco(dados.endereco());
+    	this.usuario = dados.usuario();
 	}
 
 	public Usuario getUsuario() {

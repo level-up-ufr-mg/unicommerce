@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.Domain;
+package br.com.alura.unicommerce.Domain.Produto;
 
 import java.math.BigDecimal;
 

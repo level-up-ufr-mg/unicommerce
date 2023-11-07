@@ -2,13 +2,13 @@ package br.com.alura.unicommerce.vo;
 
 import java.math.BigDecimal;
 
-public class RelatorioVendasPorCategoriaVo {
+public class RelatorioDeVendasPorCategoriaVo {
 
 	private String nomeCategoria;
 	private Long quantidadeVendida;
 	private BigDecimal totalVendido;
 
-	public RelatorioVendasPorCategoriaVo(String nomeCategoria, Long quantidadeVendida, BigDecimal totalVendido) {
+	public RelatorioDeVendasPorCategoriaVo(String nomeCategoria, Long quantidadeVendida, BigDecimal totalVendido) {
 		this.nomeCategoria = nomeCategoria;
 		this.quantidadeVendida = quantidadeVendida;
 		this.totalVendido = totalVendido;
@@ -40,7 +40,7 @@ public class RelatorioVendasPorCategoriaVo {
 
 	@Override
 	public String toString() {
-		return "RelatorioVendasPorCategoriaVo [nomeCategoria=" + nomeCategoria + ", quantidadeVendida="
+		return "RelatorioDeVendasPorCategoriaVo [nomeCategoria=" + nomeCategoria + ", quantidadeVendida="
 				+ quantidadeVendida + ", totalVendido=" + totalVendido + "]";
 	}
 }

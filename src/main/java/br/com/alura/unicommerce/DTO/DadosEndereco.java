@@ -1,6 +1,6 @@
 package br.com.alura.unicommerce.DTO;
 
-import br.com.alura.unicommerce.Domain.Endereco;
+import br.com.alura.unicommerce.Domain.Endereco.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 

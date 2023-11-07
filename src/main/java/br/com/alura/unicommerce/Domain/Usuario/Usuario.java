@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import br.com.alura.unicommerce.DTO.DadosCadastraUsuario;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +24,14 @@ public class Usuario implements UserDetails {
 	private Long ID;
 	private String login;
 	private String senha;
+    
+    public Usuario() {
+	}
+    
+    public Usuario(DadosCadastraUsuario dados) {
+    	this.login = dados.login();
+    	this.senha = dados.senha();
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -38,13 +47,11 @@ public class Usuario implements UserDetails {
 	public String getUsername() {
 		return login;
 	}
-	
-	
+
 	public void setUsername(String login) {
 		this.login = login;
 	}
 
-	
 	public void setPassword(String senha) {
 		this.senha = BCrypt.hashpw(senha, BCrypt.gensalt());
 	}
@@ -52,6 +59,10 @@ public class Usuario implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
+	}
+
+	public Long getId() {
+		return ID;
 	}
 
 	@Override

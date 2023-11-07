@@ -2,9 +2,8 @@ package br.com.alura.unicommerce.Domain.ItemPedido;
 
 import java.math.BigDecimal;
 
-import br.com.alura.unicommerce.Domain.Produto;
-import br.com.alura.unicommerce.Domain.TipoDescontoItemPedido;
 import br.com.alura.unicommerce.Domain.Pedido.Pedido;
+import br.com.alura.unicommerce.Domain.Produto.Produto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

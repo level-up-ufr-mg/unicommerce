@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.Domain;
+package br.com.alura.unicommerce.Domain.Endereco;
 
 import br.com.alura.unicommerce.DTO.DadosEndereco;
 import jakarta.persistence.Embeddable;

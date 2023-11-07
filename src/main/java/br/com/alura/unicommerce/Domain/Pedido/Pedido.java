@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.alura.unicommerce.Domain.TipoDescontoPedido;
 import br.com.alura.unicommerce.Domain.Cliente.Cliente;
 import br.com.alura.unicommerce.Domain.ItemPedido.ItemDePedido;
 import jakarta.persistence.CascadeType;
@@ -62,14 +61,9 @@ public class Pedido {
 	public Pedido() {
 	}
 
-	public void adicionarItem(ItemDePedido item) {
-		item.setPedido(this);
-		this.itens.add(item);
-		this.valorTotal = this.valorTotal.add(item.getValor());
-	}
-
-	private void adicionaItens(List<ItemDePedido> itens2) {
-		itens.forEach(item -> adicionaItem(item));
+	public Pedido(Cliente cliente, List<ItemDePedido> itens) {
+		this.cliente = cliente;
+		adicionaItens(itens);
 	}
 
 	private void adicionaItem(ItemDePedido item) {
@@ -78,6 +72,12 @@ public class Pedido {
 		this.descontoDeItens = this.descontoDeItens.add(item.getDesconto());
 		item.setPedido(this);
 		itens.add(item);
+	}
+
+	private void adicionaItens(List<ItemDePedido> itemPedidos) {
+		for (ItemDePedido item : itemPedidos) {
+			this.adicionaItem(item);
+		}
 	}
 
 	public BigDecimal getTotal() {

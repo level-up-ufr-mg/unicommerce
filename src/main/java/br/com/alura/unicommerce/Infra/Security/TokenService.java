@@ -1,4 +1,4 @@
-package br.com.alura.unicommerce.service;
+package br.com.alura.unicommerce.Infra.Security;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

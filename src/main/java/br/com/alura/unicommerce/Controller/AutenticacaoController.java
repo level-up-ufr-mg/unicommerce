@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alura.unicommerce.DTO.DadosAtualizacao;
 import br.com.alura.unicommerce.DTO.DadosTokenJWT;
 import br.com.alura.unicommerce.Domain.Usuario.Usuario;
-import br.com.alura.unicommerce.service.TokenService;
+import br.com.alura.unicommerce.Infra.Security.TokenService;
 import jakarta.validation.Valid;
 
 @RestController

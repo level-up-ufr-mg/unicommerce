@@ -2,7 +2,7 @@ package br.com.alura.unicommerce.DTO;
 
 import java.math.BigDecimal;
 
-import br.com.alura.unicommerce.Domain.Produto;
+import br.com.alura.unicommerce.Domain.Produto.Produto;
 
 public record DadosListagemProduto(String nome, BigDecimal preco, String descricao, Integer quantidadeEstoque,
 		Long categoria, String categoriaNome) {

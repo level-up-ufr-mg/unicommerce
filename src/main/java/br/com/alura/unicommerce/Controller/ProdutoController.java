@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.unicommerce.DTO.DadosCadastraProduto;
 import br.com.alura.unicommerce.DTO.DadosListagemProduto;
-import br.com.alura.unicommerce.Domain.Produto;
 import br.com.alura.unicommerce.Domain.Categoria.Categoria;
+import br.com.alura.unicommerce.Domain.Produto.Produto;
 import br.com.alura.unicommerce.Domain.Repository.CategoriaRepository;
 import br.com.alura.unicommerce.Domain.Repository.ProdutoRepository;
 import jakarta.transaction.Transactional;
@@ -36,17 +37,20 @@ public class ProdutoController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastraProduto dados, BindingResult result) {
+	public ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastraProduto dados, BindingResult result,
+			UriComponentsBuilder uriBuilder) {
 
 		if (result.hasErrors())
 			ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
 		Categoria categoriaId = dados.categoria();
-		Long idCategoria = categoriaId.getId();
-		Categoria dadosIdCategoria = categoriaRepository.getReferenceById(idCategoria);
-		Optional<Categoria> obj = categoriaRepository.findById(idCategoria);
+		Long categoriaIDLong = categoriaId.getId();
+		Categoria dadosIDCategoria = categoriaRepository.getReferenceById(categoriaIDLong);
+		Optional<Categoria> obj = categoriaRepository.findById(categoriaIDLong);
 		if (!obj.isEmpty()) {
-			repository.save(new Produto(dados, dadosIdCategoria));
+			Produto produto = new Produto(dados, dadosIDCategoria);
+			repository.save(produto);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 
 		return new ResponseEntity<>(HttpStatus.OK);

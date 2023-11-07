@@ -3,9 +3,9 @@ package br.com.alura.unicommerce.DTO;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import br.com.alura.unicommerce.Domain.Produto;
-import br.com.alura.unicommerce.Domain.TipoDescontoItemPedido;
 import br.com.alura.unicommerce.Domain.ItemPedido.ItemDePedido;
+import br.com.alura.unicommerce.Domain.ItemPedido.TipoDescontoItemPedido;
+import br.com.alura.unicommerce.Domain.Produto.Produto;
 import br.com.alura.unicommerce.service.ProdutoService;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
